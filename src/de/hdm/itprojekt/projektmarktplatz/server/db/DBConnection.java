@@ -1,7 +1,7 @@
 package de.hdm.itprojekt.projektmarktplatz.server.db;
 
 
-//Test
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
