@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.shared.bo;
 
-public class Bewertung {
+public class Bewertung extends BusinessObjekt {
 	
 	private static final long serialVersionUID = 1L;
 

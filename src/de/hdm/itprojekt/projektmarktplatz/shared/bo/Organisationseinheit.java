@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.shared.bo;
 
-public class Organisationseinheit {
+public class Organisationseinheit extends BusinessObjekt {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;

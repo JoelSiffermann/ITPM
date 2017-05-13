@@ -1,7 +1,7 @@
 package de.hdm.itprojekt.projektmarktplatz.shared.bo;
 import java.util.Date;
 
-public class Bewerbung {
+public class Bewerbung extends BusinessObjekt {
 
 	private static final long serialVersionUID = 1L;
 
