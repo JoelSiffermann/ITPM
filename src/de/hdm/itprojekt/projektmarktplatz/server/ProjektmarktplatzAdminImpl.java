@@ -15,5 +15,6 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 			
 			return "TEST";
 		}
+	//TEST
 
 }
