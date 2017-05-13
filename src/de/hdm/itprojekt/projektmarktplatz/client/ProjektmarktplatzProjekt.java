@@ -106,6 +106,8 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
 		dialogVPanel.add(closeButton);
 		dialogBox.setWidget(dialogVPanel);
+		
+		//Test
 
 
 	}
