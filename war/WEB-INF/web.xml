@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>greetServlet</servlet-name>
+      <servlet-class>de.hdm.itprojekt.projektmarktplatz.server.ProjektmarktplatzAdminImpl</servlet-class> 
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>greetServlet</servlet-name>
+    <url-pattern>/projektmarktplatzprojekt/projektmarktplatz</url-pattern>
+    <url-pattern>/projektmarktplatzprojektreport/projektmarktplatz</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>projektReport</servlet-name>
+      <servlet-class>de.hdm.itprojekt.projektmarktplatz.server.ProjektmarktplatzReportAdminImpl</servlet-class> 
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>projektReport</servlet-name>
+    <url-pattern>/projektmarktplatzprojekt/projektmarktplatzreport</url-pattern>
+    <url-pattern>/projektmarktplatzprojektreport/projektmarktplatzreport</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>ProjektmarktplatzProjekt.html</welcome-file>
+    <welcome-file>ProjektmarktplatzProjektReport.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>
