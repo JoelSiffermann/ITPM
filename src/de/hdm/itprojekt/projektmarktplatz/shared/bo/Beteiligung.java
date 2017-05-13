@@ -1,7 +1,7 @@
 package de.hdm.itprojekt.projektmarktplatz.shared.bo;
 import java.util.Date;
 
-public class Beteiligung {
+public class Beteiligung extends BusinessObjekt  {
 
 	private static final long serialVersionUID = 1L;
 

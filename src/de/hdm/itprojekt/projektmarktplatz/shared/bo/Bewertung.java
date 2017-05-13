@@ -1,21 +1,26 @@
 package de.hdm.itprojekt.projektmarktplatz.shared.bo;
-import java.util.Date;
 
-public class Bewerbung extends BusinessObjekt {
-
+public class Bewertung extends BusinessObjekt {
+	
 	private static final long serialVersionUID = 1L;
 
 	private String inhalt;
-	private Date erstelldatum;
+	private float skala;
 	
+	public Bewertung(String inhalt, float skala){
+		
+		this.inhalt=inhalt;
+		this.skala=skala;
+	}
+
 	public String getInhalt(){
 		
 		return inhalt;
 	}
 	
-	public Date getErstelldatum(){
+	public float getSkala(){
 		
-		return erstelldatum;
+		return skala;
 	}
 	
 	public void setInhalt(String string){
@@ -23,10 +28,10 @@ public class Bewerbung extends BusinessObjekt {
 		inhalt=string;
 	}
 	
-	public void setErstelldatum(Date date){
+	public void setSkala(float skala){
 		
-		erstelldatum=date;
+		skala= skala;
 	}
-	
 }
+
 
