@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
-
+//@author samina
 public class PartnerprofilMapper {
 
 	public static PartnerprofilMapper partnerprofilMapper() {
