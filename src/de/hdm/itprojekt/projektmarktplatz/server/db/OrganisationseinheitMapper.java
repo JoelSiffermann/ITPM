@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
@@ -28,7 +29,7 @@ public class OrganisationseinheitMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("INSERT INTO `organisationseinheit` (`Organisationseinheit_ID`, `Name`, `E-Mail`) VALUES (NULL, 'HdM', 'hdm@hdm-stuttgart.de');");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 			if (rs.next()) {
@@ -58,7 +59,7 @@ public class OrganisationseinheitMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("");
+			stmt.executeUpdate("UPDATE `organisationseinheit` SET `Name` = 'HdM2' WHERE `organisationseinheit`.`Organisationseinheit_ID` = 2;");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,11 +74,59 @@ public class OrganisationseinheitMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("");
+	      stmt.executeUpdate("DELETE FROM `organisationseinheit` WHERE Organisationseinheit_ID = 1");
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
 	    }
 	  }
 
+
+public Organisationseinheit getById(Organisationseinheit o){
+	 Connection con = DBConnection.connection();
+
+	    try {
+	      Statement stmt = con.createStatement();
+
+	      stmt.executeUpdate("");
+	    }
+	    catch (SQLException e) {
+	    	
+	    }
+	    return o;
 }
+public Organisationseinheit getAll(){
+	
+	Connection con = DBConnection.connection();
+
+	try {
+		Statement stmt = con.createStatement();
+
+		/*
+		 * Zunächst schauen wir nach, welches der momentan höchste
+		 * Primärschlüsselwert ist.
+		 */
+		ResultSet rs = stmt.executeQuery("");
+
+		// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+		if (rs.next()) {
+			/*
+			 * c erhält den bisher maximalen, nun um 1 inkrementierten
+			 * Primärschlüssel.
+			 */
+		//	a.setId(rs.getInt("") + 1);
+
+			stmt = con.createStatement();
+
+			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+			stmt.executeUpdate("");
+		}
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null;
+
+}
+}
+
