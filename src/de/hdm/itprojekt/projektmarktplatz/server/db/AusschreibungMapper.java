@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
@@ -27,21 +28,21 @@ public class AusschreibungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
+//			ResultSet rs = stmt.executeQuery("");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+//			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-				a.setId(rs.getInt("") + 1);
+//				a.setId(rs.getInt("Ausschreibung_ID") + 1);
 
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-			}
+				stmt.executeUpdate("INSERT INTO `ausschreibung` (`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`) VALUES (NULL, 'Bezeichnung test 1', 'test 1', '01012017');");
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,7 +56,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("");
+			stmt.executeUpdate("UPDATE `ausschreibung` SET `Inhalt` = 'test 12' WHERE `ausschreibung`.`Ausschreibung_ID` = 1;");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +71,7 @@ public class AusschreibungMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("");
+	      stmt.executeUpdate("DELETE FROM `ausschreibung` WHERE Ausschreibung_ID = 1");
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -90,7 +91,7 @@ public class AusschreibungMapper {
 		    }
 		    return a;
 	}
-	public Ausschreibung getAll(){
+	public ArrayList<Ausschreibung> getAll(){
 		
 		Connection con = DBConnection.connection();
 
@@ -110,11 +111,11 @@ public class AusschreibungMapper {
 				 * Primärschlüssel.
 				 */
 			//	a.setId(rs.getInt("") + 1);
-
+//TODO While Schleife und Objekt erzeugen wie bei Bank Projekt findAll() bei TransactionsMappers
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
+//				stmt.executeUpdate("");
 			}
 
 		} catch (SQLException e) {

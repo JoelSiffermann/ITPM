@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
@@ -31,21 +32,21 @@ public class EigenschaftMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
+			//ResultSet rs = stmt.executeQuery("");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+			//if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-				c.setId(rs.getInt("") + 1);
+				//c.setId(rs.getInt("") + 1);
 
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-			}
+				stmt.executeUpdate("INSERT INTO `eigenschaft` (`Eigenschaft_ID`, `Bezeichnung`, `Wert`, `partner_id`) VALUES (NULL, 'eigenschaftbezeichnung', 'werttest', '546');");
+			//}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,7 +60,7 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("");
+			stmt.executeUpdate("UPDATE `eigenschaft` SET `Bezeichnung` = 'eigenschaftbezeichnunghdm' WHERE `eigenschaft`.`Eigenschaft_ID` = 1;");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,7 +75,7 @@ public class EigenschaftMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("");
+	      stmt.executeUpdate("DELETE FROM `eigenschaft` WHERE Eigenschaft_ID = 1");
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -93,7 +94,7 @@ public class EigenschaftMapper {
 		    }
 		    return c;
 	}
-	public Eigenschaft getAll(){
+	public ArrayList<Eigenschaft> getAll(){
 		
 		Connection con = DBConnection.connection();
 
