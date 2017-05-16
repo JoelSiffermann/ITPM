@@ -8,6 +8,7 @@ import java.sql.Statement;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.server.db.DBConnection;
 
+//@autor Ömer
 public class ProjektMapper {
 
 	public static ProjektMapper projektMapper() {

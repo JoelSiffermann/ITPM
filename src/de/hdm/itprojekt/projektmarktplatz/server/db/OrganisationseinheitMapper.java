@@ -8,6 +8,7 @@ import java.sql.Statement;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
+//@autor �mer
 public class OrganisationseinheitMapper {
 
 	public static OrganisationseinheitMapper organisationseinheitMapper() {
@@ -40,7 +41,9 @@ public class OrganisationseinheitMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
+	//			stmt.executeUpdate("INSERT INTO `organisationseinheit` (`Organisationseinheit_ID`, `Name`, `E-Mail`) VALUES (NULL, '"+o.getName()+"', '"+o.getEmail()+"');");
+
+				stmt.executeUpdate("INSERT INTO `organisationseinheit` (`Organisationseinheit_ID`, `Name`, `E-Mail`) VALUES (NULL, 'HdM', 'test@hdm-stuttgart.de');");
 			}
 
 		} catch (SQLException e) {

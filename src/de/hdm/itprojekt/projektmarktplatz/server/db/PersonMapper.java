@@ -8,6 +8,7 @@ import java.sql.Statement;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 
+//@autor �mer
 public class PersonMapper {
 
 	public static PersonMapper personMapper() {
@@ -40,7 +41,7 @@ public class PersonMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
+				stmt.executeUpdate("INSERT INTO `person` (`Vorname`, `Beruf`, `Erfahrung`, `ID`, `o_id`) VALUES ('Max', 'Softwareentwickler', '5', NULL, '1');");
 			}
 
 		} catch (SQLException e) {

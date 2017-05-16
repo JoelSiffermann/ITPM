@@ -8,6 +8,7 @@ import java.sql.Statement;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
 
+//@autor Ömer
 public class TeamMapper {
 
 	public static TeamMapper teamMapper() {

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
+//@autor Ömer
 public class UnternehmenMapper {
 
 	public static UnternehmenMapper unternehmenMapper() {
