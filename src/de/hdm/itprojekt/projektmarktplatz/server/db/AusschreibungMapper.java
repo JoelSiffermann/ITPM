@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+
 //@author samina
 public class AusschreibungMapper {
 
@@ -41,7 +42,7 @@ public class AusschreibungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `ausschreibung` (`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`) VALUES (NULL, 'Bezeichnung test 1', 'test 1', '01012017');");
+				stmt.executeUpdate("INSERT INTO `ausschreibung` (`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`) VALUES (NULL, '"+a.getBezeichnung()+"', '"+a.getInhalt()+"', '"+a.getFrist()+"');");
 //			}
 
 		} catch (SQLException e) {
@@ -56,7 +57,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `ausschreibung` SET `Inhalt` = 'test 12' WHERE `ausschreibung`.`Ausschreibung_ID` = 1;");
+			stmt.executeUpdate("UPDATE `ausschreibung` SET `Inhalt` = '"+a.getInhalt()+"' WHERE `ausschreibung`.`Ausschreibung_ID` = "+a.getId()+";");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,7 +72,7 @@ public class AusschreibungMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `ausschreibung` WHERE Ausschreibung_ID = 1");
+	      stmt.executeUpdate("DELETE FROM `ausschreibung` WHERE Ausschreibung_ID = "+a.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -84,7 +85,7 @@ public class AusschreibungMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      stmt.executeUpdate("");
+		      stmt.executeUpdate("SELECT * FROM `ausschreibung` WHERE `Ausschreibung_ID` = " + a.getId());
 		    }
 		    catch (SQLException e) {
 		    	
@@ -94,7 +95,7 @@ public class AusschreibungMapper {
 	public ArrayList<Ausschreibung> getAll(){
 		
 		Connection con = DBConnection.connection();
-
+		ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
 		try {
 			Statement stmt = con.createStatement();
 
@@ -102,7 +103,7 @@ public class AusschreibungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `ausschreibung`");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 			if (rs.next()) {
@@ -112,6 +113,16 @@ public class AusschreibungMapper {
 				 */
 			//	a.setId(rs.getInt("") + 1);
 //TODO While Schleife und Objekt erzeugen wie bei Bank Projekt findAll() bei TransactionsMappers
+			      while (rs.next()) {
+			          Ausschreibung a = new Ausschreibung();
+			          a.setId(rs.getInt("Ausschreibung_ID"));
+			          a.setBezeichnung(rs.getString("Bezeichnung"));
+			          a.setInhalt(rs.getString("Inhalt"));
+			          a.setFrist(rs.getDate("Frist"));
+
+			          // Hinzufügen des neuen Objekts zum Ergebnisvektor
+			          result.add(a);
+			        }
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
@@ -121,7 +132,7 @@ public class AusschreibungMapper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 
 	}
 }

@@ -6,6 +6,11 @@ public class Bewertung extends BusinessObjekt {
 
 	private String inhalt;
 	private float skala;
+	private Person p;
+	
+	public Bewertung(){
+		
+	}
 	
 	public Bewertung(String inhalt, float skala){
 		
@@ -31,6 +36,14 @@ public class Bewertung extends BusinessObjekt {
 	public void setSkala(float skala){
 		
 		skala= skala;
+	}
+
+	public Person getPerson() {
+		return p;
+	}
+
+	public void setPerson(Person p) {
+		this.p = p;
 	}
 }
 

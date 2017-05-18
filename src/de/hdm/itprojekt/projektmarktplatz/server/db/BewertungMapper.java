@@ -42,7 +42,8 @@ public class BewertungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, 'sehr gut', '1', '123');");
+				stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, 'Gut', '9,5', '1')");
+				//stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"', '');";
 		//	}
 
 		} catch (SQLException e) {
@@ -57,7 +58,7 @@ public class BewertungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `bewertung` SET `Inhalt` = 'naja' WHERE `bewertung`.`Bewertung_ID` = 1;");
+			stmt.executeUpdate("UPDATE `bewertung` SET `Inhalt` = '"+b.getInhalt()+"' WHERE `bewertung`.`Bewertung_ID` = "+b.getId()+";");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,7 +73,7 @@ public class BewertungMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `bewertung` WHERE Bewertung_ID = 1");
+	      stmt.executeUpdate("DELETE FROM `bewertung` WHERE Bewertung_ID = "+b.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -84,7 +85,7 @@ public class BewertungMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      stmt.executeUpdate("");
+		      stmt.executeUpdate("SELECT * FROM `bewertung` WHERE `Bewertung_ID` = " + b.getId());
 		    }
 		    catch (SQLException e) {
 		    	
@@ -94,7 +95,7 @@ public class BewertungMapper {
 	public ArrayList<Bewertung> getAll(){
 		
 		Connection con = DBConnection.connection();
-
+		ArrayList<Bewertung> result = new ArrayList<Bewertung>();
 		try {
 			Statement stmt = con.createStatement();
 
@@ -102,7 +103,7 @@ public class BewertungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `bewertung`");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 			if (rs.next()) {
@@ -111,17 +112,27 @@ public class BewertungMapper {
 				 * Primärschlüssel.
 				 */
 			//	a.setId(rs.getInt("") + 1);
+				while (rs.next()) {
+			          Bewertung b = new Bewertung();//default Konstruktor in Bewertung.java einf�gen damit es kein Fehler anzeigt
+			          b.setId(rs.getInt("Bewertung_ID"));
+			          b.setInhalt(rs.getString("Inhalt"));
+			          b.setSkala(rs.getFloat("Skala"));
+			       //   b.setPerson(rs.getString("person_id"));
+
+			          // Hinzufügen des neuen Objekts zum Ergebnisvektor
+			          result.add(b);
 
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
+				//stmt.executeUpdate("");
 			}
 
-		} catch (SQLException e) {
+		} 
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 
 	}
 
