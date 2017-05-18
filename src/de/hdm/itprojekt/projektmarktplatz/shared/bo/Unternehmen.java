@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.shared.bo;
 
-public class Unternehmen extends Organisationseinheit{
+public class Unternehmen extends BusinessObjekt{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -11,7 +11,7 @@ public class Unternehmen extends Organisationseinheit{
 
 	public Unternehmen (String name, String email,String geschaeftsform, String geschaeftsfeld){
 
-		super(name, email);
+//		super(name, email);
 		this.geschaeftsform = geschaeftsform;
 		this.geschaeftsfeld = geschaeftsfeld;
 	}

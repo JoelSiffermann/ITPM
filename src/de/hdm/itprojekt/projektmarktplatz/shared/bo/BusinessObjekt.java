@@ -5,7 +5,7 @@ import java.io.Serializable;
  * Autor: Peter Thies & Christian Rathke
  */
 
-public class BusinessObjekt implements Serializable{
+public abstract class BusinessObjekt implements Serializable{
 	
 
 	private static final long serialVersionUID = 1L;
@@ -16,24 +16,23 @@ public class BusinessObjekt implements Serializable{
      * Abfragen, ob ein Objekt ungleich NULL ist und ob ein Objekt gecastet
      * werden kann, sind immer wichtig!
      */
-	public boolean equals(Object obj) {
-		if (obj != null && obj instanceof BusinessObjekt) {
-		      BusinessObjekt bo = (BusinessObjekt) obj;
-		      try {
-		        if (bo.getId() == this.id)
-		          return true;
-		      }
-		      catch (IllegalArgumentException e) {
-		      
-		        return false;
-		     }
-		  }
-		    return false;
-	}
+//	public boolean equals(Object obj) {
+//		if (obj != null && obj instanceof BusinessObjekt) {
+//		      BusinessObjekt bo = (BusinessObjekt) obj;
+//		      try {
+//		        if (bo.getId() == this.id)
+//		          return true;
+//		      }
+//		      catch (IllegalArgumentException e) {
+//		      
+//		        return false;
+//		     }
+//		  }
+//		    return false;
+//	}
 	
 	public String toString(){
 		return this.getClass().getName()+"#"+this.id;
-		
 	}
 	
 	public int getId(){

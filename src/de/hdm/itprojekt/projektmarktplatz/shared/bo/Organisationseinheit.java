@@ -6,6 +6,9 @@ public class Organisationseinheit extends BusinessObjekt {
 	private String name;
 	private String email;
 	
+	public Organisationseinheit(){
+		
+	}
 	public Organisationseinheit(String name, String email){
 		
 		this.name=name;

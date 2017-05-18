@@ -4,6 +4,8 @@ package de.hdm.itprojekt.projektmarktplatz.server.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import com.google.appengine.api.utils.SystemProperty;
 
@@ -46,8 +48,10 @@ public class DBConnection {
      * Software neu komilieren zu müssen.
      */
     private static String googleUrl = "jdbc:google:mysql://prof-thies.de:thies-bankproject:thies-bankproject/bankproject?user=demo&password=demo";
-    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=demo";
-
+//    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root&password=root";
+    private static String localUrl = "jdbc:mysql://127.0.0.1:3308/dbproj?user=root";
+    //PORT GEÄNDERT IN 3307!!! 
+    
     /**
      * Diese statische Methode kann aufgrufen werden durch
      * <code>DBConnection.connection()</code>. Sie stellt die
@@ -72,7 +76,7 @@ public class DBConnection {
      * @return DAS <code>DBConncetion</code>-Objekt.
      * @see con
      */
-    public static Connection connection() {
+    public static Connection connection()throws Exception {
         // Wenn es bisher keine Conncetion zur DB gab, ...
         if (con == null) {
             String url = null;
@@ -84,7 +88,8 @@ public class DBConnection {
                     url = googleUrl;
                 } else {
                     // Local MySQL instance to use during development.
-                    Class.forName("com.mysql.jdbc.Driver");
+                	System.out.println("TEST");
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
                     url = localUrl;
                 }
                 /*
@@ -95,6 +100,7 @@ public class DBConnection {
                  * Diese Verbindung wird dann in der statischen Variable con
                  * abgespeichert und fortan verwendet.
                  */
+                System.out.println("HIER "+url);
                 con = DriverManager.getConnection(url);
             } catch (Exception e) {
                 con = null;
@@ -104,6 +110,24 @@ public class DBConnection {
 
         // Zurückgegeben der Verbindung
         return con;
-    }
+        
 
+    }
+	public static void closeAll(ResultSet rs, Statement stmt, Connection con) throws Exception {
+//		try {
+//			if (rs != null) {
+//				rs.close();
+//			}
+//			if (stmt != null) {
+//				stmt.close();
+//			} 
+//			if (con != null) {
+//				con.close();
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new Exception("Connection close Fehler!" + e.toString());
+//		}
+	}
 }

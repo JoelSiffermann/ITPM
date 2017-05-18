@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.shared.bo;
 
-public class Team extends Organisationseinheit{
+public class Team extends BusinessObjekt{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -8,7 +8,7 @@ public class Team extends Organisationseinheit{
 	private String arbeitsfeld;
 	
 	public Team (String name, String email, int groesse, String arbeitsfeld) {
-		super(name, email);
+//		super(name, email);
 		this.groesse = groesse;
 		this.arbeitsfeld = arbeitsfeld;
 	}

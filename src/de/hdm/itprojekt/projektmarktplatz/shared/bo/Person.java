@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.shared.bo;
 
-public class Person extends Organisationseinheit {
+public class Person extends BusinessObjekt {
 
 	private static final long serialVersionUID = 1L;
 	private String vorname; 
@@ -8,7 +8,7 @@ public class Person extends Organisationseinheit {
 	private float erfahrung;
 	
 	public Person(String name, String email, String vorname, String beruf, float erfahrung){
-		super(name, email);
+//		super(name, email);
 		this.vorname=vorname;
 		this.beruf=beruf;
 		this.erfahrung=erfahrung;
