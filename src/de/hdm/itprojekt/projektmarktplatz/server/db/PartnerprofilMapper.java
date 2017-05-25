@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 //@author samina
@@ -42,7 +42,7 @@ public class PartnerprofilMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, `orga_id`) VALUES (NULL, '2017-05-17', '2017-05-18', '12345');");
+				stmt.executeUpdate("INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, `orga_id`) VALUES (NULL, '"+p.getErstelldatum()+"', '"+p.getAenderungsdatum()+"', '"+p.getOrganisationseinheit().getId());
 			//}
 
 		} catch (SQLException e) {
@@ -57,7 +57,7 @@ public class PartnerprofilMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `partnerprofil` SET `orga_id` = '123456' WHERE `partnerprofil`.`Partnerprofil_ID` = 2;");
+			stmt.executeUpdate("UPDATE `partnerprofil` SET `orga_id` = '"+p.getOrganisationseinheit().getId()+"' WHERE `partnerprofil`.`Partnerprofil_ID` = "+p.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,7 +72,7 @@ public class PartnerprofilMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `partnerprofil` WHERE Partnerprofil_ID = 1");
+	      stmt.executeUpdate("DELETE FROM `partnerprofil` WHERE Partnerprofil_ID = "+p.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -85,7 +85,7 @@ public class PartnerprofilMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      stmt.executeUpdate("");
+		      stmt.executeUpdate("SELECT * FROM `partnerprofil` WHERE `Partnerprofil_ID` = " + p.getId());
 		    }
 		    catch (SQLException e) {
 		    	
@@ -93,7 +93,7 @@ public class PartnerprofilMapper {
 		    return p;
 	}
 	public ArrayList<Partnerprofil> getAll(){
-		
+		ArrayList<Partnerprofil> result = new ArrayList<Partnerprofil>();
 		Connection con = DBConnection.connection();
 
 		try {
@@ -107,6 +107,17 @@ public class PartnerprofilMapper {
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 			if (rs.next()) {
+				while (rs.next()) {
+			          Partnerprofil p = new Partnerprofil();//default Konstruktor in Partnerprofil.java einf�gen damit es kein Fehler anzeigt
+			          p.setId(rs.getInt("Partnerprofil_ID"));
+			          p.setErstelldatum(rs.getDate("Erstelldatum"));
+			          p.setAenderungsdatum(rs.getDate("Aenderungsdatum"));
+			          Organisationseinheit o = new Organisationseinheit();
+					  p.setId(rs.getInt("orga_id"));
+					  p.setOrganisationseinheit(o);
+						// a.setId(rs.getInt("") + 1);
+						result.add(p);
+					}
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
@@ -117,6 +128,7 @@ public class PartnerprofilMapper {
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 				stmt.executeUpdate("");
+				return result;
 			}
 
 		} catch (SQLException e) {

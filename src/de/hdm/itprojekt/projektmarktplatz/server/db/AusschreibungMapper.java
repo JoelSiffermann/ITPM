@@ -42,7 +42,7 @@ public class AusschreibungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `ausschreibung` (`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`) VALUES (NULL, '"+a.getBezeichnung()+"', '"+a.getInhalt()+"', '"+a.getFrist()+"');");
+				stmt.executeUpdate("INSERT INTO `ausschreibung` (`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`) VALUES (NULL, '"+a.getBezeichnung()+"', '"+a.getInhalt()+"', '"+a.getFrist());
 //			}
 
 		} catch (SQLException e) {
@@ -57,7 +57,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `ausschreibung` SET `Inhalt` = '"+a.getInhalt()+"' WHERE `ausschreibung`.`Ausschreibung_ID` = "+a.getId()+";");
+			stmt.executeUpdate("UPDATE `ausschreibung` SET `Inhalt` = '"+a.getInhalt()+"' WHERE `ausschreibung`.`Ausschreibung_ID` = "+a.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,13 +126,14 @@ public class AusschreibungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-//				stmt.executeUpdate("");
+				stmt.executeUpdate("");
+				return result;
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return null;
 
 	}
 }

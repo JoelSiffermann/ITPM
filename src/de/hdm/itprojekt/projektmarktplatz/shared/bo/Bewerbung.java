@@ -7,6 +7,16 @@ public class Bewerbung extends BusinessObjekt {
 
 	private String inhalt;
 	private Date erstelldatum;
+	private Ausschreibung ausschreibung;
+	
+	
+	public Ausschreibung getAusschreibung(){
+		return this.ausschreibung;
+	}
+	
+	public void setAusschreibung(Ausschreibung a){
+		this.ausschreibung=a;
+	}
 	
 	public String getInhalt(){
 		

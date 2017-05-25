@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 //@author samina
@@ -42,7 +42,7 @@ public class BewertungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, 'Gut', '9,5', '1')");
+				stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"', '"+b.getPerson().getId());
 				//stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"', '');";
 		//	}
 
@@ -58,7 +58,7 @@ public class BewertungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `bewertung` SET `Inhalt` = '"+b.getInhalt()+"' WHERE `bewertung`.`Bewertung_ID` = "+b.getId()+";");
+			stmt.executeUpdate("UPDATE `bewertung` SET `Inhalt` = '"+b.getInhalt()+"' WHERE `bewertung`.`Bewertung_ID` = "+b.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -117,22 +117,28 @@ public class BewertungMapper {
 			          b.setId(rs.getInt("Bewertung_ID"));
 			          b.setInhalt(rs.getString("Inhalt"));
 			          b.setSkala(rs.getFloat("Skala"));
-			       //   b.setPerson(rs.getString("person_id"));
+			          Person p = new Person();
+						b.setId(rs.getInt("person_id"));
+						b.setPerson(p);
+						// a.setId(rs.getInt("") + 1);
+						result.add(b);
+					}
 
 			          // Hinzufügen des neuen Objekts zum Ergebnisvektor
-			          result.add(b);
+			         
 
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				//stmt.executeUpdate("");
+				stmt.executeUpdate("");
+				return result;
 			}
 
 		} 
-		}catch (SQLException e) {
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return null;
 
 	}
 

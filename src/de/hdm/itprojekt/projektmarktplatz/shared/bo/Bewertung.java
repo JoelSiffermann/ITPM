@@ -6,7 +6,9 @@ public class Bewertung extends BusinessObjekt {
 
 	private String inhalt;
 	private float skala;
-	private Person p;
+	private Person person;
+	
+	
 	
 	public Bewertung(){
 		
@@ -38,13 +40,14 @@ public class Bewertung extends BusinessObjekt {
 		skala= skala;
 	}
 
-	public Person getPerson() {
-		return p;
+	public Person getPerson(){
+		return this.person;
 	}
-
-	public void setPerson(Person p) {
-		this.p = p;
+	
+	public void setPerson (Person p){
+		this.person=p;
 	}
+	
 }
 
 
