@@ -17,7 +17,7 @@ public class PartnerprofilMapper {
 	
 
 
-	public Partnerprofil einfuegen(Partnerprofil p) {
+	public Partnerprofil einfuegen(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class PartnerprofilMapper {
 		return p;
 	}
 
-	public Partnerprofil speichern(Partnerprofil p) {
+	public Partnerprofil speichern(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class PartnerprofilMapper {
 		return p;
 	}
 	
-	public void loeschen(Partnerprofil p) {
+	public void loeschen(Partnerprofil p) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

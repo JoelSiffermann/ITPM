@@ -17,7 +17,7 @@ public class BewerbungMapper {
 	
 
 
-	public Bewerbung einfuegen(Bewerbung b) {
+	public Bewerbung einfuegen(Bewerbung b) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class BewerbungMapper {
 		return b;
 	}
 
-	public Bewerbung speichern(Bewerbung b) {
+	public Bewerbung speichern(Bewerbung b) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class BewerbungMapper {
 		return b;
 	}
 	
-	public void loeschen(Bewerbung b) {
+	public void loeschen(Bewerbung b) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

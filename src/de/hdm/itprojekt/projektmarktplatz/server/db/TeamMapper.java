@@ -17,7 +17,7 @@ public class TeamMapper {
 	
 
 
-	public Team einfuegen(Team t) {
+	public Team einfuegen(Team t) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class TeamMapper {
 		return t;
 	}
 
-	public Team speichern(Team t) {
+	public Team speichern(Team t) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class TeamMapper {
 		return t;
 	}
 	
-	public void loeschen(Team t) {
+	public void loeschen(Team t) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

@@ -77,36 +77,37 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	   * ABSCHNITT, Anfang: Methoden für Ausschreibung-Objekte
 	   * ***************************************************************************
 	   */
-	public Ausschreibung speichern() throws IllegalArgumentException{
+	public Ausschreibung erstellen() throws Exception{
 
 		Ausschreibung a = new Ausschreibung();
 		a.setBezeichnung("test");
 		a.setFrist(null);
-
 		a.setInhalt("testetst");
 		aMapper.einfuegen(a);
 		return a;
 	}
+	
+	
 	//Bearbeiten einer Ausschreibung ---> SQL Statement anpassen nachdem DB-Schicht committet hat!
 	public void save(Ausschreibung a) throws IllegalArgumentException {
 		aMapper.update(a);
 	}
 	
-	//Löschung einer Ausschreibung --> je nach Mapper, anpassen! 
+	//////////////////////Löschung einer Ausschreibung --> je nach Mapper, anpassen! 
 	
-public void löschen (Ausschreibung a) throws IllegalArgumentException {
-    Vector<Ausschreibung> ausschreibung = this.getAccountsOf(c);
+//public void löschen (Ausschreibung a) throws IllegalArgumentException {
+//    Vector<Ausschreibung> ausschreibung = this.getAccountsOf(c);
+//
+//    if (ausschreibung != null) {
+//      for (Ausschreibung c : ausschreibung) {
+//        this.löschen(a);
+//        
+//      }
+//    }
 
-    if (ausschreibung != null) {
-      for (Ausschreibung c : ausschreibung) {
-        this.löschen(a);
-        
-      }
-    }
-
-    // Anschließend den Kunden entfernen
-    this.aMapper.delete(a);
-  }
+//    /////////////////////// Anschließend den Kunden entfernen
+//    this.aMapper.delete(a);
+//  }
 	/*
 	   * ***************************************************************************
 	   * ABSCHNITT, Anfang: Methoden für Organisationseinheit-Objekte
@@ -117,7 +118,7 @@ public void löschen (Ausschreibung a) throws IllegalArgumentException {
 		Organisationseinheit org = new Organisationseinheit("", "");
 		
 		try {
-			orgMapper.insert(org);
+			orgMapper.speichern(org);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

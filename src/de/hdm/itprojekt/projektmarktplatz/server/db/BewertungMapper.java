@@ -17,7 +17,7 @@ public class BewertungMapper {
 	
 
 
-	public Bewertung einfuegen(Bewertung b) {
+	public Bewertung einfuegen(Bewertung b) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class BewertungMapper {
 		return b;
 	}
 
-	public Bewertung speichern(Bewertung b) {
+	public Bewertung speichern(Bewertung b) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class BewertungMapper {
 		return b;
 	}
 	
-	public void loeschen(Bewertung b) {
+	public void loeschen(Bewertung b) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

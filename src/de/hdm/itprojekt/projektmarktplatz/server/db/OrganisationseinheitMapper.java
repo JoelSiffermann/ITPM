@@ -17,7 +17,7 @@ public class OrganisationseinheitMapper {
 	
 
 
-	public Organisationseinheit einfuegen(Organisationseinheit o) {
+	public Organisationseinheit einfuegen(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class OrganisationseinheitMapper {
 		return o;
 	}
 
-	public Organisationseinheit speichern(Organisationseinheit o) {
+	public Organisationseinheit speichern(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class OrganisationseinheitMapper {
 		return o;
 	}
 	
-	public void loeschen(Organisationseinheit o) {
+	public void loeschen(Organisationseinheit o) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

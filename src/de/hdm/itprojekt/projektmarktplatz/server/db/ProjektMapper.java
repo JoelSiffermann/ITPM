@@ -15,7 +15,7 @@ public class ProjektMapper {
 		return null;
 	}
 
-	public Projekt einfuegen(Projekt p) {
+	public Projekt einfuegen(Projekt p) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -47,7 +47,7 @@ public class ProjektMapper {
 		return p;
 	}
 
-	public Projekt speichern(Projekt p) {
+	public Projekt speichern(Projekt p) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -62,7 +62,7 @@ public class ProjektMapper {
 		return p;
 	}
 	
-	public void loeschen(Projekt p) {
+	public void loeschen(Projekt p) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

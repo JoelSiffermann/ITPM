@@ -17,7 +17,7 @@ public class AusschreibungMapper {
 	
 
 
-	public Ausschreibung einfuegen(Ausschreibung a) {
+	public Ausschreibung einfuegen(Ausschreibung a) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class AusschreibungMapper {
 		return a;
 	}
 
-	public Ausschreibung speichern(Ausschreibung a) {
+	public Ausschreibung speichern(Ausschreibung a) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class AusschreibungMapper {
 		return a;
 	}
 	
-	public void loeschen(Ausschreibung a) {
+	public void loeschen(Ausschreibung a) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {
@@ -77,7 +77,7 @@ public class AusschreibungMapper {
 	    }
 	  }
 
-	public Ausschreibung getById(Ausschreibung a){
+	public Ausschreibung getById(Ausschreibung a) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
@@ -90,7 +90,7 @@ public class AusschreibungMapper {
 		    }
 		    return a;
 	}
-	public Ausschreibung getAll(){
+	public Ausschreibung getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();
 

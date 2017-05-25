@@ -17,7 +17,7 @@ public class PersonMapper {
 	
 
 
-	public Person einfuegen(Person p) {
+	public Person einfuegen(Person p) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class PersonMapper {
 		return p;
 	}
 
-	public Person speichern(Person p) {
+	public Person speichern(Person p) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class PersonMapper {
 		return p;
 	}
 	
-	public void loeschen(Person p) {
+	public void loeschen(Person p) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

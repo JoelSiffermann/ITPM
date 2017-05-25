@@ -17,7 +17,7 @@ public class ProjektbeteiligungMapper {
 	
 
 
-	public Beteiligung einfuegen(Beteiligung b) {
+	public Beteiligung einfuegen(Beteiligung b) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class ProjektbeteiligungMapper {
 		return b;
 	}
 
-	public Beteiligung speichern(Beteiligung b) {
+	public Beteiligung speichern(Beteiligung b) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class ProjektbeteiligungMapper {
 		return b;
 	}
 	
-	public void loeschen(Beteiligung b) {
+	public void loeschen(Beteiligung b) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

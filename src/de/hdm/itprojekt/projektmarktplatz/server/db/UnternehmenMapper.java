@@ -17,7 +17,7 @@ public class UnternehmenMapper {
 	
 
 
-	public Unternehmen einfuegen(Unternehmen u) {
+	public Unternehmen einfuegen(Unternehmen u) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class UnternehmenMapper {
 		return u;
 	}
 
-	public Unternehmen speichern(Unternehmen u) {
+	public Unternehmen speichern(Unternehmen u) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class UnternehmenMapper {
 		return u;
 	}
 	
-	public void loeschen(Unternehmen u) {
+	public void loeschen(Unternehmen u) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

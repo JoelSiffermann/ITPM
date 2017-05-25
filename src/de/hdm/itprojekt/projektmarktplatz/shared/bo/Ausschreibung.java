@@ -13,7 +13,9 @@ public class Ausschreibung extends BusinessObjekt {
 	/** Die Frist der G�ltigkeit einer Ausschreibung */
 	private Date frist;
 	
-	
+	public Ausschreibung (){
+		
+	}
 	public Ausschreibung(String bezeichnung, String inhalt, Date frist)
 	{
 		this.bezeichnung=bezeichnung; 

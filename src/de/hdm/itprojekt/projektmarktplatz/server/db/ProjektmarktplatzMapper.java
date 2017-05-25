@@ -17,7 +17,7 @@ public class ProjektmarktplatzMapper {
 	
 
 
-	public Projektmarktplatz einfuegen(Projektmarktplatz p) {
+	public Projektmarktplatz einfuegen(Projektmarktplatz p) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -49,7 +49,7 @@ public class ProjektmarktplatzMapper {
 		return p;
 	}
 
-	public Projektmarktplatz speichern(Projektmarktplatz p) {
+	public Projektmarktplatz speichern(Projektmarktplatz p) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -64,7 +64,7 @@ public class ProjektmarktplatzMapper {
 		return p;
 	}
 	
-	public void loeschen(Projektmarktplatz p) {
+	public void loeschen(Projektmarktplatz p) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {

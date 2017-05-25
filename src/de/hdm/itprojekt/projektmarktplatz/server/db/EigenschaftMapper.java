@@ -20,7 +20,7 @@ public class EigenschaftMapper {
 	
 
 
-	public Eigenschaft einfuegen(Eigenschaft c) {//c für character
+	public Eigenschaft einfuegen(Eigenschaft c) throws Exception {//c fï¿½r character
 		Connection con = DBConnection.connection();
 
 		try {
@@ -52,7 +52,7 @@ public class EigenschaftMapper {
 		return c;
 	}
 
-	public Eigenschaft speichern(Eigenschaft c) {
+	public Eigenschaft speichern(Eigenschaft c) throws Exception {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -67,7 +67,7 @@ public class EigenschaftMapper {
 		return c;
 	}
 	
-	public void loeschen(Eigenschaft c) {
+	public void loeschen(Eigenschaft c) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {
