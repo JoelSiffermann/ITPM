@@ -49,12 +49,12 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	@Override
 	  public void init() throws IllegalArgumentException {
 	      /*
-	       * Ganz wesentlich ist, dass die BankAdministration einen vollständigen Satz
+	       * Ganz wesentlich ist, dass die Projektmarktplatzadministration einen vollständigen Satz
 	       * von Mappern besitzt, mit deren Hilfe sie dann mit der Datenbank
 	       * kommunizieren kann.
 	       */
 	      this.aMapper = AusschreibungMapper.ausschreibungMapper();
-	      this.orgMapper = OrganisationseinheitMapper.orgMapper();
+	      this.orgMapper = OrganisationseinheitMapper.organisationseinheitMapper();
 	      this.bMapper = BewerbungMapper.bewerbungMapper();
 	      this.bwMapper = BewertungMapper.bewertungMapper();
 	      this.eMapper = EigenschaftMapper.eigenschaftMapper();
@@ -89,25 +89,25 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	
 	
 	//Bearbeiten einer Ausschreibung ---> SQL Statement anpassen nachdem DB-Schicht committet hat!
-	public void save(Ausschreibung a) throws IllegalArgumentException {
-		aMapper.update(a);
+	public void save(Ausschreibung a) throws Exception {
+		aMapper.speichern(a);
 	}
 	
 	//////////////////////Löschung einer Ausschreibung --> je nach Mapper, anpassen! 
 	
-//public void löschen (Ausschreibung a) throws IllegalArgumentException {
-//    Vector<Ausschreibung> ausschreibung = this.getAccountsOf(c);
-//
-//    if (ausschreibung != null) {
-//      for (Ausschreibung c : ausschreibung) {
-//        this.löschen(a);
-//        
-//      }
-//    }
+public void löschen (Ausschreibung a) throws IllegalArgumentException {
+    Vector<Ausschreibung> ausschreibung = this.getById(a);
 
-//    /////////////////////// Anschließend den Kunden entfernen
-//    this.aMapper.delete(a);
-//  }
+    if (ausschreibung != null) {
+      for (Ausschreibung c : ausschreibung) {
+        this.löschen(a);
+        
+      }
+    }
+
+    /////////////////////// Anschließend den Kunden entfernen
+    this.aMapper.loeschen(a);
+  }
 	/*
 	   * ***************************************************************************
 	   * ABSCHNITT, Anfang: Methoden für Organisationseinheit-Objekte

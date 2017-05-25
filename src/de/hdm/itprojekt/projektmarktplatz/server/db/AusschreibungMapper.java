@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;;
 //@author samina
 public class AusschreibungMapper {
 
