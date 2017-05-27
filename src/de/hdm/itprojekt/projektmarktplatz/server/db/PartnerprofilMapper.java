@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 //@author samina
 public class PartnerprofilMapper {
 

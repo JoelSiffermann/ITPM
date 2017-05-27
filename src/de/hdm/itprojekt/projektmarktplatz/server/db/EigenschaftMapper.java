@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 //@author samina
 
 public class EigenschaftMapper {
@@ -67,7 +66,7 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `eigenschaft` SET `Bezeichnung` = '"+c.getBezeichnung()+"' WHERE `eigenschaft`.`Eigenschaft_ID` = "+c.getId());
+			stmt.executeUpdate("UPDATE `eigenschaft` SET `Eigenschaft_ID` = '"+c.getId()+"', `Bezeichnung` = '"+c.getBezeichnung()+"', `Wert` = '"+c.getWert()+"', `partner_id` = '"+c.getPartnerprofil().getId()+"' WHERE `eigenschaft`.`Eigenschaft_ID` = "+c.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,18 +87,29 @@ public class EigenschaftMapper {
 	      e.printStackTrace();
 	    }
 	  }
-	public Eigenschaft getById(Eigenschaft c) throws Exception{
+	public Eigenschaft getById(Eigenschaft ch) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      stmt.executeUpdate("SELECT * FROM `eigenschaft` WHERE `Eigenschaft_ID` = " + c.getId());
+		      ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft` WHERE `Eigenschaft_ID` = " + ch.getId());
+		      if (rs.next()){
+		    	  Eigenschaft c = new Eigenschaft();//default Konstruktor in Eigenscgaft.java einf�gen damit es kein Fehler anzeigt
+		          c.setId(rs.getInt("Eigenschaft_ID"));
+		          c.setBezeichnung(rs.getString("Bezeichnung"));
+		          c.setWert(rs.getString("Wert"));
+		          Partnerprofil p = new Partnerprofil();
+				  c.setId(rs.getInt("partner_id"));
+				  c.setPartnerprofil(p);
+
+				  return c;
+		      }
 		    }
 		    catch (SQLException e) {
 		    	
 		    }
-		    return c;
+		    return null;
 	}
 	public ArrayList<Eigenschaft> getAll() throws Exception{
 		

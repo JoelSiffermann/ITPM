@@ -151,7 +151,7 @@ public class AusschreibungMapper {
 				 * Primärschlüssel.
 				 */
 			//	a.setId(rs.getInt("") + 1);
-//TODO While Schleife und Objekt erzeugen wie bei Bank Projekt findAll() bei TransactionsMappers
+
 			      while (rs.next()) {
 			          Ausschreibung a = new Ausschreibung();
 			          Partnerprofil pp = new Partnerprofil();

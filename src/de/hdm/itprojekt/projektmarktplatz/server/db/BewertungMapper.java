@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 //@author samina
 public class BewertungMapper {
 
@@ -67,7 +66,7 @@ public class BewertungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `bewertung` SET `Inhalt` = '"+b.getInhalt()+"' WHERE `bewertung`.`Bewertung_ID` = "+b.getId());
+			stmt.executeUpdate("UPDATE `bewertung` SET `Bewertung_ID` = '"+b.getId()+"', `Inhalt` = '"+b.getInhalt()+"', `Skala` = '"+b.getSkala()+"', `person_id` = '"+b.getPerson().getId()+"' WHERE `bewertung`.`Bewertung_ID` = "+b.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,18 +87,29 @@ public class BewertungMapper {
 	      e.printStackTrace();
 	    }
 	  }
-	public Bewertung getById(Bewertung b) throws Exception{
+	public Bewertung getById(Bewertung bt) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      stmt.executeUpdate("SELECT * FROM `bewertung` WHERE `Bewertung_ID` = " + b.getId());
+		      ResultSet rs = stmt.executeQuery("SELECT * FROM `bewertung` WHERE `Bewertung_ID` = " + bt.getId());
+		      if (rs.next()){
+		    	  Bewertung b = new Bewertung();//default Konstruktor in Bewertung.java einf�gen damit es kein Fehler anzeigt
+		          b.setId(rs.getInt("Bewertung_ID"));
+		          b.setInhalt(rs.getString("Inhalt"));
+		          b.setSkala(rs.getFloat("Skala"));
+		          Person p = new Person();
+					b.setId(rs.getInt("person_id"));
+					b.setPerson(p);
+					
+					return b;
+		      }
 		    }
 		    catch (SQLException e) {
 		    	
 		    }
-		    return b;
+		    return null;
 	}
 	public ArrayList<Bewertung> getAll() throws Exception{
 		
