@@ -79,7 +79,7 @@ public class BewertungMapper {
 	      e.printStackTrace();
 	    }
 	  }
-	public Bewertung getById(Bewertung b){
+	public Bewertung getById(Bewertung b) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
@@ -92,7 +92,7 @@ public class BewertungMapper {
 		    }
 		    return b;
 	}
-	public ArrayList<Bewertung> getAll(){
+	public ArrayList<Bewertung> getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();
 		ArrayList<Bewertung> result = new ArrayList<Bewertung>();
@@ -113,7 +113,7 @@ public class BewertungMapper {
 				 */
 			//	a.setId(rs.getInt("") + 1);
 				while (rs.next()) {
-			          Bewertung b = new Bewertung();//default Konstruktor in Bewertung.java einfügen damit es kein Fehler anzeigt
+			          Bewertung b = new Bewertung();//default Konstruktor in Bewertung.java einfï¿½gen damit es kein Fehler anzeigt
 			          b.setId(rs.getInt("Bewertung_ID"));
 			          b.setInhalt(rs.getString("Inhalt"));
 			          b.setSkala(rs.getFloat("Skala"));

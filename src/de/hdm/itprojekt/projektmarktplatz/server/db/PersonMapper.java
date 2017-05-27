@@ -9,7 +9,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 
-//@autor Ömer
+//@autor ï¿½mer
 public class PersonMapper {
 
 	public static PersonMapper personMapper() {
@@ -42,7 +42,7 @@ public class PersonMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsÃ¤chliche EinfÃ¼geoperation
-				stmt.executeUpdate("INSERT INTO `person` (`Vorname`, `Nachname`, `Beruf`, `Erfahrung`, `ID`, `o_id`) VALUES ('Hans ', 'Müller', 'Bankkaufmann', '10', NULL, '2');");
+				stmt.executeUpdate("INSERT INTO `person` (`Vorname`, `Nachname`, `Beruf`, `Erfahrung`, `ID`, `o_id`) VALUES ('Hans ', 'Mï¿½ller', 'Bankkaufmann', '10', NULL, '2');");
 			}
 
 		} catch (SQLException e) {
@@ -79,7 +79,7 @@ public class PersonMapper {
 	    }
 	  }
 
-	public Person getById(Person p){
+	public Person getById(Person p) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
@@ -92,7 +92,7 @@ public class PersonMapper {
 		    }
 		    return p;
 	}
-	public Ausschreibung getAll(){
+	public Ausschreibung getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();
 

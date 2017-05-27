@@ -81,7 +81,7 @@ public class EigenschaftMapper {
 	      e.printStackTrace();
 	    }
 	  }
-	public Eigenschaft getById(Eigenschaft c){
+	public Eigenschaft getById(Eigenschaft c) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
@@ -94,7 +94,7 @@ public class EigenschaftMapper {
 		    }
 		    return c;
 	}
-	public ArrayList<Eigenschaft> getAll(){
+	public ArrayList<Eigenschaft> getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();
 		ArrayList<Eigenschaft> result = new ArrayList<Eigenschaft>();
@@ -115,7 +115,7 @@ public class EigenschaftMapper {
 				 */
 			//	a.setId(rs.getInt("") + 1);
 				while (rs.next()) {
-			          Eigenschaft c = new Eigenschaft();//default Konstruktor in Eigenscgaft.java einfügen damit es kein Fehler anzeigt
+			          Eigenschaft c = new Eigenschaft();//default Konstruktor in Eigenscgaft.java einfï¿½gen damit es kein Fehler anzeigt
 			          c.setId(rs.getInt("Eigenschaft_ID"));
 			          c.setBezeichnung(rs.getString("Bezeichnung"));
 			          c.setWert(rs.getString("Wert"));

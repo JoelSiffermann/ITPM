@@ -79,7 +79,7 @@ public class ProjektbeteiligungMapper {
 	      e.printStackTrace();
 	    }
 	  }
-	public Beteiligung getById(Beteiligung b){
+	public Beteiligung getById(Beteiligung b) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
@@ -92,7 +92,7 @@ public class ProjektbeteiligungMapper {
 		    }
 		    return b;
 	}
-	public ArrayList<Beteiligung> getAll(){
+	public ArrayList<Beteiligung> getAll() throws Exception{
 		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
 		Connection con = DBConnection.connection();
 
@@ -108,7 +108,7 @@ public class ProjektbeteiligungMapper {
 			// Wenn wir etwas zurÃ¼ckerhalten, kann dies nur einzeilig sein
 			if (rs.next()) {
 				while (rs.next()) {
-			          Beteiligung b = new Beteiligung();//default Konstruktor in Beteiligung.java einfügen damit es kein Fehler anzeigt
+			          Beteiligung b = new Beteiligung();//default Konstruktor in Beteiligung.java einfï¿½gen damit es kein Fehler anzeigt
 			          b.setId(rs.getInt("Beteilgung_ID"));
 			          b.setStart(rs.getDate("Start"));
 			          b.setEnde(rs.getDate("Ende"));

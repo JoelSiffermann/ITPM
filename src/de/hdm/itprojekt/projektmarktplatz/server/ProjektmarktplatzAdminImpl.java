@@ -94,20 +94,24 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	}
 	
 	//////////////////////Löschung einer Ausschreibung --> je nach Mapper, anpassen! 
+	// --> Methode muss noch geändert werden!!
 	
-public void löschen (Ausschreibung a) throws IllegalArgumentException {
+/*public void loeschen (Ausschreibung a) throws IllegalArgumentException {
     Vector<Ausschreibung> ausschreibung = this.getById(a);
 
     if (ausschreibung != null) {
       for (Ausschreibung c : ausschreibung) {
-        this.löschen(a);
+        this.loeschen(a);
         
       }
     }
 
     /////////////////////// Anschließend den Kunden entfernen
     this.aMapper.loeschen(a);
-  }
+  } */
+	
+	
+	
 	/*
 	   * ***************************************************************************
 	   * ABSCHNITT, Anfang: Methoden für Organisationseinheit-Objekte
@@ -123,6 +127,12 @@ public void löschen (Ausschreibung a) throws IllegalArgumentException {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	public Ausschreibung speichern() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

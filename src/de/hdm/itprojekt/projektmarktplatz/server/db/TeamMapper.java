@@ -9,7 +9,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
 
-//@autor Ömer
+//@autor ï¿½mer
 public class TeamMapper {
 
 	public static TeamMapper teamMapper() {
@@ -79,7 +79,7 @@ public class TeamMapper {
 	    }
 	  }
 
-	public Team getById(Team t){
+	public Team getById(Team t) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
@@ -92,7 +92,7 @@ public class TeamMapper {
 		    }
 		    return t;
 	}
-	public Ausschreibung getAll(){
+	public Ausschreibung getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();
 

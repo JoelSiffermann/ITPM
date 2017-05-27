@@ -9,7 +9,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
-//@autor Ömer
+//@autor ï¿½mer
 public class OrganisationseinheitMapper {
 
 	public static OrganisationseinheitMapper organisationseinheitMapper() {
@@ -82,7 +82,7 @@ public class OrganisationseinheitMapper {
 	  }
 
 
-public Organisationseinheit getById(Organisationseinheit o){
+public Organisationseinheit getById(Organisationseinheit o) throws Exception{
 	 Connection con = DBConnection.connection();
 
 	    try {
@@ -95,7 +95,7 @@ public Organisationseinheit getById(Organisationseinheit o){
 	    }
 	    return o;
 }
-public Organisationseinheit getAll(){
+public Organisationseinheit getAll() throws Exception{
 	
 	Connection con = DBConnection.connection();
 

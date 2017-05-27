@@ -9,7 +9,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
-//@autor Ömer
+//@autor ï¿½mer
 public class ProjektmarktplatzMapper {
 
 	public static ProjektmarktplatzMapper projektmarktplatzMapper() {
@@ -79,7 +79,7 @@ public class ProjektmarktplatzMapper {
 	    }
 	  }
 
-	public Projektmarktplatz getById(Projektmarktplatz p){
+	public Projektmarktplatz getById(Projektmarktplatz p) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
@@ -92,7 +92,7 @@ public class ProjektmarktplatzMapper {
 		    }
 		    return p;
 	}
-	public Ausschreibung getAll(){
+	public Ausschreibung getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();
 

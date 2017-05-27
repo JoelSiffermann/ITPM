@@ -79,7 +79,7 @@ public class PartnerprofilMapper {
 	    }
 	  }
 
-	public Partnerprofil getById(Partnerprofil p){
+	public Partnerprofil getById(Partnerprofil p) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
@@ -92,7 +92,7 @@ public class PartnerprofilMapper {
 		    }
 		    return p;
 	}
-	public ArrayList<Partnerprofil> getAll(){
+	public ArrayList<Partnerprofil> getAll() throws Exception{
 		ArrayList<Partnerprofil> result = new ArrayList<Partnerprofil>();
 		Connection con = DBConnection.connection();
 
@@ -108,7 +108,7 @@ public class PartnerprofilMapper {
 			// Wenn wir etwas zurÃ¼ckerhalten, kann dies nur einzeilig sein
 			if (rs.next()) {
 				while (rs.next()) {
-			          Partnerprofil p = new Partnerprofil();//default Konstruktor in Partnerprofil.java einfügen damit es kein Fehler anzeigt
+			          Partnerprofil p = new Partnerprofil();//default Konstruktor in Partnerprofil.java einfï¿½gen damit es kein Fehler anzeigt
 			          p.setId(rs.getInt("Partnerprofil_ID"));
 			          p.setErstelldatum(rs.getDate("Erstelldatum"));
 			          p.setAenderungsdatum(rs.getDate("Aenderungsdatum"));

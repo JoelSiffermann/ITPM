@@ -9,7 +9,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.server.db.DBConnection;
 
-//@autor Ömer
+//@autor ï¿½mer
 public class ProjektMapper {
 
 	public static ProjektMapper projektMapper() {
@@ -55,7 +55,7 @@ public class ProjektMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `projekt` SET `Inhalt` = 'Tabellen für Projekt anlegen' WHERE `projekt`.`Projekt_ID` = 2;");
+			stmt.executeUpdate("UPDATE `projekt` SET `Inhalt` = 'Tabellen fï¿½r Projekt anlegen' WHERE `projekt`.`Projekt_ID` = 2;");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class ProjektMapper {
 	    }
 	  }
 
-	public Projekt getById(Projekt p){
+	public Projekt getById(Projekt p) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
@@ -90,7 +90,7 @@ public class ProjektMapper {
 		    }
 		    return p;
 	}
-	public Ausschreibung getAll(){
+	public Ausschreibung getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();
 
