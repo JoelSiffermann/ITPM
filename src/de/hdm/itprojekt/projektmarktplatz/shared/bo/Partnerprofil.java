@@ -9,6 +9,7 @@ public class Partnerprofil extends BusinessObjekt {
 	private Date erstelldatum;
 	private Date aenderungsdatum;
 	private Organisationseinheit organisationseinheit;
+	private Ausschreibung ausschreibung;
 
 	public Organisationseinheit getOrganisationseinheit() {
 		return this.organisationseinheit;
@@ -41,6 +42,14 @@ public class Partnerprofil extends BusinessObjekt {
 
 	public void setAenderungsdatum(Date ad) {
 		aenderungsdatum = ad;
+	}
+
+	public Ausschreibung getAusschreibung() {
+		return ausschreibung;
+	}
+
+	public void setAusschreibung(Ausschreibung ausschreibung) {
+		this.ausschreibung = ausschreibung;
 	}
 
 }

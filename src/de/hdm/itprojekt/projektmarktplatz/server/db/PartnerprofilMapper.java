@@ -6,22 +6,44 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 //@author samina
 public class PartnerprofilMapper {
 
+	private static PartnerprofilMapper partnerprofilMapper = null;
+	
+	protected PartnerprofilMapper(){
+		
+	}
+
 	public static PartnerprofilMapper partnerprofilMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		if (partnerprofilMapper == null) {
+			partnerprofilMapper = new PartnerprofilMapper();
+		}
+
+		return partnerprofilMapper;
 	}
 	
 
 
 	public Partnerprofil einfuegen(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
+		
+		String sql = "";
 
+		if (!p.getAusschreibung().equals(null)){
+			sql = "INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, "
+					+ "`orga_id`, `ausschreibung_id`) "
+					+ "VALUES (NULL, '"+p.getErstelldatum()+"', '"+p.getAenderungsdatum()+"', NULL, '"+p.getAusschreibung().getId() +"');";
+		} else if (!p.getOrganisationseinheit().equals(null)){
+			sql = "INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, "
+					+ "`orga_id`, `ausschreibung_id`) "
+					+ "VALUES (NULL, '"+p.getErstelldatum()+"', '"+p.getAenderungsdatum()+"', '"+p.getOrganisationseinheit().getId() +"', NULL);";
+		}
+		
 		try {
 			Statement stmt = con.createStatement();
 
@@ -42,8 +64,10 @@ public class PartnerprofilMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, `orga_id`) VALUES (NULL, '"+p.getErstelldatum()+"', '"+p.getAenderungsdatum()+"', '"+p.getOrganisationseinheit().getId());
+//				stmt.executeUpdate("INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, `orga_id`) VALUES (NULL, '"+p.getErstelldatum()+"', '"+p.getAenderungsdatum()+"', '"+p.getOrganisationseinheit().getId());
 			//}
+				stmt.executeUpdate(sql);
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -53,12 +77,20 @@ public class PartnerprofilMapper {
 
 	public Partnerprofil speichern(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
-
+		
+		String sql = "";
+		if(!p.getAusschreibung().equals(null)){
+			sql = "UPDATE `partnerprofil` SET `Erstelldatum` = '"+p.getErstelldatum()+"', `Aenderungsdatum` = '"+p.getAenderungsdatum()+"', `ausschreibung_id` = '"+p.getAusschreibung().getId()+"' WHERE `partnerprofil`.`Partnerprofil_ID` = "+p.getId();
+		}else if (!p.getOrganisationseinheit().equals(null)){
+			sql = "UPDATE `partnerprofil` SET `Erstelldatum` = '"+p.getErstelldatum()+"', `Aenderungsdatum` = '"+p.getAenderungsdatum()+"', `orga_id` = '"+p.getOrganisationseinheit().getId()+"' WHERE `partnerprofil`.`Partnerprofil_ID` = "+p.getId();
+		}
+		
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `partnerprofil` SET `orga_id` = '"+p.getOrganisationseinheit().getId()+"' WHERE `partnerprofil`.`Partnerprofil_ID` = "+p.getId());
+			stmt.executeUpdate(sql);
 
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -85,12 +117,35 @@ public class PartnerprofilMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      stmt.executeUpdate("SELECT * FROM `partnerprofil` WHERE `Partnerprofil_ID` = " + p.getId());
+		      ResultSet rs = stmt.executeQuery("SELECT * FROM `partnerprofil` WHERE `Partnerprofil_ID` = " + p.getId());
+		      
+		      if(rs.next()){
+		    	  Partnerprofil pp = new Partnerprofil();//default Konstruktor in Partnerprofil.java einf�gen damit es kein Fehler anzeigt
+		          pp.setId(rs.getInt("Partnerprofil_ID"));
+		          pp.setErstelldatum(rs.getDate("Erstelldatum"));
+		          pp.setAenderungsdatum(rs.getDate("Aenderungsdatum"));
+		          
+		          
+				  
+				  
+				  if(rs.getInt("orga_id") > 0){
+					  Organisationseinheit o = new Organisationseinheit();
+					  o.setId(rs.getInt("orga_id"));
+					  pp.setOrganisationseinheit(o);
+				  } else if (rs.getInt("ausschreibung_id") > 0){
+					  Ausschreibung a = new Ausschreibung();
+					  a.setId(rs.getInt("ausschreibung_id"));
+					  pp.setAusschreibung(a); 
+				  }
+				  
+					// a.setId(rs.getInt("") + 1);
+					return pp;
+		      }
 		    }
 		    catch (SQLException e) {
 		    	
 		    }
-		    return p;
+		    return null;
 	}
 	public ArrayList<Partnerprofil> getAll() throws Exception{
 		ArrayList<Partnerprofil> result = new ArrayList<Partnerprofil>();
@@ -103,7 +158,7 @@ public class PartnerprofilMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `partnerprofil`");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 			if (rs.next()) {
@@ -112,9 +167,20 @@ public class PartnerprofilMapper {
 			          p.setId(rs.getInt("Partnerprofil_ID"));
 			          p.setErstelldatum(rs.getDate("Erstelldatum"));
 			          p.setAenderungsdatum(rs.getDate("Aenderungsdatum"));
-			          Organisationseinheit o = new Organisationseinheit();
-					  p.setId(rs.getInt("orga_id"));
-					  p.setOrganisationseinheit(o);
+			          
+			          
+					  
+					  
+					  if(rs.getInt("orga_id") > 0){
+						  Organisationseinheit o = new Organisationseinheit();
+						  o.setId(rs.getInt("orga_id"));
+						  p.setOrganisationseinheit(o);
+					  } else if (rs.getInt("ausschreibung_id") > 0){
+						  Ausschreibung a = new Ausschreibung();
+						  a.setId(rs.getInt("ausschreibung_id"));
+						  p.setAusschreibung(a); 
+					  }
+					  
 						// a.setId(rs.getInt("") + 1);
 						result.add(p);
 					}

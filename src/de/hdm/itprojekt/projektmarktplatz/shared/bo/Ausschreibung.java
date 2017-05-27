@@ -13,6 +13,9 @@ public class Ausschreibung extends BusinessObjekt {
 	/** Die Frist der G�ltigkeit einer Ausschreibung */
 	private Date frist;
 	
+	private Projekt projekt;
+	
+	private Partnerprofil partnerprofil;
 	
 	public Ausschreibung(){
 		
@@ -61,6 +64,42 @@ public class Ausschreibung extends BusinessObjekt {
 	// Setzt die Frist f�r die G�ltigkeit einer Ausschreibung bzw. wie lange man sich bewerben kann
 	public void setFrist(Date date){
 		frist= date;
+	}
+
+
+
+
+
+
+	public Projekt getProjekt() {
+		return projekt;
+	}
+
+
+
+
+
+
+	public Partnerprofil getPartnerprofil() {
+		return partnerprofil;
+	}
+
+
+
+
+
+
+	public void setProjekt(Projekt projekt) {
+		this.projekt = projekt;
+	}
+
+
+
+
+
+
+	public void setPartnerprofil(Partnerprofil partnerprofil) {
+		this.partnerprofil = partnerprofil;
 	}
 	
 	

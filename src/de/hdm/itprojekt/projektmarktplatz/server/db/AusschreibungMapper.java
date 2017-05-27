@@ -7,15 +7,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 //@author samina
 public class AusschreibungMapper {
 
+	private static AusschreibungMapper aMapper = null;
+	
+	protected AusschreibungMapper(){
+		
+	}
+
 	public static AusschreibungMapper ausschreibungMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		if (aMapper == null) {
+			aMapper = new AusschreibungMapper();
+		}
+
+		return aMapper;
 	}
 	
 
@@ -43,7 +52,11 @@ public class AusschreibungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `ausschreibung` (`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`) VALUES (NULL, '"+a.getBezeichnung()+"', '"+a.getInhalt()+"', '"+a.getFrist());
+				stmt.executeUpdate("INSERT INTO `ausschreibung` "
+						+ "(`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`, `projekt_id`, `partnerprofil_id`) "
+						+ "VALUES "
+						+ "(NULL, '"+a.getBezeichnung()+"', '"+a.getInhalt()+"', '"+a.getFrist()+"', "
+								+ "'"+a.getProjekt().getId()+"', '"+a.getPartnerprofil().getId()+"';");
 //			}
 
 		} catch (SQLException e) {
@@ -58,7 +71,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `ausschreibung` SET `Inhalt` = '"+a.getInhalt()+"' WHERE `ausschreibung`.`Ausschreibung_ID` = "+a.getId());
+			stmt.executeUpdate("UPDATE `ausschreibung` SET `Bezeichnung` = '"+a.getBezeichnung()+"', `Inhalt` = '"+a.getInhalt()+"', `Frist` = '"+a.getFrist()+"', `projekt_id` = '"+a.getProjekt().getId()+"', `partnerprofil_id` = '"+a.getPartnerprofil().getId()+"' WHERE `ausschreibung`.`Ausschreibung_ID` = "+a.getId()+";");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -86,7 +99,30 @@ public class AusschreibungMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      stmt.executeUpdate("SELECT * FROM `ausschreibung` WHERE `Ausschreibung_ID` = " + a.getId());
+		      ResultSet rs = stmt.executeQuery("SELECT * FROM `ausschreibung` WHERE `Ausschreibung_ID` = " + a.getId());
+		      
+		      if(rs.next()){
+		    	  Ausschreibung as = new Ausschreibung();
+		    	  Partnerprofil pp = new Partnerprofil();
+		    	  Projekt p = new Projekt();
+		    	  as.setId(rs.getInt("Ausschreibung_ID"));
+		    	  as.setBezeichnung(rs.getString("Bezeichnung"));
+		    	  as.setFrist(rs.getDate("Frist"));
+		    	  as.setInhalt(rs.getString("Inhalt"));
+		    	  
+		    	  
+		    	  pp.setId(rs.getInt("partnerprofil_id"));
+		    	  
+		    	  as.setPartnerprofil(pp);
+		    	  
+		    	  p.setId(rs.getInt("projekt_id"));
+		    	  
+		    	  as.setProjekt(p);
+		    	  
+		    	  return as;
+		      }
+		      
+		      
 		    }
 		    catch (SQLException e) {
 		    	
@@ -98,6 +134,7 @@ public class AusschreibungMapper {
 		
 		Connection con = DBConnection.connection();
 		ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
+
 		try {
 			Statement stmt = con.createStatement();
 
@@ -117,11 +154,21 @@ public class AusschreibungMapper {
 //TODO While Schleife und Objekt erzeugen wie bei Bank Projekt findAll() bei TransactionsMappers
 			      while (rs.next()) {
 			          Ausschreibung a = new Ausschreibung();
+			          Partnerprofil pp = new Partnerprofil();
+			    	  Projekt p = new Projekt();
+			    	  
 			          a.setId(rs.getInt("Ausschreibung_ID"));
 			          a.setBezeichnung(rs.getString("Bezeichnung"));
 			          a.setInhalt(rs.getString("Inhalt"));
 			          a.setFrist(rs.getDate("Frist"));
-
+			    	  
+			    	  pp.setId(rs.getInt("partnerprofil_id"));
+			    	  
+			    	  a.setPartnerprofil(pp);
+			    	  
+			    	  p.setId(rs.getInt("projekt_id"));
+			    	  
+			    	  a.setProjekt(p);
 			          // Hinzufügen des neuen Objekts zum Ergebnisvektor
 			          result.add(a);
 			        }

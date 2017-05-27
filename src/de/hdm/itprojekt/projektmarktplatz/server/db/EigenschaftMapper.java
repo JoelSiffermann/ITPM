@@ -14,11 +14,18 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 public class EigenschaftMapper {
 	
 	  private static EigenschaftMapper eigenschaftMapper = null;
+	  
+	  protected EigenschaftMapper(){
+		  
+	  }
 
-	public static EigenschaftMapper eigenschaftMapper() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		public static EigenschaftMapper eigenschaftMapper() {
+			if (eigenschaftMapper == null) {
+				eigenschaftMapper = new EigenschaftMapper();
+			}
+
+			return eigenschaftMapper;
+		}
 	
 
 

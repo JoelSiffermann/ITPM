@@ -13,9 +13,18 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 //@author samina
 public class ProjektbeteiligungMapper {
 
+	private static ProjektbeteiligungMapper projektbeteiligungMapper = null;
+	
+	protected ProjektbeteiligungMapper(){
+		
+	}
+
 	public static ProjektbeteiligungMapper projektbeteilitungMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		if (projektbeteiligungMapper == null) {
+			projektbeteiligungMapper = new ProjektbeteiligungMapper();
+		}
+
+		return projektbeteiligungMapper;
 	}
 	
 
@@ -58,7 +67,7 @@ public class ProjektbeteiligungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `beteiligung` SET `Umfang` = '"+b.getUmfang()+"' WHERE `beteiligung`.`Beteilgung_ID` = "+b.getId());
+			stmt.executeUpdate("UPDATE `beteiligung` SET `Beteilgung_ID` = '"+b.getId()+"', `Start` = '"+b.getStart()+"', `Ende` = '"+b.getEnde()+"', `Umfang` = '"+b.getUmfang()+"', `projekt_ID` = '"+b.getProjekt().getId()+"', `orga_id` = '"+b.getOrganisationseinheit().getId()+"' WHERE `beteiligung`.`Beteilgung_ID` = "+b.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,18 +88,34 @@ public class ProjektbeteiligungMapper {
 	      e.printStackTrace();
 	    }
 	  }
-	public Beteiligung getById(Beteiligung b) throws Exception{
+	public Beteiligung getById(Beteiligung bt) throws Exception{
 		 Connection con = DBConnection.connection();
 
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      stmt.executeUpdate("SELECT * FROM `beteiligung` WHERE `Beteilgung_ID` = " + b.getId());
+		     ResultSet rs =  stmt.executeQuery("SELECT * FROM `beteiligung` WHERE `Beteilgung_ID` = " + bt.getId());
+		     if (rs.next()){
+		    	 Beteiligung b = new Beteiligung();//default Konstruktor in Beteiligung.java einf�gen damit es kein Fehler anzeigt
+		          b.setId(rs.getInt("Beteilgung_ID"));
+		          b.setStart(rs.getDate("Start"));
+		          b.setEnde(rs.getDate("Ende"));
+		          b.setUmfang(rs.getInt("Umfang"));
+		          Projekt p = new Projekt();
+				  b.setId(rs.getInt("projekt_ID"));
+				  b.setProjekt(p);
+				  Organisationseinheit o = new Organisationseinheit();
+				  b.setId(rs.getInt("orga_id"));
+				  b.setOrganisationseinheit(o);
+					// a.setId(rs.getInt("") + 1);
+					
+		     }
 		    }
+		    
 		    catch (SQLException e) {
 		    	
 		    }
-		    return b;
+		    return null;
 	}
 	public ArrayList<Beteiligung> getAll() throws Exception{
 		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();

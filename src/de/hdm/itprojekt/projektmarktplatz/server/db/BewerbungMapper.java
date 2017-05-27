@@ -8,14 +8,22 @@ import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 //@author samina
 public class BewerbungMapper {
 
+	private static BewerbungMapper bewerbungMapper = null;
+
+	protected BewerbungMapper(){
+		
+	}
+	
 	public static BewerbungMapper bewerbungMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		if (bewerbungMapper == null) {
+			bewerbungMapper = new BewerbungMapper();
+		}
+
+		return bewerbungMapper;
 	}
 
 	public Bewerbung einfuegen(Bewerbung b) throws Exception {
@@ -58,8 +66,7 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `bewerbung` SET `Inhalt` = '" + b.getInhalt()
-					+ "' WHERE `bewerbung`.`Bewerbung_ID` = " + b.getId());
+			stmt.executeUpdate("UPDATE `bewerbung` SET `Bewerbung_ID` = '"+b.getId()+"', `Inhalt` = '"+b.getInhalt()+"', `Erstelldatum` = '"+b.getErstelldatum()+"', `ausschreibung_id` = '"+b.getAusschreibung().getId()+"' WHERE `bewerbung`.`Bewerbung_ID` = "+b.getId()+";()");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -68,10 +75,8 @@ public class BewerbungMapper {
 		return b;
 	}
 
-
 	public void loeschen(Bewerbung b) throws Exception {
 		Connection con = DBConnection.connection();
-
 
 		try {
 			Statement stmt = con.createStatement();
@@ -88,7 +93,20 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("SELECT * FROM `bewerbung` WHERE `Bewerbung_ID` = " + b.getId());
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `bewerbung` WHERE `Bewerbung_ID` = " + b.getId());
+			if (rs.next()){
+				Bewerbung bw = new Bewerbung();
+				bw.setId(rs.getInt("Bewerbung_ID"));
+				bw.setInhalt(rs.getString("Inhalt"));
+				bw.setErstelldatum(rs.getDate("Erstelldatum"));
+				Ausschreibung a = new Ausschreibung();
+
+				a.setId(rs.getInt("ausschreibung_id"));
+
+				bw.setAusschreibung(a);
+				
+				return bw;
+			}
 		}
 
 		catch (SQLException e) {
@@ -122,12 +140,13 @@ public class BewerbungMapper {
 					b.setInhalt(rs.getString("Inhalt"));
 					b.setErstelldatum(rs.getDate("Erstelldatum"));
 					Ausschreibung a = new Ausschreibung();
+
 					a.setId(rs.getInt("ausschreibung_id"));
+
 					b.setAusschreibung(a);
-					// a.setId(rs.getInt("") + 1);
 					result.add(b);
 				}
-				
+
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation

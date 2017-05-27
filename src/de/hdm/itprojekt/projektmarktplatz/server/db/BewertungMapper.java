@@ -12,9 +12,18 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 //@author samina
 public class BewertungMapper {
 
+	private static BewertungMapper bwMapper = null;
+	
+	protected BewertungMapper(){
+		
+	}
+
 	public static BewertungMapper bewertungMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		if (bwMapper == null) {
+			bwMapper = new BewertungMapper();
+		}
+
+		return bwMapper;
 	}
 	
 
