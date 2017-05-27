@@ -10,6 +10,10 @@ public class Projekt extends BusinessObjekt{
 	private Date ende;
 	private String inhalt;
 	
+	public Projekt(){
+		
+	}
+	
 	public String getName(){
 		return name;
 	}
