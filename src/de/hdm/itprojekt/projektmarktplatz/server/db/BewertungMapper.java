@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 //@author samina
@@ -27,21 +29,22 @@ public class BewertungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
+		//	ResultSet rs = stmt.executeQuery("");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+		//	if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-				b.setId(rs.getInt("") + 1);
+			//	b.setId(rs.getInt("") + 1);
 
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-			}
+				stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"', '"+b.getPerson().getId());
+				//stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"', '');";
+		//	}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,7 +58,7 @@ public class BewertungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("");
+			stmt.executeUpdate("UPDATE `bewertung` SET `Inhalt` = '"+b.getInhalt()+"' WHERE `bewertung`.`Bewertung_ID` = "+b.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,11 +73,73 @@ public class BewertungMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("");
+	      stmt.executeUpdate("DELETE FROM `bewertung` WHERE Bewertung_ID = "+b.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
 	    }
 	  }
+	public Bewertung getById(Bewertung b){
+		 Connection con = DBConnection.connection();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      stmt.executeUpdate("SELECT * FROM `bewertung` WHERE `Bewertung_ID` = " + b.getId());
+		    }
+		    catch (SQLException e) {
+		    	
+		    }
+		    return b;
+	}
+	public ArrayList<Bewertung> getAll(){
+		
+		Connection con = DBConnection.connection();
+		ArrayList<Bewertung> result = new ArrayList<Bewertung>();
+		try {
+			Statement stmt = con.createStatement();
+
+			/*
+			 * Zunächst schauen wir nach, welches der momentan höchste
+			 * Primärschlüsselwert ist.
+			 */
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `bewertung`");
+
+			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+			if (rs.next()) {
+				/*
+				 * c erhält den bisher maximalen, nun um 1 inkrementierten
+				 * Primärschlüssel.
+				 */
+			//	a.setId(rs.getInt("") + 1);
+				while (rs.next()) {
+			          Bewertung b = new Bewertung();//default Konstruktor in Bewertung.java einf�gen damit es kein Fehler anzeigt
+			          b.setId(rs.getInt("Bewertung_ID"));
+			          b.setInhalt(rs.getString("Inhalt"));
+			          b.setSkala(rs.getFloat("Skala"));
+			          Person p = new Person();
+						b.setId(rs.getInt("person_id"));
+						b.setPerson(p);
+						// a.setId(rs.getInt("") + 1);
+						result.add(b);
+					}
+
+			          // Hinzufügen des neuen Objekts zum Ergebnisvektor
+			         
+
+				stmt = con.createStatement();
+
+				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+				stmt.executeUpdate("");
+				return result;
+			}
+
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 
 }
