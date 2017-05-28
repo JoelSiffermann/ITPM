@@ -6,8 +6,13 @@ public class Unternehmen extends BusinessObjekt{
 
 	private String geschaeftsform; 
 	private String geschaeftsfeld;
+	private Organisationseinheit organisationseinheit;
 	
 	/*Konstruktor */
+	
+	public Unternehmen () {
+		
+	}
 
 	public Unternehmen (String name, String email,String geschaeftsform, String geschaeftsfeld){
 
@@ -28,6 +33,16 @@ public class Unternehmen extends BusinessObjekt{
 	}
 	public void setGeschaeftsfeld(String string){
 		geschaeftsfeld = string;
+	}
+
+
+	public Organisationseinheit getOrganisationseinheit() {
+		return organisationseinheit;
+	}
+
+
+	public void setOrganisationseinheit(Organisationseinheit organisationseinheit) {
+		this.organisationseinheit = organisationseinheit;
 	}
 	
 }

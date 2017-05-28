@@ -9,6 +9,8 @@ public class Projekt extends BusinessObjekt{
 	private Date start;
 	private Date ende;
 	private String inhalt;
+	private Person person;
+	private Projektmarktplatz projektmarktplatz;
 	
 	public Projekt(){
 		
@@ -37,6 +39,22 @@ public class Projekt extends BusinessObjekt{
 	}
 	public void setInhalt(String inhalt){
 		inhalt = inhalt;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public Projektmarktplatz getProjektmarktplatz() {
+		return projektmarktplatz;
+	}
+
+	public void setProjektmarktplatz(Projektmarktplatz projektmarktplatz) {
+		this.projektmarktplatz = projektmarktplatz;
 	}
 }
 

@@ -6,6 +6,12 @@ public class Team extends BusinessObjekt{
 	
 	private int groesse;
 	private String arbeitsfeld;
+	private Organisationseinheit organisationseinheit;
+	
+	
+	public Team() {
+		
+	}
 	
 	public Team (String name, String email, int groesse, String arbeitsfeld) {
 //		super(name, email);
@@ -24,6 +30,14 @@ public class Team extends BusinessObjekt{
 	}
 	public void setArbeitsfeld(String string){
 		arbeitsfeld = string;
+	}
+
+	public Organisationseinheit getOrganisationseinheit() {
+		return organisationseinheit;
+	}
+
+	public void setOrganisationseinheit(Organisationseinheit organisationseinheit) {
+		this.organisationseinheit = organisationseinheit;
 	}
 	
 }

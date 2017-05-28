@@ -6,6 +6,7 @@ public class Person extends BusinessObjekt {
 	private String vorname; 
 	private String beruf;
 	private float erfahrung;
+	private Organisationseinheit organisationseinheit;
 	
 	public Person(){
 		
@@ -46,6 +47,16 @@ public class Person extends BusinessObjekt {
 	public void setErfahrung(float Float){
 		
 		erfahrung=Float;
+	}
+
+
+	public Organisationseinheit getOrganisationseinheit() {
+		return organisationseinheit;
+	}
+
+
+	public void setOrganisationseinheit(Organisationseinheit organisationseinheit) {
+		this.organisationseinheit = organisationseinheit;
 	}
 }
 

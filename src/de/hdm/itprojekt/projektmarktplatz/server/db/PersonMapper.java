@@ -4,47 +4,50 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+import java.util.ArrayList;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 
 //@autor �mer
 public class PersonMapper {
+	private static PersonMapper personMapper = null;
+
+	protected PersonMapper() {
+
+	}
 
 	public static PersonMapper personMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		if (personMapper == null) {
+			personMapper = new PersonMapper();
+		}
+		return personMapper;
 	}
-	
-
 
 	public Person einfuegen(Person p) throws Exception {
 		Connection con = DBConnection.connection();
-
 		try {
 			Statement stmt = con.createStatement();
-
 			/*
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("INSERT INTO `person` (`Vorname`, `Beruf`, `Erfahrung`, `ID`, `o_id`) VALUES ('Florian', 'Bankkaufmann', '5', NULL, '1');");
-
+			// ResultSet rs = stmt.executeQuery("INSERT INTO `person`
+			// (`Vorname`, `Beruf`, `Erfahrung`, `ID`, `o_id`) VALUES
+			// ('Florian', 'Bankkaufmann', '5', NULL, '1');");
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
-				/*
-				 * c erhält den bisher maximalen, nun um 1 inkrementierten
-				 * Primärschlüssel.
-				 */
-				p.setId(rs.getInt("") + 1);
-
-				stmt = con.createStatement();
-
-				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `person` (`Vorname`, `Nachname`, `Beruf`, `Erfahrung`, `ID`, `o_id`) VALUES ('Hans ', 'M�ller', 'Bankkaufmann', '10', NULL, '2');");
-			}
-
+			// if (rs.next()) {
+			/*
+			 * c erhält den bisher maximalen, nun um 1 inkrementierten
+			 * Primärschlüssel.
+			 */
+			// p.setId(rs.getInt("") + 1);
+			stmt = con.createStatement();
+			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+			stmt.executeUpdate("INSERT INTO `person` (`Vorname`, `Beruf`, `Erfahrung`, `ID`, `o_id`) VALUES " + "('"
+					+ p.getVorname() + " ', '" + p.getBeruf() + "', '" + p.getErfahrung() + "', NULL, '"
+					+ p.getOrganisationseinheit().getId() + "');");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,77 +56,84 @@ public class PersonMapper {
 
 	public Person speichern(Person p) throws Exception {
 		Connection con = DBConnection.connection();
-
 		try {
 			Statement stmt = con.createStatement();
-
-			stmt.executeUpdate("UPDATE `person` SET `Erfahrung` = '7' WHERE `person`.`ID` = 5;");
-
+			stmt.executeUpdate("UPDATE `person` SET `Vorname` = '" + p.getVorname() + "', `Beruf` = '" + p.getBeruf()
+					+ "', " + "`Erfahrung` = '" + p.getErfahrung() + "', `ID` = '" + p.getId() + "', " + "`o_id` = '"
+					+ p.getOrganisationseinheit().getId() + "' WHERE `person`.`ID` = " + p.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return p;
 	}
-	
+
 	public void loeschen(Person p) throws Exception {
-	    Connection con = DBConnection.connection();
-
-	    try {
-	      Statement stmt = con.createStatement();
-
-	      stmt.executeUpdate("DELETE FROM `person` WHERE ID = 1");
-	    }
-	    catch (SQLException e) {
-	      e.printStackTrace();
-	    }
-	  }
-
-	public Person getById(Person p) throws Exception{
-		 Connection con = DBConnection.connection();
-
-		    try {
-		      Statement stmt = con.createStatement();
-
-		      stmt.executeUpdate("");
-		    }
-		    catch (SQLException e) {
-		    	
-		    }
-		    return p;
-	}
-	public Ausschreibung getAll() throws Exception{
-		
 		Connection con = DBConnection.connection();
-
 		try {
 			Statement stmt = con.createStatement();
+			stmt.executeUpdate("DELETE FROM `person` WHERE ID = " + p.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
+	public Person getById(Person p) throws Exception {
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `person` WHERE `ID` = " + p.getId());
+			if (rs.next()) {
+				Person ps = new Person();
+				ps.setVorname(rs.getString("Vorname"));
+				ps.setBeruf(rs.getString("Beruf"));
+				ps.setErfahrung(rs.getFloat("Erfahrung"));
+				ps.setId(rs.getInt("ID"));
+				Organisationseinheit o = new Organisationseinheit();
+				o.setId(rs.getInt("o_id"));
+				ps.setOrganisationseinheit(o);
+
+				return ps;
+			}
+		} catch (SQLException e) {
+		}
+		return p;
+	}
+
+	public ArrayList<Person> getAll() throws Exception {
+		Connection con = DBConnection.connection();
+		ArrayList<Person> result = new ArrayList<Person>();
+		try {
+			Statement stmt = con.createStatement();
 			/*
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
-
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `person`");
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-			//	a.setId(rs.getInt("") + 1);
-
+				while (rs.next()) {
+					Person p = new Person();
+					p.setVorname(rs.getString("Vorname"));
+					p.setBeruf(rs.getString("Beruf"));
+					p.setErfahrung(rs.getFloat("Erfahrung"));
+					p.setId(rs.getInt("ID"));
+					Organisationseinheit o = new Organisationseinheit();
+					o.setId(rs.getInt("o_id"));
+					p.setOrganisationseinheit(o);
+					result.add(p);
+				}
 				stmt = con.createStatement();
-
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 				stmt.executeUpdate("");
+				return result;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 }
-
