@@ -135,7 +135,5 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-
 
 }
