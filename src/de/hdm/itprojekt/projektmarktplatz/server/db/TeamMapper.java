@@ -19,7 +19,7 @@ public class TeamMapper {
 
 	}
 
-	public static TeamMapper bewerbungMapper() {
+	public static TeamMapper teamMapper() {
 		if (teamMapper == null) {
 			teamMapper = new TeamMapper();
 		}
