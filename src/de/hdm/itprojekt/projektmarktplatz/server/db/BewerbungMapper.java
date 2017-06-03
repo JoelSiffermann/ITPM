@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
@@ -28,7 +30,12 @@ public class BewerbungMapper {
 
 	public Bewerbung einfuegen(Bewerbung b) throws Exception {
 		Connection con = DBConnection.connection();
+		//1
+		String datum = "";
 
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		datum = dateFormat.format(b.getErstelldatum());
+		//1
 		try {
 			Statement stmt = con.createStatement();
 
@@ -50,8 +57,8 @@ public class BewerbungMapper {
 
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate(
-					"INSERT INTO `bewerbung` (`Bewerbung_ID`, `Inhalt`, `Erstelldatum`, `ausschreibung_id`) VALUES (NULL, '"
-							+ b.getInhalt() + "','" + b.getErstelldatum() + "', '" + b.getAusschreibung().getId());
+					"INSERT INTO `bewerbung` (`Bewerbung_ID`, `Inhalt`, `Erstelldatum`, `ausschreibung_id`)" + "VALUES (NULL, '"
+							+ b.getInhalt() + "','" +datum+ "', '" + b.getAusschreibung().getId()+"');");
 			// }
 
 		} catch (SQLException e) {
@@ -62,11 +69,14 @@ public class BewerbungMapper {
 
 	public Bewerbung speichern(Bewerbung b) throws Exception {
 		Connection con = DBConnection.connection();
-
+		String datum = "";
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		datum = dateFormat.format(b.getErstelldatum());
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `bewerbung` SET `Bewerbung_ID` = '"+b.getId()+"', `Inhalt` = '"+b.getInhalt()+"', `Erstelldatum` = '"+b.getErstelldatum()+"', `ausschreibung_id` = '"+b.getAusschreibung().getId()+"' WHERE `bewerbung`.`Bewerbung_ID` = "+b.getId()+";()");
+			stmt.executeUpdate("UPDATE `bewerbung` SET `Bewerbung_ID` = '"+b.getId()+"', `Inhalt` = '"+b.getInhalt()+"', `Erstelldatum` = '"+ datum +"', `ausschreibung_id` = '"+b.getAusschreibung().getId()+"' WHERE `bewerbung`.`Bewerbung_ID` = "+b.getId()+";");
 
 		} catch (SQLException e) {
 			e.printStackTrace();

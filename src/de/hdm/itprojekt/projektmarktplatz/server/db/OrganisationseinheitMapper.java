@@ -115,11 +115,12 @@ public class OrganisationseinheitMapper {
 			 */
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `organisationseinheit`");
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+//			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
+
 				while (rs.next()) {
 					Organisationseinheit o = new Organisationseinheit();
 					o.setId(rs.getInt("Organisationseinheit_ID"));
@@ -129,16 +130,18 @@ public class OrganisationseinheitMapper {
 					p.setId(rs.getInt("partnerprofil_id"));
 					o.setPartnerprofil(p);
 					result.add(o);
-					stmt = con.createStatement();
+//					stmt = con.createStatement();
 					// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-					stmt.executeUpdate("");
-					return result;
+//					stmt.executeUpdate("");
+					System.out.println("Orga getAll");
 				}
-			}
+				
+//			}
+//			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 
 	}
 }
