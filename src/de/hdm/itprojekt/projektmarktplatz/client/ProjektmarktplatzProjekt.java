@@ -5,8 +5,14 @@ import de.hdm.itprojekt.projektmarktplatz.shared.LoginServiceAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.LoginInfo;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -52,24 +58,195 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		
-		projektService.insert(new AsyncCallback<Organisationseinheit>() {
-
+		Ausschreibung a = new Ausschreibung();
+		Partnerprofil p = new Partnerprofil();
+		Projekt proj = new Projekt();
+		Date date = new Date();
+		Bewerbung b = new Bewerbung();
+		
+		
+		b.setId(31);
+		b.setInhalt("Neuer Test von Ersin");
+		b.setErstelldatum(date);
+		
+		a.setId(666);
+		
+		b.setAusschreibung(a); 
+		
+		/*******----------------------------------------------------------------EINFÜGEN EINER BEWERBUNG -----******/
+				
+/*		projektService.insertBewerbung(b, new AsyncCallback<Bewerbung>() {
+			
+			@Override
+			public void onSuccess(Bewerbung result) {
+				// TODO Auto-generated method stub
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("hat geklappt ");
+				dialogBox.show();
+			}
+			
 			@Override
 			public void onFailure(Throwable caught) {
-				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("Fehler " + caught.getMessage());
-				dialogBox.show();
+				// TODO Auto-generated method stub
 				
 			}
+		});*/
+		
+		//--------------------------------------------------------------- BEARBEITEN VON BWERBUNGEN------  --- ---------
 
+//		projektService.updateBewerbung(b, new AsyncCallback<Bewerbung>() {
+//			
+//			@Override
+//			public void onSuccess(Bewerbung result) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt!! ");
+//				dialogBox.show();
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+//		
+		//----------------------------------------------------------------LESEN EINER BEWERBUNG--------------------------
+		
+		projektService.readByIdBewerbung(b, new AsyncCallback<Bewerbung>() {
+			
 			@Override
-			public void onSuccess(Organisationseinheit result) {
+			public void onSuccess(Bewerbung result) {
+				// TODO Auto-generated method stub
 				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("hat geklappt");
+				dialogBox.setText("hat geklappt " + result.getInhalt());
 				dialogBox.show();
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
 				
 			}
 		});
+		//--------------------------------------------------------------LESEN ALLER BEWERBUNGEN----------------
+		
+		
+///////////////////////////////////////////////////////////////
+//		p.setId(1);
+//		proj.setId(1);
+//		a.setBezeichnung("Hdm Bezeichnung"); 
+//		a.setFrist(date);
+//		a.setId(4);
+//		a.setInhalt("Suche Programmierer 2");
+//		a.setPartnerprofil(p);
+//		a.setProjekt(proj); 
+	
+		// ---- Lesen von allen Datensätzen Ausschreibung ---
+//		projektService.readAllAusschreibung(new AsyncCallback<ArrayList<Ausschreibung>>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void onSuccess(ArrayList<Ausschreibung> result) {
+//				// TODO Auto-generated method stub
+//				String id = "";
+//				for(Ausschreibung a : result){
+//					id = id + " " + a.getId();
+//				}
+//				
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt " + id );
+//				dialogBox.show();
+//			}
+//		});
+		
+		// --- Lese ein Datensatz Ausschreibung --- 
+//		projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void onSuccess(Ausschreibung result) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt " + result.getBezeichnung());
+//				dialogBox.show();
+//			}
+//		});
+		
+		// ---- Löschen Ausschreibung ---
+//		projektService.deleteAusschreibung(a, new AsyncCallback<Void>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void onSuccess(Void result) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+		
+		//--- Einfügen von Ausschreibung --
+//		projektService.insertAusschreibung(a, new AsyncCallback<Ausschreibung>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void onSuccess(Ausschreibung result) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt ");
+//				dialogBox.show();
+//			}
+//		});
+		
+		// --- Ende Einfüngen von Ausschreibung --- 
+		
+		
+		
+//		org.setId(3);
+//		org.setEmail("email@test.de");
+//		org.setName("HdM 3.0");
+//		org.setPartnerprofil(p);
+		
+//		p.setId(0); 
+//		org.setPartnerprofil(p);
+		
+//		projektService.readByIdOrg(org, new AsyncCallback<Organisationseinheit>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("Fehler " + caught.getMessage());
+//				dialogBox.show();
+//				
+//			}
+//
+//			@Override
+//			public void onSuccess(Organisationseinheit result) {
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt " + result.getEmail());
+//				dialogBox.show();
+//				
+//			}
+//		});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.
