@@ -39,7 +39,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	private BewerbungMapper bMapper = null;
 	private BewertungMapper bwMapper = null;
 	private EigenschaftMapper eMapper = null;
-	private PartnerprofilMapper pPMapper = null;
+	private PartnerprofilMapper ppMapper = null;
 	private PersonMapper persMapper = null;
 	private ProjektbeteiligungMapper projBetMapper = null;
 	private ProjektMapper projMapper = null;
@@ -63,7 +63,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	      this.bMapper = BewerbungMapper.bewerbungMapper();
 	      this.bwMapper = BewertungMapper.bewertungMapper();
 	      this.eMapper = EigenschaftMapper.eigenschaftMapper();
-	      this.pPMapper = PartnerprofilMapper.partnerprofilMapper();
+	      this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
 	      this.persMapper = PersonMapper.personMapper();
 	      this.projBetMapper = ProjektbeteiligungMapper.projektbeteilitungMapper();
 	      this.projMarkMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
@@ -439,4 +439,71 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 			e.printStackTrace();
 		}
 	}
+		
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, Anfang: Methoden für Partnerprofil-Objekte
+		   * ***************************************************************************
+		   */
+		
+	//------->Einfügen eines Partnerprofils<--------
+
+		public Partnerprofil insertPartnerprofil (Partnerprofil pp) throws IllegalArgumentException{
+			try{
+				ppMapper.einfuegen(pp);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		//------->Bearbeiten eines Partnerprofils<--------
+
+		public Partnerprofil updatePartnerprofil (Partnerprofil pp) throws IllegalArgumentException{
+			try{
+				ppMapper.speichern(pp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//------->Lesen eines Partnerprofils<--------
+
+		public Partnerprofil readByIdPartnerprofil (Partnerprofil pp) throws IllegalArgumentException {
+			try{ 
+				ppMapper.getById(pp);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//------->Lesen aller Partnerprofile<--------
+		
+		public ArrayList <Partnerprofil> readAllPartnerprofil () throws IllegalArgumentException{
+			try{
+				return ppMapper.getAll();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//------->Löschen eines Partnerprofils<--------
+
+		
+		public void deletePartnerprofil (Partnerprofil pp) throws IllegalArgumentException{
+			try{
+				ppMapper.loeschen(pp);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, Anfang: Methoden für Person-Objekte
+		   * ***************************************************************************
+		   */
 }

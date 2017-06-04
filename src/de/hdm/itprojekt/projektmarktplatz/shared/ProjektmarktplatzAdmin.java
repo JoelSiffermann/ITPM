@@ -10,6 +10,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 
 @RemoteServiceRelativePath("projektmarktplatz")
 public interface ProjektmarktplatzAdmin extends RemoteService {
@@ -46,4 +47,10 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public Eigenschaft readByIdEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
 	public ArrayList <Eigenschaft> readAllEigenschaft() throws IllegalArgumentException;
 	public void deleteEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
+	
+	public Partnerprofil insertPartnerprofil (Partnerprofil pp) throws IllegalArgumentException;
+	public Partnerprofil updatePartnerprofil (Partnerprofil pp) throws IllegalArgumentException;
+	public Partnerprofil readByIdPartnerprofil (Partnerprofil pp) throws IllegalArgumentException;
+	public ArrayList <Partnerprofil> readAllPartnerprofil() throws IllegalArgumentException;
+	public void deletePartnerprofil (Partnerprofil pp) throws IllegalArgumentException;
 }

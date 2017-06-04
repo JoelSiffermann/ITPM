@@ -6,9 +6,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.LoginInfo;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 import java.util.ArrayList;
@@ -65,13 +67,44 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		Bewerbung b = new Bewerbung();
 		
 		
+		Bewertung bt = new Bewertung ();
+		Person pers = new Person ();
+		
+		//BEWERTUNG
+		bt.setId(4);
+		bt.setInhalt("test test test");
+		bt.setPerson(pers);
+		
+		/*******----------------------------------------------------------------EINFÜGEN EINER BEWERTUNG -----******/
+
+		
+		projektService.insertBewertung(bt, new AsyncCallback<Bewertung>() {
+			
+			@Override
+			public void onSuccess(Bewertung result) {
+				// TODO Auto-generated method stub
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("hat geklappt ");
+				dialogBox.show();
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
+		
+		//BEWERBUNG--
 		b.setId(31);
 		b.setInhalt("Neuer Test von Ersin");
 		b.setErstelldatum(date);
 		
 		a.setId(666);
 		
-		b.setAusschreibung(a); 
+		b.setAusschreibung(a);
 		
 		/*******----------------------------------------------------------------EINFÜGEN EINER BEWERBUNG -----******/
 				
@@ -113,22 +146,22 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //		
 		//----------------------------------------------------------------LESEN EINER BEWERBUNG--------------------------
 		
-		projektService.readByIdBewerbung(b, new AsyncCallback<Bewerbung>() {
-			
-			@Override
-			public void onSuccess(Bewerbung result) {
-				// TODO Auto-generated method stub
-				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("hat geklappt " + result.getInhalt());
-				dialogBox.show();
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+//		projektService.readByIdBewerbung(b, new AsyncCallback<Bewerbung>() {
+//			
+//			@Override
+//			public void onSuccess(Bewerbung result) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt " + result.getInhalt());
+//				dialogBox.show();
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
 		//--------------------------------------------------------------LESEN ALLER BEWERBUNGEN----------------
 		
 		
@@ -142,7 +175,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //		a.setPartnerprofil(p);
 //		a.setProjekt(proj); 
 	
-		// ---- Lesen von allen Datensätzen Ausschreibung ---
+																	// ---- Lesen von allen Datensätzen Ausschreibung ---
 //		projektService.readAllAusschreibung(new AsyncCallback<ArrayList<Ausschreibung>>() {
 //
 //			@Override
@@ -165,7 +198,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //			}
 //		});
 		
-		// --- Lese ein Datensatz Ausschreibung --- 
+																			// --- Lese ein Datensatz Ausschreibung --- 
 //		projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
 //
 //			@Override
@@ -183,7 +216,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //			}
 //		});
 		
-		// ---- Löschen Ausschreibung ---
+																					// ---- Löschen Ausschreibung ---
 //		projektService.deleteAusschreibung(a, new AsyncCallback<Void>() {
 //
 //			@Override
@@ -199,7 +232,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //			}
 //		});
 		
-		//--- Einfügen von Ausschreibung --
+																					//--- Einfügen von Ausschreibung --
 //		projektService.insertAusschreibung(a, new AsyncCallback<Ausschreibung>() {
 //
 //			@Override
@@ -217,7 +250,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //			}
 //		});
 		
-		// --- Ende Einfüngen von Ausschreibung --- 
+																			// --- Ende Einfüngen von Ausschreibung --- 
 		
 		
 		
