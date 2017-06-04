@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
@@ -31,7 +33,11 @@ public class AusschreibungMapper {
 
 	public Ausschreibung einfuegen(Ausschreibung a) throws Exception {
 		Connection con = DBConnection.connection();
-
+		String datum = "";
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		datum = dateFormat.format(a.getFrist());
+		
 		try {
 			Statement stmt = con.createStatement();
 
@@ -51,12 +57,9 @@ public class AusschreibungMapper {
 
 				stmt = con.createStatement();
 
-				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `ausschreibung` "
-						+ "(`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`, `projekt_id`, `partnerprofil_id`) "
-						+ "VALUES "
-						+ "(NULL, '"+a.getBezeichnung()+"', '"+a.getInhalt()+"', '"+a.getFrist()+"', "
-								+ "'"+a.getProjekt().getId()+"', '"+a.getPartnerprofil().getId()+"';");
+				// Jetzt erst erfolgt die tatsächliche Einfügeoperation 
+				stmt.executeUpdate("INSERT INTO `ausschreibung` (`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`, `projekt_id`, `partnerprofil_id`) "
+						+ "VALUES (NULL, '"+a.getBezeichnung()+"', '"+a.getInhalt()+"', '"+datum+"', '"+a.getProjekt().getId()+"', '"+a.getPartnerprofil().getId()+"');");
 //			}
 
 		} catch (SQLException e) {
@@ -67,11 +70,14 @@ public class AusschreibungMapper {
 
 	public Ausschreibung speichern(Ausschreibung a) throws Exception {
 		Connection con = DBConnection.connection();
-
+		String datum = "";
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		datum = dateFormat.format(a.getFrist());
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `ausschreibung` SET `Bezeichnung` = '"+a.getBezeichnung()+"', `Inhalt` = '"+a.getInhalt()+"', `Frist` = '"+a.getFrist()+"', `projekt_id` = '"+a.getProjekt().getId()+"', `partnerprofil_id` = '"+a.getPartnerprofil().getId()+"' WHERE `ausschreibung`.`Ausschreibung_ID` = "+a.getId()+";");
+			stmt.executeUpdate("UPDATE `ausschreibung` SET `Bezeichnung` = '"+a.getBezeichnung()+"', `Inhalt` = '"+a.getInhalt()+"', `Frist` = '"+datum+"', `projekt_id` = '"+a.getProjekt().getId()+"', `partnerprofil_id` = '"+a.getPartnerprofil().getId()+"' WHERE `ausschreibung`.`Ausschreibung_ID` = "+a.getId()+";");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -145,7 +151,7 @@ public class AusschreibungMapper {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `ausschreibung`");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+//			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
@@ -172,17 +178,17 @@ public class AusschreibungMapper {
 			          // Hinzufügen des neuen Objekts zum Ergebnisvektor
 			          result.add(a);
 			        }
-				stmt = con.createStatement();
+//				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-				return result;
-			}
+//				stmt.executeUpdate("");
+//				return result;
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 
 	}
 }
