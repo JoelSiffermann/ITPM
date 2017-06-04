@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.client;
 
+import de.hdm.itprojekt.projektmarktplatz.client.gui.MainPanel;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginService;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginServiceAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
@@ -52,25 +53,6 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		
-		projektService.insert(new AsyncCallback<Organisationseinheit>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("Fehler " + caught.getMessage());
-				dialogBox.show();
-				
-			}
-
-			@Override
-			public void onSuccess(Organisationseinheit result) {
-				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("hat geklappt");
-				dialogBox.show();
-				
-			}
-		});
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.
 	    LoginServiceAsync loginService = GWT.create(LoginService.class);
@@ -82,7 +64,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	        loginInfo = result;
 	        if(loginInfo.isLoggedIn()) {
 	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
-
+	        	loadGUI();
 	        } else {
 	          loadLogin();
 	        }
@@ -129,6 +111,12 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 
 		// Focus the cursor on the name field when the app loads
 		
+	}
+	
+	private void loadGUI(){
+		MainPanel mp = new MainPanel();
+		RootPanel.get("main").add(mp);
+	
 	}
 	
 	private void loadLogin() {
