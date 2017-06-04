@@ -84,12 +84,12 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet imple
 	//Abfrage der Ausschreibungen die dem Partnerprofil des Nutzers entsprechen
 	@Override
 	public ArrayList<Ausschreibung> getAuschreibungenByPartnerprofil(Partnerprofil p) throws IllegalArgumentException {
-		ArrayList<Partnerprofil> p2 = this.pPMapper.getAll();
+		ArrayList<Partnerprofil> p2 = null; // this.pPMapper.getAll();
 		ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
 		for (int i = 0; i < p2.size(); i++) {
 			if (p.equals(p2.get(i))) {
 				//TODO: Methode zum Vergleich des Persoenlichen Profils und des Suchprofils
-				result.add(this.aMapper.getByPartnerprofil(p2.get(i).getId()));
+//				result.add(this.aMapper.getByPartnerprofil(p2.get(i).getId()));
 			}
 		}
 		return result;
@@ -98,31 +98,36 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet imple
 	//Abfrage aller Bewerbungen eines Nutzers
 	@Override
 	public ArrayList<Bewerbung> getBewerbungenByNutzer(Partnerprofil p) throws IllegalArgumentException {
-		return this.bMapper.getByPartnerprofil();
+//		return this.bMapper.getByPartnerprofil();
+		return null;
 	}
 	
 	//Abfrage aller Bewerbungen auf eine Ausschreibung
 	@Override
 	public ArrayList<Bewerbung> getBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-		return this.bMapper.getByAusschreibung();
+//		return this.bMapper.getByAusschreibung();
+		return null;
 	}
 	
 	//Abfrage einer Ausschreibung auf Basis der zugehörigen Bewerbung
 	@Override
 	public Ausschreibung getAusschreibungByBewerbung(Bewerbung b) throws IllegalArgumentException {
-		return this.aMapper.getByBewerbung();
+//		return this.aMapper.getByBewerbung();
+		return null;
 	}
 	
 	//Abfrage aller Beteiligungen eines Nutzers
 	@Override
 	public ArrayList<Beteiligung> getBeteiligungByNutzer(Partnerprofil p) throws IllegalArgumentException {
-		return this.projBetMapper.getByPartnerprofil();
+//		return this.projBetMapper.getByPartnerprofil();
+		return null;
 	}
 	
 	//Abfrage aller Ausschreibungen eines Nutzers
 	@Override
 	public ArrayList<Ausschreibung> getAusschreibungenByNutzer(Partnerprofil p) throws IllegalArgumentException {
-		return this.aMapper.getByPartnerprofil();
+//		return this.aMapper.getByPartnerprofil();
+		return null;
 	}
 	
 	/*

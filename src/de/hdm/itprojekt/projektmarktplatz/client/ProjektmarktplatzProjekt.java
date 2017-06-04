@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.client;
 
+import de.hdm.itprojekt.projektmarktplatz.client.gui.MainPanel;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginService;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginServiceAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
@@ -60,6 +61,8 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		
+
+
 		Ausschreibung a = new Ausschreibung();
 		Partnerprofil p = new Partnerprofil();
 		Projekt proj = new Projekt();
@@ -292,7 +295,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	        loginInfo = result;
 	        if(loginInfo.isLoggedIn()) {
 	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
-
+	        	loadGUI();
 	        } else {
 	          loadLogin();
 	        }
@@ -339,6 +342,12 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 
 		// Focus the cursor on the name field when the app loads
 		
+	}
+	
+	private void loadGUI(){
+		MainPanel mp = new MainPanel();
+		RootPanel.get("main").add(mp);
+	
 	}
 	
 	private void loadLogin() {
