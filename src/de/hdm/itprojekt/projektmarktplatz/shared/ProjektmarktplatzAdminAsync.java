@@ -11,6 +11,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
@@ -85,6 +86,8 @@ public interface ProjektmarktplatzAdminAsync {
 	void readByIdPartnerprofil(Partnerprofil pp, AsyncCallback<Partnerprofil> callback);
 
 	void deletePartnerprofil(Partnerprofil pp, AsyncCallback<Void> callback);
+	
+	
 
 
 
@@ -142,6 +145,16 @@ public interface ProjektmarktplatzAdminAsync {
 	void readAllUnternehmen(AsyncCallback<ArrayList<Unternehmen>> callback);
 	
 	void deleteUnternehmen(Unternehmen u,AsyncCallback<Void> callback );
+
+	void deletePerson(Person pers, AsyncCallback<Void> callback);
+
+	void insertPerson(Person pers, AsyncCallback<Person> callback);
+
+	void readAllPerson(AsyncCallback<ArrayList<Person>> callback);
+
+	void readByIdPerson(Person pers, AsyncCallback<Person> callback);
+
+	void updatePerson(Person pers, AsyncCallback<Person> callback);
 	
 	
 }

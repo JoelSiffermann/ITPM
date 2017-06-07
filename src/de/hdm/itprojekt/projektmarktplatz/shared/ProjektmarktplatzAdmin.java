@@ -11,6 +11,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
@@ -58,6 +59,13 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public Partnerprofil readByIdPartnerprofil (Partnerprofil pp) throws IllegalArgumentException;
 	public ArrayList <Partnerprofil> readAllPartnerprofil() throws IllegalArgumentException;
 	public void deletePartnerprofil (Partnerprofil pp) throws IllegalArgumentException;
+	
+	public Person insertPerson (Person pers) throws IllegalArgumentException;
+	public Person updatePerson (Person pers) throws IllegalArgumentException;
+	public Person readByIdPerson (Person pers) throws IllegalArgumentException;
+	public ArrayList <Person> readAllPerson() throws IllegalArgumentException;
+	public void deletePerson (Person pers) throws IllegalArgumentException;
+
 
 	public Beteiligung insertBeteiligung(Beteiligung projBet ) throws IllegalArgumentException;
 	public Beteiligung updateBeteiligung (Beteiligung projBet) throws IllegalArgumentException;

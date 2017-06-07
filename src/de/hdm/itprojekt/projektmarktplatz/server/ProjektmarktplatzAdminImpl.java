@@ -547,7 +547,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 		}
 		
 		//------->Lesen aller Personen<--------
-		public ArrayList <Person> readAllPerson () throws IllegalArgumentException{
+		public ArrayList <Person> readAllPerson() throws IllegalArgumentException{
 			try{
 				return persMapper.getAll();
 			} catch (Exception e){
