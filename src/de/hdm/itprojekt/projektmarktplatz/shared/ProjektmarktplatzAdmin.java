@@ -10,6 +10,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
 @RemoteServiceRelativePath("projektmarktplatz")
 public interface ProjektmarktplatzAdmin extends RemoteService {
@@ -46,4 +51,39 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public Eigenschaft readByIdEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
 	public ArrayList <Eigenschaft> readAllEigenschaft() throws IllegalArgumentException;
 	public void deleteEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
+	
+
+	public Beteiligung insertBeteiligung(Beteiligung projBet ) throws IllegalArgumentException;
+	public Beteiligung updateBeteiligung (Beteiligung projBet) throws IllegalArgumentException;
+	public Beteiligung readByIdBeteiligung(Beteiligung projBet) throws IllegalArgumentException;
+	public ArrayList<Beteiligung> readAllBeteiligung() throws IllegalArgumentException;
+	public void deleteBeteiligung (Beteiligung projBet) throws IllegalArgumentException;
+	
+	
+	public Projekt insertProjekt(Projekt proj ) throws IllegalArgumentException;
+	public Projekt updateProjekt (Projekt proj) throws IllegalArgumentException;
+	public Projekt readByIdProjekt(Projekt proj) throws IllegalArgumentException;
+	public ArrayList<Projekt> readAllProjekt() throws IllegalArgumentException;
+	public void deleteProjekt (Projekt proj) throws IllegalArgumentException;
+	
+	
+	public Projektmarktplatz insertProjektmarktplatz(Projektmarktplatz projMark ) throws IllegalArgumentException;
+	public Projektmarktplatz updateProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
+	public Projektmarktplatz readByIdProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
+	public ArrayList<Projektmarktplatz> readAllProjektmarktplatz() throws IllegalArgumentException;
+	public void deleteProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
+	
+	
+	public Team insertTeam(Team t) throws IllegalArgumentException;
+	public Team updateTeam(Team t) throws IllegalArgumentException;
+	public Team readByIdTeam(Team t) throws IllegalArgumentException;
+	public ArrayList<Team> readAllTeam() throws IllegalArgumentException;
+	public void deleteTeam(Team t) throws IllegalArgumentException;
+	
+	public Unternehmen insertUnternehmen(Unternehmen u) throws IllegalArgumentException;
+	public Unternehmen updateUnternehmen(Unternehmen u) throws IllegalArgumentException;
+	public Unternehmen readByIdUnternehmen(Unternehmen u) throws IllegalArgumentException;
+	public ArrayList<Unternehmen> readAllUnternehmen() throws IllegalArgumentException;
+	public void deleteUnternehmen(Unternehmen u) throws IllegalArgumentException;
+	
 }
