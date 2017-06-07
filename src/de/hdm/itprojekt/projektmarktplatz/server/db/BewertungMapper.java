@@ -50,8 +50,8 @@ public class BewertungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"', '"+b.getPerson().getId());
-				//stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"', '');";
+				stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"', '"+b.getPerson().getId()+"');");
+				//stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"');");
 		//	}
 
 		} catch (SQLException e) {
@@ -125,7 +125,7 @@ public class BewertungMapper {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `bewertung`");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+//			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
@@ -149,15 +149,15 @@ public class BewertungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-				return result;
-			}
+//				stmt.executeUpdate("");
+//				return result;
+//			}
 
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 
 	}
 

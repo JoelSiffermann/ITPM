@@ -25,6 +25,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 
 public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements ProjektmarktplatzAdmin{
 
@@ -410,7 +411,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 
 	public Eigenschaft readByIdEigenschaft (Eigenschaft eg) throws IllegalArgumentException {
 		try{
-			eMapper.getById(eg);
+			return eMapper.getById(eg);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -429,6 +430,8 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 		}
 		return null;
 	}
+	
+
 	//------->Löschen einer Eigenschaft<--------
 
 
@@ -506,4 +509,53 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 		   * ABSCHNITT, Anfang: Methoden für Person-Objekte
 		   * ***************************************************************************
 		   */
+
+		//------->Einfügen einer Person<--------
+		public Person insertPerson (Person pers) throws IllegalArgumentException{
+			try{
+				persMapper.einfuegen(pers);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//------->Bearbeiten einer Person<--------
+		public Person updatePerson (Person pers) throws IllegalArgumentException{
+			try{
+				persMapper.einfuegen(pers);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//------->Lesen eines Partnerprofils<--------
+		public Person readByIdPerson (Person pers) throws IllegalArgumentException {
+			try{ 
+				persMapper.getById(pers);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//------->Lesen aller Personen<--------
+		public ArrayList <Person> readAllPerson () throws IllegalArgumentException{
+			try{
+				return persMapper.getAll();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//------->Löschen eines Partnerprofils<--------
+		public void deletePerson (Person pers) throws IllegalArgumentException{
+			try{
+				persMapper.loeschen(pers);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		}
 }

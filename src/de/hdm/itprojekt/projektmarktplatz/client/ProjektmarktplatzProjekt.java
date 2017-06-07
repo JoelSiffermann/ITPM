@@ -8,6 +8,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.LoginInfo;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
@@ -68,49 +69,146 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		Projekt proj = new Projekt();
 		Date date = new Date();
 		Bewerbung b = new Bewerbung();
-		
+		Organisationseinheit org = new Organisationseinheit();
+		Eigenschaft eg = new Eigenschaft();
 		
 		Bewertung bt = new Bewertung ();
 		Person pers = new Person ();
 		
-		//BEWERTUNG
-		bt.setId(4);
-		bt.setInhalt("test test test");
-		bt.setPerson(pers);
 		
-		/*******----------------------------------------------------------------EINFÜGEN EINER BEWERTUNG -----******/
+		
+		eg.setBezeichnung("test_bearbeiten");
+		eg.setId(2);
+		eg.setPartnerprofil(p);
+		eg.setWert("test");
+		p.setId(11);
 
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, Anfang: Testen der Methoden für Eigenschaft-Objekte
+		   * ***************************************************************************
+		   */
 		
-		projektService.insertBewertung(bt, new AsyncCallback<Bewertung>() {
-			
-			@Override
-			public void onSuccess(Bewertung result) {
-				// TODO Auto-generated method stub
-				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("hat geklappt ");
-				dialogBox.show();
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+	
+		//-------> Lesen einer Eigenschaft    
 		
+
+//		projektService.readByIdEigenschaft(eg, new AsyncCallback<Eigenschaft>() {
+//	
+//		@Override
+//		public void onFailure(Throwable caught) {
+//			// TODO Auto-generated method stub
+//			final DialogBox d = new DialogBox();
+//			d.setText(caught.getMessage());
+//			d.show();
+//		}
+//		@Override
+//		public void onSuccess(Eigenschaft result) {
+//			// TODO Auto-generated method stub
+//			final DialogBox dialogBox = new DialogBox();
+//			dialogBox.setText("hat geklappt " + result.getBezeichnung());
+//			dialogBox.show();
+//		}
+//	});
+	
+		//         --------> Lesen ALLER Eigenschaften
+//
+//		projektService.readAllEigenschaft(new AsyncCallback<ArrayList<Eigenschaft>>() {
+//			
+//			@Override
+//			public void onSuccess(ArrayList<Eigenschaft> result) {
+//				// TODO Auto-generated method stub
+//				String id = "";
+//				for (Eigenschaft eg : result){
+//					id = id + " " + eg.getId(); 
+//				}
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt" + id);
+//				dialogBox.show();
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+		
+//		//BEWERTUNG
+//		bt.setId(3);
+//		bt.setInhalt("test test test - update_Test");
+//		bt.setSkala(3.64f);
+//		pers.setVorname("Ersin");
+//		pers.setBeruf("Student");
+//		pers.setErfahrung(3.64f);
+//		bt.setPerson(pers);
+//		
+//		
+//		org.setId(3);
+//		org.setEmail("email@test.de");
+//		org.setName("HdM 3.0");
+//		org.setPartnerprofil(p);
+//		
+//		p.setId(0); 
+//		org.setPartnerprofil(p);
+		
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, Anfang: Testen der Methoden für Bewertung-Objekte --> Lesen aller Bewertungen
+		   * ***************************************************************************
+		   */
+//		projektService.readAllBewertung(new AsyncCallback<ArrayList<Bewertung>>() {
+//			
+//			@Override
+//			public void onSuccess(ArrayList<Bewertung> result) {
+//				// TODO Auto-generated method stub
+//				String id = "";
+//				for(Bewertung bt : result){
+//					id = id + " " + bt.getId();
+//				}
+//				
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt " + id );
+//				dialogBox.show();
+//				
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat nicht geklappt " + caught.getMessage() );
+//				dialogBox.show();
+//			}
+//		});
+		
+		
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, ENDE: Testen der Methoden für Bewertung-Objekte --> Lesen aller Bewertungen
+		   * ***************************************************************************
+		   */		
+		
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, ANFANG: Testen der Methoden für Bewerbung-Objekte --> Einfügen einer Bewerbung
+		   * ***************************************************************************
+		   */
+
 		
 		
 		//BEWERBUNG--
-		b.setId(31);
-		b.setInhalt("Neuer Test von Ersin");
-		b.setErstelldatum(date);
+//		b.setId(31);
+//		b.setInhalt("Neuer Test von Ersin");
+//		b.setErstelldatum(date);
+//		
+//		a.setId(666);
+//		
+//		b.setAusschreibung(a);
+//		
 		
-		a.setId(666);
+		//--> Erstellen einer Bewerbung
 		
-		b.setAusschreibung(a);
-		
-		/*******----------------------------------------------------------------EINFÜGEN EINER BEWERBUNG -----******/
-				
 /*		projektService.insertBewerbung(b, new AsyncCallback<Bewerbung>() {
 			
 			@Override
@@ -128,8 +226,10 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 			}
 		});*/
 		
-		//--------------------------------------------------------------- BEARBEITEN VON BWERBUNGEN------  --- ---------
+		
+		//--> Bearbeiten einer Bewerbung
 
+		
 //		projektService.updateBewerbung(b, new AsyncCallback<Bewerbung>() {
 //			
 //			@Override
@@ -147,7 +247,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //			}
 //		});
 //		
-		//----------------------------------------------------------------LESEN EINER BEWERBUNG--------------------------
+		//--> Lesen einer Bewerbung
 		
 //		projektService.readByIdBewerbung(b, new AsyncCallback<Bewerbung>() {
 //			
@@ -165,10 +265,14 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //				
 //			}
 //		});
-		//--------------------------------------------------------------LESEN ALLER BEWERBUNGEN----------------
+		
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, ANFANG: Testen der Methoden für Ausschreibung-Objekte
+		   * ***************************************************************************
+		   */
 		
 		
-///////////////////////////////////////////////////////////////
 //		p.setId(1);
 //		proj.setId(1);
 //		a.setBezeichnung("Hdm Bezeichnung"); 
@@ -178,7 +282,8 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //		a.setPartnerprofil(p);
 //		a.setProjekt(proj); 
 	
-																	// ---- Lesen von allen Datensätzen Ausschreibung ---
+		//--> Lesen aller Ausschreibungen
+
 //		projektService.readAllAusschreibung(new AsyncCallback<ArrayList<Ausschreibung>>() {
 //
 //			@Override
@@ -201,7 +306,8 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //			}
 //		});
 		
-																			// --- Lese ein Datensatz Ausschreibung --- 
+		//--> Lesen einer Ausschreibung
+		
 //		projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
 //
 //			@Override
@@ -219,7 +325,8 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //			}
 //		});
 		
-																					// ---- Löschen Ausschreibung ---
+		//--> Löschen einer Ausschreibung
+		
 //		projektService.deleteAusschreibung(a, new AsyncCallback<Void>() {
 //
 //			@Override
@@ -235,7 +342,8 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //			}
 //		});
 		
-																					//--- Einfügen von Ausschreibung --
+		//--> Erstellen einer Ausschreibung
+
 //		projektService.insertAusschreibung(a, new AsyncCallback<Ausschreibung>() {
 //
 //			@Override
@@ -253,8 +361,17 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //			}
 //		});
 		
-																			// --- Ende Einfüngen von Ausschreibung --- 
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, Ende: Testen der Methoden für Ausschreibung-Objekte
+		   * ***************************************************************************
+		   */
 		
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, ANFANG: Testen der Methoden für Organisationseinheit-Objekte
+		   * ***************************************************************************
+		   */
 		
 		
 //		org.setId(3);
@@ -265,6 +382,8 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //		p.setId(0); 
 //		org.setPartnerprofil(p);
 		
+		//--> Lesen einer Organisationseinheit
+
 //		projektService.readByIdOrg(org, new AsyncCallback<Organisationseinheit>() {
 //
 //			@Override

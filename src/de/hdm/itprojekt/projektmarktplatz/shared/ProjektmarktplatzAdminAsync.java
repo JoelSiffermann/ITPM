@@ -81,5 +81,6 @@ public interface ProjektmarktplatzAdminAsync {
 	void deletePartnerprofil(Partnerprofil pp, AsyncCallback<Void> callback);
 
 
+	
 
 }

@@ -51,7 +51,7 @@ public class EigenschaftMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `eigenschaft` (`Eigenschaft_ID`, `Bezeichnung`, `Wert`, `partner_id`) VALUES (NULL, '"+c.getBezeichnung()+"', '"+c.getWert()+"', '"+c.getPartnerprofil().getId());
+				stmt.executeUpdate("INSERT INTO `eigenschaft` (`Eigenschaft_ID`, `Bezeichnung`, `Wert`, `partner_id`) VALUES (NULL, '"+c.getBezeichnung()+"', '"+c.getWert()+"', '"+c.getPartnerprofil().getId()+"');");
 			//}
 
 		} catch (SQLException e) {
@@ -96,13 +96,15 @@ public class EigenschaftMapper {
 		      ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft` WHERE `Eigenschaft_ID` = " + ch.getId());
 		      if (rs.next()){
 		    	  Eigenschaft c = new Eigenschaft();//default Konstruktor in Eigenscgaft.java einf�gen damit es kein Fehler anzeigt
-		          c.setId(rs.getInt("Eigenschaft_ID"));
+		          Partnerprofil p = new Partnerprofil();
+		          System.out.println("Ausgabe 1");
+		    	  c.setId(rs.getInt("Eigenschaft_ID"));
 		          c.setBezeichnung(rs.getString("Bezeichnung"));
 		          c.setWert(rs.getString("Wert"));
-		          Partnerprofil p = new Partnerprofil();
-				  c.setId(rs.getInt("partner_id"));
+		          
+				  p.setId(rs.getInt("partner_id"));
 				  c.setPartnerprofil(p);
-
+				  System.out.println("Ausgabe 2" + c.getId());    
 				  return c;
 		      }
 		    }
@@ -122,10 +124,10 @@ public class EigenschaftMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft`");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+			//if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
@@ -137,7 +139,7 @@ public class EigenschaftMapper {
 			          c.setBezeichnung(rs.getString("Bezeichnung"));
 			          c.setWert(rs.getString("Wert"));
 			          Partnerprofil p = new Partnerprofil();
-					  c.setId(rs.getInt("partner_id"));
+					  p.setId(rs.getInt("partner_id"));
 					  c.setPartnerprofil(p);
 						// a.setId(rs.getInt("") + 1);
 						result.add(c);
@@ -147,14 +149,14 @@ public class EigenschaftMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-				return result;
-			}
+//				stmt.executeUpdate("");
+//				return result;
+		//}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 
 	}
 
