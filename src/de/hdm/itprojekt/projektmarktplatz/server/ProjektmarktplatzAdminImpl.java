@@ -26,6 +26,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team; 
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
 public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements ProjektmarktplatzAdmin{
 
@@ -442,6 +447,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 			e.printStackTrace();
 		}
 	}
+
 		
 		/*
 		   * ***************************************************************************
@@ -558,4 +564,335 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 				e.printStackTrace();
 			}
 		}
+	
+	/*
+	   * ***************************************************************************
+	   * ABSCHNITT, Anfang: Methoden fuer Projektbeteiligung-Objekte
+	   * ***************************************************************************
+	   */	
+	
+	//------->Einfuegen einer Projektbeteiligung<--------
+	public Beteiligung insertBeteiligung(Beteiligung projBet ) throws IllegalArgumentException{
+		
+		try{
+		projBetMapper.einfuegen(projBet);	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//------->Bearbeiten einer Projektbeteiligung<--------
+
+	public Beteiligung updateBeteiligung (Beteiligung projBet) throws IllegalArgumentException{
+		try{
+			projBetMapper.speichern(projBet);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	
+	
+	
+	//------->Lesen einer Projektbeteiligung<--------
+	public Beteiligung readByIdBeteiligung(Beteiligung projBet) throws IllegalArgumentException {
+		try{
+			projBetMapper.getById(projBet);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//------->Lesen aller Projektbeteiligung<--------
+
+	
+	public ArrayList<Beteiligung> readAllBeteiligung() throws IllegalArgumentException{
+		
+		try{
+			return projBetMapper.getAll();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
+	//------->Loeschen einer Projektbeteiligung<--------
+
+
+	public void deleteBeteiligung (Beteiligung projBet) throws IllegalArgumentException{
+		try{ 
+			projBetMapper.loeschen(projBet);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*
+	   * ***************************************************************************
+	   * ABSCHNITT, Anfang: Methoden fuer Projekt-Objekte
+	   * ***************************************************************************
+	   */
+	
+	//------->Einfuegene eines Projektes <--------
+	
+	
+	public Projekt insertProjekt(Projekt proj ) throws IllegalArgumentException{
+		
+		try{
+		projMapper.einfuegen(proj);	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//------->Bearbeiten eines Projektes<--------
+
+	public Projekt updateProjekt (Projekt proj) throws IllegalArgumentException{
+		try{
+			projMapper.speichern(proj);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	//------->Lesen eines Projektes<--------
+	
+	public Projekt  readByIdProjekt(Projekt proj) throws IllegalArgumentException {
+		try{
+			projMapper.getById(proj);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//------->Lesen aller Projekte<--------
+
+	
+	public ArrayList<Projekt> readAllProjekt() throws IllegalArgumentException{
+		
+		try{
+			return projMapper.getAll();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//------->Loeschen eines Projektes<--------
+
+	public void deleteProjekt(Projekt proj) throws IllegalArgumentException{
+			try{ 
+				projMapper.loeschen(proj);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	/*
+	   * ***************************************************************************
+	   * ABSCHNITT, Anfang: Methoden fuer Projektmarktplatz-Objekte
+	   * ***************************************************************************
+	   */
+	
+	//------->Einfuegene eines Projektmarktplatzes <--------
+	
+	
+		public Projektmarktplatz insertProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException{
+			
+			try{
+			projMarkMapper.einfuegen(projMark);	
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}	
+	
+		//------->Bearbeiten eines Projektmarktplatzes<--------
+
+		public Projektmarktplatz updateProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException{
+			try{
+				projMarkMapper.speichern(projMark);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}	
+	
+		//------->Lesen eines Projektmarktplatzes<--------
+		
+		public Projektmarktplatz readByIDProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException {
+			try{
+				projMarkMapper.getById(projMark);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//------->Lesen aller Projektmarktpl�tze<--------
+
+		
+		public ArrayList<Projektmarktplatz> readAllProjektmarktplatz() throws IllegalArgumentException{
+			
+			try{
+				return projMarkMapper.getAll();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//------->Loeschen eines Projektmarktplatzes<--------
+
+		public void deleteProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException{
+				try{ 
+					projMarkMapper.loeschen(projMark);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, Anfang: Methoden fuer Team-Objekte
+		   * ***************************************************************************
+		   */
+		
+		//------->Einfuegen eines Teams<--------
+		
+		
+			public Team insertTeam(Team t) throws IllegalArgumentException{
+				
+				try{
+				tMapper.einfuegen(t);	
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				return null;
+			}	
+		
+			//------->Bearbeiten eines Teams<--------
+
+			public Team updateTeam (Team t) throws IllegalArgumentException{
+				try{
+					tMapper.speichern(t);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return null;
+			}	
+		
+			//------->Lesen eines Teams<--------
+			
+			public Team readByIdTeam(Team t) throws IllegalArgumentException {
+				try{
+					tMapper.getById(t);
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+				return null;
+			}
+			
+			//------->Lesen aller Teams<--------
+
+			
+			public ArrayList<Team> readAllTeam() throws IllegalArgumentException{
+				
+				try{
+					return tMapper.getAll();
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+				return null;
+			}
+			
+			//------->Loeschen eines Teams<--------
+
+			public void deleteTeam (Team t) throws IllegalArgumentException{
+					try{ 
+						tMapper.loeschen(t);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			/*
+			   * ***************************************************************************
+			   * ABSCHNITT, Anfang: Methoden fuer Unternehmen-Objekte
+			   * ***************************************************************************
+			   */
+			
+			//------->Einfuegen eines UN<--------
+			
+			
+				public Unternehmen insertUnternehmen(Unternehmen u) throws IllegalArgumentException{
+					
+					try{
+					uMapper.einfuegen(u);	
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					return null;
+				}	
+			
+				//------->Bearbeiten eines UN<--------
+
+				public Unternehmen updateUnternehmen(Unternehmen u) throws IllegalArgumentException{
+					try{
+						uMapper.speichern(u);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					return null;
+				}	
+			
+				//------->Lesen eines UN<--------
+				
+				public Unternehmen readByIdUnternehmen(Unternehmen u) throws IllegalArgumentException {
+					try{
+						uMapper.getById(u);
+					} catch (Exception e){
+						e.printStackTrace();
+					}
+					return null;
+				}
+				
+				//------->Lesen aller UN<--------
+
+				
+				public ArrayList<Unternehmen> readAllUnternehmen() throws IllegalArgumentException{
+					
+					try{
+						return uMapper.getAll();
+					} catch (Exception e){
+						e.printStackTrace();
+					}
+					return null;
+				}
+				
+				//------->Loeschen eines UN<--------
+
+				public void deleteUnternehmen (Unternehmen u) throws IllegalArgumentException{
+						try{ 
+							uMapper.loeschen(u);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+
+				@Override
+				public Projektmarktplatz readByIdProjektmarktplatz(Projektmarktplatz projMark)
+						throws IllegalArgumentException {
+					// TODO Auto-generated method stub
+					return null;
+				}
+			
+		
+		
+		
 }
