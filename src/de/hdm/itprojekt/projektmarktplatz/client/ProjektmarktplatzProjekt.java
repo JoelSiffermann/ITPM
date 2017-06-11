@@ -116,22 +116,22 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //		
 		//----------------------------------------------------------------LESEN EINER BEWERBUNG--------------------------
 		
-		projektService.readByIdBewerbung(b, new AsyncCallback<Bewerbung>() {
-			
-			@Override
-			public void onSuccess(Bewerbung result) {
-				// TODO Auto-generated method stub
-				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("hat geklappt " + result.getInhalt());
-				dialogBox.show();
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+//		projektService.readByIdBewerbung(b, new AsyncCallback<Bewerbung>() {
+//			
+//			@Override
+//			public void onSuccess(Bewerbung result) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt " + result.getInhalt());
+//				dialogBox.show();
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
 		//--------------------------------------------------------------LESEN ALLER BEWERBUNGEN----------------
 		
 		
@@ -250,24 +250,28 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //				
 //			}
 //		});
-
+		loadGUI();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.
-	    LoginServiceAsync loginService = GWT.create(LoginService.class);
-	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-	      public void onFailure(Throwable error) {
-	      }
-
-	      public void onSuccess(LoginInfo result) {
-	        loginInfo = result;
-	        if(loginInfo.isLoggedIn()) {
-	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
-	        	loadGUI();
-	        } else {
-	          loadLogin();
-	        }
-	      }
-	    });
+		
+		
+//	    LoginServiceAsync loginService = GWT.create(LoginService.class);
+//	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+//	      public void onFailure(Throwable error) {
+//	      }
+//
+//	      public void onSuccess(LoginInfo result) {
+//	        loginInfo = result;
+//	        if(loginInfo.isLoggedIn()) {
+//	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
+//	        	loadGUI();
+//	        } else {
+//	          loadLogin();
+//	        }
+//	      }
+//	    });
+	    
+	    
 		// We can add style names to widgets
 //		sendButton.addStyleName("sendButton");
 //		projektService.getTest(new AsyncCallback<String>() {

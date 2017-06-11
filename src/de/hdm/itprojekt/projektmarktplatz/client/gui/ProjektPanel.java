@@ -11,28 +11,42 @@ public class ProjektPanel extends VerticalPanel {
 	public ProjektPanel() {
 
 		// muss hier dynamisch sein
-		final VerticalPanel vp = new VerticalPanel();
+		final VerticalPanel vpProjektPanel = new VerticalPanel();
 
-		Button btP1 = new Button("Projekt 1");
-		btP1.addClickHandler(new ClickHandler() {
+		Button btMeineProjekte = new Button("Meine Projekte");
+		btMeineProjekte.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				// Window.alert("vor clear clickhandler");
-				clear(vp);
+				clear(vpProjektPanel);
 
 				// Window.alert("clickhandler");
-				AusschreibungPanel ap = new AusschreibungPanel();
-				addAusschreibungPanel(ap);
+				ProjektForm pfMeineProjekte = new ProjektForm();
+				addProjektPanel(pfMeineProjekte);
 				// Window.alert("ende clickhandler");
 			}
 		});
-		vp.add(btP1);
 
-		Button btP2 = new Button("Projekt 2");
-		vp.add(btP2);
+		Button btAlleProjekte = new Button("Alle Projekte");
+		btAlleProjekte.addClickHandler(new ClickHandler() {
 
-		this.add(vp);
+			@Override
+			public void onClick(ClickEvent event) {
+				// Window.alert("vor clear clickhandler");
+				clear(vpProjektPanel);
+
+				// Window.alert("clickhandler");
+				ProjektForm pfAlleProjekte = new ProjektForm();
+				addProjektPanel(pfAlleProjekte);
+				// Window.alert("ende clickhandler");
+			}
+		});
+		
+		vpProjektPanel.add(btMeineProjekte);
+		vpProjektPanel.add(btAlleProjekte);
+
+		this.add(vpProjektPanel);
 
 	}
 
@@ -41,7 +55,7 @@ public class ProjektPanel extends VerticalPanel {
 		p.clear();
 	}
 
-	public void addAusschreibungPanel(Panel p) {
+	public void addProjektPanel(Panel p) {
 		this.add(p);
 	}
 
