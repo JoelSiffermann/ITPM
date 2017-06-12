@@ -405,12 +405,14 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //				
 //			}
 //		});
+
 		
 		/*
 		   * ***************************************************************************
 		   * ABSCHNITT, ANFANG: Testen der Methoden für Ausschreibung-Objekte
 		   * ***************************************************************************
 		   */
+
 		
 		
 //		p.setId(1);
@@ -542,24 +544,28 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //				
 //			}
 //		});
-
+		loadGUI();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.
-	    LoginServiceAsync loginService = GWT.create(LoginService.class);
-	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-	      public void onFailure(Throwable error) {
-	      }
-
-	      public void onSuccess(LoginInfo result) {
-	        loginInfo = result;
-	        if(loginInfo.isLoggedIn()) {
-	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
-	        	loadGUI();
-	        } else {
-	          loadLogin();
-	        }
-	      }
-	    });
+		
+		
+//	    LoginServiceAsync loginService = GWT.create(LoginService.class);
+//	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+//	      public void onFailure(Throwable error) {
+//	      }
+//
+//	      public void onSuccess(LoginInfo result) {
+//	        loginInfo = result;
+//	        if(loginInfo.isLoggedIn()) {
+//	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
+//	        	loadGUI();
+//	        } else {
+//	          loadLogin();
+//	        }
+//	      }
+//	    });
+	    
+	    
 		// We can add style names to widgets
 //		sendButton.addStyleName("sendButton");
 //		projektService.getTest(new AsyncCallback<String>() {

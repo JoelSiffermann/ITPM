@@ -48,8 +48,8 @@ public class DBConnection {
      * Software neu komilieren zu müssen.
      */
     private static String googleUrl = "jdbc:google:mysql://prof-thies.de:thies-bankproject:thies-bankproject/bankproject?user=demo&password=demo";
-//    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root&password=root";
-    private static String localUrl = "jdbc:mysql://127.0.0.1:3308/dbproj?user=root";
+//    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
+    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
     //PORT GEÄNDERT IN 3307!!! 
     
     /**

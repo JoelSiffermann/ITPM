@@ -4,16 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.thirdparty.javascript.rhino.head.ast.SwitchCase;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -22,60 +16,13 @@ public class MainPanel extends HorizontalPanel {
 
 	public MainPanel() {
 
-		// MenuBarPanel menu = new MenuBarPanel();
-		//
-		// final VerticalPanel vpMainPanel = new VerticalPanel();
-		//
-		// this.add(menu.getMenuBarPanel(vpMainPanel));
-		//
-		// Button pmp1 = new Button("Projektmarktplatz 1");
-		//
-		// pmp1.addClickHandler(new ClickHandler() {
-		//
-		// @Override
-		// public void onClick(ClickEvent event) {
-		// // Window.alert("vor clear clickhandler");
-		// clear(vpMainPanel);
-		// // Window.alert("clickhandler");
-		// ProjektPanel pp = new ProjektPanel();
-		// addProjektPanel(pp);
-		// // Window.alert("ende clickhandler");
-		// }
-		// });
-		//
-		// final HorizontalPanel hpNeuerProjektmarktplatz = new
-		// HorizontalPanel();
-		// final TextBox tbNeuerProjektmarktplatz = new TextBox();
-		//
-		// tbNeuerProjektmarktplatz.getElement().setPropertyString("placeholder",
-		// "Neuer Projektmarktplatz");
-		//
-		// Button btAddProjektmarktplatz = new Button("+");
-		// btAddProjektmarktplatz.addClickHandler(new ClickHandler() {
-		//
-		// @Override
-		// public void onClick(ClickEvent event) {
-		// // TODO Auto-generated method stub
-		// Button btNeuerProjektmarktplatz = new
-		// Button(tbNeuerProjektmarktplatz.getText());
-		// vpMainPanel.add(btNeuerProjektmarktplatz);
-		// }
-		// });
-		//
-		// hpNeuerProjektmarktplatz.add(tbNeuerProjektmarktplatz);
-		// hpNeuerProjektmarktplatz.add(btAddProjektmarktplatz);
-		//
-		// this.add(vpMainPanel);
-		// vpMainPanel.add(hpNeuerProjektmarktplatz);
-		// vpMainPanel.add(pmp1);
-
-		VerticalPanel navi = new VerticalPanel();
+		final VerticalPanel navi = new VerticalPanel();
 		final VerticalPanel info = new VerticalPanel();
 
-		final List<String> NAVI = Arrays.asList("Profil", "Projektmarktplatz", "Report", "Logout");
+		final List<String> NAVI = Arrays.asList("Profil", "Projektmarktplatz", "Beteiligung", "Report", "Logout");
 		// Create a cell to render each value.
 		TextCell textCell = new TextCell();
-		
+
 		// Create a CellList that uses the cell.
 		CellList<String> cellList = new CellList<String>(textCell);
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
@@ -86,7 +33,7 @@ public class MainPanel extends HorizontalPanel {
 		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			public void onSelectionChange(SelectionChangeEvent event) {
 				String selected = selectionModel.getSelectedObject();
-				
+
 				switch (selected) {
 				case "Profil":
 					ProfilForm profilBearbeitenForm = new ProfilForm();
@@ -95,13 +42,20 @@ public class MainPanel extends HorizontalPanel {
 					break;
 
 				case "Projektmarktplatz":
-//					if (selected != null) {
-//						Window.alert("You selected: " + selected);
-//					}
-					
+					// if (selected != null) {
+					// Window.alert("You selected: " + selected);
+					// }
+
 					ProjektmarktplatzForm pmForm = new ProjektmarktplatzForm();
 					info.clear();
-					info.add(pmForm); 
+					info.add(pmForm);
+					break;
+
+				case "Beteiligung":
+
+					BeteiligungPanel beteiligung = new BeteiligungPanel();
+					info.clear();
+					info.add(beteiligung);
 					break;
 
 				case "Report":
@@ -115,8 +69,6 @@ public class MainPanel extends HorizontalPanel {
 				default:
 					break;
 				}
-
-				
 
 			}
 		});

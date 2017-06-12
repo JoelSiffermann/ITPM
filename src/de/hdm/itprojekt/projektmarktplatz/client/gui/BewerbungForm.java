@@ -1,57 +1,155 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
+import java.util.ArrayList;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RichTextArea;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
+import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 
 public class BewerbungForm extends VerticalPanel {
+	
+	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
-	public BewerbungForm(){
-		
-	/**
-	 * <p>Kopf für Ausschreibungstitel</p>
-	 * 
-	 */
+	public BewerbungForm() {
 
-		VerticalPanel vpKopf = new VerticalPanel();
-		TextBox tbTitel = new TextBox();
-		
-		tbTitel.getElement().setPropertyString("placeholder", "Name");
-		vpKopf.add(tbTitel);
-
-//		**********************************************
-		
-	/*
-	 * <p>Kenntnisse Bereich </p>
-	 */
-		// Merke: bei dynamisch auslagern
-	    VerticalPanel ausschreibungTextPanel = new VerticalPanel();
-		//create RichTextArea elements
-	    RichTextArea ausschreibungText = new RichTextArea(); 
-	      
-	    ausschreibungText.setHeight("200");
-	    ausschreibungText.setWidth("200");
-	      
-	    //add text to text area
-	    ausschreibungText.setText("");
-	    ausschreibungText.getElement().setPropertyString("placeholder", "Ausschreibungstext");
-
-	    // Add text boxes to the root panel.
-	    ausschreibungTextPanel.add(ausschreibungText);  
-		
-//		**********************************************
-		VerticalPanel vpUnten = new VerticalPanel();
-		
-		Button btSpeichern = new Button("Speichern");
-		Button btAdd = new Button("+");
-		
-		vpUnten.add(btAdd);
-		vpUnten.add(btSpeichern); 
-		
-		this.add(vpKopf);
-		this.add(ausschreibungTextPanel); 
-		this.add(vpUnten);
 	}
+
+	public VerticalPanel getAufProjektBewerben(){
+		
+		final VerticalPanel vpKopf = new VerticalPanel();
+		final ListBox lbTitel = new ListBox();
+		final VerticalPanel vpUnten = new VerticalPanel();
+		final Button btBewerbungVersenden = new Button("Bewerbung versenden");
+		
+		final VerticalPanel bewerbungTextPanel = new VerticalPanel();
+		final TextArea bewerbungText = new TextArea();
+
+		projektService.readAllBewerbung(new AsyncCallback<ArrayList<Bewerbung>>() {
+			
+			@Override
+			public void onSuccess(ArrayList<Bewerbung> result) {
+				// TODO Auto-generated method stub
+				
+				for (Bewerbung b : result) {
+					
+					lbTitel.addItem(b.getId() + "", b.getId() + "");
+					
+				}
+					
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		bewerbungText.setWidth("1000px");
+		bewerbungText.setHeight("300px");
+
+		bewerbungText.setText("");
+		bewerbungText.getElement().setPropertyString("placeholder", "Bewerbungstext");
+
+		bewerbungTextPanel.add(bewerbungText);
+	
+		btBewerbungVersenden.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				clear(vpKopf);
+				 Window.alert("Bewerbung versendet");
+
+			}
+		});
+
+		vpKopf.add(lbTitel);
+		vpUnten.add(btBewerbungVersenden);
+
+		this.add(vpKopf);
+		this.add(bewerbungTextPanel);
+		this.add(vpUnten);
+		return this;
+	}
+	
+	public VerticalPanel getMeineProjekteBewerbungAnzeigen() {
+		
+		final VerticalPanel vpKopf = new VerticalPanel();
+		final HorizontalPanel hpUnten = new HorizontalPanel();
+		final VerticalPanel bewerbungTextPanel = new VerticalPanel();
+
+		final ListBox lbTitel = new ListBox();
+		final Button btBewertungSchreiben = new Button("Bewertung schreiben");
+		final Button btBewertungAnzeigen = new Button("Bewertung anzeigen");
+		final TextArea bewerbungText = new TextArea();
+
+		bewerbungText.setWidth("1000px");
+		bewerbungText.setHeight("300px");
+		bewerbungText.setEnabled(false);
+
+		bewerbungText.setText("");
+		bewerbungText.getElement().setPropertyString("placeholder", "Bewerbungstext");
+
+		bewerbungTextPanel.add(bewerbungText);
+	
+		btBewertungSchreiben.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				vpKopf.clear();
+				bewerbungTextPanel.clear();
+				hpUnten.clear();
+				// Window.alert("clickhandler");
+				BewertungForm bewertungSchreiben = new BewertungForm();
+				vpKopf.add(bewertungSchreiben.getBewertungenSchreiben());
+				// Window.alert("ende clickhandler");
+			}
+		});
+		
+		btBewertungAnzeigen.addClickHandler(new ClickHandler() {
+			
+			public void onClick(ClickEvent event) {
+				vpKopf.clear();
+				bewerbungTextPanel.clear();
+				hpUnten.clear();
+				BewertungForm bewertungAnzeigen = new BewertungForm();
+				vpKopf.add(bewertungAnzeigen.getBewertungenAnzeigen());
+
+			}
+		});
+
+		vpKopf.add(lbTitel);
+		hpUnten.add(btBewertungSchreiben);
+		hpUnten.add(btBewertungAnzeigen);
+
+		this.add(vpKopf);
+		this.add(bewerbungTextPanel);
+		this.add(hpUnten);
+		return this;
+	}
+	
+	protected void clear(VerticalPanel vpUnten) {
+		// TODO Auto-generated method stub
+		vpUnten.clear();
+	}
+
+	public void addBewertungPanel(Panel p) {
+		this.add(p);
+	}
+
 
 }
