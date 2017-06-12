@@ -39,7 +39,7 @@ public class BewertungForm extends VerticalPanel {
 			public void onSuccess(ArrayList<Bewerbung> result) {
 				// TODO Auto-generated method stub
 				for (Bewerbung b : result) {
-	
+					
 				}
 				Window.alert("test");
 			}

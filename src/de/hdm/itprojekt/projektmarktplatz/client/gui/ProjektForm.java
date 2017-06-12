@@ -56,6 +56,11 @@ public class ProjektForm extends HorizontalPanel {
 		CellList<String> cellList = new CellList<String>(textCell);
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
+
+		taInhalt.setWidth("1000px");
+		taInhalt.setHeight("300px");
+		taInhalt.setEnabled(false);
+		
 		btBeteiligungEntfernen.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -166,6 +171,10 @@ public class ProjektForm extends HorizontalPanel {
 
 		// Create a cell to render each value.
 		TextCell textCell = new TextCell();
+		
+		taInhalt.setWidth("1000px");
+		taInhalt.setHeight("300px");
+		taInhalt.setEnabled(false);
 
 		// Create a CellList that uses the cell.
 		CellList<String> cellList = new CellList<String>(textCell);

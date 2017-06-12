@@ -18,6 +18,8 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -25,6 +27,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -404,6 +407,8 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //				
 //			}
 //		});
+		Cookies.setCookie("email", "test@hdm-stuttgart.de");
+		
 		loadGUI();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.

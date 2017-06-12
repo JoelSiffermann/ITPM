@@ -29,10 +29,20 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 public class AusschreibungPanel extends VerticalPanel {
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
+	/**
+	 * 
+	 * Der Konstruktor der Klasse AusschreibungPanel
+	 */
+	
 	public AusschreibungPanel() {
 
 	}
 
+	/**
+	 * Die Methode gibt die Form die Bewerbung für die Ausschreibung zurueck.
+	 * @return this
+	 */
+	
 	public VerticalPanel getAusschreibungBewerben() {
 		// muss hier dynamisch sein Ausschreibung
 		final VerticalPanel vpBewerben = new VerticalPanel();
