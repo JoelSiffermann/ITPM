@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
@@ -30,19 +32,26 @@ public class PartnerprofilMapper {
 
 	public Partnerprofil einfuegen(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
+		String datum = "";
+		String datum2 = "";
 		
-		String sql = "";
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		datum = dateFormat.format(p.getAenderungsdatum());
+		datum2 = dateFormat.format(p.getErstelldatum());
 
-		if (!p.getAusschreibung().equals(null)){
+		String sql = "";
+		//System.out.println(p.getAusschreibung());
+		if (p.getAusschreibung().getId() != 0){
 			sql = "INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, "
 					+ "`orga_id`, `ausschreibung_id`) "
-					+ "VALUES (NULL, '"+p.getErstelldatum()+"', '"+p.getAenderungsdatum()+"', NULL, '"+p.getAusschreibung().getId() +"');";
+					+ "VALUES (NULL, '"+datum2+"', '"+datum+"', NULL, '"+p.getAusschreibung().getId() +"');";
 		} else if (!p.getOrganisationseinheit().equals(null)){
 			sql = "INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, "
 					+ "`orga_id`, `ausschreibung_id`) "
-					+ "VALUES (NULL, '"+p.getErstelldatum()+"', '"+p.getAenderungsdatum()+"', '"+p.getOrganisationseinheit().getId() +"', NULL);";
+					+ "VALUES (NULL, '"+datum2+"', '"+datum+"', '"+p.getOrganisationseinheit().getId() +"', NULL);";
 		}
-		
+		System.out.println(sql);
+
 		try {
 			Statement stmt = con.createStatement();
 
@@ -76,14 +85,20 @@ public class PartnerprofilMapper {
 
 	public Partnerprofil speichern(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
+		String datum = "";
+		String datum2 = "";
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		datum = dateFormat.format(p.getAenderungsdatum());
+		datum2 = dateFormat.format(p.getErstelldatum());
 		
 		String sql = "";
 		if(!p.getAusschreibung().equals(null)){
-			sql = "UPDATE `partnerprofil` SET `Erstelldatum` = '"+p.getErstelldatum()+"', `Aenderungsdatum` = '"+p.getAenderungsdatum()+"', `ausschreibung_id` = '"+p.getAusschreibung().getId()+"' WHERE `partnerprofil`.`Partnerprofil_ID` = "+p.getId();
+			sql = "UPDATE `partnerprofil` SET `Erstelldatum` = '"+datum2+"', `Aenderungsdatum` = '"+datum+"', `ausschreibung_id` = '"+p.getAusschreibung().getId()+"' WHERE `partnerprofil`.`Partnerprofil_ID` = "+p.getId();
 		}else if (!p.getOrganisationseinheit().equals(null)){
-			sql = "UPDATE `partnerprofil` SET `Erstelldatum` = '"+p.getErstelldatum()+"', `Aenderungsdatum` = '"+p.getAenderungsdatum()+"', `orga_id` = '"+p.getOrganisationseinheit().getId()+"' WHERE `partnerprofil`.`Partnerprofil_ID` = "+p.getId();
+			sql = "UPDATE `partnerprofil` SET `Erstelldatum` = '"+datum2+"', `Aenderungsdatum` = '"+datum+"', `orga_id` = '"+p.getOrganisationseinheit().getId()+"' WHERE `partnerprofil`.`Partnerprofil_ID` = "+p.getId();
 		}
-		
+		System.out.println(sql);
 		try {
 			Statement stmt = con.createStatement();
 

@@ -529,7 +529,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 		//------->Bearbeiten einer Person<--------
 		public Person updatePerson (Person pers) throws IllegalArgumentException{
 			try{
-				persMapper.einfuegen(pers);
+				persMapper.speichern(pers);
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -539,7 +539,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 		//------->Lesen eines Partnerprofils<--------
 		public Person readByIdPerson (Person pers) throws IllegalArgumentException {
 			try{ 
-				persMapper.getById(pers);
+				return persMapper.getById(pers);
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -573,9 +573,12 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	
 	//------->Einfuegen einer Projektbeteiligung<--------
 	public Beteiligung insertBeteiligung(Beteiligung projBet ) throws IllegalArgumentException{
-		
+//		Organisationseinheit org = new Organisationseinheit();
+//		org.setId(13);
 		try{
-		projBetMapper.einfuegen(projBet);	
+//			System.out.println("test impl "+projBet.getOrganisationseinheit().getId());
+//			projBet.setOrganisationseinheit(org);
+		return projBetMapper.einfuegen(projBet);	
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -597,7 +600,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	//------->Lesen einer Projektbeteiligung<--------
 	public Beteiligung readByIdBeteiligung(Beteiligung projBet) throws IllegalArgumentException {
 		try{
-			projBetMapper.getById(projBet);
+			return projBetMapper.getById(projBet);
 		} catch (Exception e){
 			e.printStackTrace();
 		}

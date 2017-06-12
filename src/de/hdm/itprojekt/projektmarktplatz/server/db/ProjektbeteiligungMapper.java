@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
@@ -30,7 +32,15 @@ public class ProjektbeteiligungMapper {
 
 	public Beteiligung einfuegen(Beteiligung b) throws Exception {
 		Connection con = DBConnection.connection();
-
+		String datum = "";
+		String datum2 = "";
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		datum = dateFormat.format(b.getEnde());
+		datum2 = dateFormat.format(b.getStart());
+		System.out.println("test "+b.getOrganisationseinheit().getId());
+		String sql = "INSERT INTO `beteiligung` (`Beteilgung_ID`, `Start`, `Ende`, `Umfang`, `projekt_ID`, `orga_id`) "
+				+ "VALUES (NULL, '"+datum2+"', '"+datum+"', '"+b.getUmfang()+"', '"+b.getProjekt().getId()+"', '"+b.getOrganisationseinheit().getId()+"');";
 		try {
 			Statement stmt = con.createStatement();
 
@@ -51,7 +61,7 @@ public class ProjektbeteiligungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `beteiligung` (`Beteilgung_ID`, `Start`, `Ende`, `Umfang`, `projekt_ID`, `orga_id`) VALUES (NULL, '"+b.getStart()+"', '"+b.getEnde()+"', '"+b.getUmfang()+"', '"+b.getProjekt().getId()+"', '"+b.getOrganisationseinheit().getId());
+				stmt.executeUpdate("INSERT INTO `beteiligung` (`Beteilgung_ID`, `Start`, `Ende`, `Umfang`, `projekt_ID`, `orga_id`) VALUES (NULL, '"+datum2+"', '"+datum+"', '"+b.getUmfang()+"', '"+b.getProjekt().getId()+"', '"+b.getOrganisationseinheit().getId()+"');");
 			//}
 
 		} catch (SQLException e) {
@@ -62,11 +72,16 @@ public class ProjektbeteiligungMapper {
 
 	public Beteiligung speichern(Beteiligung b) throws Exception {
 		Connection con = DBConnection.connection();
-
+		String datum = "";
+		String datum2 = "";
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		datum = dateFormat.format(b.getEnde());
+		datum2 = dateFormat.format(b.getStart());
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `beteiligung` SET `Beteilgung_ID` = '"+b.getId()+"', `Start` = '"+b.getStart()+"', `Ende` = '"+b.getEnde()+"', `Umfang` = '"+b.getUmfang()+"', `projekt_ID` = '"+b.getProjekt().getId()+"', `orga_id` = '"+b.getOrganisationseinheit().getId()+"' WHERE `beteiligung`.`Beteilgung_ID` = "+b.getId());
+			stmt.executeUpdate("UPDATE `beteiligung` SET `Beteilgung_ID` = '"+b.getId()+"', `Start` = '"+datum2+"', `Ende` = '"+datum+"', `Umfang` = '"+b.getUmfang()+"', `projekt_ID` = '"+b.getProjekt().getId()+"', `orga_id` = '"+b.getOrganisationseinheit().getId()+"' WHERE `beteiligung`.`Beteilgung_ID` = "+b.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
