@@ -26,6 +26,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -111,22 +112,22 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		   * ***************************************************************************
 		   */
 		
-		projektService.insertBeteiligung(projBet, new AsyncCallback<Beteiligung>() {
-			
-			@Override
-			public void onSuccess(Beteiligung result) {
-				// TODO Auto-generated method stub
-				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("hat funktioniert");
-				dialogBox.show();
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+//		projektService.insertBeteiligung(projBet, new AsyncCallback<Beteiligung>() {
+//			
+//			@Override
+//			public void onSuccess(Beteiligung result) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat funktioniert");
+//				dialogBox.show();
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
 		
 		
 		
@@ -548,7 +549,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.
 		
-		
+		Cookies.setCookie("email", "test@hdm-stuttgart.de");
 //	    LoginServiceAsync loginService = GWT.create(LoginService.class);
 //	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 //	      public void onFailure(Throwable error) {

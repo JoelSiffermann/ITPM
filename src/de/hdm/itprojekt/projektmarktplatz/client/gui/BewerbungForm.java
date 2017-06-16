@@ -3,6 +3,8 @@ package de.hdm.itprojekt.projektmarktplatz.client.gui;
 import java.util.ArrayList;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -86,7 +88,7 @@ public class BewerbungForm extends VerticalPanel {
 		return this;
 	}
 	
-	public VerticalPanel getMeineProjekteBewerbungAnzeigen() {
+	public VerticalPanel getMeineProjekteBewerbungAnzeigen(String selectedValue) {
 		
 		final VerticalPanel vpKopf = new VerticalPanel();
 		final HorizontalPanel hpUnten = new HorizontalPanel();
@@ -105,7 +107,24 @@ public class BewerbungForm extends VerticalPanel {
 		bewerbungText.getElement().setPropertyString("placeholder", "Bewerbungstext");
 
 		bewerbungTextPanel.add(bewerbungText);
-	
+		
+		projektService.readAllBewerbungByAusschreibungId(selectedValue, new AsyncCallback<ArrayList<Bewerbung>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(ArrayList<Bewerbung> result) {
+				// TODO Auto-generated method stub
+				for(Bewerbung b : result){
+					lbTitel.addItem(b.getId() + "", b.getId() + ""); 
+				}
+			}
+		});
+		
 		btBewertungSchreiben.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -115,7 +134,7 @@ public class BewerbungForm extends VerticalPanel {
 				hpUnten.clear();
 				// Window.alert("clickhandler");
 				BewertungForm bewertungSchreiben = new BewertungForm();
-				vpKopf.add(bewertungSchreiben.getBewertungenSchreiben());
+				vpKopf.add(bewertungSchreiben.getBewertungenSchreiben(lbTitel.getSelectedValue()));
 				// Window.alert("ende clickhandler");
 			}
 		});
@@ -132,6 +151,32 @@ public class BewerbungForm extends VerticalPanel {
 			}
 		});
 
+		lbTitel.addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				Bewerbung b = new Bewerbung();
+				int id = Integer.parseInt(lbTitel.getSelectedValue());
+				
+				b.setId(id);
+				
+				projektService.readByIdBewerbung(b, new AsyncCallback<Bewerbung>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Bewerbung result) {
+						// TODO Auto-generated method stub
+						bewerbungText.setText(result.getInhalt()); 
+					}
+				});
+			}
+		});
+		
 		vpKopf.add(lbTitel);
 		hpUnten.add(btBewertungSchreiben);
 		hpUnten.add(btBewertungAnzeigen);
