@@ -104,6 +104,47 @@ public class OrganisationseinheitMapper {
 		return o;
 	}
 
+	public Organisationseinheit getByEmail(Organisationseinheit o) throws Exception {
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `organisationseinheit` WHERE `E-Mail` = '" + o.getEmail() + "'");
+			if (rs.next()) {
+				Organisationseinheit or = new Organisationseinheit();
+				or.setId(rs.getInt("Organisationseinheit_ID"));
+				or.setName(rs.getString("Name"));
+				or.setEmail(rs.getString("E-Mail"));
+				Partnerprofil p = new Partnerprofil();
+				p.setId(rs.getInt("partnerprofil_id"));
+				or.setPartnerprofil(p);
+				return or;
+			}
+		} catch (SQLException e) {
+		}
+		return null;
+	}
+	
+	public Organisationseinheit getByPartnerprofilId(Partnerprofil pp) throws Exception {
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM `organisationseinheit` WHERE `partnerprofil_id` = " + pp.getId());
+			if (rs.next()) {
+				Organisationseinheit or = new Organisationseinheit();
+				or.setId(rs.getInt("Organisationseinheit_ID"));
+				or.setName(rs.getString("Name"));
+				or.setEmail(rs.getString("E-Mail"));
+				Partnerprofil p = new Partnerprofil();
+				p.setId(rs.getInt("partnerprofil_id"));
+				or.setPartnerprofil(p);
+				return or;
+			}
+		} catch (SQLException e) {
+		}
+		return null;
+	}
+	
 	public ArrayList<Organisationseinheit> getAll() throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Organisationseinheit> result = new ArrayList<Organisationseinheit>();

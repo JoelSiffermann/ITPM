@@ -42,11 +42,12 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public ArrayList <Bewerbung> readAllBewerbung() throws IllegalArgumentException;
 	public void deleteBewerbung (Bewerbung b) throws IllegalArgumentException;
 	
-	public Bewertung insertBewertung (Bewertung bt) throws IllegalArgumentException;
+	public Bewertung insertBewertung (Bewertung bt, String id) throws IllegalArgumentException;
 	public Bewertung updateBewertung (Bewertung bt) throws IllegalArgumentException;
 	public Bewertung readByIdBewertung (Bewertung bt) throws IllegalArgumentException;
 	public ArrayList <Bewertung> readAllBewertung() throws IllegalArgumentException;
 	public void deleteBewertung (Bewertung bt) throws IllegalArgumentException;
+	public ArrayList<Bewerbung> readAllBewerbungByAusschreibungId(String id) throws IllegalArgumentException;
 	
 	public Eigenschaft insertEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
 	public Eigenschaft updateEigenschaft (Eigenschaft eg) throws IllegalArgumentException;

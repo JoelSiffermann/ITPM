@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -12,7 +13,9 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -24,7 +27,15 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
+import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+
 public class ProjektForm extends HorizontalPanel {
+	
+	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+
 
 	public HorizontalPanel BeteiligungAnMeineProjekte() {
 
@@ -264,8 +275,8 @@ public class ProjektForm extends HorizontalPanel {
 		final TextBox tbProjektName = new TextBox();
 		final ListBox lbProjektListe = new ListBox();
 		final Grid gridProjektForm = new Grid(7, 2);
-		DatePicker startPicker = new DatePicker();
-		DatePicker endPicker = new DatePicker();
+		final DatePicker startPicker = new DatePicker();
+		final DatePicker endPicker = new DatePicker();
 
 		final Button btProjektSpeichern = new Button("Projekt speichern");
 		final Button btProjektEntfernen = new Button("Projekt entfernen");
@@ -296,7 +307,13 @@ public class ProjektForm extends HorizontalPanel {
 
 			@Override
 			public void onClick(ClickEvent event) {
-
+				
+				Projekt projekt = new Projekt();
+				projekt.setName(tbProjektName.getText());
+				projekt.setStart(startPicker.getFirstDate());
+				projekt.setEnde(endPicker.getLastDate());
+				projekt.setInhalt(taInhalt.getText());
+				
 				if (tbProjektName.isVisible()) {
 					tbProjektName.setVisible(false);
 					lbProjektListe.setVisible(true);
@@ -306,6 +323,49 @@ public class ProjektForm extends HorizontalPanel {
 					lbProjektListe.setVisible(false);
 					gridProjektForm.setWidget(0, 1, tbProjektName);
 				}
+				
+				if (!projekt.equals(null)) {
+
+					projektService.insertProjekt(projekt, new AsyncCallback<Projekt>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							final DialogBox dialogBox = new DialogBox();
+							dialogBox.setText("Speichern hat nicht geklappt " + caught.getLocalizedMessage());
+							Button closeButton = new Button("OK", new ClickHandler() {
+
+								@Override
+								public void onClick(ClickEvent event) {
+									// TODO Auto-generated method stub
+									dialogBox.hide();
+								}
+							});
+
+							dialogBox.add(closeButton);
+							dialogBox.show();
+						}
+
+						@Override
+						public void onSuccess(Projekt result) {
+							// TODO Auto-generated method stub
+							final DialogBox dialogBox = new DialogBox();
+							dialogBox.setText("Erfolgreich gespeichert");
+							Button closeButton = new Button("OK", new ClickHandler() {
+
+								@Override
+								public void onClick(ClickEvent event) {
+									// TODO Auto-generated method stub
+									dialogBox.hide();
+								}
+							});
+
+							dialogBox.add(closeButton);
+							dialogBox.show();
+						}
+					});
+				}
+				
 			}
 		});
 

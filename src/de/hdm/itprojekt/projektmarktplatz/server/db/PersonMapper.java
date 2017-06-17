@@ -100,6 +100,28 @@ public class PersonMapper {
 		return p;
 	}
 
+	public Person getByOrgId(Organisationseinheit org) throws Exception {
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `person` WHERE `o_id` = " + org.getId());
+			if (rs.next()) {
+				Person ps = new Person();
+				ps.setVorname(rs.getString("Vorname"));
+				ps.setBeruf(rs.getString("Beruf"));
+				ps.setErfahrung(rs.getFloat("Erfahrung"));
+				ps.setId(rs.getInt("ID"));
+				Organisationseinheit o = new Organisationseinheit();
+				o.setId(rs.getInt("o_id"));
+				ps.setOrganisationseinheit(o);
+
+				return ps;
+			}
+		} catch (SQLException e) {
+		}
+		return null;
+	}
+	
 	public ArrayList<Person> getAll() throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Person> result = new ArrayList<Person>();

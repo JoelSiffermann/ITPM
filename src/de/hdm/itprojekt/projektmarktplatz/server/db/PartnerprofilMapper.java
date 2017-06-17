@@ -161,6 +161,44 @@ public class PartnerprofilMapper {
 		    }
 		    return null;
 	}
+	
+	public Partnerprofil getByAusschreibungId(Ausschreibung aId) throws Exception{
+		 Connection con = DBConnection.connection();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT * FROM `partnerprofil` WHERE `ausschreibung_id` = " + aId.getId());
+		      
+		      if(rs.next()){
+		    	  Partnerprofil pp = new Partnerprofil();//default Konstruktor in Partnerprofil.java einf�gen damit es kein Fehler anzeigt
+		          pp.setId(rs.getInt("Partnerprofil_ID"));
+		          pp.setErstelldatum(rs.getDate("Erstelldatum"));
+		          pp.setAenderungsdatum(rs.getDate("Aenderungsdatum"));
+		          
+		          
+				  
+				  
+				  if(rs.getInt("orga_id") > 0){
+					  Organisationseinheit o = new Organisationseinheit();
+					  o.setId(rs.getInt("orga_id"));
+					  pp.setOrganisationseinheit(o);
+				  } else if (rs.getInt("ausschreibung_id") > 0){
+					  Ausschreibung a = new Ausschreibung();
+					  a.setId(rs.getInt("ausschreibung_id"));
+					  pp.setAusschreibung(a); 
+				  }
+				  
+					// a.setId(rs.getInt("") + 1);
+					return pp;
+		      }
+		    }
+		    catch (SQLException e) {
+		    	
+		    }
+		    return null;
+	}
+	
 	public ArrayList<Partnerprofil> getAll() throws Exception{
 		ArrayList<Partnerprofil> result = new ArrayList<Partnerprofil>();
 		Connection con = DBConnection.connection();

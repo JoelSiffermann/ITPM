@@ -55,7 +55,7 @@ public interface ProjektmarktplatzAdminAsync {
 	void deleteBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 	
 
-	void insertBewertung(Bewertung bt, AsyncCallback<Bewertung> callback);
+	void insertBewertung(Bewertung bt, String id, AsyncCallback<Bewertung> callback);
 
 	void updateBewertung(Bewertung bt, AsyncCallback<Bewertung> callback);
 
@@ -155,6 +155,8 @@ public interface ProjektmarktplatzAdminAsync {
 	void readByIdPerson(Person pers, AsyncCallback<Person> callback);
 
 	void updatePerson(Person pers, AsyncCallback<Person> callback);
+
+	void readAllBewerbungByAusschreibungId(String id, AsyncCallback<ArrayList<Bewerbung>> callback);
 	
 	
 }

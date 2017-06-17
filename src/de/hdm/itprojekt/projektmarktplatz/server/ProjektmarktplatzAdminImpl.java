@@ -307,6 +307,17 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 		}
 		return null;
 	}
+	
+	public ArrayList<Bewerbung> readAllBewerbungByAusschreibungId(String id) throws IllegalArgumentException {
+		
+		try{
+			
+			return bMapper.getAllByAusschreibungId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	//------->Löschen einer Bewerbung<--------
 
@@ -327,9 +338,25 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	//------->Erstellen einer Bewertung<--------
 
 	
-	public Bewertung insertBewertung (Bewertung bt) throws IllegalArgumentException {
+	public Bewertung insertBewertung (Bewertung bt, String id) throws IllegalArgumentException {
 		
 		try{
+			Bewerbung b = new Bewerbung();
+			Ausschreibung a = new Ausschreibung();
+			Partnerprofil pp = new Partnerprofil();
+			Organisationseinheit o = new Organisationseinheit();
+			Person person = new Person();
+			
+			b.setId(Integer.parseInt(id));
+			b.setAusschreibung(bMapper.getById(b).getAusschreibung());
+			a.setId(b.getAusschreibung().getId());
+			System.out.println("HIER Ausschreibung ID " + a.getId()); 
+			pp.setId(ppMapper.getByAusschreibungId(a).getId()); 
+			System.out.println("Partnerproifl ID " + pp.getId()); 
+			o.setId(orgMapper.getByPartnerprofilId(pp).getId());
+			
+			person = persMapper.getByOrgId(o);
+			bt.setPerson(person); 
 			bwMapper.einfuegen(bt);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -518,8 +545,28 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 
 		//------->Einfügen einer Person<--------
 		public Person insertPerson (Person pers) throws IllegalArgumentException{
+			Person p = new Person();
 			try{
-				persMapper.einfuegen(pers);
+				
+				p.setOrganisationseinheit(orgMapper.getByEmail(pers.getOrganisationseinheit()));
+				pers.getOrganisationseinheit().setId(p.getOrganisationseinheit().getId()); 
+				p = persMapper.getByOrgId(p.getOrganisationseinheit());
+				if (p != null){
+//					pers.getOrganisationseinheit().setId(p.getOrganisationseinheit().getId()); 
+//					persMapper.getByOrgId(p.getOrganisationseinheit());
+					pers.setId(p.getId()); 
+					persMapper.speichern(pers);
+				}else {
+					persMapper.einfuegen(pers);
+				}
+//				try {
+//					System.out.println("Einf�ngen von Person " + orgMapper.getByEmail(pers.getOrganisationseinheit()).getId());
+//				pers.getOrganisationseinheit().setId(orgMapper.getByEmail(pers.getOrganisationseinheit()).getId());
+//				persMapper.speichern(pers);
+//				}catch (Exception e){
+//					persMapper.einfuegen(pers);
+//
+//				}
 			} catch (Exception e){
 				e.printStackTrace();
 			}
