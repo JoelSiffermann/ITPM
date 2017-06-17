@@ -37,4 +37,6 @@ public interface ProjektmarktplatzReportAdminAsync {
 	void getBewerbungenByNutzer(Partnerprofil p,
 			AsyncCallback<ArrayList<Bewerbung>> callback);
 
+	void getTest(AsyncCallback<String> callback);
+
 }

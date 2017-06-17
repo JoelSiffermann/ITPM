@@ -112,6 +112,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		   * ***************************************************************************
 		   */
 		
+
 //		projektService.insertBeteiligung(projBet, new AsyncCallback<Beteiligung>() {
 //			
 //			@Override
