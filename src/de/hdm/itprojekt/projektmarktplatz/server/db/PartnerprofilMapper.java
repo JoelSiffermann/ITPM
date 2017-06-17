@@ -50,7 +50,8 @@ public class PartnerprofilMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			//ResultSet rs = stmt.executeQuery("");
+			//ResultSet rs = stmt.executeQuer
+			("");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 			//if (rs.next()) {
