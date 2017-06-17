@@ -6,6 +6,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.LoginServiceAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
@@ -25,6 +26,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -71,18 +73,158 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		Bewerbung b = new Bewerbung();
 		Organisationseinheit org = new Organisationseinheit();
 		Eigenschaft eg = new Eigenschaft();
-		
 		Bewertung bt = new Bewertung ();
 		Person pers = new Person ();
+		Beteiligung projBet = new Beteiligung ();
 		
+//		eg.setBezeichnung("test_bearbeiten");
+//		eg.setId(2);
+//		eg.setPartnerprofil(p);
+//		eg.setWert("test");
 		
-		
-		eg.setBezeichnung("test_bearbeiten");
-		eg.setId(2);
-		eg.setPartnerprofil(p);
-		eg.setWert("test");
 		p.setId(11);
+		p.setAenderungsdatum(date);
+		p.setErstelldatum(date);
+		
+		a.setId(0);
+		org.setId(13);
+		proj.setId(23);
+		
+//		p.setAusschreibung(a);
+//		p.setOrganisationseinheit(org);
+		
+//		pers.setBeruf("Student");
+//		pers.setErfahrung(1.1f);
+//		pers.setId(4);
+//		pers.setOrganisationseinheit(org);
+//		pers.setVorname("Ersin");
+		
+		projBet.setEnde(date);
+		projBet.setId(1);
+		projBet.setOrganisationseinheit(org);
+		projBet.setProjekt(proj);
+		projBet.setStart(date);
+		projBet.setUmfang(12);
+		
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, Anfang: Testen der Methoden für Projektbeteiligung-Objekte
+		   * ***************************************************************************
+		   */
+		
 
+//		projektService.insertBeteiligung(projBet, new AsyncCallback<Beteiligung>() {
+//			
+//			@Override
+//			public void onSuccess(Beteiligung result) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat funktioniert");
+//				dialogBox.show();
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+		
+		
+		
+		
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, Anfang: Testen der Methoden für Person-Objekte
+		   * ***************************************************************************
+		   */
+		//----> Löschen einer Person 
+		
+//		projektService.deletePerson(pers, new AsyncCallback<Void>() {
+//			
+//			@Override
+//			public void onSuccess(Void result) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt - Person ");
+//				dialogBox.show();
+//
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+		
+		
+		
+		//----> lesen aller Personen 
+		
+//		projektService.readAllPerson(new AsyncCallback<ArrayList<Person>>() {
+//			
+//			@Override
+//			public void onSuccess(ArrayList<Person> result) {
+//				// TODO Auto-generated method stub
+//				String id = "";
+//				for (Person pers : result){
+//					id = id + " " + pers.getId();
+//				}
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt" + id);
+//				dialogBox.show();
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+
+		
+		//-------> Lesen einer Person 
+//		projektService.readByIdPerson(pers, new AsyncCallback<Person>() {
+//			
+//			@Override
+//			public void onSuccess(Person result) {
+//				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat geklappt - Person " + result.getVorname());
+//				dialogBox.show();
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+		
+		/*
+		   * ***************************************************************************
+		   * ABSCHNITT, Anfang: Testen der Methoden für Partnerprofil-Objekte
+		   * ***************************************************************************
+		   */
+		
+//				projektService.updatePartnerprofil(p, new AsyncCallback<Partnerprofil>() {
+//		
+//		@Override
+//		public void onSuccess(Partnerprofil result) {
+//			// TODO Auto-generated method stub
+//			final DialogBox dialogBox = new DialogBox();
+//			dialogBox.setText("hat geklappt ");
+//			dialogBox.show();
+//		}
+//		
+//		@Override
+//		public void onFailure(Throwable caught) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//	});
+		
 		/*
 		   * ***************************************************************************
 		   * ABSCHNITT, Anfang: Testen der Methoden für Eigenschaft-Objekte
@@ -408,7 +550,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.
 		
-		
+		Cookies.setCookie("email", "test@hdm-stuttgart.de");
 //	    LoginServiceAsync loginService = GWT.create(LoginService.class);
 //	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 //	      public void onFailure(Throwable error) {

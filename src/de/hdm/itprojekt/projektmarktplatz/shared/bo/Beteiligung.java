@@ -21,6 +21,7 @@ public class Beteiligung extends BusinessObjekt {
 	}
 
 	public void setOrganisationseinheit(Organisationseinheit o) {
+		this.organisationseinheit = o;
 	}
 
 	

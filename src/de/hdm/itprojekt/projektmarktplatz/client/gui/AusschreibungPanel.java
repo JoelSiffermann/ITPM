@@ -27,16 +27,17 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 public class AusschreibungPanel extends VerticalPanel {
+	
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	final ListBox listBoxBezeichnung = new ListBox();
 
 	public AusschreibungPanel() {
 
 	}
 
 	public VerticalPanel getAusschreibungBewerben() {
-		// muss hier dynamisch sein Ausschreibung
+
 		final VerticalPanel vpBewerben = new VerticalPanel();
-		final ListBox listBoxBezeichnung = new ListBox();
 		final TextArea taInhalt = new TextArea();
 		final TextArea taBewerbungInhalt = new TextArea();
 		final DatePicker frist = new DatePicker();
@@ -47,7 +48,7 @@ public class AusschreibungPanel extends VerticalPanel {
 
 			@Override
 			public void onChange(ChangeEvent event) {
-				// TODO Auto-generated method stub
+
 				Ausschreibung a = new Ausschreibung();
 				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
 				a.setId(id);
@@ -55,15 +56,12 @@ public class AusschreibungPanel extends VerticalPanel {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
 
 					}
 
 					@Override
 					public void onSuccess(Ausschreibung result) {
-						// TODO Auto-generated method stub
-						// Window.alert("geändert " +
-						// listBoxBezeichnung.getSelectedValue());
+					
 						taInhalt.setText(result.getInhalt());
 						frist.setValue(result.getFrist());
 
@@ -211,7 +209,8 @@ public class AusschreibungPanel extends VerticalPanel {
 		final TextArea taBewerbungInhalt = new TextArea();
 		final DatePicker frist = new DatePicker();
 		final Grid gridAusschreibungAnzeigen = new Grid(8, 2);
-
+		Button btMeineProjekteBewerbungAnzeigen = new Button("Bewerbungen anzeigen");
+		Button btAusschreibungSpeichern = new Button("Ausschreibung speichern");
 		TextBox tbKenntnis = new TextBox();
 		TextBox tbJahr = new TextBox();
 
@@ -221,32 +220,32 @@ public class AusschreibungPanel extends VerticalPanel {
 			@Override
 			public void onChange(ChangeEvent event) {
 				// TODO Auto-generated method stub
-				Ausschreibung a = new Ausschreibung();
-				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
-				a.setId(id);
-				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void onSuccess(Ausschreibung result) {
-						// TODO Auto-generated method stub
-						// Window.alert("geändert " +
-						// listBoxBezeichnung.getSelectedValue());
-						taInhalt.setText(result.getInhalt());
-						frist.setValue(result.getFrist());
-
-					}
-				});
+//				Ausschreibung a = new Ausschreibung();
+//				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
+//				a.setId(id);
+//				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
+//
+//					@Override
+//					public void onFailure(Throwable caught) {
+//						// TODO Auto-generated method stub
+//
+//					}
+//
+//					@Override
+//					public void onSuccess(Ausschreibung result) {
+//						// TODO Auto-generated method stub
+//						// Window.alert("geändert " +
+//						// listBoxBezeichnung.getSelectedValue());
+//						taInhalt.setText(result.getInhalt());
+//						frist.setValue(result.getFrist());
+//
+//					}
+//				});
 
 			}
 		});
 
-		Button btMeineProjekteBewerbungAnzeigen = new Button("Bewerbungen anzeigen");
+
 		btMeineProjekteBewerbungAnzeigen.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -255,15 +254,16 @@ public class AusschreibungPanel extends VerticalPanel {
 
 				BewerbungForm bewerbenAnzeigenForm = new BewerbungForm();
 				vpBewerben.clear();
-				vpBewerben.add(bewerbenAnzeigenForm.getMeineProjekteBewerbungAnzeigen());
+				vpBewerben.add(bewerbenAnzeigenForm.getMeineProjekteBewerbungAnzeigen(listBoxBezeichnung.getSelectedValue()));
 			}
 		});
 
-		Button btAusschreibungSpeichern = new Button("Ausschreibung speichern");
+
 		btAusschreibungSpeichern.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
+
 				Ausschreibung a = new Ausschreibung();
 				Projekt p = new Projekt();
 				Partnerprofil pp = new Partnerprofil();
@@ -274,7 +274,6 @@ public class AusschreibungPanel extends VerticalPanel {
 				a.setBezeichnung(listBoxBezeichnung.getSelectedItemText());
 				a.setInhalt(taInhalt.getText());
 				a.setFrist(frist.getValue());
-				// Window.alert("Datum "+frist.getValue());
 				p.setId(1);
 				pp.setId(1);
 
@@ -285,13 +284,13 @@ public class AusschreibungPanel extends VerticalPanel {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
+						
 						Window.alert("Ein Fehler ist aufgetreten: " + caught.getMessage());
 					}
 
 					@Override
 					public void onSuccess(Ausschreibung result) {
-						// TODO Auto-generated method stub
+						
 						Window.alert("Ausschreibung gespeichert ");
 					}
 				});
@@ -305,7 +304,7 @@ public class AusschreibungPanel extends VerticalPanel {
 			public void onSuccess(ArrayList<Ausschreibung> result) {
 
 				for (Ausschreibung a : result) {
-					// listBoxBezeichnung.addItem(a.getBezeichnung());
+					
 					listBoxBezeichnung.addItem(a.getBezeichnung(), a.getId() + "");
 
 				}
