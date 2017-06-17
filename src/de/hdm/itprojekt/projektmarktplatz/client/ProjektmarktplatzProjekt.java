@@ -550,6 +550,22 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		// Check login status using login service.
 		
 		Cookies.setCookie("email", "test@hdm-stuttgart.de");
+		org.setEmail(Cookies.getCookie("email")); 
+		projektService.readByEmail(org , new AsyncCallback<Organisationseinheit>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Organisationseinheit result) {
+				// TODO Auto-generated method stub
+				Cookies.setCookie("userid", result.getId()+"");
+			}
+		});
+		
 //	    LoginServiceAsync loginService = GWT.create(LoginService.class);
 //	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 //	      public void onFailure(Throwable error) {
