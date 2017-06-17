@@ -118,7 +118,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 				// TODO Auto-generated method stub
 				final DialogBox dialogBox = new DialogBox();
 				dialogBox.setText("hat funktioniert");
-				dialogBox.show();
+//				dialogBox.show();
 			}
 			
 			@Override

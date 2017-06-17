@@ -126,39 +126,39 @@ public class ProfilForm extends VerticalPanel {
 			@Override
 			public void onChange(ChangeEvent event) {
 				// TODO Auto-generated method stub
-				
-				switch (listOrg.getSelectedItemText()) {
-				case "Person":
-					tbVorname.setVisible(true);
-					tbGroesse.setVisible(false);;
-					tbArbeitsfeld.setVisible(false);
-					tbBeruf.setVisible(true);
-					tbGeschform.setVisible(false);
-					tbGeschfeld.setVisible(false);
-				    
-					break;
-				case "Team":
-					tbVorname.setVisible(false);
-					tbGroesse.setVisible(true);
-					tbBeruf.setVisible(false);
-					tbArbeitsfeld.setVisible(true);
-					
-					tbGeschform.setVisible(false);
-					tbGeschfeld.setVisible(false);
-				    tbKenntnis.getElement().setPropertyString("placeholder", "Spezifikation");
-					break;
-				case "Unternehmen":
-					tbVorname.setVisible(false);
-					tbGroesse.setVisible(false);;
-					tbArbeitsfeld.setVisible(false);
-					tbBeruf.setVisible(false);
-					tbGeschform.setVisible(true);
-					tbGeschfeld.setVisible(true);
-				    tbKenntnis.getElement().setPropertyString("placeholder", "Spezialisierung");
-					break;
-				default:
-					break;
-				}
+//				
+//				switch (listOrg.getSelectedItemText()) {
+//				case "Person":
+//					tbVorname.setVisible(true);
+//					tbGroesse.setVisible(false);;
+//					tbArbeitsfeld.setVisible(false);
+//					tbBeruf.setVisible(true);
+//					tbGeschform.setVisible(false);
+//					tbGeschfeld.setVisible(false);
+//				    
+//					break;
+//				case "Team":
+//					tbVorname.setVisible(false);
+//					tbGroesse.setVisible(true);
+//					tbBeruf.setVisible(false);
+//					tbArbeitsfeld.setVisible(true);
+//					
+//					tbGeschform.setVisible(false);
+//					tbGeschfeld.setVisible(false);
+//				    tbKenntnis.getElement().setPropertyString("placeholder", "Spezifikation");
+//					break;
+//				case "Unternehmen":
+//					tbVorname.setVisible(false);
+//					tbGroesse.setVisible(false);;
+//					tbArbeitsfeld.setVisible(false);
+//					tbBeruf.setVisible(false);
+//					tbGeschform.setVisible(true);
+//					tbGeschfeld.setVisible(true);
+//				    tbKenntnis.getElement().setPropertyString("placeholder", "Spezialisierung");
+//					break;
+//				default:
+//					break;
+//				}
 			}
 		});
 		

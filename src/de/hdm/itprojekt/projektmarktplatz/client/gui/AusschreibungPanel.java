@@ -48,27 +48,27 @@ public class AusschreibungPanel extends VerticalPanel {
 			@Override
 			public void onChange(ChangeEvent event) {
 				// TODO Auto-generated method stub
-				Ausschreibung a = new Ausschreibung();
-				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
-				a.setId(id);
-				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void onSuccess(Ausschreibung result) {
-						// TODO Auto-generated method stub
-						// Window.alert("geändert " +
-						// listBoxBezeichnung.getSelectedValue());
-						taInhalt.setText(result.getInhalt());
-						frist.setValue(result.getFrist());
-
-					}
-				});
+//				Ausschreibung a = new Ausschreibung();
+//				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
+//				a.setId(id);
+//				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
+//
+//					@Override
+//					public void onFailure(Throwable caught) {
+//						// TODO Auto-generated method stub
+//
+//					}
+//
+//					@Override
+//					public void onSuccess(Ausschreibung result) {
+//						// TODO Auto-generated method stub
+//						// Window.alert("geändert " +
+//						// listBoxBezeichnung.getSelectedValue());
+//						taInhalt.setText(result.getInhalt());
+//						frist.setValue(result.getFrist());
+//
+//					}
+//				});
 
 			}
 		});
@@ -221,27 +221,27 @@ public class AusschreibungPanel extends VerticalPanel {
 			@Override
 			public void onChange(ChangeEvent event) {
 				// TODO Auto-generated method stub
-				Ausschreibung a = new Ausschreibung();
-				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
-				a.setId(id);
-				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void onSuccess(Ausschreibung result) {
-						// TODO Auto-generated method stub
-						// Window.alert("geändert " +
-						// listBoxBezeichnung.getSelectedValue());
-						taInhalt.setText(result.getInhalt());
-						frist.setValue(result.getFrist());
-
-					}
-				});
+//				Ausschreibung a = new Ausschreibung();
+//				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
+//				a.setId(id);
+//				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
+//
+//					@Override
+//					public void onFailure(Throwable caught) {
+//						// TODO Auto-generated method stub
+//
+//					}
+//
+//					@Override
+//					public void onSuccess(Ausschreibung result) {
+//						// TODO Auto-generated method stub
+//						// Window.alert("geändert " +
+//						// listBoxBezeichnung.getSelectedValue());
+//						taInhalt.setText(result.getInhalt());
+//						frist.setValue(result.getFrist());
+//
+//					}
+//				});
 
 			}
 		});
@@ -264,37 +264,37 @@ public class AusschreibungPanel extends VerticalPanel {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				Ausschreibung a = new Ausschreibung();
-				Projekt p = new Projekt();
-				Partnerprofil pp = new Partnerprofil();
-
-				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
-
-				a.setId(id);
-				a.setBezeichnung(listBoxBezeichnung.getSelectedItemText());
-				a.setInhalt(taInhalt.getText());
-				a.setFrist(frist.getValue());
-				// Window.alert("Datum "+frist.getValue());
-				p.setId(1);
-				pp.setId(1);
-
-				a.setProjekt(p);
-				a.setPartnerprofil(pp);
-
-				projektService.updateAusschreibung(a, new AsyncCallback<Ausschreibung>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("Ein Fehler ist aufgetreten: " + caught.getMessage());
-					}
-
-					@Override
-					public void onSuccess(Ausschreibung result) {
-						// TODO Auto-generated method stub
-						Window.alert("Ausschreibung gespeichert ");
-					}
-				});
+//				Ausschreibung a = new Ausschreibung();
+//				Projekt p = new Projekt();
+//				Partnerprofil pp = new Partnerprofil();
+//
+//				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
+//
+//				a.setId(id);
+//				a.setBezeichnung(listBoxBezeichnung.getSelectedItemText());
+//				a.setInhalt(taInhalt.getText());
+//				a.setFrist(frist.getValue());
+//				// Window.alert("Datum "+frist.getValue());
+//				p.setId(1);
+//				pp.setId(1);
+//
+//				a.setProjekt(p);
+//				a.setPartnerprofil(pp);
+//
+//				projektService.updateAusschreibung(a, new AsyncCallback<Ausschreibung>() {
+//
+//					@Override
+//					public void onFailure(Throwable caught) {
+//						// TODO Auto-generated method stub
+//						Window.alert("Ein Fehler ist aufgetreten: " + caught.getMessage());
+//					}
+//
+//					@Override
+//					public void onSuccess(Ausschreibung result) {
+//						// TODO Auto-generated method stub
+//						Window.alert("Ausschreibung gespeichert ");
+//					}
+//				});
 
 			}
 		});
