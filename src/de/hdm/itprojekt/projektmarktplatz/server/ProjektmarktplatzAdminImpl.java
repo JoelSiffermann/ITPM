@@ -552,6 +552,9 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 				p.setOrganisationseinheit(orgMapper.getByEmail(pers.getOrganisationseinheit()));
 				pers.getOrganisationseinheit().setId(p.getOrganisationseinheit().getId()); 
 				p = persMapper.getByOrgId(p.getOrganisationseinheit());
+				
+				orgMapper.speichern(pers.getOrganisationseinheit());
+				
 				if (p != null){
 //					pers.getOrganisationseinheit().setId(p.getOrganisationseinheit().getId()); 
 //					persMapper.getByOrgId(p.getOrganisationseinheit());
