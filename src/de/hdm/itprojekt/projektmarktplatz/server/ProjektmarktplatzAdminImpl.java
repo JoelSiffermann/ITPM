@@ -802,9 +802,9 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	
 		//------->Lesen eines Projektmarktplatzes<--------
 		
-		public Projektmarktplatz readByIDProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException {
+		public Projektmarktplatz readByIdProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException {
 			try{
-				projMarkMapper.getById(projMark);
+				return projMarkMapper.getById(projMark);
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -848,6 +848,9 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 					e.printStackTrace();
 				}
 			}
+		
+
+	
 
 		/*
 		   * ***************************************************************************
@@ -976,12 +979,6 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 						}
 					}
 
-				@Override
-				public Projektmarktplatz readByIdProjektmarktplatz(Projektmarktplatz projMark)
-						throws IllegalArgumentException {
-					// TODO Auto-generated method stub
-					return null;
-				}
 			
 		
 		
