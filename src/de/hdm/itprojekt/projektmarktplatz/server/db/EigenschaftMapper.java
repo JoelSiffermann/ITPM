@@ -160,4 +160,47 @@ public class EigenschaftMapper {
 
 	}
 
+	public ArrayList<Eigenschaft> getEigenschaftenByPartnerprofil(Partnerprofil p) throws Exception {
+		Connection con = DBConnection.connection();
+		ArrayList<Eigenschaft> result = new ArrayList<Eigenschaft>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft` WHERE `partner_id` = " + p.getId());
+			while (rs.next()) {
+				Eigenschaft c = new Eigenschaft();
+		        c.setId(rs.getInt("Eigenschaft_ID"));
+		        c.setBezeichnung(rs.getString("Bezeichnung"));
+		        c.setWert(rs.getString("Wert"));
+		        Partnerprofil pp = new Partnerprofil();
+				pp.setId(rs.getInt("partner_id"));
+				c.setPartnerprofil(pp);
+				result.add(c);
+				}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public ArrayList<Eigenschaft> equals(String s) throws Exception {
+		Connection con = DBConnection.connection();
+		ArrayList<Eigenschaft> result = new ArrayList<Eigenschaft>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft` WHERE `Wert` LIKE '%" + s + "%'");
+			while (rs.next()) {
+				Eigenschaft c = new Eigenschaft();
+		        c.setId(rs.getInt("Eigenschaft_ID"));
+		        c.setBezeichnung(rs.getString("Bezeichnung"));
+		        c.setWert(rs.getString("Wert"));
+		        Partnerprofil pp = new Partnerprofil();
+				pp.setId(rs.getInt("partner_id"));
+				c.setPartnerprofil(pp);
+				result.add(c);
+				}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

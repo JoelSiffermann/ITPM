@@ -5,10 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
 
 //@autor �mer
@@ -131,6 +129,27 @@ public class TeamMapper {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Team getByOrgId(Organisationseinheit org) throws Exception {
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `team` WHERE `o_id` = " + org.getId());
+			if (rs.next()) {
+				Team t = new Team();
+				t.setGroesse(rs.getInt("Groesse"));
+				t.setArbeitsfeld(rs.getString("Arbeitsfeld"));
+				t.setId(rs.getInt("ID"));
+				Organisationseinheit o = new Organisationseinheit();
+				o.setId(rs.getInt("o_id"));
+				t.setOrganisationseinheit(o);
+
+				return t;
+			}
+		} catch (SQLException e) {
 		}
 		return null;
 	}
