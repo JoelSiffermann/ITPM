@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 
 public interface ProjektmarktplatzReportAdminAsync {
@@ -38,5 +39,8 @@ public interface ProjektmarktplatzReportAdminAsync {
 			AsyncCallback<ArrayList<Bewerbung>> callback);
 
 	void getTest(AsyncCallback<String> callback);
+
+	void getEmpfAusschreibungen(Organisationseinheit o,
+			AsyncCallback<ArrayList<Ausschreibung>> callback);
 
 }

@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 
 @RemoteServiceRelativePath("projektmarktplatzreport")
@@ -42,4 +43,7 @@ public interface ProjektmarktplatzReportAdmin extends RemoteService {
 	int getAnzahlAusschreibungen() throws IllegalArgumentException;
 
 	public String getTest() throws IllegalArgumentException;
+
+	ArrayList<Ausschreibung> getEmpfAusschreibungen(Organisationseinheit o)
+			throws IllegalArgumentException;
 }

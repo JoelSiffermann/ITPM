@@ -64,7 +64,7 @@ public class EmpfAusschreibungReport extends VerticalPanel{
 //		});
 		
 		
-		reportService.getAuschreibungenByPartnerprofil(p , new AsyncCallback<ArrayList<Ausschreibung>>(){
+		reportService.getEmpfAusschreibungen(e , new AsyncCallback<ArrayList<Ausschreibung>>(){
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
@@ -76,7 +76,9 @@ public class EmpfAusschreibungReport extends VerticalPanel{
 			@Override
 			public void onSuccess(ArrayList<Ausschreibung> result) {
 				int reihe = 0;
-				
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("klappt");
+				dialogBox.show();
 				for(Ausschreibung a : result){
 					reihe++;
 					table.setText(reihe, 0, a.getId() + "");

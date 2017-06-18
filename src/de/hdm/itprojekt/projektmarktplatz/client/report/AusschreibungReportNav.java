@@ -41,7 +41,6 @@ public AusschreibungReportNav() {
 					break;
 
 				case "Empfohlene Ausschreibungen abfragen":
-
 					EmpfAusschreibungReport ear = new EmpfAusschreibungReport();
 					info.clear();
 					info.add(ear);

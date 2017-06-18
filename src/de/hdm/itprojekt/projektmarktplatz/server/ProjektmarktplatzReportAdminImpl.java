@@ -31,7 +31,7 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	// private OrganisationseinheitMapper orgMapper = null;
 	private BewerbungMapper bMapper = null;
 	// private BewertungMapper bwMapper = null;
-	// private EigenschaftMapper eMapper = null;
+	private EigenschaftMapper eMapper = null;
 	private PartnerprofilMapper pPMapper = null;
 	private PersonMapper persMapper = null;
 	private ProjektbeteiligungMapper projBetMapper = null;
@@ -193,24 +193,71 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return "TEST";
 	}
 
+	//-------------------------------------------------------------------------------------------------------
+	//------------------------------------------Neuer Abschnitt----------------------------------------------
+	//-------------------------------------------------------------------------------------------------------
+	
 	public String getVergleichswert(Organisationseinheit o)
 			throws IllegalArgumentException {
 		String s = null;
-		try {
-			Person p = this.persMapper.getByOrgId(o);
-			Team t = this.tMapper.getByOrgId(o);
-			Unternehmen u = this.uMapper.getByOrgId(o);
-			if (p != null) {
-				s = p.getBeruf();
-			} else if (t != null) {
-				s = t.getArbeitsfeld();
-			} else if (u != null) {
-				s = u.getGeschaeftsfeld();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Person p = this.persMapper.getByOrgId(o);
+//			Team t = this.tMapper.getByOrgId(o);
+//			Unternehmen u = this.uMapper.getByOrgId(o);
+//			if (p != null) {
+//				s = p.getBeruf();
+//			} else if (t != null) {
+//				s = t.getArbeitsfeld();
+//			} else if (u != null) {
+//				s = u.getGeschaeftsfeld();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
+		s = "Web";
 		return s;
+	}
+	
+//	public ArrayList<Eigenschaft> getAlleEigenschaftenByPartnerprofilen() throws IllegalArgumentException {
+//		ArrayList<Ausschreibung> a = this.getAllAusschreibung();
+//		ArrayList<Partnerprofil> p = new ArrayList<Partnerprofil>();
+//		ArrayList<Eigenschaft> result = new ArrayList<Eigenschaft>();
+//		for (int i = 0 ; i < a.size() ; i++) {
+//			Partnerprofil pp = new Partnerprofil();
+//			pp.setId(a.get(i).getPartnerprofil().getId());
+//			p.add(pp);
+//			for (int i2 = 0 ; i2<p.size() ; i2++) {
+//				try {
+//					result.addAll(this.eMapper.getEigenschaftenByPartnerprofil(pp));
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		return result;
+//	}
+	
+	@Override
+	public ArrayList<Ausschreibung> getEmpfAusschreibungen(Organisationseinheit o) throws IllegalArgumentException {
+		ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
+		ArrayList<Eigenschaft> e = new ArrayList<Eigenschaft>();
+//		ArrayList<Partnerprofil> p = new ArrayList<Partnerprofil>();
+		String vglw = this.getVergleichswert(o);
+		try {
+			e.addAll(this.eMapper.equals(vglw));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		for(int i = 0 ; i<e.size() ; i++) {
+			Partnerprofil pp = new Partnerprofil();
+			pp.setId(e.get(i).getPartnerprofil().getId());
+			try {
+				result.add(this.aMapper.getAusschreibungByPartnerprofil(pp));
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		return result;
 	}
 }
