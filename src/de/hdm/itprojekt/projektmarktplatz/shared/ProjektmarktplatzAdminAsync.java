@@ -66,7 +66,7 @@ public interface ProjektmarktplatzAdminAsync {
 	void deleteBewertung(Bewertung bt, AsyncCallback<Void> callback);
 	
 
-	void insertEigenschaft(Eigenschaft eg, AsyncCallback<Eigenschaft> callback);
+	void insertEigenschaft(ArrayList<Eigenschaft> eg, AsyncCallback<Eigenschaft> callback);
 
 	void updateEigenschaft(Eigenschaft eg, AsyncCallback<Eigenschaft> callback);
 
@@ -157,6 +157,12 @@ public interface ProjektmarktplatzAdminAsync {
 	void updatePerson(Person pers, AsyncCallback<Person> callback);
 
 	void readAllBewerbungByAusschreibungId(String id, AsyncCallback<ArrayList<Bewerbung>> callback);
+
+	void readByEmail(Organisationseinheit o, AsyncCallback<Organisationseinheit> callback);
+
+	void readAllProjektmarktplatzByOrg(Organisationseinheit o, AsyncCallback<ArrayList<Projektmarktplatz>> callback);
+
+	void readByIdProjektProjektmarktplatz(Projektmarktplatz proj, AsyncCallback<ArrayList<Projekt>> callback);
 	
 	
 }

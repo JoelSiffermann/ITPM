@@ -41,7 +41,20 @@ public class BewertungForm extends VerticalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
+
+//				for (Bewerbung b : result) {
+//					
+//				}
+//				Window.alert("test");
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+//				Window.alert("test2");
+
 				Bewertung bt = new Bewertung();
+
 				
 				bt.setInhalt(bewertungText.getText());
 				bt.setSkala(0);

@@ -31,10 +31,20 @@ public class AusschreibungPanel extends VerticalPanel {
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 	final ListBox listBoxBezeichnung = new ListBox();
 
+	/**
+	 * 
+	 * Der Konstruktor der Klasse AusschreibungPanel
+	 */
+	
 	public AusschreibungPanel() {
 
 	}
 
+	/**
+	 * Die Methode gibt die Form die Bewerbung für die Ausschreibung zurueck.
+	 * @return this
+	 */
+	
 	public VerticalPanel getAusschreibungBewerben() {
 
 		final VerticalPanel vpBewerben = new VerticalPanel();
@@ -52,7 +62,7 @@ public class AusschreibungPanel extends VerticalPanel {
 				Ausschreibung a = new Ausschreibung();
 				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
 				a.setId(id);
-				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
+				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() { //Anschauen
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -71,7 +81,7 @@ public class AusschreibungPanel extends VerticalPanel {
 			}
 		});
 
-		btAusschreibungBewerben.addClickHandler(new ClickHandler() {
+		btAusschreibungBewerben.addClickHandler(new ClickHandler() { // Anschauen
 
 			@Override
 			public void onClick(ClickEvent event) {

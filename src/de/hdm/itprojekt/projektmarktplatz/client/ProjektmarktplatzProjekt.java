@@ -19,6 +19,8 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -546,11 +548,60 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //				
 //			}
 //		});
+//		Cookies.setCookie("email", "test@hdm-stuttgart.de");
+		
 		loadGUI();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.
 		
 		Cookies.setCookie("email", "test@hdm-stuttgart.de");
+		org.setEmail(Cookies.getCookie("email")); 
+		
+
+		projektService.readByEmail(org , new AsyncCallback<Organisationseinheit>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("Fehler " + caught.getLocalizedMessage());
+				Button closeButton = new Button("OK", new ClickHandler() {
+
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						dialogBox.hide();
+					}
+				});
+
+				dialogBox.add(closeButton);
+				dialogBox.show();
+			
+			}
+
+			@Override
+			public void onSuccess(Organisationseinheit result) {
+				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("Erfolgreich " + result.getPartnerprofil().getId());
+//				Button closeButton = new Button("OK", new ClickHandler() {
+//
+//					@Override
+//					public void onClick(ClickEvent event) {
+//						// TODO Auto-generated method stub
+//						dialogBox.hide();
+//					}
+//				});
+//
+//				dialogBox.add(closeButton);
+//				dialogBox.show();
+			
+				Cookies.setCookie("userid", result.getId()+"");
+				Cookies.setCookie("partnerprofilid", result.getPartnerprofil().getId()+""); 
+				
+			}
+		});
+		
 //	    LoginServiceAsync loginService = GWT.create(LoginService.class);
 //	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 //	      public void onFailure(Throwable error) {

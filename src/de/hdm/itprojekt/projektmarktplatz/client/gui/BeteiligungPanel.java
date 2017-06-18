@@ -41,12 +41,16 @@ public class BeteiligungPanel extends HorizontalPanel {
 				switch (selected) {
 				case "Projekt 1":
 					ProjektForm pmForm1 = new ProjektForm();
+					vpBeteiligung.clear();
 					vpBeteiligung2.clear();
+
 					vpBeteiligung.add(pmForm1.BeteiligungAnMeineProjekte());
 					break;
 
 				case "Projekt 3":
 					ProjektForm pmForm3 = new ProjektForm();
+					vpBeteiligung.clear();
+
 					vpBeteiligung2.clear();
 					vpBeteiligung.add(pmForm3.BeteiligungAnMeineProjekte());
 					break;
@@ -73,18 +77,24 @@ public class BeteiligungPanel extends HorizontalPanel {
 				case "Projekt 1":
 					ProjektForm pmForm1 = new ProjektForm();
 					vpBeteiligung.clear();
+					vpBeteiligung2.clear();
+
 					vpBeteiligung2.add(pmForm1.BeteiligungAnAndereProjekte());
 					break;
 
 				case "Projekt 2":
 					ProjektForm pmForm2 = new ProjektForm();
 					vpBeteiligung.clear();
+					vpBeteiligung2.clear();
+
 					vpBeteiligung2.add(pmForm2.BeteiligungAnAndereProjekte());
 					break;
 					
 				case "Projekt 3":
 					ProjektForm pmForm3 = new ProjektForm();
 					vpBeteiligung.clear();
+
+					vpBeteiligung2.clear();
 					vpBeteiligung2.add(pmForm3.BeteiligungAnAndereProjekte());
 					break;
 					
@@ -108,6 +118,11 @@ public class BeteiligungPanel extends HorizontalPanel {
 		this.add(vpBeteiligung);
 		this.add(vpBeteiligung2);
 
+	}
+	
+	protected void clear(VerticalPanel vpUnten) {
+		// TODO Auto-generated method stub
+		vpUnten.clear();
 	}
 
 }

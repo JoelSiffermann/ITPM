@@ -72,6 +72,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	      this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
 	      this.persMapper = PersonMapper.personMapper();
 	      this.projBetMapper = ProjektbeteiligungMapper.projektbeteilitungMapper();
+	      this.projMapper = ProjektMapper.projektMapper();
 	      this.projMarkMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
 //	      this.tMapper = TeamMapper.teamMapper();
 	      this.uMapper = UnternehmenMapper.unternehmenMapper();
@@ -419,7 +420,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	//------->Einfügen einer Eigenschaft<--------
 
 	
-	public Eigenschaft insertEigenschaft (Eigenschaft eg) throws IllegalArgumentException{
+	public Eigenschaft insertEigenschaft (ArrayList<Eigenschaft> eg) throws IllegalArgumentException{
 		try{
 			eMapper.einfuegen(eg);
 		} catch (Exception e) {
@@ -551,6 +552,9 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 				p.setOrganisationseinheit(orgMapper.getByEmail(pers.getOrganisationseinheit()));
 				pers.getOrganisationseinheit().setId(p.getOrganisationseinheit().getId()); 
 				p = persMapper.getByOrgId(p.getOrganisationseinheit());
+				
+				orgMapper.speichern(pers.getOrganisationseinheit());
+				
 				if (p != null){
 //					pers.getOrganisationseinheit().setId(p.getOrganisationseinheit().getId()); 
 //					persMapper.getByOrgId(p.getOrganisationseinheit());
@@ -570,6 +574,21 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 			} catch (Exception e){
 				e.printStackTrace();
 			}
+			return null;
+		}
+		
+		public Organisationseinheit readByEmail(Organisationseinheit o){
+			
+			try {
+				 o.setId(orgMapper.getByEmail(o).getId());
+				 Organisationseinheit org = new Organisationseinheit();
+				 org = orgMapper.getByEmail(o);
+				 return org;
+			}
+			catch(Exception e){
+				
+			}
+			
 			return null;
 		}
 		
@@ -714,7 +733,16 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	
 	public Projekt  readByIdProjekt(Projekt proj) throws IllegalArgumentException {
 		try{
-			projMapper.getById(proj);
+			return projMapper.getById(proj);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Projekt>  readByIdProjektProjektmarktplatz(Projektmarktplatz proj) throws IllegalArgumentException {
+		try{
+			return projMapper.getAllByProjektmarktplatz(proj);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -776,9 +804,9 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	
 		//------->Lesen eines Projektmarktplatzes<--------
 		
-		public Projektmarktplatz readByIDProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException {
+		public Projektmarktplatz readByIdProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException {
 			try{
-				projMarkMapper.getById(projMark);
+				return projMarkMapper.getById(projMark);
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -798,6 +826,21 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 			return null;
 		}
 		
+		public ArrayList<Projektmarktplatz> readAllProjektmarktplatzByOrg(Organisationseinheit o) throws IllegalArgumentException{
+			ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
+			try{
+				for (Projektmarktplatz pm : projMarkMapper.getProjketmarkplatzByOrg(o)){
+					for (Projektmarktplatz pmp : projMarkMapper.getAllByOrg(pm)){
+						result.add(pmp);
+					}
+				}
+				return result;
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 		//------->Loeschen eines Projektmarktplatzes<--------
 
 		public void deleteProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException{
@@ -807,6 +850,9 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 					e.printStackTrace();
 				}
 			}
+		
+
+	
 
 		/*
 		   * ***************************************************************************
@@ -935,12 +981,6 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 						}
 					}
 
-				@Override
-				public Projektmarktplatz readByIdProjektmarktplatz(Projektmarktplatz projMark)
-						throws IllegalArgumentException {
-					// TODO Auto-generated method stub
-					return null;
-				}
 			
 		
 		

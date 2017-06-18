@@ -28,7 +28,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public Organisationseinheit readByIdOrg(Organisationseinheit org ) throws IllegalArgumentException;
 	public ArrayList<Organisationseinheit> readAllOrg() throws IllegalArgumentException;
 	public void deleteOrg(Organisationseinheit org) throws IllegalArgumentException;
-	
+	public Organisationseinheit readByEmail(Organisationseinheit o);
 
 	public Ausschreibung insertAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 	public Ausschreibung updateAusschreibung (Ausschreibung a) throws IllegalArgumentException;
@@ -49,7 +49,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public void deleteBewertung (Bewertung bt) throws IllegalArgumentException;
 	public ArrayList<Bewerbung> readAllBewerbungByAusschreibungId(String id) throws IllegalArgumentException;
 	
-	public Eigenschaft insertEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
+	public Eigenschaft insertEigenschaft (ArrayList<Eigenschaft> eg) throws IllegalArgumentException;
 	public Eigenschaft updateEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
 	public Eigenschaft readByIdEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
 	public ArrayList <Eigenschaft> readAllEigenschaft() throws IllegalArgumentException;
@@ -87,7 +87,8 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public Projektmarktplatz readByIdProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
 	public ArrayList<Projektmarktplatz> readAllProjektmarktplatz() throws IllegalArgumentException;
 	public void deleteProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
-	
+	public ArrayList<Projektmarktplatz> readAllProjektmarktplatzByOrg(Organisationseinheit o) throws IllegalArgumentException;
+	public ArrayList<Projekt>  readByIdProjektProjektmarktplatz(Projektmarktplatz proj) throws IllegalArgumentException;	
 	
 	public Team insertTeam(Team t) throws IllegalArgumentException;
 	public Team updateTeam(Team t) throws IllegalArgumentException;
