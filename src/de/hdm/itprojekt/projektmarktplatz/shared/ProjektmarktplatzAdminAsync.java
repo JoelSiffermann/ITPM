@@ -157,6 +157,12 @@ public interface ProjektmarktplatzAdminAsync {
 	void updatePerson(Person pers, AsyncCallback<Person> callback);
 
 	void readAllBewerbungByAusschreibungId(String id, AsyncCallback<ArrayList<Bewerbung>> callback);
+
+	void readByEmail(Organisationseinheit o, AsyncCallback<Organisationseinheit> callback);
+
+	void readAllProjektmarktplatzByOrg(Organisationseinheit o, AsyncCallback<ArrayList<Projektmarktplatz>> callback);
+
+	void readByIdProjektProjektmarktplatz(Projektmarktplatz proj, AsyncCallback<ArrayList<Projekt>> callback);
 	
 	
 }

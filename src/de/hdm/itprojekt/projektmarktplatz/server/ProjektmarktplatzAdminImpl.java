@@ -72,6 +72,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	      this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
 	      this.persMapper = PersonMapper.personMapper();
 	      this.projBetMapper = ProjektbeteiligungMapper.projektbeteilitungMapper();
+	      this.projMapper = ProjektMapper.projektMapper();
 	      this.projMarkMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
 //	      this.tMapper = TeamMapper.teamMapper();
 	      this.uMapper = UnternehmenMapper.unternehmenMapper();
@@ -573,6 +574,19 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 			return null;
 		}
 		
+		public Organisationseinheit readByEmail(Organisationseinheit o){
+			
+			try {
+				 o.setId(orgMapper.getByEmail(o).getId());
+				 return o;
+			}
+			catch(Exception e){
+				
+			}
+			
+			return null;
+		}
+		
 		//------->Bearbeiten einer Person<--------
 		public Person updatePerson (Person pers) throws IllegalArgumentException{
 			try{
@@ -714,7 +728,16 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	
 	public Projekt  readByIdProjekt(Projekt proj) throws IllegalArgumentException {
 		try{
-			projMapper.getById(proj);
+			return projMapper.getById(proj);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Projekt>  readByIdProjektProjektmarktplatz(Projektmarktplatz proj) throws IllegalArgumentException {
+		try{
+			return projMapper.getAllByProjektmarktplatz(proj);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -792,6 +815,21 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 			
 			try{
 				return projMarkMapper.getAll();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		public ArrayList<Projektmarktplatz> readAllProjektmarktplatzByOrg(Organisationseinheit o) throws IllegalArgumentException{
+			ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
+			try{
+				for (Projektmarktplatz pm : projMarkMapper.getProjketmarkplatzByOrg(o)){
+					for (Projektmarktplatz pmp : projMarkMapper.getAllByOrg(pm)){
+						result.add(pmp);
+					}
+				}
+				return result;
 			} catch (Exception e){
 				e.printStackTrace();
 			}

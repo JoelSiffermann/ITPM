@@ -1,16 +1,25 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
+
+import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
+import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 public class MainPanel extends HorizontalPanel {
 
@@ -18,7 +27,7 @@ public class MainPanel extends HorizontalPanel {
 
 		final VerticalPanel navi = new VerticalPanel();
 		final VerticalPanel info = new VerticalPanel();
-
+		final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 		final List<String> NAVI = Arrays.asList("Profil", "Projektmarktplatz", "Beteiligung", "Report", "Logout");
 		// Create a cell to render each value.
 		TextCell textCell = new TextCell();
@@ -45,10 +54,26 @@ public class MainPanel extends HorizontalPanel {
 					// if (selected != null) {
 					// Window.alert("You selected: " + selected);
 					// }
-
-					ProjektmarktplatzForm pmForm = new ProjektmarktplatzForm();
-					info.clear();
-					info.add(pmForm);
+					int id = Integer.parseInt(Cookies.getCookie("userid"));
+					Organisationseinheit o = new Organisationseinheit();
+					o.setId(id);
+					projektService.readAllProjektmarktplatzByOrg(o, new AsyncCallback<ArrayList<Projektmarktplatz>>() {
+						
+						@Override
+						public void onSuccess(ArrayList<Projektmarktplatz> result) {
+							// TODO Auto-generated method stub
+							ProjektmarktplatzForm pmForm = new ProjektmarktplatzForm(result);
+							info.clear();
+							info.add(pmForm);
+						}
+						
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					
 					break;
 
 				case "Beteiligung":
