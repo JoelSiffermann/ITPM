@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 //@autor �mer
@@ -91,7 +92,7 @@ public class ProjektmarktplatzMapper {
 		return p;
 	}
 
-	public ArrayList<Projektmarktplatz> getAll() throws Exception {
+	public ArrayList<Projektmarktplatz> getAllByOrg(Projektmarktplatz pm) throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
 		try {
@@ -100,9 +101,10 @@ public class ProjektmarktplatzMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `projektmarktplatz`");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `projektmarktplatz` WHERE `Projektmarktplatz_ID` = " + pm.getId());
+			
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+//			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
@@ -115,12 +117,74 @@ public class ProjektmarktplatzMapper {
 				}
 				stmt = con.createStatement();
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-				return result;
-			}
+//				stmt.executeUpdate("");
+//				return result;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
+	}
+	
+	public ArrayList<Projektmarktplatz> getProjketmarkplatzByOrg(Organisationseinheit o) throws Exception {
+		Connection con = DBConnection.connection();
+		ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
+		int projId = 0;
+		try {
+			Statement stmt = con.createStatement();
+			/*
+			 * Zunächst schauen wir nach, welches der momentan höchste
+			 * Primärschlüsselwert ist.
+			 */
+
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `orga_pmarkt` WHERE `orga_id` = " + o.getId());
+
+				/*
+				 * c erhält den bisher maximalen, nun um 1 inkrementierten
+				 * Primärschlüssel.
+				 */
+				while (rs.next()) {
+					Projektmarktplatz p = new Projektmarktplatz();
+					p.setId(rs.getInt("pmarkt_id"));
+					result.add(p);
+				}
+				stmt = con.createStatement();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public ArrayList<Projektmarktplatz> getAll() throws Exception {
+		Connection con = DBConnection.connection();
+		ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
+		try {
+			Statement stmt = con.createStatement();
+			/*
+			 * Zunächst schauen wir nach, welches der momentan höchste
+			 * Primärschlüsselwert ist.
+			 */
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `projektmarktplatz`");
+			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+//			if (rs.next()) {
+				/*
+				 * c erhält den bisher maximalen, nun um 1 inkrementierten
+				 * Primärschlüssel.
+				 */
+				while (rs.next()) {
+					Projektmarktplatz p = new Projektmarktplatz();
+					p.setId(rs.getInt("Projektmarktplatz_ID"));
+					p.setBezeichnung(rs.getString("Bezeichnung"));
+					result.add(p);
+				}
+				stmt = con.createStatement();
+				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+//				stmt.executeUpdate("");
+//				return result;
+//			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

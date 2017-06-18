@@ -27,6 +27,7 @@ public class PersonMapper {
 
 	public Person einfuegen(Person p) throws Exception {
 		Connection con = DBConnection.connection();
+		
 		try {
 			Statement stmt = con.createStatement();
 			/*
@@ -60,7 +61,7 @@ public class PersonMapper {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate("UPDATE `person` SET `Vorname` = '" + p.getVorname() + "', `Beruf` = '" + p.getBeruf()
 					+ "', " + "`Erfahrung` = '" + p.getErfahrung() + "', `ID` = '" + p.getId() + "', " + "`o_id` = '"
-					+ p.getOrganisationseinheit().getId() + "' WHERE `person`.`ID` = " + p.getId());
+					+ p.getOrganisationseinheit().getId() + "' WHERE `person`.`ID` = " + p.getId()+";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -99,6 +100,28 @@ public class PersonMapper {
 		return p;
 	}
 
+	public Person getByOrgId(Organisationseinheit org) throws Exception {
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `person` WHERE `o_id` = " + org.getId());
+			if (rs.next()) {
+				Person ps = new Person();
+				ps.setVorname(rs.getString("Vorname"));
+				ps.setBeruf(rs.getString("Beruf"));
+				ps.setErfahrung(rs.getFloat("Erfahrung"));
+				ps.setId(rs.getInt("ID"));
+				Organisationseinheit o = new Organisationseinheit();
+				o.setId(rs.getInt("o_id"));
+				ps.setOrganisationseinheit(o);
+
+				return ps;
+			}
+		} catch (SQLException e) {
+		}
+		return null;
+	}
+	
 	public ArrayList<Person> getAll() throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Person> result = new ArrayList<Person>();
@@ -110,7 +133,7 @@ public class PersonMapper {
 			 */
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `person`");
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+			// 								fehler -----> if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
@@ -126,14 +149,14 @@ public class PersonMapper {
 					p.setOrganisationseinheit(o);
 					result.add(p);
 				}
-				stmt = con.createStatement();
+				//fehler -----> 				stmt = con.createStatement();
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-				return result;
-			}
+				//fehler ----> 					stmt.executeUpdate("");
+				//-----> 						fehler return result;
+		//fehler ---> 							}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 	}
 }

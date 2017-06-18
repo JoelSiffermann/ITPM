@@ -109,7 +109,7 @@ public class ProjektMapper {
 		return p;
 	}
 
-	public ArrayList<Projekt> getAll() throws Exception {
+	public ArrayList<Projekt> getAllByProjektmarktplatz(Projektmarktplatz pr) throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Projekt> result = new ArrayList<Projekt>();
 		try {
@@ -118,9 +118,9 @@ public class ProjektMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `projekt`");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `projekt` WHERE `projektmarktplatz_id` = " + pr.getId());
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+//			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
@@ -143,12 +143,55 @@ public class ProjektMapper {
 				}
 				stmt = con.createStatement();
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-				return result;
-			}
+//				stmt.executeUpdate("");
+//				return result;
+//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
+	}
+	
+	public ArrayList<Projekt> getAll() throws Exception {
+		Connection con = DBConnection.connection();
+		ArrayList<Projekt> result = new ArrayList<Projekt>();
+		try {
+			Statement stmt = con.createStatement();
+			/*
+			 * Zunächst schauen wir nach, welches der momentan höchste
+			 * Primärschlüsselwert ist.
+			 */
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `projekt`");
+			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+//			if (rs.next()) {
+				/*
+				 * c erhält den bisher maximalen, nun um 1 inkrementierten
+				 * Primärschlüssel.
+				 */
+				while (rs.next()) {
+					Projekt p = new Projekt();
+					p.setId(rs.getInt("Projekt_ID"));
+					p.setName(rs.getString("Name"));
+					p.setStart(rs.getDate("Start"));
+					p.setEnde(rs.getDate("Ende"));
+					Projektmarktplatz pm = new Projektmarktplatz();
+					Person ps = new Person();
+					pm.setId(rs.getInt("projektmarktplatz_id"));
+					p.setProjektmarktplatz(pm);
+
+					ps.setId(rs.getInt("person_id"));
+
+					p.setPerson(ps);
+					result.add(p);
+				}
+				stmt = con.createStatement();
+				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+//				stmt.executeUpdate("");
+//				return result;
+//			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

@@ -72,6 +72,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	      this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
 	      this.persMapper = PersonMapper.personMapper();
 	      this.projBetMapper = ProjektbeteiligungMapper.projektbeteilitungMapper();
+	      this.projMapper = ProjektMapper.projektMapper();
 	      this.projMarkMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
 //	      this.tMapper = TeamMapper.teamMapper();
 	      this.uMapper = UnternehmenMapper.unternehmenMapper();
@@ -307,6 +308,17 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 		}
 		return null;
 	}
+	
+	public ArrayList<Bewerbung> readAllBewerbungByAusschreibungId(String id) throws IllegalArgumentException {
+		
+		try{
+			
+			return bMapper.getAllByAusschreibungId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	//------->Löschen einer Bewerbung<--------
 
@@ -327,9 +339,25 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	//------->Erstellen einer Bewertung<--------
 
 	
-	public Bewertung insertBewertung (Bewertung bt) throws IllegalArgumentException {
+	public Bewertung insertBewertung (Bewertung bt, String id) throws IllegalArgumentException {
 		
 		try{
+			Bewerbung b = new Bewerbung();
+			Ausschreibung a = new Ausschreibung();
+			Partnerprofil pp = new Partnerprofil();
+			Organisationseinheit o = new Organisationseinheit();
+			Person person = new Person();
+			
+			b.setId(Integer.parseInt(id));
+			b.setAusschreibung(bMapper.getById(b).getAusschreibung());
+			a.setId(b.getAusschreibung().getId());
+			System.out.println("HIER Ausschreibung ID " + a.getId()); 
+			pp.setId(ppMapper.getByAusschreibungId(a).getId()); 
+			System.out.println("Partnerproifl ID " + pp.getId()); 
+			o.setId(orgMapper.getByPartnerprofilId(pp).getId());
+			
+			person = persMapper.getByOrgId(o);
+			bt.setPerson(person); 
 			bwMapper.einfuegen(bt);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -518,18 +546,54 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 
 		//------->Einfügen einer Person<--------
 		public Person insertPerson (Person pers) throws IllegalArgumentException{
+			Person p = new Person();
 			try{
-				persMapper.einfuegen(pers);
+				
+				p.setOrganisationseinheit(orgMapper.getByEmail(pers.getOrganisationseinheit()));
+				pers.getOrganisationseinheit().setId(p.getOrganisationseinheit().getId()); 
+				p = persMapper.getByOrgId(p.getOrganisationseinheit());
+				
+				orgMapper.speichern(pers.getOrganisationseinheit());
+				
+				if (p != null){
+//					pers.getOrganisationseinheit().setId(p.getOrganisationseinheit().getId()); 
+//					persMapper.getByOrgId(p.getOrganisationseinheit());
+					pers.setId(p.getId()); 
+					persMapper.speichern(pers);
+				}else {
+					persMapper.einfuegen(pers);
+				}
+//				try {
+//					System.out.println("Einf�ngen von Person " + orgMapper.getByEmail(pers.getOrganisationseinheit()).getId());
+//				pers.getOrganisationseinheit().setId(orgMapper.getByEmail(pers.getOrganisationseinheit()).getId());
+//				persMapper.speichern(pers);
+//				}catch (Exception e){
+//					persMapper.einfuegen(pers);
+//
+//				}
 			} catch (Exception e){
 				e.printStackTrace();
 			}
 			return null;
 		}
 		
+		public Organisationseinheit readByEmail(Organisationseinheit o){
+			
+			try {
+				 o.setId(orgMapper.getByEmail(o).getId());
+				 return o;
+			}
+			catch(Exception e){
+				
+			}
+			
+			return null;
+		}
+		
 		//------->Bearbeiten einer Person<--------
 		public Person updatePerson (Person pers) throws IllegalArgumentException{
 			try{
-				persMapper.einfuegen(pers);
+				persMapper.speichern(pers);
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -539,7 +603,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 		//------->Lesen eines Partnerprofils<--------
 		public Person readByIdPerson (Person pers) throws IllegalArgumentException {
 			try{ 
-				persMapper.getById(pers);
+				return persMapper.getById(pers);
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -573,9 +637,12 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	
 	//------->Einfuegen einer Projektbeteiligung<--------
 	public Beteiligung insertBeteiligung(Beteiligung projBet ) throws IllegalArgumentException{
-		
+//		Organisationseinheit org = new Organisationseinheit();
+//		org.setId(13);
 		try{
-		projBetMapper.einfuegen(projBet);	
+//			System.out.println("test impl "+projBet.getOrganisationseinheit().getId());
+//			projBet.setOrganisationseinheit(org);
+		return projBetMapper.einfuegen(projBet);	
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -597,7 +664,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	//------->Lesen einer Projektbeteiligung<--------
 	public Beteiligung readByIdBeteiligung(Beteiligung projBet) throws IllegalArgumentException {
 		try{
-			projBetMapper.getById(projBet);
+			return projBetMapper.getById(projBet);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -664,7 +731,16 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	
 	public Projekt  readByIdProjekt(Projekt proj) throws IllegalArgumentException {
 		try{
-			projMapper.getById(proj);
+			return projMapper.getById(proj);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Projekt>  readByIdProjektProjektmarktplatz(Projektmarktplatz proj) throws IllegalArgumentException {
+		try{
+			return projMapper.getAllByProjektmarktplatz(proj);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -726,9 +802,9 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	
 		//------->Lesen eines Projektmarktplatzes<--------
 		
-		public Projektmarktplatz readByIDProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException {
+		public Projektmarktplatz readByIdProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException {
 			try{
-				projMarkMapper.getById(projMark);
+				return projMarkMapper.getById(projMark);
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -748,6 +824,21 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 			return null;
 		}
 		
+		public ArrayList<Projektmarktplatz> readAllProjektmarktplatzByOrg(Organisationseinheit o) throws IllegalArgumentException{
+			ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
+			try{
+				for (Projektmarktplatz pm : projMarkMapper.getProjketmarkplatzByOrg(o)){
+					for (Projektmarktplatz pmp : projMarkMapper.getAllByOrg(pm)){
+						result.add(pmp);
+					}
+				}
+				return result;
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 		//------->Loeschen eines Projektmarktplatzes<--------
 
 		public void deleteProjektmarktplatz (Projektmarktplatz projMark) throws IllegalArgumentException{
@@ -757,6 +848,9 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 					e.printStackTrace();
 				}
 			}
+		
+
+	
 
 		/*
 		   * ***************************************************************************
@@ -885,12 +979,6 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 						}
 					}
 
-				@Override
-				public Projektmarktplatz readByIdProjektmarktplatz(Projektmarktplatz projMark)
-						throws IllegalArgumentException {
-					// TODO Auto-generated method stub
-					return null;
-				}
 			
 		
 		

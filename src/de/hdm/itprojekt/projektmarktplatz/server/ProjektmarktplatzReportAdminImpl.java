@@ -172,4 +172,8 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet imple
 		}
 		return count;
 	}
+	
+	public String getTest() throws IllegalArgumentException{
+		return "TEST";
+	}
 }

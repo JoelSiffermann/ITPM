@@ -138,7 +138,7 @@ public class BewerbungMapper {
 			 */
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `bewerbung`");
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+//			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
@@ -160,14 +160,60 @@ public class BewerbungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-				return result;
-			}
+//				stmt.executeUpdate("");
+//				return result;
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
+
+	}
+	
+	public ArrayList<Bewerbung> getAllByAusschreibungId(String id) throws Exception {
+
+		Connection con = DBConnection.connection();
+		ArrayList<Bewerbung> result = new ArrayList<Bewerbung>();
+		try {
+			Statement stmt = con.createStatement();
+
+			/*
+			 * Zunächst schauen wir nach, welches der momentan höchste
+			 * Primärschlüsselwert ist.
+			 */
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `bewerbung` WHERE `ausschreibung_id` = " + id);
+			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+//			if (rs.next()) {
+				/*
+				 * c erhält den bisher maximalen, nun um 1 inkrementierten
+				 * Primärschlüssel.
+				 */
+
+				while (rs.next()) {
+					Bewerbung b = new Bewerbung();
+					b.setId(rs.getInt("Bewerbung_ID"));
+					b.setInhalt(rs.getString("Inhalt"));
+					b.setErstelldatum(rs.getDate("Erstelldatum"));
+					Ausschreibung a = new Ausschreibung();
+
+					a.setId(rs.getInt("ausschreibung_id"));
+
+					b.setAusschreibung(a);
+					result.add(b);
+				}
+
+				stmt = con.createStatement();
+
+				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+//				stmt.executeUpdate("");
+//				return result;
+//			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 
 	}
 
