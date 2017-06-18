@@ -60,7 +60,7 @@ public class PartnerprofilMapper {
 			 * Primärschlüsselwert ist.
 			 */
 			//ResultSet rs = stmt.executeQuer
-			("");
+			//("");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 			//if (rs.next()) {
