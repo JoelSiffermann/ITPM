@@ -420,7 +420,7 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 	//------->Einfügen einer Eigenschaft<--------
 
 	
-	public Eigenschaft insertEigenschaft (Eigenschaft eg) throws IllegalArgumentException{
+	public Eigenschaft insertEigenschaft (ArrayList<Eigenschaft> eg) throws IllegalArgumentException{
 		try{
 			eMapper.einfuegen(eg);
 		} catch (Exception e) {
@@ -581,7 +581,9 @@ public class ProjektmarktplatzAdminImpl  extends RemoteServiceServlet implements
 			
 			try {
 				 o.setId(orgMapper.getByEmail(o).getId());
-				 return o;
+				 Organisationseinheit org = new Organisationseinheit();
+				 org = orgMapper.getByEmail(o);
+				 return org;
 			}
 			catch(Exception e){
 				

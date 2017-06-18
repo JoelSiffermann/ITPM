@@ -28,7 +28,7 @@ public class EigenschaftMapper {
 	
 
 
-	public Eigenschaft einfuegen(Eigenschaft c) throws Exception {//c f�r character
+	public ArrayList<Eigenschaft> einfuegen(ArrayList<Eigenschaft> eg) throws Exception {//c f�r character
 		Connection con = DBConnection.connection();
 
 		try {
@@ -50,14 +50,15 @@ public class EigenschaftMapper {
 
 				stmt = con.createStatement();
 
+				for(Eigenschaft c : eg){
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `eigenschaft` (`Eigenschaft_ID`, `Bezeichnung`, `Wert`, `partner_id`) VALUES (NULL, '"+c.getBezeichnung()+"', '"+c.getWert()+"', '"+c.getPartnerprofil().getId()+"');");
-			//}
+					stmt.executeUpdate("INSERT INTO `eigenschaft` (`Eigenschaft_ID`, `Bezeichnung`, `Wert`, `partner_id`) VALUES (NULL, '"+c.getBezeichnung()+"', '"+c.getWert()+"', '"+c.getPartnerprofil().getId()+"');");
+				}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return c;
+		return eg;
 	}
 
 	public Eigenschaft speichern(Eigenschaft c) throws Exception {
@@ -87,6 +88,7 @@ public class EigenschaftMapper {
 	      e.printStackTrace();
 	    }
 	  }
+	
 	public Eigenschaft getById(Eigenschaft ch) throws Exception{
 		 Connection con = DBConnection.connection();
 

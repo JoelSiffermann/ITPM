@@ -66,7 +66,7 @@ public interface ProjektmarktplatzAdminAsync {
 	void deleteBewertung(Bewertung bt, AsyncCallback<Void> callback);
 	
 
-	void insertEigenschaft(Eigenschaft eg, AsyncCallback<Eigenschaft> callback);
+	void insertEigenschaft(ArrayList<Eigenschaft> eg, AsyncCallback<Eigenschaft> callback);
 
 	void updateEigenschaft(Eigenschaft eg, AsyncCallback<Eigenschaft> callback);
 

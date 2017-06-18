@@ -49,7 +49,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public void deleteBewertung (Bewertung bt) throws IllegalArgumentException;
 	public ArrayList<Bewerbung> readAllBewerbungByAusschreibungId(String id) throws IllegalArgumentException;
 	
-	public Eigenschaft insertEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
+	public Eigenschaft insertEigenschaft (ArrayList<Eigenschaft> eg) throws IllegalArgumentException;
 	public Eigenschaft updateEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
 	public Eigenschaft readByIdEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
 	public ArrayList <Eigenschaft> readAllEigenschaft() throws IllegalArgumentException;
