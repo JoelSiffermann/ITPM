@@ -197,6 +197,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `ausschreibung` WHERE `partnerprofil_id` = " + p.getId());
+			if(rs.next()){
 			Ausschreibung a = new Ausschreibung();
 			Partnerprofil pp = new Partnerprofil();
 	    	Projekt proj = new Projekt();
@@ -209,6 +210,7 @@ public class AusschreibungMapper {
 	    	proj.setId(rs.getInt("projekt_id"));
 	    	a.setProjekt(proj);
 			return a;
+			}
 		} catch (SQLException e){
 			e.printStackTrace();
 		}

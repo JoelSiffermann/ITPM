@@ -56,7 +56,7 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		// OrganisationseinheitMapper.organisationseinheitMapper();
 		this.bMapper = BewerbungMapper.bewerbungMapper();
 		// this.bwMapper = BewertungMapper.bewertungMapper();
-		// this.eMapper = EigenschaftMapper.eigenschaftMapper();
+		 this.eMapper = EigenschaftMapper.eigenschaftMapper();
 		this.pPMapper = PartnerprofilMapper.partnerprofilMapper();
 		// this.persMapper = PersonMapper.personMapper();
 		this.projBetMapper = ProjektbeteiligungMapper
@@ -105,8 +105,10 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 
 	// Abfrage aller Bewerbungen eines Nutzers
 	@Override
-	public ArrayList<Bewerbung> getBewerbungenByNutzer(Partnerprofil p)
+	public ArrayList<Bewerbung> getBewerbungenByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
+		
+		//TODO
 		// return this.bMapper.getByPartnerprofil();
 		return null;
 	}
@@ -170,7 +172,7 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		ArrayList<Bewerbung> b = new ArrayList<Bewerbung>();
 		int count = 0;
 		for (int i = 0; i < p.size(); i++) {
-			b.addAll(this.getBewerbungenByNutzer(p.get(i)));
+//			b.addAll(this.getBewerbungenByNutzer(p.get(i)));
 			count = b.size();
 		}
 		return count;
@@ -245,9 +247,10 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 //		ArrayList<Partnerprofil> p = new ArrayList<Partnerprofil>();
 		String vglw = this.getVergleichswert(o);
 		try {
-			e.addAll(this.eMapper.equals(vglw));
-		} catch (Exception e1) {
-			e1.printStackTrace();
+			e = this.eMapper.equals(vglw);
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
 		for(int i = 0 ; i<e.size() ; i++) {
 			Partnerprofil pp = new Partnerprofil();
@@ -260,4 +263,15 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		}
 		return result;
 	}
+	
+//	public ArrayList<Eigenschaft> getEquals(Organisationseinheit o) throws IllegalArgumentException {
+//		String vglw = this.getVergleichswert(o);
+//		try {
+//			return this.eMapper.equals(vglw);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 }

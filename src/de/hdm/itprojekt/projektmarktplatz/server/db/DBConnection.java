@@ -76,7 +76,7 @@ public class DBConnection {
      * @return DAS <code>DBConncetion</code>-Objekt.
      * @see con
      */
-    public static Connection connection()throws Exception {
+    public static Connection connection() throws Exception {
         // Wenn es bisher keine Conncetion zur DB gab, ...
         if (con == null) {
             String url = null;

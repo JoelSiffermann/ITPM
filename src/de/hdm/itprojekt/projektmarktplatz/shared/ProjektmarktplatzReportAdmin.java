@@ -20,7 +20,7 @@ public interface ProjektmarktplatzReportAdmin extends RemoteService {
 	ArrayList<Ausschreibung> getAuschreibungenByPartnerprofil(Partnerprofil p)
 			throws IllegalArgumentException;
 
-	ArrayList<Bewerbung> getBewerbungenByNutzer(Partnerprofil p)
+	ArrayList<Bewerbung> getBewerbungenByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException;
 
 	ArrayList<Bewerbung> getBewerbungenByAusschreibung(Ausschreibung a)
