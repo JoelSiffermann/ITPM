@@ -24,41 +24,41 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 
 public class BewerbungForm extends VerticalPanel {
-	
+
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
 	public BewerbungForm() {
 
 	}
 
-	public VerticalPanel getAufProjektBewerben(){
-		
+	public VerticalPanel getAufProjektBewerben() {
+
 		final VerticalPanel vpKopf = new VerticalPanel();
 		final ListBox lbTitel = new ListBox();
 		final VerticalPanel vpUnten = new VerticalPanel();
 		final Button btBewerbungVersenden = new Button("Bewerbung versenden");
-		
+
 		final VerticalPanel bewerbungTextPanel = new VerticalPanel();
 		final TextArea bewerbungText = new TextArea();
 
 		projektService.readAllBewerbung(new AsyncCallback<ArrayList<Bewerbung>>() {
-			
+
 			@Override
 			public void onSuccess(ArrayList<Bewerbung> result) {
 				// TODO Auto-generated method stub
-				
+
 				for (Bewerbung b : result) {
-					
+
 					lbTitel.addItem(b.getId() + "", b.getId() + "");
-					
+
 				}
-					
+
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		bewerbungText.setWidth("1000px");
@@ -68,13 +68,13 @@ public class BewerbungForm extends VerticalPanel {
 		bewerbungText.getElement().setPropertyString("placeholder", "Bewerbungstext");
 
 		bewerbungTextPanel.add(bewerbungText);
-	
+
 		btBewerbungVersenden.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				clear(vpKopf);
-				 Window.alert("Bewerbung versendet");
+				Window.alert("Bewerbung versendet");
 
 			}
 		});
@@ -87,9 +87,9 @@ public class BewerbungForm extends VerticalPanel {
 		this.add(vpUnten);
 		return this;
 	}
-	
+
 	public VerticalPanel getMeineProjekteBewerbungAnzeigen(String selectedValue) {
-		
+
 		final VerticalPanel vpKopf = new VerticalPanel();
 		final HorizontalPanel hpUnten = new HorizontalPanel();
 		final VerticalPanel bewerbungTextPanel = new VerticalPanel();
@@ -107,24 +107,24 @@ public class BewerbungForm extends VerticalPanel {
 		bewerbungText.getElement().setPropertyString("placeholder", "Bewerbungstext");
 
 		bewerbungTextPanel.add(bewerbungText);
-		
+
 		projektService.readAllBewerbungByAusschreibungId(selectedValue, new AsyncCallback<ArrayList<Bewerbung>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void onSuccess(ArrayList<Bewerbung> result) {
 				// TODO Auto-generated method stub
-				for(Bewerbung b : result){
-					lbTitel.addItem(b.getId() + "", b.getId() + ""); 
+				for (Bewerbung b : result) {
+					lbTitel.addItem(b.getId() + "", b.getId() + "");
 				}
 			}
 		});
-		
+
 		btBewertungSchreiben.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -138,9 +138,9 @@ public class BewerbungForm extends VerticalPanel {
 				// Window.alert("ende clickhandler");
 			}
 		});
-		
+
 		btBewertungAnzeigen.addClickHandler(new ClickHandler() {
-			
+
 			public void onClick(ClickEvent event) {
 				vpKopf.clear();
 				bewerbungTextPanel.clear();
@@ -152,31 +152,31 @@ public class BewerbungForm extends VerticalPanel {
 		});
 
 		lbTitel.addChangeHandler(new ChangeHandler() {
-			
+
 			@Override
 			public void onChange(ChangeEvent event) {
 				Bewerbung b = new Bewerbung();
 				int id = Integer.parseInt(lbTitel.getSelectedValue());
-				
+
 				b.setId(id);
-				
+
 				projektService.readByIdBewerbung(b, new AsyncCallback<Bewerbung>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+
 					}
 
 					@Override
 					public void onSuccess(Bewerbung result) {
 						// TODO Auto-generated method stub
-						bewerbungText.setText(result.getInhalt()); 
+						bewerbungText.setText(result.getInhalt());
 					}
 				});
 			}
 		});
-		
+
 		vpKopf.add(lbTitel);
 		hpUnten.add(btBewertungSchreiben);
 		hpUnten.add(btBewertungAnzeigen);
@@ -186,7 +186,7 @@ public class BewerbungForm extends VerticalPanel {
 		this.add(hpUnten);
 		return this;
 	}
-	
+
 	protected void clear(VerticalPanel vpUnten) {
 		// TODO Auto-generated method stub
 		vpUnten.clear();
@@ -195,6 +195,5 @@ public class BewerbungForm extends VerticalPanel {
 	public void addBewertungPanel(Panel p) {
 		this.add(p);
 	}
-
 
 }

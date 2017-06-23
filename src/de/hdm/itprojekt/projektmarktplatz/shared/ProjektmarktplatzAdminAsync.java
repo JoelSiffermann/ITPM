@@ -72,7 +72,7 @@ public interface ProjektmarktplatzAdminAsync {
 
 	void readByIdEigenschaft(Eigenschaft eg, AsyncCallback<Eigenschaft> callback);
 
-	void readAllEigenschaft(AsyncCallback<ArrayList<Eigenschaft>> callback);
+	void readAllEigenschaft(Partnerprofil p, AsyncCallback<ArrayList<Eigenschaft>> callback);
 
 	void deleteEigenschaft(Eigenschaft eg, AsyncCallback<Void> callback);
 	
@@ -163,6 +163,10 @@ public interface ProjektmarktplatzAdminAsync {
 	void readAllProjektmarktplatzByOrg(Organisationseinheit o, AsyncCallback<ArrayList<Projektmarktplatz>> callback);
 
 	void readByIdProjektProjektmarktplatz(Projektmarktplatz proj, AsyncCallback<ArrayList<Projekt>> callback);
+
+	void readAllEigenschaft(AsyncCallback<ArrayList<Eigenschaft>> callback);
+
+	void readUserByOrg(Organisationseinheit o, AsyncCallback<ArrayList<String>> callback);
 	
 	
 }

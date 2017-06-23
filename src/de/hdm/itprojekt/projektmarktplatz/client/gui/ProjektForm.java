@@ -36,14 +36,12 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 public class ProjektForm extends HorizontalPanel {
-	
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
+	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
 	public HorizontalPanel BeteiligungAnMeineProjekte() {
 
-		final List<String> BETEILIGUNGPERSONEN = Arrays.asList("Person 1", "Person 2",
-				"Person 3", "Person 4");
+		final List<String> BETEILIGUNGPERSONEN = Arrays.asList("Person 1", "Person 2", "Person 3", "Person 4");
 		final VerticalPanel vpProjektform = new VerticalPanel();
 		final Label lblPerson = new Label();
 		final TextArea taInhalt = new TextArea();
@@ -70,11 +68,10 @@ public class ProjektForm extends HorizontalPanel {
 		CellList<String> cellList = new CellList<String>(textCell);
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
-
 		taInhalt.setWidth("1000px");
 		taInhalt.setHeight("300px");
 		taInhalt.setEnabled(false);
-		
+
 		btBeteiligungEntfernen.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -142,7 +139,6 @@ public class ProjektForm extends HorizontalPanel {
 		gridProjektForm.setWidget(0, 1, tbProjektmarktplatz);
 		gridProjektForm.setWidget(1, 0, lblName);
 		gridProjektForm.setWidget(1, 1, lbProjektListe);
-		// grid.setWidget(0, 1, projektName);
 		gridProjektForm.setWidget(2, 0, lblStart);
 		gridProjektForm.setWidget(2, 1, startPicker);
 		gridProjektForm.setWidget(3, 0, lblEnde);
@@ -160,11 +156,10 @@ public class ProjektForm extends HorizontalPanel {
 		return this;
 
 	}
-	
+
 	public HorizontalPanel BeteiligungAnAndereProjekte() {
 
-		final List<String> BETEILIGUNGPROJEKTE = Arrays.asList("Projekt 1", "Projekt 2",
-				"Projekt 3", "Projekt 4");
+		final List<String> BETEILIGUNGPROJEKTE = Arrays.asList("Projekt 1", "Projekt 2", "Projekt 3", "Projekt 4");
 		final VerticalPanel vpProjektform = new VerticalPanel();
 		final Label lblPerson = new Label();
 		final TextArea taInhalt = new TextArea();
@@ -185,7 +180,7 @@ public class ProjektForm extends HorizontalPanel {
 
 		// Create a cell to render each value.
 		TextCell textCell = new TextCell();
-		
+
 		taInhalt.setWidth("1000px");
 		taInhalt.setHeight("300px");
 		taInhalt.setEnabled(false);
@@ -279,16 +274,14 @@ public class ProjektForm extends HorizontalPanel {
 
 	public HorizontalPanel getMeineProjekte(final ArrayList<Projektmarktplatz> result) {
 
-//		final List<String> PROJEKTMARKTPLATZ = Arrays.asList("Projektmarktplatz 1", "Projektmarktplatz 3",
-//				"Projektmarktplatz 4");
 		final List<String> meineProjekte = new ArrayList<String>();
 
-		for(Projektmarktplatz pr : result){
+		for (Projektmarktplatz pr : result) {
 			meineProjekte.add(pr.getBezeichnung());
-			Cookies.setCookie(pr.getBezeichnung(), pr.getId()+""); 
+			Cookies.setCookie(pr.getBezeichnung(), pr.getId() + "");
 
 		}
-		
+
 		final VerticalPanel vpProjektform = new VerticalPanel();
 		final Label lblProjektmarktplatz = new Label("Projektmarktplatz:");
 		final TextArea taInhalt = new TextArea();
@@ -323,17 +316,27 @@ public class ProjektForm extends HorizontalPanel {
 		CellList<String> cellList = new CellList<String>(textCell);
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
+		btProjektSpeichern.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+
 		btProjektAnlegen.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				
+
 				Projekt projekt = new Projekt();
 				projekt.setName(tbProjektName.getText());
 				projekt.setStart(startPicker.getFirstDate());
 				projekt.setEnde(endPicker.getLastDate());
 				projekt.setInhalt(taInhalt.getText());
-				
+
 				if (tbProjektName.isVisible()) {
 					tbProjektName.setVisible(false);
 					lbProjektListe.setVisible(true);
@@ -343,21 +346,21 @@ public class ProjektForm extends HorizontalPanel {
 					lbProjektListe.setVisible(false);
 					gridProjektForm.setWidget(0, 1, tbProjektName);
 				}
-				
+
 				if (!projekt.equals(null)) {
 
 					projektService.insertProjekt(projekt, new AsyncCallback<Projekt>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							
+
 							final DialogBox dialogBox = new DialogBox();
 							dialogBox.setText("Speichern hat nicht geklappt " + caught.getLocalizedMessage());
 							Button closeButton = new Button("OK", new ClickHandler() {
 
 								@Override
 								public void onClick(ClickEvent event) {
-									
+
 									dialogBox.hide();
 								}
 							});
@@ -368,14 +371,14 @@ public class ProjektForm extends HorizontalPanel {
 
 						@Override
 						public void onSuccess(Projekt result) {
-							
+
 							final DialogBox dialogBox = new DialogBox();
 							dialogBox.setText("Erfolgreich gespeichert");
 							Button closeButton = new Button("OK", new ClickHandler() {
 
 								@Override
 								public void onClick(ClickEvent event) {
-								
+
 									dialogBox.hide();
 								}
 							});
@@ -385,7 +388,7 @@ public class ProjektForm extends HorizontalPanel {
 						}
 					});
 				}
-				
+
 			}
 		});
 
@@ -398,8 +401,31 @@ public class ProjektForm extends HorizontalPanel {
 
 				if (selected != null) {
 					// Window.alert("You selected: " + selected);
-					
+
 					lblProjektmarktplatz.setText(selected.toString());
+
+					int id = Integer.parseInt(Cookies.getCookie(selected));
+					Projektmarktplatz proj = new Projektmarktplatz();
+					proj.setId(id);
+					proj.setBezeichnung(Cookies.getCookie(selected));
+					lbProjektListe.clear();
+					projektService.readByIdProjektProjektmarktplatz(proj, new AsyncCallback<ArrayList<Projekt>>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onSuccess(ArrayList<Projekt> result) {
+							// TODO Auto-generated method stub
+
+							for (Projekt p : result) {
+								lbProjektListe.addItem(p.getName(), p.getId() + "");
+							}
+						}
+					});
 				}
 
 			}
@@ -483,11 +509,6 @@ public class ProjektForm extends HorizontalPanel {
 		gridProjektForm.setWidget(6, 1, btAusschreibungAnzeigen);
 
 		vpProjektform.add(lblProjektmarktplatz);
-		// form.add(projektListe);
-		// form.add(projektName);
-		// form.add(startPicker);
-		// form.add(endPicker);
-		// form.add(taInhalt);
 		vpProjektform.add(gridProjektForm);
 
 		this.add(cellList);
@@ -499,15 +520,12 @@ public class ProjektForm extends HorizontalPanel {
 	public HorizontalPanel getAlleProjekte(ArrayList<Projektmarktplatz> result) {
 
 		final List<String> alleProjekte = new ArrayList<String>();
-		
-		for(Projektmarktplatz pr : result){
+
+		for (Projektmarktplatz pr : result) {
 			alleProjekte.add(pr.getBezeichnung());
-			Cookies.setCookie(pr.getBezeichnung(), pr.getId()+""); 
+			Cookies.setCookie(pr.getBezeichnung(), pr.getId() + "");
 
 		}
-		
-//		final List<String> PROJEKTMARKTPLATZ = Arrays.asList("Projektmarktplatz 1", "Projektmarktplatz 2",
-//				"Projektmarktplatz 3", "Projektmarktplatz 4", "PM5");
 
 		final VerticalPanel vpProjektform = new VerticalPanel();
 		final Label lblProjektmarktplatz = new Label("Projektmarktplatz:");
@@ -529,7 +547,7 @@ public class ProjektForm extends HorizontalPanel {
 
 		// Create a cell to render each value.
 		TextCell textCell = new TextCell();
-		
+
 		taInhalt.setWidth("1000px");
 		taInhalt.setHeight("300px");
 		taInhalt.setEnabled(false);
@@ -571,27 +589,28 @@ public class ProjektForm extends HorizontalPanel {
 				if (selected != null) {
 					// Window.alert("You selected: " + selected);
 					lblProjektmarktplatz.setText(selected.toString());
-					//TODO Alle Projektmarktplaetze die Id rauslesen beim Selektieren
-//					Cookies.getCookie(selected);
+					// TODO Alle Projektmarktplaetze die Id rauslesen beim
+					// Selektieren
+					// Cookies.getCookie(selected);
 					int id = Integer.parseInt(Cookies.getCookie(selected));
 					Projektmarktplatz proj = new Projektmarktplatz();
 					proj.setId(id);
-					proj.setBezeichnung(Cookies.getCookie(selected)); 
+					proj.setBezeichnung(Cookies.getCookie(selected));
 					lbProjektListe.clear();
 					projektService.readByIdProjektProjektmarktplatz(proj, new AsyncCallback<ArrayList<Projekt>>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
 							// TODO Auto-generated method stub
-							
+
 						}
 
 						@Override
 						public void onSuccess(ArrayList<Projekt> result) {
 							// TODO Auto-generated method stub
-							
-							for(Projekt p : result){
-								lbProjektListe.addItem(p.getName(), p.getId()+"");
+
+							for (Projekt p : result) {
+								lbProjektListe.addItem(p.getName(), p.getId() + "");
 							}
 						}
 					});
@@ -675,11 +694,6 @@ public class ProjektForm extends HorizontalPanel {
 		gridProjektForm.setWidget(4, 1, btAusschreibungAnzeigen);
 
 		vpProjektform.add(lblProjektmarktplatz);
-		// form.add(projektListe);
-		// form.add(projektName);
-		// form.add(startPicker);
-		// form.add(endPicker);
-		// form.add(taInhalt);
 		vpProjektform.add(gridProjektForm);
 
 		this.add(cellList);

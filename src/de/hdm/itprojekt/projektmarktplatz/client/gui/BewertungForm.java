@@ -24,9 +24,9 @@ public class BewertungForm extends VerticalPanel {
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
 	public BewertungForm() {
-		
+
 	}
-	
+
 	public VerticalPanel getBewertungenSchreiben(final String selectedValue) {
 
 		final VerticalPanel vpKopf = new VerticalPanel();
@@ -37,51 +37,39 @@ public class BewertungForm extends VerticalPanel {
 		final Button btSpeichern = new Button("Speichern");
 
 		btSpeichern.addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 
-//				for (Bewerbung b : result) {
-//					
-//				}
-//				Window.alert("test");
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-//				Window.alert("test2");
-
 				Bewertung bt = new Bewertung();
 
-				
 				bt.setInhalt(bewertungText.getText());
 				bt.setSkala(0);
-				
+
 				projektService.insertBewertung(bt, selectedValue, new AsyncCallback<Bewertung>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+
 					}
 
 					@Override
 					public void onSuccess(Bewertung result) {
 						// TODO Auto-generated method stub
-						
+
 					}
 				});
 			}
 		});
-		
+
 		lblTitel.getElement().setPropertyString("placeholder", "Name");
 		vpKopf.add(lblTitel);
 
 		bewertungText.setWidth("1000px");
 		bewertungText.setHeight("300px");
-		
+
 		// add text to text area
 		bewertungText.setText("");
 		bewertungText.getElement().setPropertyString("placeholder", "Bewertungstext");
@@ -90,14 +78,13 @@ public class BewertungForm extends VerticalPanel {
 		bewertungTextPanel.add(bewertungText);
 
 		// **********************************************
-	
 
 		vpUnten.add(btSpeichern);
 
 		this.add(vpKopf);
 		this.add(bewertungTextPanel);
 		this.add(vpUnten);
-		
+
 		return this;
 	}
 
@@ -109,7 +96,7 @@ public class BewertungForm extends VerticalPanel {
 		final VerticalPanel vpUnten = new VerticalPanel();
 		final VerticalPanel bewertungTextPanel = new VerticalPanel();
 		final TextArea bewertungText = new TextArea();
-		
+
 		lbTitel.getElement().setPropertyString("placeholder", "Name");
 		vpKopf.add(lbTitel);
 

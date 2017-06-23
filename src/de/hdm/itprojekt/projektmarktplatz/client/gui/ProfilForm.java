@@ -93,13 +93,14 @@ public class ProfilForm extends VerticalPanel {
 		/*
 		 * <p>Kenntnisse Bereich </p>
 		 */
-		// Merke: bei dynamisch auslagern
 		final VerticalPanel kBereich = new VerticalPanel();
 		final FlexTable ftKenntnis = new FlexTable();
-		final FlexTable ftKenntnisListe = new FlexTable();
+
 		final TextBox tbKenntnis = new TextBox();
 		final TextBox tbJahr = new TextBox();
 
+		Partnerprofil partnerprofil = new Partnerprofil();
+		partnerprofil.setId(Integer.parseInt(Cookies.getCookie("partnerprofilid")));
 		tbKenntnis.getElement().setPropertyString("placeholder", "Kenntnisse");
 		tbJahr.getElement().setPropertyString("placeholder", "Anzahl der Jahre");
 		ftKenntnis.setWidget(0, 0, tbKenntnis);
@@ -107,6 +108,142 @@ public class ProfilForm extends VerticalPanel {
 		ftKenntnis.setText(0, 2, "Jahr");
 
 		kBereich.add(ftKenntnis);
+		final FlexTable ftKenntnisListe = new FlexTable();
+		kBereich.add(ftKenntnisListe);
+
+		Organisationseinheit org = new Organisationseinheit();
+		org.setId(Integer.parseInt(Cookies.getCookie("userid")));
+		projektService.readByIdOrg(org, new AsyncCallback<Organisationseinheit>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onSuccess(Organisationseinheit result) {
+				tbName.setText(result.getName());
+
+			}
+		});
+
+		projektService.readUserByOrg(org, new AsyncCallback<ArrayList<String>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+
+			}
+
+			@Override
+			public void onSuccess(ArrayList<String> result) {
+
+				for (String s : result) {
+					String user = result.get(0).toString();
+
+					if (s != "Person" || s != "Team" || s != "Unternehmen") {
+						switch (user) {
+
+						case "Person":
+
+							tbVorname.setVisible(true);
+							tbGroesse.setVisible(false);
+							tbArbeitsfeld.setVisible(false);
+							tbBeruf.setVisible(true);
+							tbGeschform.setVisible(false);
+							tbGeschfeld.setVisible(false);
+							listOrg.getItemText(0);
+							if (s == "Person") {
+
+							} else {
+								if (tbVorname.getText() == "") {
+									tbVorname.setText(s);
+								} else {
+									tbBeruf.setText(s);
+								}
+							}
+							break;
+
+						case "Unternehmen":
+							tbVorname.setVisible(false);
+							tbGroesse.setVisible(false);
+							tbArbeitsfeld.setVisible(false);
+							tbBeruf.setVisible(false);
+							tbGeschform.setVisible(true);
+							tbGeschfeld.setVisible(true);
+							tbKenntnis.getElement().setPropertyString("placeholder", "Spezialisierung");
+							listOrg.getItemText(2);
+							if (s == "Unternehmen") {
+
+							} else {
+								if (tbGeschform.getText() == "") {
+									tbGeschform.setText(s);
+								} else {
+									tbGeschfeld.setText(s);
+								}
+							}
+							break;
+
+						case "Team":
+							tbVorname.setVisible(false);
+							tbGroesse.setVisible(true);
+							tbBeruf.setVisible(false);
+							tbArbeitsfeld.setVisible(true);
+							tbGeschform.setVisible(false);
+							tbGeschfeld.setVisible(false);
+							tbKenntnis.getElement().setPropertyString("placeholder", "Spezifikation");
+							listOrg.getItemText(1);
+							if (s == "Team") {
+
+							} else {
+
+								if (tbGroesse.getText() == "") {
+									tbGroesse.setText(s);
+								} else {
+									tbArbeitsfeld.setText(s);
+								}
+							}
+							break;
+						}
+					}
+				}
+
+			}
+		});
+		projektService.readAllEigenschaft(partnerprofil, new AsyncCallback<ArrayList<Eigenschaft>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("Fehler beim Auslesen der Eigenschaften " + caught.getLocalizedMessage());
+				Button closeButton = new Button("OK", new ClickHandler() {
+
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						dialogBox.hide();
+					}
+				});
+
+				dialogBox.add(closeButton);
+				dialogBox.show();
+			}
+
+			@Override
+			public void onSuccess(ArrayList<Eigenschaft> result) {
+				int zeile = 1;
+				for (Eigenschaft e : result) {
+
+					ftKenntnisListe.setText(zeile, 0, e.getBezeichnung());
+					ftKenntnisListe.setText(zeile, 1, e.getWert());
+					ftKenntnisListe.setText(zeile, 2, e.getId() + "");
+
+					zeile = zeile + 1;
+
+				}
+
+			}
+		});
 
 		ftKenntnisListe.setWidget(0, 0, new Label("Kenntnisse"));
 		ftKenntnisListe.setWidget(0, 1, new Label("Jahre"));
@@ -115,25 +252,6 @@ public class ProfilForm extends VerticalPanel {
 		VerticalPanel vpUnten = new VerticalPanel();
 
 		Button btSpeichern = new Button("Speichern");
-
-//		Button btAdd = new Button("+");
-//		btAdd.addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				// TODO Auto-generated method stub
-//				TextBox tbKenntnis = new TextBox();
-//				TextBox tbJahr = new TextBox();
-//				int zeile = ftKenntnis.getRowCount() + 1;
-//
-//
-//				ftKenntnis.setWidget(zeile, 0, tbKenntnis);
-//				ftKenntnis.setWidget(zeile, 1, tbJahr);
-//				ftKenntnis.setText(zeile, 2, "Jahr");
-//
-//				kBereich.add(ftKenntnis);
-//			}
-//		});
 
 		listOrg.addChangeHandler(new ChangeHandler() {
 
@@ -188,9 +306,7 @@ public class ProfilForm extends VerticalPanel {
 				Organisationseinheit o = new Organisationseinheit();
 				Partnerprofil pp = new Partnerprofil();
 				pp.setId(ppid);
-				// o.setId(2);
 				o.setName(tbName.getText());
-				// p.setId(id);
 				o.setPartnerprofil(pp);
 				o.setEmail(Cookies.getCookie("email"));
 				Person person = null;
@@ -198,29 +314,11 @@ public class ProfilForm extends VerticalPanel {
 				Unternehmen unternehmen = null;
 				Eigenschaft ei = new Eigenschaft();
 
-//				 final DialogBox dialogBox = new DialogBox();
-//				// TextBox ttb = (TextBox) ftKenntnis.getWidget(0, 0);
-//				// TextBox ttb2 = (TextBox) ftKenntnis.getWidget(0, 1);
-//				 dialogBox.setText("Anzahl " + ftKenntnis.getRowCount());
-//				 Button closeButton = new Button("OK", new ClickHandler() {
-//				
-//				 @Override
-//				 public void onClick(ClickEvent event) {
-//				 // TODO Auto-generated method stub
-//				 dialogBox.hide();
-//				 }
-//				 });
-//				
-//				 dialogBox.add(closeButton);
-//				 dialogBox.show();
-				
-					 
-					
-					 ei.setBezeichnung(tbKenntnis.getText());
-					 ei.setWert(tbJahr.getText());
-					 ei.setPartnerprofil(pp);
-					
-					 eig.add(ei);
+				ei.setBezeichnung(tbKenntnis.getText());
+				ei.setWert(tbJahr.getText());
+				ei.setPartnerprofil(pp);
+
+				eig.add(ei);
 
 				switch (listOrg.getSelectedItemText()) {
 				case "Person":
@@ -323,28 +421,35 @@ public class ProfilForm extends VerticalPanel {
 
 					@Override
 					public void onSuccess(Eigenschaft result) {
-						// TODO Auto-generated method stub
-						// final DialogBox dialogBox = new DialogBox();
-						// dialogBox.setText("Erfolgreich gespeichert");
-						// Button closeButton = new Button("OK", new
-						// ClickHandler() {
-						//
-						// @Override
-						// public void onClick(ClickEvent event) {
-						// // TODO Auto-generated method stub
-						// dialogBox.hide();
-						// }
-						// });
-						//
-						// dialogBox.add(closeButton);
-						// dialogBox.show();
+
+					}
+				});
+
+				projektService.readAllEigenschaft(pp, new AsyncCallback<ArrayList<Eigenschaft>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+					}
+
+					@Override
+					public void onSuccess(ArrayList<Eigenschaft> result) {
+						int zeile = ftKenntnis.getRowCount() + 1;
+						for (Eigenschaft e : result) {
+
+							ftKenntnisListe.setWidget(zeile, 0, new Label(e.getBezeichnung()));
+							ftKenntnisListe.setWidget(zeile, 1, new Label(e.getWert()));
+							ftKenntnisListe.setWidget(zeile, 2, new Label(e.getId() + ""));
+
+							zeile = zeile + 1;
+
+						}
 
 					}
 				});
 			}
 		});
-//		vpUnten.add(btAdd);
-		vpUnten.add(ftKenntnisListe); 
+
+		vpUnten.add(ftKenntnisListe);
 		vpUnten.add(btSpeichern);
 
 		this.add(vpKopf);
