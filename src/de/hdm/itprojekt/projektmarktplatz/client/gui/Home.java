@@ -38,6 +38,7 @@ public class Home extends VerticalPanel {
 		final Button btBewertungAnzeigen = new Button("Bewertung anzeigen");
 		final Button btAndereBeteiligung = new Button("Andere Beteiligung");
 		final Button btAndereProjekte = new Button("Andere Projekte");
+		final Button btMeineBewerbung = new Button("Meine Bewerbungen");
 		final Button btBewerbungNeu = new Button("Sich bewerben");
 
 
@@ -170,6 +171,15 @@ public class Home extends VerticalPanel {
 			}
 
 		});
+		btMeineBewerbung.addClickHandler(new ClickHandler() {
+			MeineBewerbung m = new MeineBewerbung();
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				vpInfo.clear();
+				vpInfo.add(m); 
+			}
+		});
 		
 		btBewerbungNeu.addClickHandler(new ClickHandler() {
 
@@ -195,6 +205,7 @@ public class Home extends VerticalPanel {
 		vpMainNavigation.add(btBewertungAnzeigen);
 		vpMainNavigation.add(btAndereBeteiligung);
 		vpMainNavigation.add(btAndereProjekte);
+		vpMainNavigation.add(btMeineBewerbung);
 		vpMainNavigation.add(btBewerbungNeu);
 
 
