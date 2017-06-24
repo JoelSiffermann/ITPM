@@ -103,7 +103,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		projBet.setOrganisationseinheit(org);
 		projBet.setProjekt(proj);
 		projBet.setStart(date);
-		projBet.setUmfang(12);
+		projBet.setUmfang(16);
 		
 		/*
 		   * ***************************************************************************
@@ -116,9 +116,9 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 			@Override
 			public void onSuccess(Beteiligung result) {
 				// TODO Auto-generated method stub
-				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("hat funktioniert");
-				dialogBox.show();
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("hat funktioniert");
+//				dialogBox.show();
 			}
 			
 			@Override
