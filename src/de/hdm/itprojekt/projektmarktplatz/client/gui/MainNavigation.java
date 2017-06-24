@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public interface MainNavigation extends Constants {
 	
 	/*
-	 * Neues Design
+	 * Neues Design test
 	 */
 	
     String[] cwStackPanelContacts();
