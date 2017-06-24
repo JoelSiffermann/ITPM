@@ -47,8 +47,6 @@ public class ProjektNeuForm extends VerticalPanel {
 		final HorizontalPanel hpButton = new HorizontalPanel();
 		final TextArea taProjektInhalt = new TextArea();
 		final TextBox tbProjektName = new TextBox();
-		final Grid gridProjektForm1 = new Grid(7, 2);
-		final Grid gridProjektForm2 = new Grid(7, 2);
 
 		final DatePicker startPicker = new DatePicker();
 		final DatePicker endPicker = new DatePicker();
@@ -121,5 +119,6 @@ public class ProjektNeuForm extends VerticalPanel {
 		this.clear();
 		this.add(hpProjektForm);
 		this.add(hpButton);
+		
 	} 
 }

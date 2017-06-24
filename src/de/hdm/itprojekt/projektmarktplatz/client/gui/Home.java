@@ -28,12 +28,20 @@ public class Home extends VerticalPanel {
 		final VerticalPanel vpInfo = new VerticalPanel();
 		final Button btLogout = new Button("Logout");
 
-		final Button btProfil = new Button("Profil");
+		final Button btProfilBearbeiten = new Button("Profil bearbeiten");
+		final Button btProfilAnzeigen = new Button("Profil anzeigen");
 		final Button btProjektNeu = new Button("Projekt anlegen");
 		final Button btAusschreibungNeu = new Button("Ausschreibung anlegen");
 		final Button btAusschreibungAnzeigen = new Button("Ausschreibung anzeigen");
+		final Button btMeineProjekte = new Button("Meine Projekte");
+		final Button btMeineBeteiligung = new Button("Meine Beteiligung");
+		final Button btBewertungAnzeigen = new Button("Bewertung anzeigen");
+		final Button btAndereBeteiligung = new Button("Andere Beteiligung");
+		final Button btAndereProjekte = new Button("Andere Projekte");
+		final Button btBewerbungNeu = new Button("Sich bewerben");
 
-		btProfil.addClickHandler(new ClickHandler() {
+
+		btProfilBearbeiten.addClickHandler(new ClickHandler() {
 
 			ProfilNeuForm profilNeu = new ProfilNeuForm();
 
@@ -44,6 +52,19 @@ public class Home extends VerticalPanel {
 				vpInfo.add(profilNeu);
 			}
 
+		});
+		
+		btProfilAnzeigen.addClickHandler(new ClickHandler() {
+			
+			ProfilAnzeigenPanel profilAnzeigen = new ProfilAnzeigenPanel();
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				vpInfo.clear();
+				vpInfo.add(profilAnzeigen);
+			}
+			
 		});
 
 		btProjektNeu.addClickHandler(new ClickHandler() {
@@ -83,12 +104,98 @@ public class Home extends VerticalPanel {
 			}
 
 		});
+		
+		btMeineProjekte.addClickHandler(new ClickHandler() {
 
+			MeineProjektePanel meineProjekte = new MeineProjektePanel();
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				vpInfo.clear();
+				vpInfo.add(meineProjekte);
+			}
+
+		});
+		
+		btMeineBeteiligung.addClickHandler(new ClickHandler() {
+
+			MeineBeteiligungPanel meineBeteiligung = new MeineBeteiligungPanel();
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				vpInfo.clear();
+				vpInfo.add(meineBeteiligung);
+			}
+
+		});
+		
+		btAndereBeteiligung.addClickHandler(new ClickHandler() {
+
+			AndereBeteiligungPanel andereBeteiligung = new AndereBeteiligungPanel();
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				vpInfo.clear();
+				vpInfo.add(andereBeteiligung);
+				
+			}
+
+		});
+
+		btBewertungAnzeigen.addClickHandler(new ClickHandler() {
+
+			BewertungAnzeigen bewertungAnzeigen = new BewertungAnzeigen();
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				vpInfo.clear();
+				vpInfo.add(bewertungAnzeigen);
+			}
+
+		});
+		
+		btAndereProjekte.addClickHandler(new ClickHandler() {
+
+			AndereProjekte andereProjekte = new AndereProjekte();
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				vpInfo.clear();
+				vpInfo.add(andereProjekte);
+			}
+
+		});
+		
+		btBewerbungNeu.addClickHandler(new ClickHandler() {
+
+			BewerbungNeuForm sichBewerben = new BewerbungNeuForm();
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				vpInfo.clear();
+				vpInfo.add(sichBewerben);
+			}
+
+		});
+		
 		vpMainNavigation.addStyleName("mainNavigation");
-		vpMainNavigation.add(btProfil);
+		vpMainNavigation.add(btProfilBearbeiten);
+		vpMainNavigation.add(btProfilAnzeigen);
 		vpMainNavigation.add(btProjektNeu);
 		vpMainNavigation.add(btAusschreibungNeu);
 		vpMainNavigation.add(btAusschreibungAnzeigen);
+		vpMainNavigation.add(btMeineProjekte);
+		vpMainNavigation.add(btMeineBeteiligung);
+		vpMainNavigation.add(btBewertungAnzeigen);
+		vpMainNavigation.add(btAndereBeteiligung);
+		vpMainNavigation.add(btAndereProjekte);
+		vpMainNavigation.add(btBewerbungNeu);
 
 
 		hpInfo.add(vpMainNavigation);
@@ -96,6 +203,8 @@ public class Home extends VerticalPanel {
 
 		RootPanel.get("nav").add(vpMainNavigation);
 		RootPanel.get("header").add(btLogout);
+		
+		this.clear();
 		this.add(hpHeader);
 		this.add(hpInfo);
 

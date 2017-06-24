@@ -42,17 +42,17 @@ public class AusschreibungAnzeigenForm extends HorizontalPanel {
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
 	public void onLoad() {
-		final List<String> BETEILIGUNGPERSONEN = Arrays.asList("Projekt 1", "Projekt 2", "Projekt 3", "Projekt 4");
-		final VerticalPanel vpAusschreibungAnzeigenform1 = new VerticalPanel();
-		final VerticalPanel vpAusschreibungAnzeigenform2 = new VerticalPanel();
+		
+		final List<String> AUSSCHREIBUNG = Arrays.asList("Ausschreibung 1", "Ausschreibung 2", "Ausschreibung 3", "Ausschreibung 4");
+		final VerticalPanel vpAusschreibungAnzeigenForm1 = new VerticalPanel();
+		final VerticalPanel vpAusschreibungAnzeigenForm2 = new VerticalPanel();
 		final HorizontalPanel hpAusschreibungAnzeigenForm = new HorizontalPanel();
 
-		final TextBox tbAusschreibung = new TextBox();
 		final TextBox tbPartnerProfilBeschreibung = new TextBox();
 		final TextBox tbPartnerProfilWert = new TextBox();
-		final TextBox tbFrist = new TextBox();
+		final DatePicker dpFrist = new DatePicker();
 		final TextArea taAusschreibungInhalt = new TextArea();
-		final Label lblAusschreibungName = new Label("Ausschreibungbezeichnung:");
+		final Label lblAusschreibungName = new Label("Ausschreibungbezeichnung");
 		final Label lblAusschreibungInhalt = new Label("Ausschreibungsbeschreibung:");
 		final Label lblFrist = new Label("Frist:");
 		final Label lblGesucht = new Label("Gesucht:");
@@ -89,27 +89,53 @@ public class AusschreibungAnzeigenForm extends HorizontalPanel {
 	    cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
 	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
 
-		cellList.setRowCount(BETEILIGUNGPERSONEN.size(), true);
+		cellList.setRowCount(AUSSCHREIBUNG.size(), true);
 
 		// Push the data into the widget.
-		cellList.setRowData(0, BETEILIGUNGPERSONEN);
+		cellList.setRowData(0, AUSSCHREIBUNG);
+		
+		dpFrist.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				Date date = event.getValue();
+				String dateString = DateTimeFormat.getMediumDateFormat().format(date);
+				// Window.alert("You selected " +dateString);
+			}
+		});
 
-		vpAusschreibungAnzeigenform1.add(lblAusschreibungName);
-		vpAusschreibungAnzeigenform1.add(tbAusschreibung);
-		vpAusschreibungAnzeigenform1.add(lblAusschreibungInhalt);
-		vpAusschreibungAnzeigenform1.add(taAusschreibungInhalt);
-		vpAusschreibungAnzeigenform1.add(lblFrist);
-		vpAusschreibungAnzeigenform1.add(tbFrist);
-		vpAusschreibungAnzeigenform1.add(lblGesucht);
-		vpAusschreibungAnzeigenform1.add(lblPartnerProfilBeschreibung);
-		vpAusschreibungAnzeigenform1.add(lblPartnerProfilWert);
+		// Set the default value
+		dpFrist.setValue(new Date(), true);
+		
+		btAusschreibungBearbeiten.addClickHandler(new ClickHandler() {
+			
+			AusschreibungNeuForm ausschreibungNeu = new AusschreibungNeuForm();
 
-		vpAusschreibungAnzeigenform2.add(btAusschreibungBearbeiten);
-		vpAusschreibungAnzeigenform2.add(btAusschreibungEntfernen);
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				hpAusschreibungAnzeigenForm.clear();
+				hpAusschreibungAnzeigenForm.add(ausschreibungNeu);
+			}
+			
+		});
 
-		hpAusschreibungAnzeigenForm.add(vpAusschreibungAnzeigenform1);
-		hpAusschreibungAnzeigenForm.add(vpAusschreibungAnzeigenform2);
+		vpAusschreibungAnzeigenForm1.add(lblAusschreibungName);
+		vpAusschreibungAnzeigenForm1.add(lblAusschreibungInhalt);
+		vpAusschreibungAnzeigenForm1.add(taAusschreibungInhalt);
+		vpAusschreibungAnzeigenForm1.add(lblFrist);
+		vpAusschreibungAnzeigenForm1.add(dpFrist);
+		vpAusschreibungAnzeigenForm1.add(lblGesucht);
+		vpAusschreibungAnzeigenForm1.add(lblPartnerProfilBeschreibung);
+		vpAusschreibungAnzeigenForm1.add(tbPartnerProfilBeschreibung);
+		vpAusschreibungAnzeigenForm1.add(lblPartnerProfilWert);
+		vpAusschreibungAnzeigenForm1.add(tbPartnerProfilWert);
 
+		vpAusschreibungAnzeigenForm2.add(btAusschreibungBearbeiten);
+		vpAusschreibungAnzeigenForm2.add(btAusschreibungEntfernen);
+
+		hpAusschreibungAnzeigenForm.add(vpAusschreibungAnzeigenForm1);
+		hpAusschreibungAnzeigenForm.add(vpAusschreibungAnzeigenForm2);
+
+		this.clear();
 		this.add(cellList);
 		this.add(hpAusschreibungAnzeigenForm);
 

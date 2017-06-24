@@ -12,6 +12,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -46,6 +47,10 @@ public class ProfilNeuForm extends VerticalPanel {
 		final TextBox tbArbeitsfeld = new TextBox();
 		final TextBox tbGeschform = new TextBox();
 		final TextBox tbGeschfeld = new TextBox();
+		final HorizontalPanel hpButton = new HorizontalPanel();
+
+		final Button btSpeichern = new Button("Speichern");
+		final Button btAbbrechen = new Button("Abbrechen");
 
 		final ArrayList<Eigenschaft> eig = new ArrayList<Eigenschaft>();
 
@@ -242,9 +247,6 @@ public class ProfilNeuForm extends VerticalPanel {
 		ftKenntnisListe.setWidget(0, 1, new Label("Jahre"));
 		ftKenntnisListe.setWidget(0, 2, new Label("ID"));
 		// **********************************************
-		VerticalPanel vpUnten = new VerticalPanel();
-
-		Button btSpeichern = new Button("Speichern");
 
 		listOrg.addChangeHandler(new ChangeHandler() {
 
@@ -442,12 +444,14 @@ public class ProfilNeuForm extends VerticalPanel {
 			}
 		});
 
-		vpUnten.add(ftKenntnisListe);
-		vpUnten.add(btSpeichern);
+		hpButton.add(btSpeichern);
+		hpButton.add(btAbbrechen);
 
 		vpKopf.add(lbKenntnisse);
 		vpKopf.add(kBereich);
-		vpKopf.add(vpUnten);
+		vpKopf.add(ftKenntnisListe);
+
+		vpKopf.add(hpButton);
 		this.clear();
 		this.add(vpKopf);
 
