@@ -42,15 +42,15 @@ public class BeteiligungPanel extends HorizontalPanel {
 				
 				switch (selected) {
 				case "Beteiligungen an anderen Projekten":
-					BeteiligungAndereProjekte beteiligungAndereProjekte = new BeteiligungAndereProjekte();
+//					BeteiligungAndereProjekte beteiligungAndereProjekte = new BeteiligungAndereProjekte();
 					vpBeteiligung.clear();
-					vpBeteiligung.add(beteiligungAndereProjekte);
+//					vpBeteiligung.add(beteiligungAndereProjekte);
 					break;
 					
 				case "Beteiligung an meinen Projekten":
-					BeteiligungMeineProjekte beteiligungMeineProjekte = new BeteiligungMeineProjekte();
+//					BeteiligungMeineProjekte beteiligungMeineProjekte = new BeteiligungMeineProjekte();
 					vpBeteiligung.clear();
-					vpBeteiligung.add(beteiligungMeineProjekte);
+//					vpBeteiligung.add(beteiligungMeineProjekte);
 					break;
 					
 				default:
