@@ -48,7 +48,7 @@ public class AusschreibungNeuForm extends VerticalPanel {
 		final TextBox tbPartnerProfilBeschreibung = new TextBox();
 		final TextBox tbPartnerProfilWert = new TextBox();
 		final TextArea taAusschreibungInhalt = new TextArea();
-		final DatePicker frist = new DatePicker();
+		final DatePicker dpFrist = new DatePicker();
 		final Label lblAusschreibungName = new Label("Ausschreibungbezeichnung:");
 		final Label lblAusschreibungInhalt = new Label("Ausschreibungsbeschreibung:");
 		final Label lblFrist = new Label("Frist:");
@@ -65,7 +65,7 @@ public class AusschreibungNeuForm extends VerticalPanel {
 		taAusschreibungInhalt.setHeight("300px");
 		taAusschreibungInhalt.getElement().setPropertyString("placeholder", "Ausschreibungbezeichnung");
 		
-		frist.addValueChangeHandler(new ValueChangeHandler<Date>() {
+		dpFrist.addValueChangeHandler(new ValueChangeHandler<Date>() {
 			public void onValueChange(ValueChangeEvent<Date> event) {
 				Date date = event.getValue();
 				String dateString = DateTimeFormat.getMediumDateFormat().format(date);
@@ -74,12 +74,12 @@ public class AusschreibungNeuForm extends VerticalPanel {
 		});
 
 		// Set the default value
-		frist.setValue(new Date(), true);
+		dpFrist.setValue(new Date(), true);
 
 		vpAusschreibungForm1.add(lblAusschreibungName);
 		vpAusschreibungForm1.add(tbAusschreibung);
 		vpAusschreibungForm1.add(lblFrist);
-		vpAusschreibungForm1.add(frist);
+		vpAusschreibungForm1.add(dpFrist);
 		vpAusschreibungForm1.add(lblAusschreibungInhalt);
 		vpAusschreibungForm1.add(taAusschreibungInhalt);
 		
@@ -98,5 +98,6 @@ public class AusschreibungNeuForm extends VerticalPanel {
 		this.clear();
 		this.add(hpAusschreibungForm);
 		this.add(hpButton);
+		
 	}
 }
