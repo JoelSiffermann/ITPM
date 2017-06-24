@@ -40,7 +40,7 @@ public class MeineBewerbung extends HorizontalPanel {
 		CellList<String> cellList = new CellList<String>(textCell);
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 		cellList.addStyleName("scrollable");
-		cellList.setPageSize(30);
+		cellList.setPageSize(20);
 	    cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
 	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
 
