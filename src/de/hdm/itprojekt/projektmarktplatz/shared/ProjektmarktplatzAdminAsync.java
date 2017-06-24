@@ -55,7 +55,7 @@ public interface ProjektmarktplatzAdminAsync {
 	void deleteBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 	
 
-	void insertBewertung(Bewertung bt, AsyncCallback<Bewertung> callback);
+	void insertBewertung(Bewertung bt, String id, AsyncCallback<Bewertung> callback);
 
 	void updateBewertung(Bewertung bt, AsyncCallback<Bewertung> callback);
 
@@ -66,13 +66,13 @@ public interface ProjektmarktplatzAdminAsync {
 	void deleteBewertung(Bewertung bt, AsyncCallback<Void> callback);
 	
 
-	void insertEigenschaft(Eigenschaft eg, AsyncCallback<Eigenschaft> callback);
+	void insertEigenschaft(ArrayList<Eigenschaft> eg, AsyncCallback<Eigenschaft> callback);
 
 	void updateEigenschaft(Eigenschaft eg, AsyncCallback<Eigenschaft> callback);
 
 	void readByIdEigenschaft(Eigenschaft eg, AsyncCallback<Eigenschaft> callback);
 
-	void readAllEigenschaft(AsyncCallback<ArrayList<Eigenschaft>> callback);
+	void readAllEigenschaft(Partnerprofil p, AsyncCallback<ArrayList<Eigenschaft>> callback);
 
 	void deleteEigenschaft(Eigenschaft eg, AsyncCallback<Void> callback);
 	
@@ -155,6 +155,18 @@ public interface ProjektmarktplatzAdminAsync {
 	void readByIdPerson(Person pers, AsyncCallback<Person> callback);
 
 	void updatePerson(Person pers, AsyncCallback<Person> callback);
+
+	void readAllBewerbungByAusschreibungId(String id, AsyncCallback<ArrayList<Bewerbung>> callback);
+
+	void readByEmail(Organisationseinheit o, AsyncCallback<Organisationseinheit> callback);
+
+	void readAllProjektmarktplatzByOrg(Organisationseinheit o, AsyncCallback<ArrayList<Projektmarktplatz>> callback);
+
+	void readByIdProjektProjektmarktplatz(Projektmarktplatz proj, AsyncCallback<ArrayList<Projekt>> callback);
+
+	void readAllEigenschaft(AsyncCallback<ArrayList<Eigenschaft>> callback);
+
+	void readUserByOrg(Organisationseinheit o, AsyncCallback<ArrayList<String>> callback);
 	
 	
 }

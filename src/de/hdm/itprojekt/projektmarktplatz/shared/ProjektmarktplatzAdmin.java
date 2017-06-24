@@ -28,7 +28,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public Organisationseinheit readByIdOrg(Organisationseinheit org ) throws IllegalArgumentException;
 	public ArrayList<Organisationseinheit> readAllOrg() throws IllegalArgumentException;
 	public void deleteOrg(Organisationseinheit org) throws IllegalArgumentException;
-	
+	public Organisationseinheit readByEmail(Organisationseinheit o);
 
 	public Ausschreibung insertAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 	public Ausschreibung updateAusschreibung (Ausschreibung a) throws IllegalArgumentException;
@@ -42,17 +42,19 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public ArrayList <Bewerbung> readAllBewerbung() throws IllegalArgumentException;
 	public void deleteBewerbung (Bewerbung b) throws IllegalArgumentException;
 	
-	public Bewertung insertBewertung (Bewertung bt) throws IllegalArgumentException;
+	public Bewertung insertBewertung (Bewertung bt, String id) throws IllegalArgumentException;
 	public Bewertung updateBewertung (Bewertung bt) throws IllegalArgumentException;
 	public Bewertung readByIdBewertung (Bewertung bt) throws IllegalArgumentException;
 	public ArrayList <Bewertung> readAllBewertung() throws IllegalArgumentException;
 	public void deleteBewertung (Bewertung bt) throws IllegalArgumentException;
+	public ArrayList<Bewerbung> readAllBewerbungByAusschreibungId(String id) throws IllegalArgumentException;
 	
-	public Eigenschaft insertEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
+	public Eigenschaft insertEigenschaft (ArrayList<Eigenschaft> eg) throws IllegalArgumentException;
 	public Eigenschaft updateEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
 	public Eigenschaft readByIdEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
 	public ArrayList <Eigenschaft> readAllEigenschaft() throws IllegalArgumentException;
 	public void deleteEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
+	public ArrayList<Eigenschaft> readAllEigenschaft(Partnerprofil p) throws IllegalArgumentException;
 	
 	public Partnerprofil insertPartnerprofil (Partnerprofil pp) throws IllegalArgumentException;
 	public Partnerprofil updatePartnerprofil (Partnerprofil pp) throws IllegalArgumentException;
@@ -65,6 +67,8 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public Person readByIdPerson (Person pers) throws IllegalArgumentException;
 	public ArrayList <Person> readAllPerson() throws IllegalArgumentException;
 	public void deletePerson (Person pers) throws IllegalArgumentException;
+	
+	public ArrayList<String> readUserByOrg(Organisationseinheit o);
 
 
 	public Beteiligung insertBeteiligung(Beteiligung projBet ) throws IllegalArgumentException;
@@ -86,7 +90,8 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public Projektmarktplatz readByIdProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
 	public ArrayList<Projektmarktplatz> readAllProjektmarktplatz() throws IllegalArgumentException;
 	public void deleteProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
-	
+	public ArrayList<Projektmarktplatz> readAllProjektmarktplatzByOrg(Organisationseinheit o) throws IllegalArgumentException;
+	public ArrayList<Projekt>  readByIdProjektProjektmarktplatz(Projektmarktplatz proj) throws IllegalArgumentException;	
 	
 	public Team insertTeam(Team t) throws IllegalArgumentException;
 	public Team updateTeam(Team t) throws IllegalArgumentException;

@@ -39,8 +39,11 @@
   <servlet-mapping>
     <servlet-name>loginService</servlet-name>
     <url-pattern>/projektmarktplatzprojekt/login</url-pattern>
-    <url-pattern>/projektmarktplatzprojekt/projektmarktplatzreport</url-pattern>
-    <url-pattern>/projektmarktplatzprojektreport/projektmarktplatzreport</url-pattern>
+    <!--<url-pattern>/projektmarktplatzprojekt/projektmarktplatz</url-pattern>-->
+    <!--<url-pattern>/projektmarktplatzprojektreport/projektmarktplatzreport</url-pattern>-->
+    
+    <!-- Musste auskommentiert werden weil sonst der Report keine RPC machen konnte -->
+    
   </servlet-mapping>
   
   <!-- Default page to serve -->

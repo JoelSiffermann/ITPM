@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.client;
 
+import de.hdm.itprojekt.projektmarktplatz.client.gui.Home;
 import de.hdm.itprojekt.projektmarktplatz.client.gui.MainPanel;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginService;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginServiceAsync;
@@ -19,6 +20,8 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -26,6 +29,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -111,22 +115,25 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		   * ***************************************************************************
 		   */
 		
-		projektService.insertBeteiligung(projBet, new AsyncCallback<Beteiligung>() {
-			
-			@Override
-			public void onSuccess(Beteiligung result) {
-				// TODO Auto-generated method stub
+
+
+//		projektService.insertBeteiligung(projBet, new AsyncCallback<Beteiligung>() {
+//			
+//			@Override
+//			public void onSuccess(Beteiligung result) {
+//				// TODO Auto-generated method stub
 //				final DialogBox dialogBox = new DialogBox();
 //				dialogBox.setText("hat funktioniert");
 //				dialogBox.show();
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+
 		
 		
 		
@@ -544,10 +551,59 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //				
 //			}
 //		});
+//		Cookies.setCookie("email", "test@hdm-stuttgart.de");
+		
 		loadGUI();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.
 		
+		Cookies.setCookie("email", "test@hdm-stuttgart.de");
+		org.setEmail(Cookies.getCookie("email")); 
+		
+
+		projektService.readByEmail(org , new AsyncCallback<Organisationseinheit>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("Fehler " + caught.getLocalizedMessage());
+				Button closeButton = new Button("OK", new ClickHandler() {
+
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						dialogBox.hide();
+					}
+				});
+
+				dialogBox.add(closeButton);
+				dialogBox.show();
+			
+			}
+
+			@Override
+			public void onSuccess(Organisationseinheit result) {
+				// TODO Auto-generated method stub
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("Erfolgreich " + result.getPartnerprofil().getId());
+//				Button closeButton = new Button("OK", new ClickHandler() {
+//
+//					@Override
+//					public void onClick(ClickEvent event) {
+//						// TODO Auto-generated method stub
+//						dialogBox.hide();
+//					}
+//				});
+//
+//				dialogBox.add(closeButton);
+//				dialogBox.show();
+			
+				Cookies.setCookie("userid", result.getId()+"");
+				Cookies.setCookie("partnerprofilid", result.getPartnerprofil().getId()+""); 
+				
+			}
+		});
 		
 //	    LoginServiceAsync loginService = GWT.create(LoginService.class);
 //	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
@@ -610,7 +666,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	}
 	
 	private void loadGUI(){
-		MainPanel mp = new MainPanel();
+		Home mp = new Home();
 		RootPanel.get("main").add(mp);
 	
 	}

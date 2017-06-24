@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
@@ -129,6 +130,27 @@ public class UnternehmenMapper {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Unternehmen getByOrgId(Organisationseinheit org) throws Exception {
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `unternehmen` WHERE `o_id` = " + org.getId());
+			if (rs.next()) {
+				Unternehmen u = new Unternehmen();
+				u.setGeschaeftsfeld(rs.getString("Geschaeftsfeld"));
+				u.setGeschaeftsform(rs.getString("Geschaeftsform"));
+				u.setId(rs.getInt("ID"));
+				Organisationseinheit o = new Organisationseinheit();
+				o.setId(rs.getInt("o_id"));
+				u.setOrganisationseinheit(o);
+
+				return u;
+			}
+		} catch (SQLException e) {
 		}
 		return null;
 	}

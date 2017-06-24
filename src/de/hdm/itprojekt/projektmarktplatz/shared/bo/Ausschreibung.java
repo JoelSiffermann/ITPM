@@ -1,6 +1,11 @@
 package de.hdm.itprojekt.projektmarktplatz.shared.bo;
 import java.util.Date;
 
+/**
+ * @author Thies & Rathke
+ * @author Ayse
+ */
+
 public class Ausschreibung extends BusinessObjekt {
 	
 
@@ -17,14 +22,17 @@ public class Ausschreibung extends BusinessObjekt {
 	
 	private Partnerprofil partnerprofil;
 	
+	 /**
+	   * No Argument Constructor
+	   */
+	
 	public Ausschreibung(){
 		
 	}
 	
-	
-	
-	
-	
+	 /**
+	   *  Konstruktur:  fügt dem Objekt Eigenschaften hinzu 
+	   */ 
 	
 	public Ausschreibung(String bezeichnung, String inhalt, Date frist)
 	{
@@ -69,7 +77,7 @@ public class Ausschreibung extends BusinessObjekt {
 
 
 
-
+	//Auslesen von Projekten
 
 	public Projekt getProjekt() {
 		return projekt;
@@ -78,7 +86,7 @@ public class Ausschreibung extends BusinessObjekt {
 
 
 
-
+	//Auslesen von Partnerprofilen
 
 	public Partnerprofil getPartnerprofil() {
 		return partnerprofil;
@@ -87,7 +95,7 @@ public class Ausschreibung extends BusinessObjekt {
 
 
 
-
+	//Setzt die Werte eines Projekts 
 
 	public void setProjekt(Projekt projekt) {
 		this.projekt = projekt;
@@ -95,7 +103,7 @@ public class Ausschreibung extends BusinessObjekt {
 
 
 
-
+	//Legt ein neues Partnerprofil an
 
 
 	public void setPartnerprofil(Partnerprofil partnerprofil) {
