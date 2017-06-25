@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.client;
 
+import de.hdm.itprojekt.projektmarktplatz.client.gui.Home;
 import de.hdm.itprojekt.projektmarktplatz.client.gui.MainPanel;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginService;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginServiceAsync;
@@ -106,7 +107,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		projBet.setOrganisationseinheit(org);
 		projBet.setProjekt(proj);
 		projBet.setStart(date);
-		projBet.setUmfang(12);
+		projBet.setUmfang(16);
 		
 		/*
 		   * ***************************************************************************
@@ -114,6 +115,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		   * ***************************************************************************
 		   */
 		
+
 
 //		projektService.insertBeteiligung(projBet, new AsyncCallback<Beteiligung>() {
 //			
@@ -131,6 +133,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //				
 //			}
 //		});
+
 		
 		
 		
@@ -663,7 +666,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	}
 	
 	private void loadGUI(){
-		MainPanel mp = new MainPanel();
+		Home mp = new Home();
 		RootPanel.get("main").add(mp);
 	
 	}

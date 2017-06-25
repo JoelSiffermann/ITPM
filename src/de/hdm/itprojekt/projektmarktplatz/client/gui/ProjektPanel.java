@@ -18,8 +18,9 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 public class ProjektPanel extends VerticalPanel {
-	
+
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+
 	public ProjektPanel() {
 
 		// muss hier dynamisch sein
@@ -35,7 +36,7 @@ public class ProjektPanel extends VerticalPanel {
 				Organisationseinheit o = new Organisationseinheit();
 				o.setId(id);
 				projektService.readAllProjektmarktplatzByOrg(o, new AsyncCallback<ArrayList<Projektmarktplatz>>() {
-					
+
 					@Override
 					public void onSuccess(ArrayList<Projektmarktplatz> result) {
 						// TODO Auto-generated method stub
@@ -58,7 +59,7 @@ public class ProjektPanel extends VerticalPanel {
 						addProjektPanel(pfMeineProjekte);
 						// Window.alert("ende clickhandler");
 					}
-					
+
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
@@ -77,9 +78,7 @@ public class ProjektPanel extends VerticalPanel {
 						dialogBox.show();
 					}
 				});
-				
 
-				
 			}
 		});
 
@@ -97,7 +96,7 @@ public class ProjektPanel extends VerticalPanel {
 				// Window.alert("ende clickhandler");
 			}
 		});
-		
+
 		vpProjektPanel.add(btMeineProjekte);
 		vpProjektPanel.add(btAlleProjekte);
 

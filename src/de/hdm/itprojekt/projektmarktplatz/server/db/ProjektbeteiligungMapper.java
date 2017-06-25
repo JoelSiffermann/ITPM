@@ -81,7 +81,7 @@ public class ProjektbeteiligungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `beteiligung` SET `Beteilgung_ID` = '"+b.getId()+"', `Start` = '"+datum2+"', `Ende` = '"+datum+"', `Umfang` = '"+b.getUmfang()+"', `projekt_ID` = '"+b.getProjekt().getId()+"', `orga_id` = '"+b.getOrganisationseinheit().getId()+"' WHERE `beteiligung`.`Beteilgung_ID` = "+b.getId());
+			stmt.executeUpdate("UPDATE `beteiligung` SET `Beteilgung_ID` = '"+b.getId()+"', `Start` = '"+datum2+"', `Ende` = '"+datum+"', `Umfang` = '"+b.getUmfang()+"', `projekt_ID` = '"+b.getProjekt().getId()+"', `orga_id` = '"+b.getOrganisationseinheit().getId()+"' WHERE `beteiligung`.`Beteilgung_ID` = "+b.getId()+";");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
