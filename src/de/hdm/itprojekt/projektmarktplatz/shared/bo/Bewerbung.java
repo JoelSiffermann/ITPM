@@ -8,6 +8,7 @@ public class Bewerbung extends BusinessObjekt {
 	private String inhalt;
 	private Date erstelldatum;
 	private Ausschreibung ausschreibung;
+	private Organisationseinheit bewerber;
 	
 	
 	public Ausschreibung getAusschreibung(){
@@ -36,6 +37,14 @@ public class Bewerbung extends BusinessObjekt {
 	public void setErstelldatum(Date date){
 		
 		erstelldatum=date;
+	}
+
+	public Organisationseinheit getBewerber() {
+		return bewerber;
+	}
+
+	public void setBewerber(Organisationseinheit bewerber) {
+		this.bewerber = bewerber;
 	}
 	
 }

@@ -5,8 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
@@ -182,6 +184,49 @@ public class ProjektMapper {
 					ps.setId(rs.getInt("person_id"));
 
 					p.setPerson(ps);
+					result.add(p);
+				}
+				stmt = con.createStatement();
+				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+//				stmt.executeUpdate("");
+//				return result;
+//			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public ArrayList<Projekt> getAllbyNutzer(Organisationseinheit o) throws Exception {
+		
+		//TODO
+		
+		Connection con = DBConnection.connection();
+		ArrayList<Projekt> result = new ArrayList<Projekt>();
+		try {
+			Statement stmt = con.createStatement();
+			/*
+			 * Zunächst schauen wir nach, welches der momentan höchste
+			 * Primärschlüsselwert ist.
+			 */
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `projekt` WHERE `person_id` ='" + o.getId() + "'");
+			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+//			if (rs.next()) {
+				/*
+				 * c erhält den bisher maximalen, nun um 1 inkrementierten
+				 * Primärschlüssel.
+				 */
+				while (rs.next()) {
+					Projekt p = new Projekt();
+					p.setId(rs.getInt("Projekt_ID"));
+					p.setName(rs.getString("Name"));
+					p.setStart(rs.getDate("Start"));
+					p.setEnde(rs.getDate("Ende"));
+					Projektmarktplatz pm = new Projektmarktplatz();
+					pm.setId(rs.getInt("projektmarktplatz_id"));
+					p.setProjektmarktplatz(pm);;
+
+					p.setPerson(o);
 					result.add(p);
 				}
 				stmt = con.createStatement();

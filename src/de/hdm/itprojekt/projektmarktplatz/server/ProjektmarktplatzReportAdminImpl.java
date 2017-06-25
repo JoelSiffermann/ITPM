@@ -107,18 +107,30 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	@Override
 	public ArrayList<Bewerbung> getBewerbungenByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
-		
-		//TODO
-		// return this.bMapper.getByPartnerprofil();
+		try {
+			return this.bMapper.getBewerbungenByBewerber(o);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	// Abfrage aller Bewerbungen auf eine Ausschreibung
 	@Override
-	public ArrayList<Bewerbung> getBewerbungenByAusschreibung(Ausschreibung a)
+	public ArrayList<Bewerbung> getBewerbungenByAusschreibung(Organisationseinheit o)
 			throws IllegalArgumentException {
-		// return this.bMapper.getByAusschreibung();
-		return null;
+		ArrayList<Ausschreibung> a = this.getAusschreibungenByNutzer(o);
+		ArrayList<Bewerbung> result = new ArrayList<Bewerbung>();
+		for(Ausschreibung a1 : a){
+			try {
+				result.addAll(this.bMapper.getAllByAusschreibungId(a1.getId() + ""));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 	// Abfrage einer Ausschreibung auf Basis der zugehörigen Bewerbung
@@ -139,9 +151,15 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 
 	// Abfrage aller Ausschreibungen eines Nutzers
 	@Override
-	public ArrayList<Ausschreibung> getAusschreibungenByNutzer(Partnerprofil p)
+	public ArrayList<Ausschreibung> getAusschreibungenByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
-		// return this.aMapper.getByPartnerprofil();
+		Partnerprofil p = o.getPartnerprofil();
+		try {
+			return this.aMapper.getAusschreibungenByPartnerprofil(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -185,7 +203,7 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		ArrayList<Ausschreibung> a = new ArrayList<Ausschreibung>();
 		int count = 0;
 		for (int i = 0; i < p.size(); i++) {
-			a.addAll(this.getAusschreibungenByNutzer(p.get(i)));
+//			a.addAll(this.getAusschreibungenByNutzer(p.get(i)));
 			count = a.size();
 		}
 		return count;

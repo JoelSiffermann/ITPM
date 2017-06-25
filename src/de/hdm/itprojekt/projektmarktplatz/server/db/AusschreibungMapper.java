@@ -216,4 +216,30 @@ public class AusschreibungMapper {
 		}
 		return null;
 	}
+	
+	public ArrayList<Ausschreibung> getAusschreibungenByPartnerprofil(Partnerprofil p) throws Exception {
+		Connection con = DBConnection.connection();
+		ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `ausschreibung` WHERE `partnerprofil_id` = " + p.getId());
+			while(rs.next()){
+			Ausschreibung a = new Ausschreibung();
+			Partnerprofil pp = new Partnerprofil();
+	    	Projekt proj = new Projekt();
+			a.setId(rs.getInt("Ausschreibung_ID"));
+			a.setBezeichnung(rs.getString("Bezeichnung"));
+			a.setInhalt(rs.getString("Inhalt"));
+			a.setFrist(rs.getDate("Frist"));
+			pp.setId(rs.getInt("partnerprofil_id"));
+	    	a.setPartnerprofil(pp);
+	    	proj.setId(rs.getInt("projekt_id"));
+	    	a.setProjekt(proj);
+			result.add(a);
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
