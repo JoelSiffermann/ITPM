@@ -74,7 +74,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 		Projekt proj = new Projekt();
 		Date date = new Date();
 		Bewerbung b = new Bewerbung();
-		Organisationseinheit org = new Organisationseinheit();
+		final Organisationseinheit org = new Organisationseinheit();
 		Eigenschaft eg = new Eigenschaft();
 		Bewertung bt = new Bewertung ();
 		Person pers = new Person ();
@@ -553,7 +553,28 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //		});
 //		Cookies.setCookie("email", "test@hdm-stuttgart.de");
 		
-		loadGUI();
+		
+	    LoginServiceAsync loginService = GWT.create(LoginService.class);
+	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+	      public void onFailure(Throwable error) {
+	      }
+
+	      public void onSuccess(LoginInfo result) {
+	        loginInfo = result;
+	        if(loginInfo.isLoggedIn()) {
+	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
+//	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
+	        	Cookies.setCookie("email", "email@test.de");
+//	    		org.setEmail(Cookies.getCookie("email")); 
+	        	loadGUI();
+	        } else {
+	          loadLogin();
+	        }
+	      }
+	    });
+		
+		
+//		loadGUI();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Check login status using login service.
 		
@@ -605,21 +626,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 			}
 		});
 		
-//	    LoginServiceAsync loginService = GWT.create(LoginService.class);
-//	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-//	      public void onFailure(Throwable error) {
-//	      }
-//
-//	      public void onSuccess(LoginInfo result) {
-//	        loginInfo = result;
-//	        if(loginInfo.isLoggedIn()) {
-//	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
-//	        	loadGUI();
-//	        } else {
-//	          loadLogin();
-//	        }
-//	      }
-//	    });
+
 	    
 	    
 		// We can add style names to widgets
