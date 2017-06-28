@@ -15,22 +15,21 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 
-public class EmpfAusschreibungReport extends VerticalPanel{
+public class EmpfAusschreibungReport extends VerticalPanel {
 
 	private final ProjektmarktplatzReportAdminAsync reportService = GWT.create(ProjektmarktplatzReportAdmin.class);
 	private final FlexTable table = new FlexTable();
 	private VerticalPanel vp = new VerticalPanel();
 	private Organisationseinheit e = new Organisationseinheit();
-	private Partnerprofil p = new Partnerprofil();
 	int id = 0;
 	
 	public EmpfAusschreibungReport(){
 		
-		id = Integer.parseInt(Cookies.getCookie("userid"));
+		id = 1; //Integer.parseInt(Cookies.getCookie("userid"));
 		e.setId(id);
-		e.setEmail(Cookies.getCookie("email"));
-		
-		p.setOrganisationseinheit(e);
+		e.setEmail("test@test.de");
+		e.setName("teest");
+//		e.setEmail(Cookies.getCookie("email"));
 		
 		
 		table.addStyleName("Table");
@@ -44,27 +43,7 @@ public class EmpfAusschreibungReport extends VerticalPanel{
 		table.setText(0, 2, "Bezeichnung");
 		table.setText(0, 3, "Inhalt");
 		
-//		reportService.getTest(new AsyncCallback<String>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("klappt ned " + caught.getMessage());
-//				dialogBox.show();
-//			}
-//
-//			@Override
-//			public void onSuccess(String result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("klappt " + result);
-//				dialogBox.show();
-//			}
-//		});
-		
-		
-		reportService.getAuschreibungenByPartnerprofil(p , new AsyncCallback<ArrayList<Ausschreibung>>(){
+		reportService.getEmpfAusschreibungen(e , new AsyncCallback<ArrayList<Ausschreibung>>(){
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
@@ -76,7 +55,9 @@ public class EmpfAusschreibungReport extends VerticalPanel{
 			@Override
 			public void onSuccess(ArrayList<Ausschreibung> result) {
 				int reihe = 0;
-				
+//				final DialogBox dialogBox = new DialogBox();
+//				dialogBox.setText("klappt");
+//				dialogBox.show();
 				for(Ausschreibung a : result){
 					reihe++;
 					table.setText(reihe, 0, a.getId() + "");

@@ -12,14 +12,14 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 
 public class EigBewerbungenReport extends VerticalPanel{
 
 	private final ProjektmarktplatzReportAdminAsync reportService = GWT.create(ProjektmarktplatzReportAdmin.class);
 	private final FlexTable table = new FlexTable();
 	private VerticalPanel vp = new VerticalPanel();
-	private Partnerprofil p = new Partnerprofil();
+	private Organisationseinheit o = new Organisationseinheit();
 	
 	public EigBewerbungenReport(){
 		
@@ -60,7 +60,7 @@ public class EigBewerbungenReport extends VerticalPanel{
 //		});
 		
 		
-		reportService.getBewerbungenByNutzer(p , new AsyncCallback<ArrayList<Bewerbung>>(){
+		reportService.getBewerbungenByNutzer(o , new AsyncCallback<ArrayList<Bewerbung>>(){
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
