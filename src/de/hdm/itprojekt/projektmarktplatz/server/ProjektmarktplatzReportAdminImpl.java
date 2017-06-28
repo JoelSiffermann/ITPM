@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.projektmarktplatz.server;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -28,14 +29,14 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	private static final long serialVersionUID = -4685023405692030606L;
 
 	private AusschreibungMapper aMapper = null;
-	// private OrganisationseinheitMapper orgMapper = null;
+	private OrganisationseinheitMapper orgMapper = null;
 	private BewerbungMapper bMapper = null;
 	// private BewertungMapper bwMapper = null;
 	private EigenschaftMapper eMapper = null;
 	private PartnerprofilMapper pPMapper = null;
 	private PersonMapper persMapper = null;
 	private ProjektbeteiligungMapper projBetMapper = null;
-	// private ProjektMapper projMapper = null;
+	private ProjektMapper projMapper = null;
 	// private ProjektmarktplatzMapper projMarkMapper = null;
 	private TeamMapper tMapper = null;
 	private UnternehmenMapper uMapper = null;
@@ -52,8 +53,8 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		 * der Datenbank kommunizieren kann.
 		 */
 		this.aMapper = AusschreibungMapper.ausschreibungMapper();
-		// this.orgMapper =
-		// OrganisationseinheitMapper.organisationseinheitMapper();
+		this.projMapper = ProjektMapper.projektMapper();
+		this.orgMapper = OrganisationseinheitMapper.organisationseinheitMapper();
 		this.bMapper = BewerbungMapper.bewerbungMapper();
 		// this.bwMapper = BewertungMapper.bewertungMapper();
 		 this.eMapper = EigenschaftMapper.eigenschaftMapper();
@@ -143,7 +144,7 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 
 	// Abfrage aller Beteiligungen eines Nutzers
 	@Override
-	public ArrayList<Beteiligung> getBeteiligungByNutzer(Partnerprofil p)
+	public ArrayList<Beteiligung> getBeteiligungByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
 		// return this.projBetMapper.getByPartnerprofil();
 		return null;
@@ -153,12 +154,20 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	@Override
 	public ArrayList<Ausschreibung> getAusschreibungenByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
-		Partnerprofil p = o.getPartnerprofil();
+		ArrayList<Projekt> p = new ArrayList<Projekt>();
 		try {
-			return this.aMapper.getAusschreibungenByPartnerprofil(p);
+			p = this.projMapper.getAllbyNutzer(o);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for(Projekt p1 : p){
+		try {
+			return this.aMapper.getAusschreibungenByProjekt(p1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 		return null;
 	}
@@ -173,44 +182,38 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 
 	// Abfrage aller Nutzer
 	@Override
-	public ArrayList<Partnerprofil> getAllPersProfile()
+	public ArrayList<Organisationseinheit> getAllPersProfile()
 			throws IllegalArgumentException {
 		try {
-			return this.pPMapper.getAll();
+			return this.orgMapper.getAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	// Abfrage der Anzahl aller Bewerbungen der Nutzer (Fan-In)
+	// Abfrage der Anzahl aller Bewerbungen pro Teilnehmer (Fan-In)
 	@Override
-	public int getAnzahlBewerbungen() throws IllegalArgumentException {
-		ArrayList<Partnerprofil> p = this.getAllPersProfile();
-		ArrayList<Bewerbung> b = new ArrayList<Bewerbung>();
-		int count = 0;
-		for (int i = 0; i < p.size(); i++) {
-//			b.addAll(this.getBewerbungenByNutzer(p.get(i)));
-			count = b.size();
-		}
+	public int getAnzahlBewerbungen(Organisationseinheit o) throws IllegalArgumentException {
+		ArrayList<Bewerbung> b = this.getBewerbungenByNutzer(o);
+		int count = b.size();
 		return count;
 	}
 
-	// Abfrage der Anzahl aller Ausschreibungen der Nutzer (Fan-Out)
+	// Abfrage der Anzahl aller Ausschreibungen pro Projekt (Fan-Out)
 	@Override
-	public int getAnzahlAusschreibungen() throws IllegalArgumentException {
-		ArrayList<Partnerprofil> p = this.getAllPersProfile();
-		ArrayList<Ausschreibung> a = new ArrayList<Ausschreibung>();
-		int count = 0;
-		for (int i = 0; i < p.size(); i++) {
-//			a.addAll(this.getAusschreibungenByNutzer(p.get(i)));
-			count = a.size();
-		}
+	public int getAnzahlAusschreibungen(Projekt p) throws IllegalArgumentException {
+		ArrayList<Ausschreibung> a = this.getAusschreibungenByProjekt(p);
+		int count = a.size();
 		return count;
 	}
-
-	public String getTest() throws IllegalArgumentException {
-		return "TEST";
+	
+	//Abfrage der Anzahl aller Beteiligungen pro Projekt (Fan-In)
+	@Override
+	public int getAnzahlBeteiligungen(Projekt p) throws IllegalArgumentException {
+		ArrayList<Beteiligung> b = this.getBeteiligungenByProjekt(p);
+		int count = b.size();
+		return count;
 	}
 
 	//-------------------------------------------------------------------------------------------------------
@@ -280,6 +283,73 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 			}
 		}
 		return result;
+	}
+	
+	public ArrayList<Ausschreibung> getAusschreibungenByProjekt(Projekt p){
+		try {
+			return this.aMapper.getAusschreibungenByProjekt(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Bewerbung> getBewerbungbyAusschreibung(Ausschreibung a){
+		try {
+			return this.bMapper.getAllByAusschreibungId(a.getId() + "");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Beteiligung> getBeteiligungenByProjekt(Projekt p){
+		try {
+			return this.projBetMapper.getAllByProjekt(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public ArrayList<Organisationseinheit> getPersonenByProjekt(Projekt p){
+		ArrayList<Organisationseinheit> result = new ArrayList<Organisationseinheit>();
+		ArrayList<Ausschreibung> a = this.getAusschreibungenByProjekt(p);
+		for(Ausschreibung a1 : a){
+			ArrayList<Bewerbung> b = new ArrayList<Bewerbung>();
+			b = this.getBewerbungbyAusschreibung(a1);
+			for(Bewerbung b1 : b){
+				Organisationseinheit o = b1.getBewerber();
+				result.add(o);
+			}
+		}
+		ArrayList<Beteiligung> b = this.getBeteiligungenByProjekt(p);
+		for(Beteiligung b1 : b){
+			Organisationseinheit o = b1.getOrganisationseinheit();
+			result.add(o);
+		}
+		return result;
+	}
+	
+	@Override
+	public Beteiligung getBeteiligungByProjektteilnehmer(Organisationseinheit o, Projekt p){
+		try {
+			return this.projBetMapper.getByPersonAndProjekt(o, p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String getTest() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 //	public ArrayList<Eigenschaft> getEquals(Organisationseinheit o) throws IllegalArgumentException {

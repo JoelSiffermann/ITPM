@@ -28,7 +28,8 @@ public class AusBewerbungenReport extends VerticalPanel{
 	//TODO get Ausschreibungen des Nutzers
 	
 	public AusBewerbungenReport(){
-		
+		//TODO
+		o.setId(60);
 		table.addStyleName("Table");
 		table.setCellPadding(6);
 		table.getCellFormatter().addStyleName(0, 0, "TableHeader");

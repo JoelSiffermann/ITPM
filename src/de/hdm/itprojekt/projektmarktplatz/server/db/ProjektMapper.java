@@ -225,8 +225,7 @@ public class ProjektMapper {
 					Projektmarktplatz pm = new Projektmarktplatz();
 					pm.setId(rs.getInt("projektmarktplatz_id"));
 					p.setProjektmarktplatz(pm);;
-
-					p.setPerson(o);
+					p.setProjektleiter(o);
 					result.add(p);
 				}
 				stmt = con.createStatement();
