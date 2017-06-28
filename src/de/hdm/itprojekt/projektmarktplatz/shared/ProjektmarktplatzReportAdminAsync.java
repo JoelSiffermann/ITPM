@@ -41,6 +41,9 @@ public interface ProjektmarktplatzReportAdminAsync {
 
 	void getTest(AsyncCallback<String> callback);
 
+
+	void init(AsyncCallback<Void> callback);
+
 	void getEmpfAusschreibungen(Organisationseinheit o,
 			AsyncCallback<ArrayList<Ausschreibung>> callback);
 
@@ -51,5 +54,6 @@ public interface ProjektmarktplatzReportAdminAsync {
 			AsyncCallback<ArrayList<Organisationseinheit>> callback);
 
 	void getAnzahlBeteiligungen(Projekt p, AsyncCallback<Integer> callback);
+
 
 }

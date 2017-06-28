@@ -58,14 +58,14 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 
 	private LoginInfo loginInfo = null;
 	private VerticalPanel loginPanel = new VerticalPanel();
-	private Label loginLabel = new Label(
-	      "Please sign in to your Google Account to access the StockWatcher application.");
+	private Label loginLabel = new Label("Bitte mit Ihrem Google-Account einloggen.");
 	private Anchor signInLink = new Anchor("Sign In");
 //	private Anchor signOutLink = new Anchor("Sign Out");
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+
 	    LoginServiceAsync loginService = GWT.create(LoginService.class);
 	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 	      public void onFailure(Throwable error) {
@@ -84,6 +84,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	        }
 	      }
 	    });
+
 		
 		
 		loadGUI();
