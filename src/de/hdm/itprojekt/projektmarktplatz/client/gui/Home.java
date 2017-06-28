@@ -22,6 +22,7 @@ public class Home extends VerticalPanel {
 
 	public void onLoad() {
 
+		super.onLoad();
 		final HorizontalPanel hpHeader = new HorizontalPanel();
 		final HorizontalPanel hpInfo = new HorizontalPanel();
 		final VerticalPanel vpMainNavigation = new VerticalPanel();
@@ -206,23 +207,23 @@ public class Home extends VerticalPanel {
 		});
 		
 		vpMainNavigation.addStyleName("mainNavigation");
-		vpMainNavigation.add(btProfilBearbeiten);
-		vpMainNavigation.add(btProfilAnzeigen);
-		vpMainNavigation.add(btProjektNeu);
-		vpMainNavigation.add(btAusschreibungNeu);
-		vpMainNavigation.add(btAusschreibungAnzeigen);
-		vpMainNavigation.add(btPM);
-		vpMainNavigation.add(btMeineProjekte);
-		vpMainNavigation.add(btMeineBeteiligung);
-		vpMainNavigation.add(btBewertungAnzeigen);
-		vpMainNavigation.add(btAndereBeteiligung);
-		vpMainNavigation.add(btAndereProjekte);
-		vpMainNavigation.add(btMeineBewerbung);
-		vpMainNavigation.add(btBewerbungNeu);
+//		vpMainNavigation.add(btProfilBearbeiten);
+//		vpMainNavigation.add(btProfilAnzeigen);
+//		vpMainNavigation.add(btProjektNeu);
+//		vpMainNavigation.add(btAusschreibungNeu);
+//		vpMainNavigation.add(btAusschreibungAnzeigen);
+//		vpMainNavigation.add(btPM);
+//		vpMainNavigation.add(btMeineProjekte);
+//		vpMainNavigation.add(btMeineBeteiligung);
+//		vpMainNavigation.add(btBewertungAnzeigen);
+//		vpMainNavigation.add(btAndereBeteiligung);
+//		vpMainNavigation.add(btAndereProjekte);
+//		vpMainNavigation.add(btMeineBewerbung);
+//		vpMainNavigation.add(btBewerbungNeu);
 
 
-		hpInfo.add(vpMainNavigation);
-		hpInfo.add(vpInfo);
+//		hpInfo.add(vpMainNavigation);
+//		hpInfo.add(vpInfo);
 
 //		RootPanel.get("nav").add(vpMainNavigation);
 		RootPanel.get("nav").add(mainnav);
