@@ -47,6 +47,9 @@ public interface ProjektmarktplatzReportAdmin extends RemoteService {
 
 	public String getTest() throws IllegalArgumentException;
 
+
+	void init() throws IllegalArgumentException;;
+
 	ArrayList<Ausschreibung> getEmpfAusschreibungen(Organisationseinheit o)
 			throws IllegalArgumentException;
 
@@ -54,4 +57,5 @@ public interface ProjektmarktplatzReportAdmin extends RemoteService {
 			Projekt p);
 
 	ArrayList<Organisationseinheit> getPersonenByProjekt(Projekt p);
+
 }

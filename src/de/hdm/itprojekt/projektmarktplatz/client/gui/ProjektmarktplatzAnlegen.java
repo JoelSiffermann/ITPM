@@ -32,15 +32,17 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 public class ProjektmarktplatzAnlegen extends VerticalPanel{
 	
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
-
 	
-	public void onLoad() {
-		final HorizontalPanel hPanel = new HorizontalPanel();
+	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	//in bankprojekt nachsehen! 
+	
+		HorizontalPanel hPanel = new HorizontalPanel();
+		TextArea taName = new TextArea();
 		HorizontalPanel hPanel2 = new HorizontalPanel();
 		VerticalPanel vPanel = new VerticalPanel();
 		Label lblBez = new Label("Bezeichnung");
-		final TextArea taName = new TextArea();
+	public void onLoad() {
+		
 		Button btSpeichern = new Button("Speichern");
 		Button btAbbrechen = new Button ("Abbrechen");
 		
@@ -77,4 +79,6 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel{
 	
 	
 	}
+	
+	
 }

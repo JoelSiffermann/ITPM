@@ -196,12 +196,15 @@ public class Home extends VerticalPanel {
 		});
 		
 		btPM.addClickHandler(new ClickHandler() {
-			ProjektmarktplatzAnzeigen pm = new ProjektmarktplatzAnzeigen();
+			
 			@Override
 			public void onClick(ClickEvent event) {
+				ProjektmarktplatzAnzeigen pm = new ProjektmarktplatzAnzeigen();
 				// TODO Auto-generated method stub
 				vpInfo.clear();
 				vpInfo.add(pm);
+				//pm.getData();
+				
 			}
 		});
 		
