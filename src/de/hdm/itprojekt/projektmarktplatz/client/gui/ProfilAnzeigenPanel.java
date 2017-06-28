@@ -17,10 +17,11 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 	 * Neues Design
 	 */
 
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class); //gehört in entrypoint klasse rein
 	
 	public void onLoad(){
-		
+		//Superklasse ->Methodenaufrauf    
+		super.onLoad();
 		final VerticalPanel vpProfilForm1 = new VerticalPanel();
 		final VerticalPanel vpProfilForm2 = new VerticalPanel();
 		final TextBox tbName = new TextBox();
@@ -52,7 +53,8 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 		vpProfilForm2.add(btProfilBearbeiten);
 		vpProfilForm2.add(btProfilEntfernen);
 		
-		this.clear();
+		this.clear();//nicht nötig, weil frisch angelegt wurde
+		
 		this.add(vpProfilForm1);
 		this.add(vpProfilForm2);
 

@@ -42,4 +42,6 @@ public interface ProjektmarktplatzReportAdmin extends RemoteService {
 	int getAnzahlAusschreibungen() throws IllegalArgumentException;
 
 	public String getTest() throws IllegalArgumentException;
+
+	void init() throws IllegalArgumentException;;
 }

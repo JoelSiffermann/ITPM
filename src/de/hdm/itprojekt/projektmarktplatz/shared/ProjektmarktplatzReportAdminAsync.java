@@ -39,4 +39,6 @@ public interface ProjektmarktplatzReportAdminAsync {
 
 	void getTest(AsyncCallback<String> callback);
 
+	void init(AsyncCallback<Void> callback);
+
 }

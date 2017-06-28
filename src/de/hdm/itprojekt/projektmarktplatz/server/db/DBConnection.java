@@ -51,7 +51,7 @@ public class DBConnection {
     private static String googleUrl = "jdbc:google:mysql://it-projekt-170811:it-projekt170811:it-projekt/itproj?user=root&password=123";
 
     //    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
-    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
+    private static String localUrl = "jdbc:mysql://127.0.0.1:3308/dbproj?user=root";
     //PORT GEÄNDERT IN 3307!!! 
     
     /**
