@@ -3,6 +3,7 @@ package de.hdm.itprojekt.projektmarktplatz.client.gui;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -11,6 +12,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.LoginInfo;
 
 public class Home extends VerticalPanel {
 	
@@ -19,13 +21,15 @@ public class Home extends VerticalPanel {
 	 */
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
-
+//	private Anchor signOutLink = new Anchor("Sign Out");
+//	private LoginInfo loginInfo = null;
 	public void onLoad() {
 
 		final HorizontalPanel hpHeader = new HorizontalPanel();
 		final HorizontalPanel hpInfo = new HorizontalPanel();
 		final VerticalPanel vpMainNavigation = new VerticalPanel();
 		final VerticalPanel vpInfo = new VerticalPanel();
+//		signOutLink.setHref(loginInfo.getLogoutUrl());
 		final Button btLogout = new Button("Logout");
 		final MainNavigationPanel mainnav = new MainNavigationPanel();
 
@@ -230,7 +234,7 @@ public class Home extends VerticalPanel {
 //		RootPanel.get("nav").add(vpMainNavigation);
 		RootPanel.get("nav").add(mainnav);
 		RootPanel.get("header").add(btLogout);
-		
+//		RootPanel.get("header").add(signOutLink);
 		this.clear();
 		this.add(hpHeader);
 		this.add(hpInfo);

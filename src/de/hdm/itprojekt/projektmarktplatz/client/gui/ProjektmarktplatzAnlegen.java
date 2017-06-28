@@ -23,41 +23,40 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
+public class ProjektmarktplatzAnlegen extends VerticalPanel {
 
+	// private final ProjektmarktplatzAdminAsync projektService =
+	// GWT.create(ProjektmarktplatzAdmin.class);
+	private final ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
+	// in bankprojekt nachsehen!
 
+	HorizontalPanel hPanel = new HorizontalPanel();
+	TextArea taName = new TextArea();
+	HorizontalPanel hPanel2 = new HorizontalPanel();
+	VerticalPanel vPanel = new VerticalPanel();
+	Label lblBez = new Label("Bezeichnung");
 
-public class ProjektmarktplatzAnlegen extends VerticalPanel{
-	
-	
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
-	//in bankprojekt nachsehen! 
-	
-		HorizontalPanel hPanel = new HorizontalPanel();
-		TextArea taName = new TextArea();
-		HorizontalPanel hPanel2 = new HorizontalPanel();
-		VerticalPanel vPanel = new VerticalPanel();
-		Label lblBez = new Label("Bezeichnung");
 	public void onLoad() {
-		
+
 		Button btSpeichern = new Button("Speichern");
-		Button btAbbrechen = new Button ("Abbrechen");
-		
-		
+		Button btAbbrechen = new Button("Abbrechen");
+
 		btSpeichern.addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		btAbbrechen.addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
@@ -66,19 +65,36 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel{
 				hPanel.add(pa);
 			}
 		});
-		
+
 		hPanel.add(vPanel);
 		vPanel.add(lblBez);
 		vPanel.add(taName);
 		vPanel.add(hPanel2);
 		hPanel2.add(btSpeichern);
 		hPanel2.add(btAbbrechen);
-		
+
 		this.add(hPanel);
 
+	}
 	
-	
+	private class Save implements ClickHandler{
+
+		String name = "";
+		
+		public Save(String name) {
+			this.name = name;
+			
+			
+		}
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			
+			
+		}
+		
 	}
 	
 	
+
 }
