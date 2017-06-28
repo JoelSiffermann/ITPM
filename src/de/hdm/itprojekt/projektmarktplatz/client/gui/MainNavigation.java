@@ -27,7 +27,7 @@ public interface MainNavigation extends Constants {
 
     String cwStackPanelName();
 
-	void add(VerticalPanel vpMainNavigation);
+	
     
   }
 

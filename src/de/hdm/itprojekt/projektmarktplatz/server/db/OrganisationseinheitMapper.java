@@ -108,7 +108,7 @@ public class OrganisationseinheitMapper {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `organisationseinheit` WHERE `E-Mail` = '" + o.getEmail() + "'");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM organisationseinheit WHERE `E-Mail` = '" + o.getEmail() + "'");
 			if (rs.next()) {
 				Organisationseinheit or = new Organisationseinheit();
 				or.setId(rs.getInt("Organisationseinheit_ID"));
