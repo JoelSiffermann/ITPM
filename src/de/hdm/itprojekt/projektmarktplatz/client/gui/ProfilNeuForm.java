@@ -108,15 +108,26 @@ public class ProfilNeuForm extends VerticalPanel {
 		kBereich.add(ftKenntnis);
 		final FlexTable ftKenntnisListe = new FlexTable();
 		kBereich.add(ftKenntnisListe);
-
+		
 		Organisationseinheit org = new Organisationseinheit();
 		org.setId(Integer.parseInt(Cookies.getCookie("userid")));
 		projektService.readByIdOrg(org, new AsyncCallback<Organisationseinheit>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("Fehler: " + caught.getLocalizedMessage());
+				Button closeButton = new Button("OK", new ClickHandler() {
 
+					@Override
+					public void onClick(ClickEvent event) {
+
+						dialogBox.hide();
+					}
+				});
+
+				dialogBox.add(closeButton);
+				dialogBox.show();
 			}
 
 			@Override
@@ -130,7 +141,19 @@ public class ProfilNeuForm extends VerticalPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("Fehler: " + caught.getLocalizedMessage());
+				Button closeButton = new Button("OK", new ClickHandler() {
 
+					@Override
+					public void onClick(ClickEvent event) {
+
+						dialogBox.hide();
+					}
+				});
+
+				dialogBox.add(closeButton);
+				dialogBox.show();
 			}
 
 			@Override
@@ -424,6 +447,20 @@ public class ProfilNeuForm extends VerticalPanel {
 
 					@Override
 					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						final DialogBox dialogBox = new DialogBox();
+						dialogBox.setText("Fehler: " + caught.getLocalizedMessage());
+						Button closeButton = new Button("OK", new ClickHandler() {
+
+							@Override
+							public void onClick(ClickEvent event) {
+
+								dialogBox.hide();
+							}
+						});
+
+						dialogBox.add(closeButton);
+						dialogBox.show();
 					}
 
 					@Override

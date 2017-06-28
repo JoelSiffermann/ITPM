@@ -27,6 +27,7 @@ public class Home extends VerticalPanel {
 		final VerticalPanel vpMainNavigation = new VerticalPanel();
 		final VerticalPanel vpInfo = new VerticalPanel();
 		final Button btLogout = new Button("Logout");
+		final MainNavigationPanel mainnav = new MainNavigationPanel();
 
 		final Button btProfilBearbeiten = new Button("Profil bearbeiten");
 		final Button btProfilAnzeigen = new Button("Profil anzeigen");
@@ -40,8 +41,8 @@ public class Home extends VerticalPanel {
 		final Button btAndereProjekte = new Button("Andere Projekte");
 		final Button btMeineBewerbung = new Button("Meine Bewerbungen");
 		final Button btBewerbungNeu = new Button("Sich bewerben");
-
-
+		final Button btPM = new Button("Projektmarktplatz");
+		
 		btProfilBearbeiten.addClickHandler(new ClickHandler() {
 
 			ProfilNeuForm profilNeu = new ProfilNeuForm();
@@ -194,12 +195,23 @@ public class Home extends VerticalPanel {
 
 		});
 		
+		btPM.addClickHandler(new ClickHandler() {
+			ProjektmarktplatzAnzeigen pm = new ProjektmarktplatzAnzeigen();
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				vpInfo.clear();
+				vpInfo.add(pm);
+			}
+		});
+		
 		vpMainNavigation.addStyleName("mainNavigation");
 		vpMainNavigation.add(btProfilBearbeiten);
 		vpMainNavigation.add(btProfilAnzeigen);
 		vpMainNavigation.add(btProjektNeu);
 		vpMainNavigation.add(btAusschreibungNeu);
 		vpMainNavigation.add(btAusschreibungAnzeigen);
+		vpMainNavigation.add(btPM);
 		vpMainNavigation.add(btMeineProjekte);
 		vpMainNavigation.add(btMeineBeteiligung);
 		vpMainNavigation.add(btBewertungAnzeigen);
@@ -212,7 +224,8 @@ public class Home extends VerticalPanel {
 		hpInfo.add(vpMainNavigation);
 		hpInfo.add(vpInfo);
 
-		RootPanel.get("nav").add(vpMainNavigation);
+//		RootPanel.get("nav").add(vpMainNavigation);
+		RootPanel.get("nav").add(mainnav);
 		RootPanel.get("header").add(btLogout);
 		
 		this.clear();

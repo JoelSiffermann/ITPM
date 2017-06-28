@@ -32,6 +32,7 @@ h1 {
 }
 
 .flex-container {
+
 	display: -webkit-flex;
 	display: flex;
 	-webkit-flex-flow: row wrap;
@@ -102,3 +103,4 @@ footer {
 		order: 3;
 	}
 }
+

@@ -11,6 +11,7 @@ public class Projekt extends BusinessObjekt{
 	private String inhalt;
 	private Person person;
 	private Projektmarktplatz projektmarktplatz;
+	private Organisationseinheit projektleiter;
 	
 	public Projekt(){
 		
@@ -55,6 +56,14 @@ public class Projekt extends BusinessObjekt{
 
 	public void setProjektmarktplatz(Projektmarktplatz projektmarktplatz) {
 		this.projektmarktplatz = projektmarktplatz;
+	}
+
+	public Organisationseinheit getProjektleiter() {
+		return projektleiter;
+	}
+
+	public void setProjektleiter(Organisationseinheit projektleiter) {
+		this.projektleiter = projektleiter;
 	}
 }
 

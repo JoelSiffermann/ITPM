@@ -18,7 +18,10 @@ public class AlleAusschreibungenReport extends VerticalPanel{
 	
 	private final ProjektmarktplatzReportAdminAsync reportService = GWT.create(ProjektmarktplatzReportAdmin.class);
 	private final FlexTable table = new FlexTable();
-	private VerticalPanel vp = new VerticalPanel();
+	
+	//TODO DataGrid statt Flextable
+	
+	//TODO onLoad() wichtig!
 	
 	public AlleAusschreibungenReport(){
 		
@@ -53,6 +56,13 @@ public class AlleAusschreibungenReport extends VerticalPanel{
 //		});
 		
 		
+		setAllAusschreibung();
+		this.add(table);
+	}
+
+
+
+	private void setAllAusschreibung() {
 		reportService.getAllAusschreibung(new AsyncCallback<ArrayList<Ausschreibung>>(){
 			@Override
 			public void onFailure(Throwable caught) {
@@ -75,8 +85,5 @@ public class AlleAusschreibungenReport extends VerticalPanel{
 				};
 			}
 		});
-		
-		vp.add(table);
-		this.add(vp);
 	}
 }
