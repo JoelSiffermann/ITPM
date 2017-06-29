@@ -37,11 +37,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 	/* Neues Design für die GUI */
-	private ListDataProvider<Projektmarktplatz> customerDataProvider = null;
+	private ListDataProvider<Projektmarktplatz> projektmarktplatzDataProvider = null;
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
-	Projektmarktplatz accountToDisplay = null;
+	Projektmarktplatz projektmarktplatzToDisplay = null;
 	// CustomerAccountsTreeViewModel catvm = null;
 	NumberFormat decimalFormatter = NumberFormat.getDecimalFormat();
 
@@ -71,7 +71,7 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 		// projektService.readAllProjektmarktplatz(new ReadAllPM(liste));
 		// List<String> MEINEBEWERBUNGEN = Arrays.asList(liste);
 
-		List<String> MEINEBEWERBUNGEN = Arrays.asList(liste);
+		List<String> PROJEKTMARKTPLAETZE = Arrays.asList(liste);
 		TextCell textCell = new TextCell();
 		CellList<String> cellList = new CellList<String>(textCell);
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
@@ -80,10 +80,10 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 		cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
 
-		cellList.setRowCount(MEINEBEWERBUNGEN.size(), true);
+		cellList.setRowCount(PROJEKTMARKTPLAETZE.size(), true);
 
 		// Push the data into the widget.
-		cellList.setRowData(0, MEINEBEWERBUNGEN);
+		cellList.setRowData(0, PROJEKTMARKTPLAETZE);
 
 //		this.getData(cellList);
 		Button btErstellen = new Button("Erstellen");
@@ -184,7 +184,7 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 	private class ReadAllPM extends VerticalPanel implements AsyncCallback<ArrayList<Projektmarktplatz>> {
 		String[] l;
 		CellList<String> clist;
-		List<String> MEINEBEWERBUNGEN;
+		List<String> PROJEKTMARKTPLAETZE;
 
 		public ReadAllPM(CellList clist) {
 			this.clist = clist;
@@ -203,14 +203,14 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 			this.l = new String[result.size()];
 			int i = 0;
 			for (Projektmarktplatz p : result) {
-				Window.alert(p.getBezeichnung());
+//				Window.alert(p.getBezeichnung());
 				l[i] = p.getBezeichnung();
 				i++;
 			}
 
-			MEINEBEWERBUNGEN = Arrays.asList(l);
+			PROJEKTMARKTPLAETZE = Arrays.asList(l);
 			// // Push the data into the widget.
-			clist.setRowData(0, MEINEBEWERBUNGEN);
+			clist.setRowData(0, PROJEKTMARKTPLAETZE);
 //			this.add(clist);
 		}
 
