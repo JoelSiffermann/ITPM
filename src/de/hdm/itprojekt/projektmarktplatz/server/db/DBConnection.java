@@ -47,8 +47,10 @@ public class DBConnection {
      * mitgegeben, um bei einer Veränderung dieser URL nicht die gesamte
      * Software neu komilieren zu müssen.
      */
-    private static String googleUrl = "jdbc:google:mysql://prof-thies.de:thies-bankproject:thies-bankproject/bankproject?user=demo&password=demo";
-//    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
+//    private static String googleUrl = "jdbc:google:mysql://prof-thies.de:thies-bankproject:thies-bankproject/bankproject?user=demo&password=demo";
+    private static String googleUrl = "jdbc:google:mysql://it-projekt-170811:it-projekt170811:it-projekt/itproj?user=root&password=123";
+
+    //    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
     private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
     //PORT GEÄNDERT IN 3307!!! 
     
@@ -76,7 +78,7 @@ public class DBConnection {
      * @return DAS <code>DBConncetion</code>-Objekt.
      * @see con
      */
-    public static Connection connection()throws Exception {
+    public static Connection connection() throws Exception {
         // Wenn es bisher keine Conncetion zur DB gab, ...
         if (con == null) {
             String url = null;

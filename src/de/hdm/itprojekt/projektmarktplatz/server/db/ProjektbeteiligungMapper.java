@@ -81,7 +81,7 @@ public class ProjektbeteiligungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `beteiligung` SET `Beteilgung_ID` = '"+b.getId()+"', `Start` = '"+datum2+"', `Ende` = '"+datum+"', `Umfang` = '"+b.getUmfang()+"', `projekt_ID` = '"+b.getProjekt().getId()+"', `orga_id` = '"+b.getOrganisationseinheit().getId()+"' WHERE `beteiligung`.`Beteilgung_ID` = "+b.getId());
+			stmt.executeUpdate("UPDATE `beteiligung` SET `Beteilgung_ID` = '"+b.getId()+"', `Start` = '"+datum2+"', `Ende` = '"+datum+"', `Umfang` = '"+b.getUmfang()+"', `projekt_ID` = '"+b.getProjekt().getId()+"', `orga_id` = '"+b.getOrganisationseinheit().getId()+"' WHERE `beteiligung`.`Beteilgung_ID` = "+b.getId()+";");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -180,6 +180,59 @@ public class ProjektbeteiligungMapper {
 		}
 		return null;
 
+	}
+
+	public ArrayList<Beteiligung> getAllByProjekt(Projekt p) throws Exception {
+		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			/*
+			 * Zunächst schauen wir nach, welches der momentan höchste
+			 * Primärschlüsselwert ist.
+			 */
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `beteiligung` WHERE `projekt_ID` = " + p.getId());
+				while (rs.next()) {
+			          Beteiligung b = new Beteiligung();//default Konstruktor in Beteiligung.java einf�gen damit es kein Fehler anzeigt
+			          b.setId(rs.getInt("Beteilgung_ID"));
+			          b.setStart(rs.getDate("Start"));
+			          b.setEnde(rs.getDate("Ende"));
+			          b.setUmfang(rs.getInt("Umfang"));
+					  b.setProjekt(p);
+					  Organisationseinheit o = new Organisationseinheit();
+					  b.setId(rs.getInt("orga_id"));
+					  b.setOrganisationseinheit(o);
+					  result.add(b);
+					}
+				return result;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Beteiligung getByPersonAndProjekt(Organisationseinheit o, Projekt p) throws Exception{
+		Connection con = DBConnection.connection();
+	    try {
+	      Statement stmt = con.createStatement();
+
+	      ResultSet rs =  stmt.executeQuery("SELECT * FROM `beteiligung` WHERE `projekt_ID` = " + p.getId() + " AND `orga_id` = " + o.getId());
+	     if (rs.next()){
+	    	 Beteiligung b = new Beteiligung();//default Konstruktor in Beteiligung.java einf�gen damit es kein Fehler anzeigt
+	          b.setId(rs.getInt("Beteilgung_ID"));
+	          b.setStart(rs.getDate("Start"));
+	          b.setEnde(rs.getDate("Ende"));
+	          b.setUmfang(rs.getInt("Umfang"));
+			  b.setProjekt(p);
+			  b.setOrganisationseinheit(o);
+			  return b;
+	     }
+	    }
+	    catch (SQLException e) {
+	    	
+	    }
+	    return null;
 	}
 
 }

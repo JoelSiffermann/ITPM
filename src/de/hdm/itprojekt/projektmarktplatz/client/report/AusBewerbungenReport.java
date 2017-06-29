@@ -13,6 +13,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 
 public class AusBewerbungenReport extends VerticalPanel{
@@ -22,11 +23,13 @@ public class AusBewerbungenReport extends VerticalPanel{
 	private VerticalPanel vp = new VerticalPanel();
 	private Partnerprofil p = new Partnerprofil();
 	private Ausschreibung a = new Ausschreibung();
+	private Organisationseinheit o = new Organisationseinheit();
 	
 	//TODO get Ausschreibungen des Nutzers
 	
 	public AusBewerbungenReport(){
-		
+		//TODO
+		o.setId(60);
 		table.addStyleName("Table");
 		table.setCellPadding(6);
 		table.getCellFormatter().addStyleName(0, 0, "TableHeader");
@@ -58,7 +61,7 @@ public class AusBewerbungenReport extends VerticalPanel{
 //		});
 		
 		
-		reportService.getBewerbungenByAusschreibung(a, new AsyncCallback<ArrayList<Bewerbung>>(){
+		reportService.getBewerbungenByAusschreibung(o, new AsyncCallback<ArrayList<Bewerbung>>(){
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 
 //@author samina
 public class BewerbungMapper {
@@ -57,8 +58,8 @@ public class BewerbungMapper {
 
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate(
-					"INSERT INTO `bewerbung` (`Bewerbung_ID`, `Inhalt`, `Erstelldatum`, `ausschreibung_id`)" + "VALUES (NULL, '"
-							+ b.getInhalt() + "','" +datum+ "', '" + b.getAusschreibung().getId()+"');");
+					"INSERT INTO `bewerbung` (`Bewerbung_ID`, `Inhalt`, `Erstelldatum`, `ausschreibung_id`, `bewerber_id`)" + "VALUES (NULL, '"
+							+ b.getInhalt() + "','" +datum+ "', '" + b.getAusschreibung().getId()+"', '" + b.getBewerber().getId()+"');");
 			// }
 
 		} catch (SQLException e) {
@@ -76,7 +77,7 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE `bewerbung` SET `Bewerbung_ID` = '"+b.getId()+"', `Inhalt` = '"+b.getInhalt()+"', `Erstelldatum` = '"+ datum +"', `ausschreibung_id` = '"+b.getAusschreibung().getId()+"' WHERE `bewerbung`.`Bewerbung_ID` = "+b.getId()+";");
+			stmt.executeUpdate("UPDATE `bewerbung` SET `Bewerbung_ID` = '"+b.getId()+"', `Inhalt` = '"+b.getInhalt()+"', `Erstelldatum` = '"+ datum +"', `ausschreibung_id` = '"+b.getAusschreibung().getId()+"', `bewerber_id` = '"+ b.getBewerber().getId() +"' WHERE `bewerbung`.`Bewerbung_ID` = "+b.getId()+";");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,9 +111,10 @@ public class BewerbungMapper {
 				bw.setInhalt(rs.getString("Inhalt"));
 				bw.setErstelldatum(rs.getDate("Erstelldatum"));
 				Ausschreibung a = new Ausschreibung();
-
+				Organisationseinheit o = new Organisationseinheit();
+				o.setId(rs.getInt("bewerber_id"));
 				a.setId(rs.getInt("ausschreibung_id"));
-
+				b.setBewerber(o);
 				bw.setAusschreibung(a);
 				
 				return bw;
@@ -150,9 +152,10 @@ public class BewerbungMapper {
 					b.setInhalt(rs.getString("Inhalt"));
 					b.setErstelldatum(rs.getDate("Erstelldatum"));
 					Ausschreibung a = new Ausschreibung();
-
+					Organisationseinheit o = new Organisationseinheit();
+					o.setId(rs.getInt("bewerber_id"));
 					a.setId(rs.getInt("ausschreibung_id"));
-
+					b.setBewerber(o);
 					b.setAusschreibung(a);
 					result.add(b);
 				}
@@ -196,10 +199,56 @@ public class BewerbungMapper {
 					b.setInhalt(rs.getString("Inhalt"));
 					b.setErstelldatum(rs.getDate("Erstelldatum"));
 					Ausschreibung a = new Ausschreibung();
-
+					Organisationseinheit o = new Organisationseinheit();
+					o.setId(rs.getInt("bewerber_id"));
 					a.setId(rs.getInt("ausschreibung_id"));
-
+					b.setBewerber(o);
 					b.setAusschreibung(a);
+					result.add(b);
+				}
+
+				stmt = con.createStatement();
+
+				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+//				stmt.executeUpdate("");
+//				return result;
+//			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+
+	}
+	
+	public ArrayList<Bewerbung> getBewerbungenByBewerber(Organisationseinheit o) throws Exception {
+
+		Connection con = DBConnection.connection();
+		ArrayList<Bewerbung> result = new ArrayList<Bewerbung>();
+		try {
+			Statement stmt = con.createStatement();
+
+			/*
+			 * Zunächst schauen wir nach, welches der momentan höchste
+			 * Primärschlüsselwert ist.
+			 */
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `bewerbung` WHERE `bewerber_id` = " + o.getId());
+			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+//			if (rs.next()) {
+				/*
+				 * c erhält den bisher maximalen, nun um 1 inkrementierten
+				 * Primärschlüssel.
+				 */
+
+				while (rs.next()) {
+					Bewerbung b = new Bewerbung();
+					b.setId(rs.getInt("Bewerbung_ID"));
+					b.setInhalt(rs.getString("Inhalt"));
+					b.setErstelldatum(rs.getDate("Erstelldatum"));
+					Ausschreibung a = new Ausschreibung();
+					a.setId(rs.getInt("ausschreibung_id"));
+					b.setAusschreibung(a);
+					b.setBewerber(o);
 					result.add(b);
 				}
 

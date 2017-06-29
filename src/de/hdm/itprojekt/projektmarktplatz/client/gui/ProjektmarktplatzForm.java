@@ -27,11 +27,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 public class ProjektmarktplatzForm extends HorizontalPanel {
-	
+
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
 	public ProjektmarktplatzForm(final ArrayList<Projektmarktplatz> result) {
-		// aus DB
+
 		final List<String> PROJEKTMARKTPLATZ = Arrays.asList("Projektmarktplatz 1", "Projektmarktplatz 2",
 				"Projektmarktplatz 3", "Projektmarktplatz 4");
 		final VerticalPanel vpProjektmarktplatz = new VerticalPanel();
@@ -47,7 +47,7 @@ public class ProjektmarktplatzForm extends HorizontalPanel {
 
 		// Add a selection model to handle user selection.
 		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
-		
+
 		cellList.setSelectionModel(selectionModel);
 		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			public void onSelectionChange(SelectionChangeEvent event) {
@@ -71,7 +71,7 @@ public class ProjektmarktplatzForm extends HorizontalPanel {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				
+
 				ProjektForm pfMeineProjekte = new ProjektForm();
 				vpProjektmarktplatz.clear();
 				vpProjektmarktplatz.add(pfMeineProjekte.getMeineProjekte(result));
@@ -88,22 +88,21 @@ public class ProjektmarktplatzForm extends HorizontalPanel {
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+
 					}
 
 					@Override
 					public void onSuccess(ArrayList<Projektmarktplatz> result) {
-						
-						for(Projektmarktplatz pm : result){
+
+						for (Projektmarktplatz pm : result) {
 							ProjektForm pfMeineProjekte = new ProjektForm();
 							vpProjektmarktplatz.clear();
 							vpProjektmarktplatz.add(pfMeineProjekte.getAlleProjekte(result));
-							
+
 						}
-						
+
 					}
 				});
-				
 
 			}
 		});

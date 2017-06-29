@@ -23,6 +23,8 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 public class MainPanel extends HorizontalPanel {
 
+	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+
 	public MainPanel() {
 
 		final VerticalPanel navi = new VerticalPanel();
@@ -51,14 +53,12 @@ public class MainPanel extends HorizontalPanel {
 					break;
 
 				case "Projektmarktplatz":
-					// if (selected != null) {
-					// Window.alert("You selected: " + selected);
-					// }
+
 					int id = Integer.parseInt(Cookies.getCookie("userid"));
 					Organisationseinheit o = new Organisationseinheit();
 					o.setId(id);
 					projektService.readAllProjektmarktplatzByOrg(o, new AsyncCallback<ArrayList<Projektmarktplatz>>() {
-						
+
 						@Override
 						public void onSuccess(ArrayList<Projektmarktplatz> result) {
 							// TODO Auto-generated method stub
@@ -66,14 +66,14 @@ public class MainPanel extends HorizontalPanel {
 							info.clear();
 							info.add(pmForm);
 						}
-						
+
 						@Override
 						public void onFailure(Throwable caught) {
 							// TODO Auto-generated method stub
-							
+
 						}
 					});
-					
+
 					break;
 
 				case "Beteiligung":

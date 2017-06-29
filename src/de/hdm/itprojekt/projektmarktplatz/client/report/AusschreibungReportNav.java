@@ -14,6 +14,9 @@ import com.google.gwt.view.client.SingleSelectionModel;
 public class AusschreibungReportNav extends HorizontalPanel{
 	
 public AusschreibungReportNav() {
+	
+	//TODO Menubar
+	
 		
 		final VerticalPanel navi = new VerticalPanel();
 		final VerticalPanel info = new VerticalPanel();
@@ -41,7 +44,6 @@ public AusschreibungReportNav() {
 					break;
 
 				case "Empfohlene Ausschreibungen abfragen":
-
 					EmpfAusschreibungReport ear = new EmpfAusschreibungReport();
 					info.clear();
 					info.add(ear);

@@ -27,24 +27,26 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 public class AusschreibungPanel extends VerticalPanel {
-	
+
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+
 	final ListBox listBoxBezeichnung = new ListBox();
 
 	/**
 	 * 
 	 * Der Konstruktor der Klasse AusschreibungPanel
 	 */
-	
+
 	public AusschreibungPanel() {
 
 	}
 
 	/**
 	 * Die Methode gibt die Form die Bewerbung für die Ausschreibung zurueck.
+	 * 
 	 * @return this
 	 */
-	
+
 	public VerticalPanel getAusschreibungBewerben() {
 
 		final VerticalPanel vpBewerben = new VerticalPanel();
@@ -62,7 +64,7 @@ public class AusschreibungPanel extends VerticalPanel {
 				Ausschreibung a = new Ausschreibung();
 				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
 				a.setId(id);
-				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() { //Anschauen
+				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() { // Anschauen
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -71,7 +73,7 @@ public class AusschreibungPanel extends VerticalPanel {
 
 					@Override
 					public void onSuccess(Ausschreibung result) {
-					
+
 						taInhalt.setText(result.getInhalt());
 						frist.setValue(result.getFrist());
 
@@ -99,7 +101,6 @@ public class AusschreibungPanel extends VerticalPanel {
 			public void onSuccess(ArrayList<Ausschreibung> result) {
 
 				for (Ausschreibung a : result) {
-					// listBoxBezeichnung.addItem(a.getBezeichnung());
 					listBoxBezeichnung.addItem(a.getBezeichnung(), a.getId() + "");
 
 				}
@@ -181,8 +182,6 @@ public class AusschreibungPanel extends VerticalPanel {
 		tbKenntnis.getElement().setPropertyString("placeholder", "Kenntnisse");
 		tbJahr.getElement().setPropertyString("placeholder", "Anzahl der Jahre");
 
-		// grid.setWidget(4, 0, tbKenntnis);
-		// grid.setWidget(4, 1, tbJahr);
 		ftKenntnis.setWidget(0, 0, tbKenntnis);
 		ftKenntnis.setWidget(0, 1, tbJahr);
 
@@ -202,9 +201,7 @@ public class AusschreibungPanel extends VerticalPanel {
 				tbJahr.getElement().setPropertyString("placeholder", "Anzahl der Jahre");
 				ftKenntnis.setWidget(zeile, 0, tbKenntnis);
 				ftKenntnis.setWidget(zeile, 1, tbJahr);
-				// ftKenntnis.setText(zeile, 2, "Jahr");
 
-				// vthis.add(ftKenntnis);
 			}
 		});
 
@@ -212,7 +209,7 @@ public class AusschreibungPanel extends VerticalPanel {
 	}
 
 	public VerticalPanel getAusschreibungAnzeigen() {
-		// muss hier dynamisch sein Ausschreibung
+
 		final VerticalPanel vpBewerben = new VerticalPanel();
 		final ListBox listBoxBezeichnung = new ListBox();
 		final TextArea taInhalt = new TextArea();
@@ -224,37 +221,14 @@ public class AusschreibungPanel extends VerticalPanel {
 		TextBox tbKenntnis = new TextBox();
 		TextBox tbJahr = new TextBox();
 
-
 		listBoxBezeichnung.addChangeHandler(new ChangeHandler() {
 
 			@Override
 			public void onChange(ChangeEvent event) {
 				// TODO Auto-generated method stub
-//				Ausschreibung a = new Ausschreibung();
-//				int id = Integer.parseInt(listBoxBezeichnung.getSelectedValue());
-//				a.setId(id);
-//				projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
-//
-//					@Override
-//					public void onFailure(Throwable caught) {
-//						// TODO Auto-generated method stub
-//
-//					}
-//
-//					@Override
-//					public void onSuccess(Ausschreibung result) {
-//						// TODO Auto-generated method stub
-//						// Window.alert("geändert " +
-//						// listBoxBezeichnung.getSelectedValue());
-//						taInhalt.setText(result.getInhalt());
-//						frist.setValue(result.getFrist());
-//
-//					}
-//				});
 
 			}
 		});
-
 
 		btMeineProjekteBewerbungAnzeigen.addClickHandler(new ClickHandler() {
 
@@ -264,10 +238,10 @@ public class AusschreibungPanel extends VerticalPanel {
 
 				BewerbungForm bewerbenAnzeigenForm = new BewerbungForm();
 				vpBewerben.clear();
-				vpBewerben.add(bewerbenAnzeigenForm.getMeineProjekteBewerbungAnzeigen(listBoxBezeichnung.getSelectedValue()));
+				vpBewerben.add(
+						bewerbenAnzeigenForm.getMeineProjekteBewerbungAnzeigen(listBoxBezeichnung.getSelectedValue()));
 			}
 		});
-
 
 		btAusschreibungSpeichern.addClickHandler(new ClickHandler() {
 
@@ -294,13 +268,13 @@ public class AusschreibungPanel extends VerticalPanel {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						
+
 						Window.alert("Ein Fehler ist aufgetreten: " + caught.getMessage());
 					}
 
 					@Override
 					public void onSuccess(Ausschreibung result) {
-						
+
 						Window.alert("Ausschreibung gespeichert ");
 					}
 				});
@@ -314,7 +288,7 @@ public class AusschreibungPanel extends VerticalPanel {
 			public void onSuccess(ArrayList<Ausschreibung> result) {
 
 				for (Ausschreibung a : result) {
-					
+
 					listBoxBezeichnung.addItem(a.getBezeichnung(), a.getId() + "");
 
 				}
@@ -369,6 +343,7 @@ public class AusschreibungPanel extends VerticalPanel {
 		// Window.alert("clickhandler clear");
 		p.clear();
 	}
+
 	public void addBewerbungForm(Panel p) {
 		this.add(p);
 	}

@@ -147,7 +147,6 @@ public class EigenschaftMapper {
 						result.add(c);
 					}
 
-
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation

@@ -7,17 +7,14 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.CloseEvent;
-import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -30,19 +27,16 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
-public class ProfilForm extends VerticalPanel {
+public class ProfilNeuForm extends VerticalPanel {
+	
+	/*
+	 * Neues Design
+	 */
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
-	public ProfilForm() {
-
-		/**
-		 * <p>
-		 * Kopf für Name und Organisationseinheit
-		 * </p>
-		 * 
-		 */
-
+	public void onLoad() {
+		// TODO Auto-generated method stub
 		final VerticalPanel vpKopf = new VerticalPanel();
 		final TextBox tbName = new TextBox();
 		final TextBox tbVorname = new TextBox();
@@ -53,6 +47,10 @@ public class ProfilForm extends VerticalPanel {
 		final TextBox tbArbeitsfeld = new TextBox();
 		final TextBox tbGeschform = new TextBox();
 		final TextBox tbGeschfeld = new TextBox();
+		final HorizontalPanel hpButton = new HorizontalPanel();
+
+		final Button btSpeichern = new Button("Speichern");
+		final Button btAbbrechen = new Button("Abbrechen");
 
 		final ArrayList<Eigenschaft> eig = new ArrayList<Eigenschaft>();
 
@@ -110,15 +108,26 @@ public class ProfilForm extends VerticalPanel {
 		kBereich.add(ftKenntnis);
 		final FlexTable ftKenntnisListe = new FlexTable();
 		kBereich.add(ftKenntnisListe);
-
+		
 		Organisationseinheit org = new Organisationseinheit();
 		org.setId(Integer.parseInt(Cookies.getCookie("userid")));
 		projektService.readByIdOrg(org, new AsyncCallback<Organisationseinheit>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("Fehler: " + caught.getLocalizedMessage());
+				Button closeButton = new Button("OK", new ClickHandler() {
 
+					@Override
+					public void onClick(ClickEvent event) {
+
+						dialogBox.hide();
+					}
+				});
+
+				dialogBox.add(closeButton);
+				dialogBox.show();
 			}
 
 			@Override
@@ -132,7 +141,19 @@ public class ProfilForm extends VerticalPanel {
 
 			@Override
 			public void onFailure(Throwable caught) {
+				final DialogBox dialogBox = new DialogBox();
+				dialogBox.setText("Fehler: " + caught.getLocalizedMessage());
+				Button closeButton = new Button("OK", new ClickHandler() {
 
+					@Override
+					public void onClick(ClickEvent event) {
+
+						dialogBox.hide();
+					}
+				});
+
+				dialogBox.add(closeButton);
+				dialogBox.show();
 			}
 
 			@Override
@@ -249,9 +270,6 @@ public class ProfilForm extends VerticalPanel {
 		ftKenntnisListe.setWidget(0, 1, new Label("Jahre"));
 		ftKenntnisListe.setWidget(0, 2, new Label("ID"));
 		// **********************************************
-		VerticalPanel vpUnten = new VerticalPanel();
-
-		Button btSpeichern = new Button("Speichern");
 
 		listOrg.addChangeHandler(new ChangeHandler() {
 
@@ -429,6 +447,20 @@ public class ProfilForm extends VerticalPanel {
 
 					@Override
 					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						final DialogBox dialogBox = new DialogBox();
+						dialogBox.setText("Fehler: " + caught.getLocalizedMessage());
+						Button closeButton = new Button("OK", new ClickHandler() {
+
+							@Override
+							public void onClick(ClickEvent event) {
+
+								dialogBox.hide();
+							}
+						});
+
+						dialogBox.add(closeButton);
+						dialogBox.show();
 					}
 
 					@Override
@@ -449,13 +481,17 @@ public class ProfilForm extends VerticalPanel {
 			}
 		});
 
-		vpUnten.add(ftKenntnisListe);
-		vpUnten.add(btSpeichern);
+		hpButton.add(btSpeichern);
+		hpButton.add(btAbbrechen);
 
-		this.add(vpKopf);
 		vpKopf.add(lbKenntnisse);
 		vpKopf.add(kBereich);
-		vpKopf.add(vpUnten);
+		vpKopf.add(ftKenntnisListe);
+
+		vpKopf.add(hpButton);
+		this.clear();
+		this.add(vpKopf);
+
 	}
 
 }
