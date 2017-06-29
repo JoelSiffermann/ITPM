@@ -62,12 +62,19 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	private Label loginLabel = new Label("Bitte mit Ihrem Google-Account einloggen.");
 	private Anchor signInLink = new Anchor("Sign In");
 //	private Anchor signOutLink = new Anchor("Sign Out");
+	
+	VerticalPanel vpNavigation = new VerticalPanel();
+	Button btStartseite = new Button("Startseite");
+	Button btPost = new Button("Post");
+	Button btImpressum = new Button("Impressum");
+	Button btAusloggen = new Button("Ausloggen");
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
 
 	    LoginServiceAsync loginService = GWT.create(LoginService.class);
+	    
 	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 	      public void onFailure(Throwable error) {
 	      }

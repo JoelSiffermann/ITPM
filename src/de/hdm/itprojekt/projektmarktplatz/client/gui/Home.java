@@ -114,13 +114,13 @@ public class Home extends VerticalPanel {
 		
 		btMeineProjekte.addClickHandler(new ClickHandler() {
 
-			MeineProjektePanel meineProjekte = new MeineProjektePanel();
+//			MeineProjektePanel meineProjekte = new MeineProjektePanel();
 
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 				vpInfo.clear();
-				vpInfo.add(meineProjekte);
+//				vpInfo.add(meineProjekte);
 			}
 
 		});

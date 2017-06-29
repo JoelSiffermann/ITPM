@@ -39,6 +39,12 @@ public class ProjektForm extends HorizontalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
+	Projekt projekt = new Projekt();
+	
+	public ProjektForm(Projekt p) {
+		this.projekt = p;
+	}
+	
 	public HorizontalPanel BeteiligungAnMeineProjekte() {
 
 		final List<String> BETEILIGUNGPERSONEN = Arrays.asList("Person 1", "Person 2", "Person 3", "Person 4");
