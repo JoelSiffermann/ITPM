@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -20,12 +23,16 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 public class MeineProjekteList extends HorizontalPanel{
 
 	ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	HorizontalPanel hpList = new HorizontalPanel();
+	HorizontalPanel hpInfo = new HorizontalPanel();
+	Projekt selectedProjekt = null;
 	
 	public void onLoad() {
 		super.onLoad();
 		String[] liste = {};
 		List<String> MEINEPROJEKTE = Arrays.asList(liste);
-		TextCell textCell = new TextCell();
+//		TextCell textCell = new TextCell();
+		ClickableTextCell  textCell = new ClickableTextCell();
 		CellList<String> cellList = new CellList<String>(textCell);
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 		cellList.addStyleName("scrollable");
@@ -34,8 +41,23 @@ public class MeineProjekteList extends HorizontalPanel{
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
 		cellList.setRowCount(MEINEPROJEKTE.size(), true);
 		cellList.setRowData(0, MEINEPROJEKTE);
+		//TODO: ClickHandler
+		cellList.addHandler(new ListClickHandler(), DoubleClickEvent.getType());
 		getData(cellList);
-		this.add(cellList);
+		hpList.add(cellList);
+		this.add(hpList);
+		this.add(hpInfo);
+	}
+	
+	private class ListClickHandler implements DoubleClickHandler {
+
+		@Override
+		public void onDoubleClick(DoubleClickEvent event) {
+			ProjektNeuForm pf = new ProjektNeuForm();
+			hpInfo.add(pf);
+			Window.alert("ok");
+		}
+		
 	}
 	
 	public void getData(CellList<String> clist) {

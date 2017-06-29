@@ -15,10 +15,6 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdminAsy
 
 public class ReportGenerator implements EntryPoint {
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final ProjektmarktplatzReportAdminAsync reportService = GWT.create(ProjektmarktplatzReportAdmin.class);
 	HorizontalPanel hpHeader = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
 	Button btLogout = new Button("Logout");
@@ -45,21 +41,8 @@ public class ReportGenerator implements EntryPoint {
 			RootPanel.get("nav").clear();
 			RootPanel.get("mainReport").clear();
 			RootPanel.get("header").clear();
-			Window.open("www.google.de", "_self", "");
+			Window.open("https://www.google.de/", "_self", "");
 		}
 		
 	}
-	
-//	private class home extends VerticalPanel {
-//		public void onLoad() {
-//			ReportNavPanel repnav = new ReportNavPanel();
-//			RootPanel.get("nav").clear();
-//			RootPanel.get("nav").add(repnav);
-//			RootPanel.get("mainReport").clear();
-//			RootPanel.get("header").clear();
-//			RootPanel.get("header").add(hpHeader);
-//			RootPanel.get("mainReport").add(hpInfo);
-//		}
-//	}
-
 }
