@@ -72,9 +72,9 @@ public class ProjektmarktplatzForm extends HorizontalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 
-				ProjektForm pfMeineProjekte = new ProjektForm();
-				vpProjektmarktplatz.clear();
-				vpProjektmarktplatz.add(pfMeineProjekte.getMeineProjekte(result));
+//				ProjektForm pfMeineProjekte = new ProjektForm();
+//				vpProjektmarktplatz.clear();
+//				vpProjektmarktplatz.add(pfMeineProjekte.getMeineProjekte(result));
 
 			}
 		});
@@ -95,9 +95,9 @@ public class ProjektmarktplatzForm extends HorizontalPanel {
 					public void onSuccess(ArrayList<Projektmarktplatz> result) {
 
 						for (Projektmarktplatz pm : result) {
-							ProjektForm pfMeineProjekte = new ProjektForm();
-							vpProjektmarktplatz.clear();
-							vpProjektmarktplatz.add(pfMeineProjekte.getAlleProjekte(result));
+//							ProjektForm pfMeineProjekte = new ProjektForm();
+//							vpProjektmarktplatz.clear();
+//							vpProjektmarktplatz.add(pfMeineProjekte.getAlleProjekte(result));
 
 						}
 
