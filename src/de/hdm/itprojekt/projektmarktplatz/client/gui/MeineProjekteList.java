@@ -42,6 +42,7 @@ public class MeineProjekteList extends HorizontalPanel{
 	Column<Projekt, String> col = new Column<Projekt, String>(new ClickableTextCell()){
 		@Override
 		public String getValue(Projekt object) {
+			setSelectedProjekt(object);
 			return object.getName();
 		}
 	};
