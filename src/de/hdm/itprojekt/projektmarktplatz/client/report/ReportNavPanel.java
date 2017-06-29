@@ -1,36 +1,21 @@
 package de.hdm.itprojekt.projektmarktplatz.client.report;
 
-import java.util.Arrays;
-import java.util.List;
 
-import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
-
-import de.hdm.itprojekt.projektmarktplatz.client.gui.BeteiligungPanel;
-import de.hdm.itprojekt.projektmarktplatz.client.gui.Home;
-import de.hdm.itprojekt.projektmarktplatz.client.gui.ProfilForm;
-import de.hdm.itprojekt.projektmarktplatz.client.gui.ProjektmarktplatzForm;
 
 public class ReportNavPanel extends VerticalPanel{
 	HorizontalPanel nav = new HorizontalPanel();
 	HorizontalPanel info = new HorizontalPanel();
 	public void onLoad() {
 		super.onLoad();
-	    // Create a stack panel containing three labels.
 	    StackPanel panel = new StackPanel();
 	    panel.add(ausschreibungStack(), "Ausschreibungen abfragen");
 	    panel.add(bewerbungStack(), "Bewerbungen abfragen");
@@ -140,8 +125,7 @@ public class ReportNavPanel extends VerticalPanel{
 	private class ProjektMarktplatzClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			Window.open(GWT.getHostPageBaseURL(), "/ProjektmarktplatzProjekt.html", "enable");
-			//TODO logout
+			Window.open(GWT.getHostPageBaseURL() + "ProjektmarktplatzProjekt.html", "_self", "enable");
 		}	
 	}
 }

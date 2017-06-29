@@ -2,12 +2,12 @@ package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class MainNavigationPanel extends VerticalPanel{
 	HorizontalPanel nav = new HorizontalPanel();
@@ -15,7 +15,6 @@ public class MainNavigationPanel extends VerticalPanel{
 
 	public void onLoad() {
 		super.onLoad();
-	    // Create a stack panel containing three labels.
 	    StackPanel panel = new StackPanel();
 	    panel.add(new Label(""), "Mein Profil");
 	    panel.add(projektStack(), "Projekte");
@@ -31,21 +30,20 @@ public class MainNavigationPanel extends VerticalPanel{
 	
 	private VerticalPanel projektStack(){
 		VerticalPanel projektstack = new VerticalPanel();
-		Label lblMeineProjekte = new Label("Meine Projekte");
-		Label lblAndereProjekte = new Label("Andere Projekte");
-		lblMeineProjekte.addClickHandler(new MeineProjekteClickHandler());
-		projektstack.add(lblMeineProjekte);
-		projektstack.add(lblAndereProjekte);
+		Button btMeineProjekte = new Button("Meine Projekte");
+		Button btAndereProjekte = new Button("Andere Projekte");
+		btMeineProjekte.addClickHandler(new MeineProjekteClickHandler());
+		projektstack.add(btMeineProjekte);
+		projektstack.add(btAndereProjekte);
 		return projektstack;
 	}
 	
 	private class MeineProjekteClickHandler implements ClickHandler {
 	@Override
 	public void onClick(ClickEvent event) {
-		// TODO Auto-generated method stub
-		MeineProjektePanel mp = new MeineProjektePanel();
+		MeineProjekteList mpl = new MeineProjekteList();
 		info.clear();
-		info.add(mp);
+		info.add(mpl);
 	}
 	}
 }

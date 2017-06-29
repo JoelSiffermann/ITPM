@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.projektmarktplatz.client;
 
 import de.hdm.itprojekt.projektmarktplatz.client.gui.Home;
+import de.hdm.itprojekt.projektmarktplatz.client.gui.MainNavigationPanel;
 import de.hdm.itprojekt.projektmarktplatz.client.gui.MainPanel;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginService;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginServiceAsync;
@@ -93,8 +94,10 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	}
 	
 	private void loadGUI(){
-		Home mp = new Home();
-		RootPanel.get("main").add(mp);
+//		Home mp = new Home();
+		MainNavigationPanel mainnav = new MainNavigationPanel();
+		RootPanel.get("nav").add(mainnav);
+//		RootPanel.get("main").add(mp);
 	
 	}
 	

@@ -17,6 +17,7 @@ public class Home extends VerticalPanel {
 	/*
 	 * Neues Design
 	 */
+	MainNavigationPanel mainnav = new MainNavigationPanel();
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
@@ -28,7 +29,6 @@ public class Home extends VerticalPanel {
 		final VerticalPanel vpMainNavigation = new VerticalPanel();
 		final VerticalPanel vpInfo = new VerticalPanel();
 		final Button btLogout = new Button("Logout");
-		final MainNavigationPanel mainnav = new MainNavigationPanel();
 
 		final Button btProfilBearbeiten = new Button("Profil bearbeiten");
 		final Button btProfilAnzeigen = new Button("Profil anzeigen");
@@ -209,7 +209,7 @@ public class Home extends VerticalPanel {
 			}
 		});
 		
-		vpMainNavigation.addStyleName("mainNavigation");
+//		vpMainNavigation.addStyleName("mainNavigation");
 //		vpMainNavigation.add(btProfilBearbeiten);
 //		vpMainNavigation.add(btProfilAnzeigen);
 //		vpMainNavigation.add(btProjektNeu);
@@ -229,12 +229,12 @@ public class Home extends VerticalPanel {
 //		hpInfo.add(vpInfo);
 
 //		RootPanel.get("nav").add(vpMainNavigation);
-		RootPanel.get("nav").add(mainnav);
+//		RootPanel.get("nav").add(mainnav);
 		RootPanel.get("header").add(btLogout);
 		
-		this.clear();
-		this.add(hpHeader);
-		this.add(hpInfo);
+//		this.clear();
+//		this.add(hpHeader);
+//		this.add(hpInfo);
 
 	}
 }
