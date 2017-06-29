@@ -19,19 +19,20 @@ public class Home extends VerticalPanel {
 	/*
 	 * Neues Design
 	 */
+	MainNavigationPanel mainnav = new MainNavigationPanel();
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 //	private Anchor signOutLink = new Anchor("Sign Out");
 //	private LoginInfo loginInfo = null;
 	public void onLoad() {
 
+		super.onLoad();
 		final HorizontalPanel hpHeader = new HorizontalPanel();
 		final HorizontalPanel hpInfo = new HorizontalPanel();
 		final VerticalPanel vpMainNavigation = new VerticalPanel();
 		final VerticalPanel vpInfo = new VerticalPanel();
 //		signOutLink.setHref(loginInfo.getLogoutUrl());
 		final Button btLogout = new Button("Logout");
-		final MainNavigationPanel mainnav = new MainNavigationPanel();
 
 		final Button btProfilBearbeiten = new Button("Profil bearbeiten");
 		final Button btProfilAnzeigen = new Button("Profil anzeigen");
@@ -212,32 +213,34 @@ public class Home extends VerticalPanel {
 			}
 		});
 		
-		vpMainNavigation.addStyleName("mainNavigation");
-		vpMainNavigation.add(btProfilBearbeiten);
-		vpMainNavigation.add(btProfilAnzeigen);
-		vpMainNavigation.add(btProjektNeu);
-		vpMainNavigation.add(btAusschreibungNeu);
-		vpMainNavigation.add(btAusschreibungAnzeigen);
-		vpMainNavigation.add(btPM);
-		vpMainNavigation.add(btMeineProjekte);
-		vpMainNavigation.add(btMeineBeteiligung);
-		vpMainNavigation.add(btBewertungAnzeigen);
-		vpMainNavigation.add(btAndereBeteiligung);
-		vpMainNavigation.add(btAndereProjekte);
-		vpMainNavigation.add(btMeineBewerbung);
-		vpMainNavigation.add(btBewerbungNeu);
+//		vpMainNavigation.addStyleName("mainNavigation");
+//		vpMainNavigation.add(btProfilBearbeiten);
+//		vpMainNavigation.add(btProfilAnzeigen);
+//		vpMainNavigation.add(btProjektNeu);
+//		vpMainNavigation.add(btAusschreibungNeu);
+//		vpMainNavigation.add(btAusschreibungAnzeigen);
+//		vpMainNavigation.add(btPM);
+//		vpMainNavigation.add(btMeineProjekte);
+//		vpMainNavigation.add(btMeineBeteiligung);
+//		vpMainNavigation.add(btBewertungAnzeigen);
+//		vpMainNavigation.add(btAndereBeteiligung);
+//		vpMainNavigation.add(btAndereProjekte);
+//		vpMainNavigation.add(btMeineBewerbung);
+//		vpMainNavigation.add(btBewerbungNeu);
 
 
-		hpInfo.add(vpMainNavigation);
-		hpInfo.add(vpInfo);
+//		hpInfo.add(vpMainNavigation);
+//		hpInfo.add(vpInfo);
 
 //		RootPanel.get("nav").add(vpMainNavigation);
-		RootPanel.get("nav").add(mainnav);
-		RootPanel.get("header").add(btLogout);
+//		RootPanel.get("nav").add(mainnav);
 //		RootPanel.get("header").add(signOutLink);
-		this.clear();
-		this.add(hpHeader);
-		this.add(hpInfo);
+
+		
+//		this.clear();
+//		this.add(hpHeader);
+//		this.add(hpInfo);
+
 
 	}
 }

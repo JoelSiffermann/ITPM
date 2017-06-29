@@ -38,25 +38,26 @@ public class ProjektNeuForm extends VerticalPanel {
 	 */
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
-
+	HorizontalPanel hpProjektForm = new HorizontalPanel();
+	VerticalPanel vpProjektForm1 = new VerticalPanel();
+	VerticalPanel vpProjektForm2 = new VerticalPanel();
+	HorizontalPanel hpButton = new HorizontalPanel();
+	TextArea taProjektInhalt = new TextArea();
+	TextBox tbProjektName = new TextBox();
+	DatePicker startPicker = new DatePicker();
+	DatePicker endPicker = new DatePicker();
+	
+	
 	public void onLoad() {
 
-		final HorizontalPanel hpProjektForm = new HorizontalPanel();
-		final VerticalPanel vpProjektForm1 = new VerticalPanel();
-		final VerticalPanel vpProjektForm2 = new VerticalPanel();
-		final HorizontalPanel hpButton = new HorizontalPanel();
-		final TextArea taProjektInhalt = new TextArea();
-		final TextBox tbProjektName = new TextBox();
-
-		final DatePicker startPicker = new DatePicker();
-		final DatePicker endPicker = new DatePicker();
-
-		final Button btSpeichern = new Button("Projekt speichern");
-		final Button btAbbrechen = new Button("Abbrechen");
-		final Label lblProjektName = new Label("Projektname:");
-		final Label lblStart = new Label("Start:");
-		final Label lblEnde = new Label("Ende:");
-		final Label lblInhalt = new Label("Inhalt:");
+		super.onLoad();
+		Label lblProjektName = new Label("Projektname:");
+		Label lblStart = new Label("Start:");
+		Label lblEnde = new Label("Ende:");
+		Label lblInhalt = new Label("Inhalt:");
+		Button btSpeichern = new Button("Projekt speichern");
+		Button btAbbrechen = new Button("Abbrechen");
+		
 		
 		tbProjektName.getElement().setPropertyString("placeholder", "Projektname");
 
@@ -65,28 +66,20 @@ public class ProjektNeuForm extends VerticalPanel {
 		taProjektInhalt.getElement().setPropertyString("placeholder", "Projektbezeichnung");
 		
 		// Set the value in the text box when the user selects a date
-		startPicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				Date date = event.getValue();
-				String dateString = DateTimeFormat.getMediumDateFormat().format(date);
-				// Window.alert("You selected " +dateString);
-			}
-		});
+		startPicker.addValueChangeHandler(new DateValuePicker());
 
 		// Set the default value
 		startPicker.setValue(new Date(), true);
 
 		// Set the value in the text box when the user selects a date
-		endPicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				Date date = event.getValue();
-				String dateString = DateTimeFormat.getMediumDateFormat().format(date);
-				// Window.alert("You selected " +dateString);
-			}
-		});
+		endPicker.addValueChangeHandler(new DateValuePicker());
 
 		endPicker.setValue(new Date(), true);
+		
+		btSpeichern.addClickHandler(new SpeichernClickHandler());
 
+		btAbbrechen.addClickHandler(new AbbrechenClickHandler());
+		
 //		tbProjektName.setVisible(false);
 //		lbProjektListe.setVisible(true);
 
@@ -121,4 +114,59 @@ public class ProjektNeuForm extends VerticalPanel {
 		this.add(hpButton);
 		
 	} 
+	
+	private class DateValuePicker implements ValueChangeHandler<Date> {
+
+		@Override
+		public void onValueChange(ValueChangeEvent<Date> event) {
+			// TODO Auto-generated method stub
+			Date date = event.getValue();
+			String dateString = DateTimeFormat.getMediumDateFormat().format(date);
+		}
+		
+	}
+	
+	private class SpeichernClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			Projekt p = new Projekt();
+			p.setName(tbProjektName.getText());
+			p.setStart(startPicker.getValue());
+			p.setEnde(endPicker.getValue());
+			p.setInhalt(taProjektInhalt.getText());
+			projektService.updateProjekt(p, new ProjektSpeichernCallback(p));
+		}
+	}
+
+	private class ProjektSpeichernCallback implements AsyncCallback<Projekt> {
+		Projekt p = null;
+		ProjektSpeichernCallback(Projekt projekt){
+			p = projekt;
+		}
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void onSuccess(Projekt result) {
+			// TODO Projekt panel aktualisieren
+		}
+		
+	}
+	
+	private class AbbrechenClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			hpProjektForm.clear();
+		}
+		
+	}
+	
 }
+
+

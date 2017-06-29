@@ -28,8 +28,10 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
-import de.hdm.itprojekt.projektmarktplatz.shared.CompositePM;
+//import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
+//import de.hdm.itprojekt.projektmarktplatz.shared.CompositePM;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
@@ -38,6 +40,7 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 	/* Neues Design für die GUI */
 	private ListDataProvider<Projektmarktplatz> projektmarktplatzDataProvider = null;
+
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
