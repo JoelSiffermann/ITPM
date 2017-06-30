@@ -19,21 +19,21 @@ public class MainNavigationPanel extends VerticalPanel{
 	HorizontalPanel nav = new HorizontalPanel();
 	HorizontalPanel info = new HorizontalPanel();
 
-	Organisationseinheit o;
+//	Organisationseinheit o;
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	
-	public MainNavigationPanel(){
-		
-	}
+//	public MainNavigationPanel(){
+//		
+//	}
 	
-	public MainNavigationPanel(Organisationseinheit o) {
-		// TODO Auto-generated constructor stub
-		this.o = o;
-	}
+//	public MainNavigationPanel(Organisationseinheit o) {
+//		// TODO Auto-generated constructor stub
+//		this.o = o;
+//	}
 	public void onLoad() {
 		super.onLoad();
 		
-		projektService.readByEmail(o, new CheckUser(o));
+//		projektService.readByEmail(o, new CheckUser(o));
 	    StackPanel panel = new StackPanel();
 	    panel.add(profilStack(), "Mein Profil");
 	    panel.add(projektStack(), "Projekte");
@@ -208,42 +208,42 @@ public class MainNavigationPanel extends VerticalPanel{
 		}
 		}
 	
-	private class CheckUser implements AsyncCallback<Organisationseinheit>{
-
-		Organisationseinheit org;
-		public CheckUser() {
-			// TODO Auto-generated constructor stub
-		}
-		public CheckUser(Organisationseinheit org) {
-			// TODO Auto-generated constructor stub
-			this.org = org;
-		}
-		@Override
-		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			Window.alert("Fehler " +caught); 
-			ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
-			projektService.insertOrg(org, new AsyncCallback<Organisationseinheit>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(Organisationseinheit result) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
-		}
-
-		@Override
-		public void onSuccess(Organisationseinheit result) {
-			Window.alert("User existiert " + result.getEmail()); 
-			
-		}
-		
-	}
+//	private class CheckUser implements AsyncCallback<Organisationseinheit>{
+//
+//		Organisationseinheit org;
+//		public CheckUser() {
+//			// TODO Auto-generated constructor stub
+//		}
+//		public CheckUser(Organisationseinheit org) {
+//			// TODO Auto-generated constructor stub
+//			this.org = org;
+//		}
+//		@Override
+//		public void onFailure(Throwable caught) {
+//			// TODO Auto-generated method stub
+//			Window.alert("Fehler " +caught); 
+//			ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
+//			projektService.insertOrg(org, new AsyncCallback<Organisationseinheit>() {
+//
+//				@Override
+//				public void onFailure(Throwable caught) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//
+//				@Override
+//				public void onSuccess(Organisationseinheit result) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//			});
+//		}
+//
+//		@Override
+//		public void onSuccess(Organisationseinheit result) {
+//			Window.alert("User existiert " + result.getEmail()); 
+//			
+//		}
+//		
+//	}
 }
