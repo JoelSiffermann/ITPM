@@ -12,6 +12,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.ui.Button;
@@ -22,11 +23,15 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 public class AndereProjekte extends HorizontalPanel {
 
@@ -34,71 +39,51 @@ public class AndereProjekte extends HorizontalPanel {
 	 * Neues Design
 	 */
 
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	
+	Projektmarktplatz projektmarktplatz = new Projektmarktplatz();
+	
+	public AndereProjekte(Projektmarktplatz pm) {
+		this.projektmarktplatz = pm;
+	}
+	
+	VerticalPanel vpAndereProjekteForm1 = new VerticalPanel();
+	VerticalPanel vpAndereProjekteForm2 = new VerticalPanel();
+	HorizontalPanel hpAndereProjekteForm = new HorizontalPanel();
+
+	ListBox lbProjekte = new ListBox();
+	ListBox lbAusschreibung = new ListBox();
+
+	TextBox tbProjektName = new TextBox();
+	TextArea taProjektbeschreibung = new TextArea();
+	
+	DatePicker startPicker = new DatePicker();
+	DatePicker endPicker = new DatePicker();
+	
+	Label lblProjektmarktplatz = new Label("Projektmarktplatz:");
+	Label lblProjektName = new Label("Projektname:");
+	Label lblStart = new Label("Start:");
+	Label lblEnde = new Label("Ende:");
+	Label lblProjektBeschreibung = new Label("Beschreibung:");
+
+	Button btBewerbung = new Button("Sich Bewerben");
+	TextCell textCell = new TextCell();
+
 	public void onLoad() {
 		
-		final List<String> PROJEKTMARKTPLATZ = Arrays.asList("Projektmarktplatz 1", "Projektmarktplatz 2", "Projektmarktplatz 3", "Projektmarktplatz 4");
-		final VerticalPanel vpAndereProjekteForm1 = new VerticalPanel();
-		final VerticalPanel vpAndereProjekteForm2 = new VerticalPanel();
-		final HorizontalPanel hpAndereProjekteForm = new HorizontalPanel();
+		super.onLoad();	
+		if(this.projektmarktplatz!=null){
+			lblProjektmarktplatz.setText(projektmarktplatz.getBezeichnung());
+			
+		}
+//		
+//		lbProjekte.addItem("Projekte 1");
+//		lbProjekte.addItem("Projekte 2");
+//
+//		lbAusschreibung.addItem("Ausschreibung 1");
+//		lbAusschreibung.addItem("Ausschreibung 2");
+//		lbAusschreibung.addItem("Ausschreibung 3");
 
-		final ListBox lbProjekte = new ListBox();
-		final ListBox lbAusschreibung = new ListBox();
-
-		final TextBox tbProjektName = new TextBox();
-		final TextArea taProjektbeschreibung = new TextArea();
-		
-		final DatePicker startPicker = new DatePicker();
-		final DatePicker endPicker = new DatePicker();
-		
-		final Label lblProjektName = new Label("Projektname:");
-		final Label lblStart = new Label("Start:");
-		final Label lblEnde = new Label("Ende:");
-		final Label lblProjektBeschreibung = new Label("Beschreibung:");
-
-		final Button btBewerbung = new Button("Sich Bewerben");
-				
-		lbProjekte.addItem("Projekte 1");
-		lbProjekte.addItem("Projekte 2");
-
-		lbAusschreibung.addItem("Ausschreibung 1");
-		lbAusschreibung.addItem("Ausschreibung 2");
-		lbAusschreibung.addItem("Ausschreibung 3");
-
-		// Create a cell to render each value.
-		TextCell textCell = new TextCell();
-
-		// Create a CellList that uses the cell.
-		CellList<String> cellList = new CellList<String>(textCell);
-		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-
-		// Add a selection model to handle user selection.
-		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
-		cellList.setSelectionModel(selectionModel);
-		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-			public void onSelectionChange(SelectionChangeEvent event) {
-				String selected = selectionModel.getSelectedObject();
-
-				if (selected != null) {
-					// Window.alert("You selected: " + selected);
-					//TODO listbox funktioniert nicht
-//					lbBeteiligung.getText(selected.toString());
-				}
-
-			}
-		});
-
-		cellList.addStyleName("scrollable");
-		cellList.setPageSize(30);
-	    cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
-	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
-
-		cellList.setRowCount(PROJEKTMARKTPLATZ.size(), true);
-
-		// Push the data into the widget.
-		cellList.setRowData(0, PROJEKTMARKTPLATZ);
-		
 		// Set the value in the text box when the user selects a date
 		startPicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
 			public void onValueChange(ValueChangeEvent<Date> event) {
@@ -119,19 +104,8 @@ public class AndereProjekte extends HorizontalPanel {
 				// Window.alert("You selected " +dateString);
 			}
 		});
-				
-		btBewerbung.addClickHandler(new ClickHandler() {
-			
-			BewerbungNeuForm bewerben = new BewerbungNeuForm();
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				hpAndereProjekteForm.clear();
-				hpAndereProjekteForm.add(btBewerbung);
-			}
-			
-		});
+						
+		btBewerbung.addClickHandler(new SichBewerbenClickHandler());
 		
 		endPicker.setValue(new Date(), true);
 		
@@ -149,10 +123,17 @@ public class AndereProjekte extends HorizontalPanel {
 		vpAndereProjekteForm2.add(btBewerbung);
 
 		this.clear();
-		this.add(cellList);
 		this.add(vpAndereProjekteForm1);
 		this.add(vpAndereProjekteForm2);
 		
 	}
 	
+	private class SichBewerbenClickHandler implements ClickHandler {
+		@Override
+		public void onClick(ClickEvent event) {
+			BewerbungNeuForm bn = new BewerbungNeuForm(null);
+			hpAndereProjekteForm.clear();
+			hpAndereProjekteForm.add(bn);
+		}
+		}
 }

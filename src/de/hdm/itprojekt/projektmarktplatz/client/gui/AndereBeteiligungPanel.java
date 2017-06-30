@@ -29,6 +29,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 public class AndereBeteiligungPanel extends HorizontalPanel {
 	
@@ -38,72 +39,80 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 	
+//	final List<String> PROJEKTE = Arrays.asList("Projekt 1", "Projekt 2", "Projekt 3", "Projekt 4");
+	VerticalPanel vpAndereProjekteForm1 = new VerticalPanel();
+	VerticalPanel vpAndereProjekteForm2 = new VerticalPanel();
+	HorizontalPanel hpAndereProjekteForm = new HorizontalPanel();
+
+	ListBox lbBeteiligung = new ListBox();
+	TextBox tbBeruf = new TextBox();
+	TextBox tbName = new TextBox();
+	TextBox tbUmfang = new TextBox();
+	TextBox tbErfahrung = new TextBox();
+
+	DatePicker startPicker = new DatePicker();
+	DatePicker endPicker = new DatePicker();
+	
+	Label lblName = new Label("Name:");
+	Label lblStart = new Label("Start:");
+	Label lblEnde = new Label("Ende:");
+	Label lblBeruf = new Label("Beruf:");
+	Label lblUmfang = new Label("Umfang:");
+	Label lblJahre = new Label("Jahre");
+	Label lblTage = new Label("Tage");
+	Label lblErfahrung = new Label("Erfahrung:");
+
+	Button btBewertungAnzeigen = new Button("Bewertung anzeigen");
+	Button btBeteiligungBeenden = new Button("Beteiligung beenden");
+	
+	Grid gridErfahrung = new Grid(1, 2);
+	Grid gridUmfang = new Grid(1, 2);
+	TextCell textCell = new TextCell();
+
+	Projekt projekt = new Projekt();
+	
+	public AndereBeteiligungPanel (Projekt p) {
+		this.projekt = p;
+	}
+	
 	public void onLoad() {
-		
-		final List<String> PROJEKTE = Arrays.asList("Projekt 1", "Projekt 2", "Projekt 3", "Projekt 4");
-		final VerticalPanel vpAndereProjekteForm1 = new VerticalPanel();
-		final VerticalPanel vpAndereProjekteForm2 = new VerticalPanel();
-		final HorizontalPanel hpAndereProjekteForm = new HorizontalPanel();
-
-		final ListBox lbBeteiligung = new ListBox();
-		final TextBox tbBeruf = new TextBox();
-		final TextBox tbName = new TextBox();
-		final TextBox tbUmfang = new TextBox();
-		final TextBox tbErfahrung = new TextBox();
-
-		final DatePicker startPicker = new DatePicker();
-		final DatePicker endPicker = new DatePicker();
-		
-		final Label lblName = new Label("Name:");
-		final Label lblStart = new Label("Start:");
-		final Label lblEnde = new Label("Ende:");
-		final Label lblBeruf = new Label("Beruf:");
-		final Label lblUmfang = new Label("Umfang:");
-		final Label lblJahre = new Label("Jahre");
-		final Label lblTage = new Label("Tage");
-		final Label lblErfahrung = new Label("Erfahrung:");
-
-		final Button btBewertungAnzeigen = new Button("Bewertung anzeigen");
-		final Button btBeteiligungBeenden = new Button("Beteiligung beenden");
-		
-		final Grid gridErfahrung = new Grid(1, 2);
-		final Grid gridUmfang = new Grid(1, 2);
-		
+				
+		super.onLoad();
+		if(this.projekt!=null){
+			lblName.setText(projekt.getName());
+		}
 		lbBeteiligung.addItem("Beteiligung 1");
 		lbBeteiligung.addItem("Beteiligung 2");
 
-		// Create a cell to render each value.
-		TextCell textCell = new TextCell();
-
-		// Create a CellList that uses the cell.
-		CellList<String> cellList = new CellList<String>(textCell);
-		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-
-		// Add a selection model to handle user selection.
-		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
-		cellList.setSelectionModel(selectionModel);
-		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-			public void onSelectionChange(SelectionChangeEvent event) {
-				String selected = selectionModel.getSelectedObject();
-
-				if (selected != null) {
-					// Window.alert("You selected: " + selected);
-					//TODO listbox funktioniert nicht
-//					lbBeteiligung.getText(selected.toString());
-				}
-
-			}
-		});
-
-		cellList.addStyleName("scrollable");
-		cellList.setPageSize(30);
-	    cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
-	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
-
-		cellList.setRowCount(PROJEKTE.size(), true);
-
-		// Push the data into the widget.
-		cellList.setRowData(0, PROJEKTE);
+//		// Create a CellList that uses the cell.
+//		CellList<String> cellList = new CellList<String>(textCell);
+//		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+//
+//		// Add a selection model to handle user selection.
+//		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
+//		cellList.setSelectionModel(selectionModel);
+//		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+//			public void onSelectionChange(SelectionChangeEvent event) {
+//				String selected = selectionModel.getSelectedObject();
+//
+//				if (selected != null) {
+//					// Window.alert("You selected: " + selected);
+//					//TODO listbox funktioniert nicht
+////					lbBeteiligung.getText(selected.toString());
+//				}
+//
+//			}
+//		});
+//
+//		cellList.addStyleName("scrollable");
+//		cellList.setPageSize(30);
+//	    cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
+//	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
+//
+//		cellList.setRowCount(PROJEKTE.size(), true);
+//
+//		// Push the data into the widget.
+//		cellList.setRowData(0, PROJEKTE);
 		
 		// Set the value in the text box when the user selects a date
 		startPicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -166,7 +175,7 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		vpAndereProjekteForm2.add(btBeteiligungBeenden);
 
 		this.clear();
-		this.add(cellList);
+//		this.add(cellList);
 		this.add(vpAndereProjekteForm1);
 		this.add(vpAndereProjekteForm2);
 	}

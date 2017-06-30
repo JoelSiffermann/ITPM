@@ -14,7 +14,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
 
-public class BeteiligungAndereProjekte extends VerticalPanel{
+public class AltBeteiligungAndereProjekte extends VerticalPanel{
 	
 private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 	
@@ -24,7 +24,7 @@ private final ProjektmarktplatzAdminAsync projektService = GWT.create(Projektmar
 	final TextCell textCell = new TextCell();
 	CellList<String> clBeteiligungProjekte = new CellList<String>(textCell);
 	
-	public BeteiligungAndereProjekte(){
+	public AltBeteiligungAndereProjekte(){
 		
 		projektService.readAllBeteiligung(new AsyncCallback<ArrayList<Beteiligung>>(){
 

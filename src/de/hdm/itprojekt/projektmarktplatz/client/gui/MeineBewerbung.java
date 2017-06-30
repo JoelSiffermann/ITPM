@@ -14,43 +14,58 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 
 public class MeineBewerbung extends HorizontalPanel {
-	
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
-	public void onLoad (){
+	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
+
+	HorizontalPanel hPanel = new HorizontalPanel();
+	VerticalPanel vPanel = new VerticalPanel();
+	VerticalPanel vPanel2 = new VerticalPanel();
+	Label lblDatum = new Label("Datum: ");
+	TextArea taAnschreiben = new TextArea();
+	Button btBearbeiten = new Button("Bewerbung bearbeiten");
+	Button btLoeschen = new Button("Bewerbung löschen");
+	Button btAnzeigen = new Button("Bewerbung anzeigen");
+	Button btAusschreiben = new Button("Ausschreibung anzeigen");
+
+	Bewerbung bewerbung = new Bewerbung();
+
+	public MeineBewerbung (Bewerbung p) {
+		this.bewerbung = p;
+	}
+
+	public void onLoad() {
 		
-		final HorizontalPanel hPanel = new HorizontalPanel();
-		final VerticalPanel vPanel = new VerticalPanel();
-		final VerticalPanel vPanel2 = new VerticalPanel();
-		final Label lDatum = new Label("Datum: ");
-		final TextArea taAnschreiben = new TextArea();
-		final Button btBearbeiten = new Button("Bewerbung bearbeiten");
-		final Button btLoeschen = new Button("Bewerbung löschen");
-		final Button btAnzeigen = new Button("Bewerbung anzeigen");
-		final Button btAusschreiben = new Button("Ausschreibung anzeigen");
-		final List<String> MEINEBEWERBUNGEN = Arrays.asList("Bewerbung 1", "Bewerbung 2", "Bewerbung 3", "Bewerbung 4");
-		// Create a cell to render each value.
-		TextCell textCell = new TextCell();
+		super.onLoad();
+		if(this.bewerbung!=null){
+//			lblInhalt.setText(bewerbung.getInhalt());
+		}
 
-		// Create a CellList that uses the cell.
-		CellList<String> cellList = new CellList<String>(textCell);
-		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-		cellList.addStyleName("scrollable");
-		cellList.setPageSize(20);
-	    cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
-	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
+		// final List<String> MEINEBEWERBUNGEN = Arrays.asList("Bewerbung 1",
+		// "Bewerbung 2", "Bewerbung 3", "Bewerbung 4");
+		// // Create a cell to render each value.
+		// TextCell textCell = new TextCell();
+		//
+		// // Create a CellList that uses the cell.
+		// CellList<String> cellList = new CellList<String>(textCell);
+		// cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+		// cellList.addStyleName("scrollable");
+		// cellList.setPageSize(20);
+		// cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
+		// cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
+		//
+		// cellList.setRowCount(MEINEBEWERBUNGEN.size(), true);
+		//
+		// // Push the data into the widget.
+		// cellList.setRowData(0, MEINEBEWERBUNGEN);
 
-		cellList.setRowCount(MEINEBEWERBUNGEN.size(), true);
-
-		// Push the data into the widget.
-		cellList.setRowData(0, MEINEBEWERBUNGEN);
-		
-		hPanel.add(cellList);
-		vPanel2.add(lDatum);
+		// hPanel.add(cellList);
+		vPanel2.add(lblDatum);
 		vPanel2.add(taAnschreiben);
 		hPanel.add(vPanel2);
 		vPanel.add(btAusschreiben);
@@ -58,11 +73,9 @@ public class MeineBewerbung extends HorizontalPanel {
 		vPanel.add(btLoeschen);
 		vPanel.add(btBearbeiten);
 		hPanel.add(vPanel);
-		
+
 		this.add(hPanel);
-		
-		
-		
+
 	}
 
 }

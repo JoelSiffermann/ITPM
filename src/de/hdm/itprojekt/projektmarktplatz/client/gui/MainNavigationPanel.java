@@ -10,34 +10,34 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class MainNavigationPanel extends VerticalPanel{
+public class MainNavigationPanel extends VerticalPanel {
 	HorizontalPanel nav = new HorizontalPanel();
 	HorizontalPanel info = new HorizontalPanel();
 
 	public void onLoad() {
 		super.onLoad();
-	    StackPanel panel = new StackPanel();
-	    panel.add(profilStack(), "Mein Profil");
-	    panel.add(projektStack(), "Projekte");
-	    panel.add(beteiligungStack(), "Beteiligung");
-	    panel.add(bewerbungStack(), "Bewerbung");
-	    panel.add(projektmarktplatzStack(), "Projektmarktplatz");
-	    panel.add(reportStack(), "Report");
-	    nav.add(panel);
-	    RootPanel.get("nav").add(nav);
-	    RootPanel.get("main").clear();
-	    RootPanel.get("main").add(info);
-	  }
-	
-	private VerticalPanel profilStack(){
+		StackPanel panel = new StackPanel();
+		panel.add(profilStack(), "Mein Profil");
+		panel.add(projektStack(), "Projekte");
+		panel.add(beteiligungStack(), "Beteiligung");
+		panel.add(bewerbungStack(), "Bewerbung");
+		panel.add(projektmarktplatzStack(), "Projektmarktplatz");
+		panel.add(reportStack(), "Report");
+		nav.add(panel);
+		RootPanel.get("nav").add(nav);
+		RootPanel.get("main").clear();
+		RootPanel.get("main").add(info);
+	}
+
+	private VerticalPanel profilStack() {
 		VerticalPanel profilstack = new VerticalPanel();
 		Button btMeinProfil = new Button("Anzeigen");
 		btMeinProfil.addClickHandler(new MeinProfilClickHandler());
 		profilstack.add(btMeinProfil);
 		return profilstack;
 	}
-	
-	private VerticalPanel projektStack(){
+
+	private VerticalPanel projektStack() {
 		VerticalPanel projektstack = new VerticalPanel();
 		Button btMeineProjekte = new Button("Meine Projekte");
 		Button btAndereProjekte = new Button("Andere Projekte");
@@ -50,8 +50,8 @@ public class MainNavigationPanel extends VerticalPanel{
 		projektstack.add(btProjektAnlegen);
 		return projektstack;
 	}
-	
-	private VerticalPanel beteiligungStack(){
+
+	private VerticalPanel beteiligungStack() {
 		VerticalPanel beteiligungstack = new VerticalPanel();
 		Button btMeineBeteiligung = new Button("Meine Beteiligungen");
 		Button btAndereBeteiligung = new Button("Andere Beteiligungen");
@@ -61,8 +61,8 @@ public class MainNavigationPanel extends VerticalPanel{
 		beteiligungstack.add(btAndereBeteiligung);
 		return beteiligungstack;
 	}
-	
-	private VerticalPanel bewerbungStack(){
+
+	private VerticalPanel bewerbungStack() {
 		VerticalPanel bewerbungstack = new VerticalPanel();
 		Button btMeineBewerbung = new Button("Meine Bewerbungen");
 		Button btEingegangeneBewerbung = new Button("Eingegangene Bewerbungen");
@@ -72,8 +72,8 @@ public class MainNavigationPanel extends VerticalPanel{
 		bewerbungstack.add(btEingegangeneBewerbung);
 		return bewerbungstack;
 	}
-	
-	private VerticalPanel projektmarktplatzStack(){
+
+	private VerticalPanel projektmarktplatzStack() {
 		VerticalPanel projektmarktplatzStack = new VerticalPanel();
 		Button btErstellen = new Button("Erstellen");
 		Button btAnzeigen = new Button("Anzeigen");
@@ -83,15 +83,15 @@ public class MainNavigationPanel extends VerticalPanel{
 		projektmarktplatzStack.add(btAnzeigen);
 		return projektmarktplatzStack;
 	}
-	
-	private VerticalPanel reportStack(){
+
+	private VerticalPanel reportStack() {
 		VerticalPanel reportstack = new VerticalPanel();
 		Button btReport = new Button("Zum ReportGenerator wechseln");
 		btReport.addClickHandler(new ReportClickHandler());
 		reportstack.add(btReport);
 		return reportstack;
 	}
-	
+
 	private class MeinProfilClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
@@ -99,26 +99,26 @@ public class MainNavigationPanel extends VerticalPanel{
 			info.clear();
 			info.add(pp);
 		}
-		}
-	
+	}
+
 	private class MeineProjekteClickHandler implements ClickHandler {
-	@Override
-	public void onClick(ClickEvent event) {
-		MeineProjekteList mpl = new MeineProjekteList();
-		info.clear();
-		info.add(mpl);
+		@Override
+		public void onClick(ClickEvent event) {
+			MeineProjekteList mpl = new MeineProjekteList();
+			info.clear();
+			info.add(mpl);
+		}
 	}
-	}
-	
+
 	private class AndereProjekteClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			AndereProjekte ap = new AndereProjekte();
+			AndereProjektmarktplatzList pml = new AndereProjektmarktplatzList();
 			info.clear();
-			info.add(ap);
+			info.add(pml);
 		}
-		}
-	
+	}
+
 	private class ProjektAnlegenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
@@ -126,54 +126,54 @@ public class MainNavigationPanel extends VerticalPanel{
 			info.clear();
 			info.add(pn);
 		}
-		}
-	
+	}
+
 	private class MeineBeteiligungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			MeineBeteiligungPanel mb = new MeineBeteiligungPanel();
+			MeineBeteiligungList mbl = new MeineBeteiligungList();
 			info.clear();
-			info.add(mb);
+			info.add(mbl);
 		}
-		}
-	
+	}
+
 	private class AndereBeteiligungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			AndereBeteiligungPanel ab = new AndereBeteiligungPanel();
+			AndereBeteiligungList abl = new AndereBeteiligungList();
 			info.clear();
-			info.add(ab);
+			info.add(abl);
 		}
-		}
-	
+	}
+
 	private class MeineBewerbungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			MeineBewerbung m = new MeineBewerbung();
+			MeineBeteiligungList mbl = new MeineBeteiligungList();
 			info.clear();
-			info.add(m);
+			info.add(mbl);
 		}
-		}
-	
+	}
+
 	private class EingegangeneBewerbungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			//TODO
+			// TODO
 			info.clear();
 			Window.alert("Panel fehlt");
-//			info.add(m);
+			// info.add(m);
 		}
-		}
-	
+	}
+
 	private class PMAnzeigenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			ProjektmarktplatzAnzeigen pm = new ProjektmarktplatzAnzeigen();
+			AlleProjektmarktplatzList apml = new AlleProjektmarktplatzList();
 			info.clear();
-			info.add(pm);
+			info.add(apml);
 		}
-		}
-	
+	}
+
 	private class PMErstellenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
@@ -181,12 +181,12 @@ public class MainNavigationPanel extends VerticalPanel{
 			info.clear();
 			info.add(pma);
 		}
-		}
-	
+	}
+
 	private class ReportClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
 			Window.open(GWT.getHostPageBaseURL() + "ProjektmarktplatzProjektReport.html", "_self", "enable");
 		}
-		}
+	}
 }

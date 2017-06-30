@@ -36,13 +36,14 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel {
 	// in bankprojekt nachsehen!
 
 	HorizontalPanel hPanel = new HorizontalPanel();
-	TextArea taName = new TextArea();
+	TextBox taName = new TextBox();
 	HorizontalPanel hPanel2 = new HorizontalPanel();
 	VerticalPanel vPanel = new VerticalPanel();
 	Label lblBez = new Label("Bezeichnung");
 
 	public void onLoad() {
 
+		super.onLoad();
 		Button btSpeichern = new Button("Speichern");
 		Button btAbbrechen = new Button("Abbrechen");
 
@@ -61,7 +62,7 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel {
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 				hPanel.clear();
-				ProjektmarktplatzAnzeigen pa = new ProjektmarktplatzAnzeigen();
+				ProjektmarktplatzAnzeigen pa = new ProjektmarktplatzAnzeigen(null);
 				hPanel.add(pa);
 			}
 		});

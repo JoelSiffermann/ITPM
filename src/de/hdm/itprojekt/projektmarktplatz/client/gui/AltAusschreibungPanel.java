@@ -26,7 +26,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
-public class AusschreibungPanel extends VerticalPanel {
+public class AltAusschreibungPanel extends VerticalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
@@ -37,7 +37,7 @@ public class AusschreibungPanel extends VerticalPanel {
 	 * Der Konstruktor der Klasse AusschreibungPanel
 	 */
 
-	public AusschreibungPanel() {
+	public AltAusschreibungPanel() {
 
 	}
 
@@ -89,7 +89,7 @@ public class AusschreibungPanel extends VerticalPanel {
 			public void onClick(ClickEvent event) {
 				// Window.alert("clickhandler");
 
-				BewerbungForm bewerbenAnzeigenForm = new BewerbungForm();
+				AltBewerbungForm bewerbenAnzeigenForm = new AltBewerbungForm();
 				vpBewerben.clear();
 				vpBewerben.add(bewerbenAnzeigenForm.getAufProjektBewerben());
 			}
@@ -236,7 +236,7 @@ public class AusschreibungPanel extends VerticalPanel {
 			public void onClick(ClickEvent event) {
 				// Window.alert("clickhandler");
 
-				BewerbungForm bewerbenAnzeigenForm = new BewerbungForm();
+				AltBewerbungForm bewerbenAnzeigenForm = new AltBewerbungForm();
 				vpBewerben.clear();
 				vpBewerben.add(
 						bewerbenAnzeigenForm.getMeineProjekteBewerbungAnzeigen(listBoxBezeichnung.getSelectedValue()));

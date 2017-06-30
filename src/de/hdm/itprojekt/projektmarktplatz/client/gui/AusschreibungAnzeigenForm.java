@@ -32,67 +32,72 @@ import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 public class AusschreibungAnzeigenForm extends HorizontalPanel {
 
 	/*
 	 * Neues Design
 	 */
-	
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
+//	List<String> AUSSCHREIBUNG = Arrays.asList("Ausschreibung 1", "Ausschreibung 2", "Ausschreibung 3", "Ausschreibung 4");
+	VerticalPanel vpAusschreibungAnzeigenForm1 = new VerticalPanel();
+	VerticalPanel vpAusschreibungAnzeigenForm2 = new VerticalPanel();
+	HorizontalPanel hpAusschreibungAnzeigenForm = new HorizontalPanel();
+
+	TextBox tbPartnerProfilBeschreibung = new TextBox();
+	TextBox tbPartnerProfilWert = new TextBox();
+	DatePicker dpFrist = new DatePicker();
+	TextArea taAusschreibungInhalt = new TextArea();
+	Label lblAusschreibungName = new Label("Ausschreibungbezeichnung");
+	Label lblAusschreibungInhalt = new Label("Ausschreibungsbeschreibung:");
+	Label lblFrist = new Label("Frist:");
+	Label lblGesucht = new Label("Gesucht:");
+	Label lblPartnerProfilBeschreibung = new Label("Beschreibung:");
+	Label lblPartnerProfilWert = new Label("Wert:");
+
+	Button btAusschreibungBearbeiten = new Button("Ausschreibung bearbeiten");
+	Button btAusschreibungEntfernen = new Button("Ausschreibung entfernen");
+	TextCell textCell = new TextCell();
+
+	Projekt projekt = new Projekt();
+	
+	public AusschreibungAnzeigenForm(Projekt p) {
+		this.projekt = p;
+	}
 	public void onLoad() {
 		
-		final List<String> AUSSCHREIBUNG = Arrays.asList("Ausschreibung 1", "Ausschreibung 2", "Ausschreibung 3", "Ausschreibung 4");
-		final VerticalPanel vpAusschreibungAnzeigenForm1 = new VerticalPanel();
-		final VerticalPanel vpAusschreibungAnzeigenForm2 = new VerticalPanel();
-		final HorizontalPanel hpAusschreibungAnzeigenForm = new HorizontalPanel();
-
-		final TextBox tbPartnerProfilBeschreibung = new TextBox();
-		final TextBox tbPartnerProfilWert = new TextBox();
-		final DatePicker dpFrist = new DatePicker();
-		final TextArea taAusschreibungInhalt = new TextArea();
-		final Label lblAusschreibungName = new Label("Ausschreibungbezeichnung");
-		final Label lblAusschreibungInhalt = new Label("Ausschreibungsbeschreibung:");
-		final Label lblFrist = new Label("Frist:");
-		final Label lblGesucht = new Label("Gesucht:");
-		final Label lblPartnerProfilBeschreibung = new Label("Beschreibung:");
-		final Label lblPartnerProfilWert = new Label("Wert:");
-
-		final Button btAusschreibungBearbeiten = new Button("Ausschreibung bearbeiten");
-		final Button btAusschreibungEntfernen = new Button("Ausschreibung entfernen");
-
-		// Create a cell to render each value.
-		TextCell textCell = new TextCell();
-
+		super.onLoad();
 		// Create a CellList that uses the cell.
-		CellList<String> cellList = new CellList<String>(textCell);
-		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-
-		// Add a selection model to handle user selection.
-		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
-		cellList.setSelectionModel(selectionModel);
-		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-			public void onSelectionChange(SelectionChangeEvent event) {
-				String selected = selectionModel.getSelectedObject();
-
-				if (selected != null) {
-					// Window.alert("You selected: " + selected);
-					lblAusschreibungName.setText(selected.toString());
-				}
-
-			}
-		});
-
-		cellList.addStyleName("scrollable");
-		cellList.setPageSize(30);
-	    cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
-	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
-
-		cellList.setRowCount(AUSSCHREIBUNG.size(), true);
-
-		// Push the data into the widget.
-		cellList.setRowData(0, AUSSCHREIBUNG);
+//		CellList<String> cellList = new CellList<String>(textCell);
+//		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+//
+//		// Add a selection model to handle user selection.
+//		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
+//		cellList.setSelectionModel(selectionModel);
+//		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+//			public void onSelectionChange(SelectionChangeEvent event) {
+//				String selected = selectionModel.getSelectedObject();
+//
+//				if (selected != null) {
+//					// Window.alert("You selected: " + selected);
+//					lblAusschreibungName.setText(selected.toString());
+//				}
+//
+//			}
+//		});
+//
+//		cellList.addStyleName("scrollable");
+//		cellList.setPageSize(30);
+//	    cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
+//	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
+//
+//		cellList.setRowCount(AUSSCHREIBUNG.size(), true);
+//
+//		// Push the data into the widget.
+//		cellList.setRowData(0, AUSSCHREIBUNG);
 		
 		dpFrist.addValueChangeHandler(new ValueChangeHandler<Date>() {
 			public void onValueChange(ValueChangeEvent<Date> event) {
@@ -136,7 +141,7 @@ public class AusschreibungAnzeigenForm extends HorizontalPanel {
 		hpAusschreibungAnzeigenForm.add(vpAusschreibungAnzeigenForm2);
 
 		this.clear();
-		this.add(cellList);
+//		this.add(cellList);
 		this.add(hpAusschreibungAnzeigenForm);
 
 	}

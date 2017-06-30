@@ -1,36 +1,28 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.ClickableTextCell;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.DoubleClickEvent;
-import com.google.gwt.event.dom.client.DoubleClickHandler;
-import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
-import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
-import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
+
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
-public class MeineProjekteList extends HorizontalPanel{
+public class AndereProjekteList extends HorizontalPanel{
 	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
+	
+	Projektmarktplatz projektmarktplatz = null;
+
 	private Projekt selectedProjekt = null;
 	private SingleSelectionModel<Projekt> ssmProjekt = null;
 	private ListDataProvider<Projekt> projektDataProvider = null;
@@ -56,6 +48,11 @@ public class MeineProjekteList extends HorizontalPanel{
 //		}
 //		
 //	}
+	
+	public AndereProjekteList(Projektmarktplatz pm) {
+		
+		this.projektmarktplatz = pm;
+	}
 	
 	public void onLoad(){
 		super.onLoad();
@@ -86,9 +83,7 @@ public class MeineProjekteList extends HorizontalPanel{
 		public void onSuccess(ArrayList<Projekt> result) {
 			cellTable.setRowData(0, result);
 			cellTable.setRowCount(result.size(), true);
-//			for (Projekt p : result) {
-//				projektDataProvider.getList().add(p);
-//			}
+
 		}
 		
 	}
@@ -97,12 +92,11 @@ public class MeineProjekteList extends HorizontalPanel{
 
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
-//			Projekt selection = ssmProjekt.getSelectedObject();
-//			setSelectedProjekt((Projekt) selection);
+
 			Projekt selection = getSelectedProjekt();
-			MeineProjektePanel pm = new MeineProjektePanel(selection);
+			AusschreibungAnzeigenForm pml = new AusschreibungAnzeigenForm(selection);
 			hpInfo.clear();
-			hpInfo.add(pm);
+			hpInfo.add(pml);
 		}
 		
 	}
@@ -114,4 +108,5 @@ public class MeineProjekteList extends HorizontalPanel{
 	void setSelectedProjekt(Projekt p){
 		selectedProjekt = p;
 	}
+
 }

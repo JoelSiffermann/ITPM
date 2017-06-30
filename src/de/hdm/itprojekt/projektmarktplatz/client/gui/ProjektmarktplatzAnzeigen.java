@@ -33,16 +33,20 @@ import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 //import de.hdm.itprojekt.projektmarktplatz.shared.CompositePM;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 	/* Neues Design f√ºr die GUI */
 	private ListDataProvider<Projektmarktplatz> customerDataProvider = null;
-
+	
+	Projekt projekt = new Projekt();
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
+	Projektmarktplatz pm = null;
+	
 	Projektmarktplatz accountToDisplay = null;
 	// CustomerAccountsTreeViewModel catvm = null;
 	NumberFormat decimalFormatter = NumberFormat.getDecimalFormat();
@@ -50,6 +54,7 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 	final HorizontalPanel hPanel = new HorizontalPanel();
 	HorizontalPanel hPanel2 = new HorizontalPanel();
 	VerticalPanel vPanel = new VerticalPanel();
+	Label lblProjekt = new Label();
 	Button btErstellen = new Button();
 	Button btAndere = new Button();
 
@@ -59,7 +64,12 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 	 * enthaltenen Widgets bestimmt.
 	 */
 
-	public ProjektmarktplatzAnzeigen() {
+//	public ProjektmarktplatzAnzeigen(Projekt p) {
+//		this.projekt = p;
+//	}
+	
+	public ProjektmarktplatzAnzeigen(Projektmarktplatz p) {
+		this.pm = p;
 		super.onLoad();
 
 		// ERSIN: HIER UNSERE KLASSE AN DEN KONSTRUKTOR ANPASSEN!
@@ -96,8 +106,7 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 			}
 		});
-
-
+		
 		cellList.setRowCount(MEINEBEWERBUNGEN.size(), true);
 
 		// Push the data into the widget.
@@ -105,50 +114,16 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 //		this.getData(cellList);
 		Button btErstellen = new Button("Erstellen");
-		Button btAndere = new Button("Andere Projektmarktpl‰tze");
+//		Button btAndere = new Button("Andere Projektmarktpl‰tze");
 
 		btErstellen.addClickHandler(new ErstellenClickHandler(this));
-		btAndere.addClickHandler(new AnzeigenClickHandler(this, cellList));
+//		btAndere.addClickHandler(new AnzeigenClickHandler(this, cellList));
 		
 //		this.add(cellList);
 		vPanel.add(btErstellen);
-		vPanel.add(btAndere);
+//		vPanel.add(btAndere);
 		this.add(vPanel);
 		
-		// Grid customerGrid = new Grid(4, 2);
-		// this.add(customerGrid);
-		//
-		// Label idLabel = new Label("Kontonummer");
-		// customerGrid.setWidget(1, 0, idLabel);
-		// customerGrid.setWidget(1, 1, idValueLabel);
-		//
-		// Label balanceLabel = new Label("Kontonstand");
-		// customerGrid.setWidget(2, 0, balanceLabel);
-		// customerGrid.setWidget(2, 1, balanceValueLabel);
-		//
-		// Label amountLabel = new Label("Betrag");
-		// customerGrid.setWidget(3, 0, amountLabel);
-		// customerGrid.setWidget(3, 1, amountTextBox);
-		//
-		// HorizontalPanel accountButtonsPanel = new HorizontalPanel();
-		// this.add(accountButtonsPanel);
-		//
-		// Button depositButton = new Button("Einzahlen");
-		// depositButton.addClickHandler(new DepositClickHandler());
-		// accountButtonsPanel.add(depositButton);
-		//
-		// Button withdrawButton = new Button("Abheben");
-		// withdrawButton.addClickHandler(new WithdrawClickHandler());
-		// accountButtonsPanel.add(withdrawButton);
-		//
-		// Button deleteButton = new Button("L√∂schen");
-		// deleteButton.addClickHandler(new DeleteClickHandler());
-		// accountButtonsPanel.add(deleteButton);
-		//
-		// Button newButton = new Button("Neu");
-		// newButton.addClickHandler(new NewClickHandler());
-		// accountButtonsPanel.add(newButton);
-		// }
 	}
 
 	/*
@@ -199,6 +174,14 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 	}
 
+	public void onLoad(){
+		
+		super.onLoad();
+		if(this.projekt!=null){
+			lblProjekt.setText(projekt.getName());
+		}
+	}	
+	
 	private class ReadAllPM extends VerticalPanel implements AsyncCallback<ArrayList<Projektmarktplatz>> {
 		String[] l;
 		CellList<String> clist;

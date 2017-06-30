@@ -1,17 +1,10 @@
 package de.hdm.itprojekt.projektmarktplatz.client;
 
-import de.hdm.itprojekt.projektmarktplatz.client.gui.Home;
 import de.hdm.itprojekt.projektmarktplatz.client.gui.MainNavigationPanel;
-import de.hdm.itprojekt.projektmarktplatz.client.gui.MainPanel;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginService;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginServiceAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.LoginInfo;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;

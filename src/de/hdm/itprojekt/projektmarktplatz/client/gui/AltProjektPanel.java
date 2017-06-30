@@ -17,11 +17,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
-public class ProjektPanel extends VerticalPanel {
+public class AltProjektPanel extends VerticalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
-	public ProjektPanel() {
+	public AltProjektPanel() {
 
 		// muss hier dynamisch sein
 		final VerticalPanel vpProjektPanel = new VerticalPanel();

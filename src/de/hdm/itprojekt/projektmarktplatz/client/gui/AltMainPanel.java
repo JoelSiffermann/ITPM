@@ -21,11 +21,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
-public class MainPanel extends HorizontalPanel {
+public class AltMainPanel extends HorizontalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
-	public MainPanel() {
+	public AltMainPanel() {
 
 		final VerticalPanel navi = new VerticalPanel();
 		final VerticalPanel info = new VerticalPanel();
@@ -47,7 +47,7 @@ public class MainPanel extends HorizontalPanel {
 
 				switch (selected) {
 				case "Profil":
-					ProfilForm profilBearbeitenForm = new ProfilForm();
+					AltProfilForm profilBearbeitenForm = new AltProfilForm();
 					info.clear();
 					info.add(profilBearbeitenForm);
 					break;
@@ -62,7 +62,7 @@ public class MainPanel extends HorizontalPanel {
 						@Override
 						public void onSuccess(ArrayList<Projektmarktplatz> result) {
 							// TODO Auto-generated method stub
-							ProjektmarktplatzForm pmForm = new ProjektmarktplatzForm(result);
+							AltProjektmarktplatzForm pmForm = new AltProjektmarktplatzForm(result);
 							info.clear();
 							info.add(pmForm);
 						}
@@ -78,7 +78,7 @@ public class MainPanel extends HorizontalPanel {
 
 				case "Beteiligung":
 
-					BeteiligungPanel beteiligung = new BeteiligungPanel();
+					AltBeteiligungPanel beteiligung = new AltBeteiligungPanel();
 					info.clear();
 					info.add(beteiligung);
 					break;

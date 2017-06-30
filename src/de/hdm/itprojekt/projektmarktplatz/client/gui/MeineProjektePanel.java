@@ -67,7 +67,7 @@ public class MeineProjektePanel extends HorizontalPanel {
 
 	public void onLoad() {
 		
-		
+		super.onLoad();
 		if(this.projekt!=null){
 			lblProjektName.setText(projekt.getName());
 			taProjektBeschreibung.setText(projekt.getInhalt());
@@ -156,7 +156,7 @@ public class MeineProjektePanel extends HorizontalPanel {
 		
 		btAusschreibungAnzeigen.addClickHandler(new ClickHandler() {
 
-			AusschreibungAnzeigenForm ausschreibungAnzeigen = new AusschreibungAnzeigenForm();
+			AusschreibungAnzeigenForm ausschreibungAnzeigen = new AusschreibungAnzeigenForm(null);
 
 			@Override
 			public void onClick(ClickEvent event) {
