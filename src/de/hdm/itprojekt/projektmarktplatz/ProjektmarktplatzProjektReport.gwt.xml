@@ -3,6 +3,8 @@
 <module rename-to='projektmarktplatzprojektreport'>
 	<inherits name="com.google.gwt.user.User" />
 	<entry-point class='de.hdm.itprojekt.projektmarktplatz.client.report.ReportGenerator'/>
+	<inherits name='com.google.gwt.user.theme.chrome.Chrome'/>
 	<source path='client'/>
   	<source path='shared'/>
+  	<add-linker name="xsiframe"/>
 </module>

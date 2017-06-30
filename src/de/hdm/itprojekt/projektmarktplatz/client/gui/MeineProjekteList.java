@@ -16,6 +16,7 @@ import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagin
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -34,7 +35,7 @@ public class MeineProjekteList extends HorizontalPanel{
 	private Projekt selectedProjekt = null;
 	private SingleSelectionModel<Projekt> ssmProjekt = null;
 	private ListDataProvider<Projekt> projektDataProvider = null;
-//	private KeyProvider projKey = new KeyProvider();
+	private KeyProvider projKey = new KeyProvider();
 	private CellTable<Projekt> cellTable = new CellTable<Projekt>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
@@ -49,13 +50,13 @@ public class MeineProjekteList extends HorizontalPanel{
 	
 	//Gerade auskommentiert, wird nicht gebraucht evtl?
 	
-//	private class KeyProvider implements ProvidesKey<Projekt> {
-//		@Override
-//		public Integer getKey(Projekt item) {
-//			return new Integer(item.getId());
-//		}
-//		
-//	}
+	private class KeyProvider implements ProvidesKey<Projekt> {
+		@Override
+		public Integer getKey(Projekt item) {
+			return new Integer(item.getId());
+		}
+		
+	}
 	
 	public void onLoad(){
 		super.onLoad();
@@ -100,6 +101,9 @@ public class MeineProjekteList extends HorizontalPanel{
 //			Projekt selection = ssmProjekt.getSelectedObject();
 //			setSelectedProjekt((Projekt) selection);
 			Projekt selection = getSelectedProjekt();
+//			DialogBox d = new DialogBox();
+//			d.setText("id " + selection.getId() + " Inhalt" + selection.getInhalt() + " Name" + selection.getName());
+//			d.show();
 			MeineProjektePanel pm = new MeineProjektePanel(selection);
 			hpInfo.clear();
 			hpInfo.add(pm);

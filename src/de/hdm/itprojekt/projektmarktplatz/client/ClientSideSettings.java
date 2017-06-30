@@ -4,11 +4,10 @@ import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
-import de.hdm.itprojekt.projektmarktplatz.client.report.ReportGenerator;
 import de.hdm.itprojekt.projektmarktplatz.shared.CommonSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdminAsync;
 
 
@@ -49,23 +48,23 @@ public class ClientSideSettings extends CommonSettings{
 		    // Gab es bislang noch keine ReportGenerator-Instanz, dann...
 		    if (reportService == null) {
 		      // Zunächst instantiieren wir ReportGenerator
-		    	reportService = GWT.create(ReportGenerator.class);
+		    	reportService = GWT.create(ProjektmarktplatzReportAdmin.class);
 
-		      final AsyncCallback<Void> initReportGeneratorCallback = new AsyncCallback<Void>() {
-		        @Override
-				public void onFailure(Throwable caught) {
-		          ClientSideSettings.getLogger().severe(
-		              "Der ReportGenerator konnte nicht initialisiert werden!");
-		        }
-
-		        @Override
-				public void onSuccess(Void result) {
-		          ClientSideSettings.getLogger().info(
-		              "Der ReportGenerator wurde initialisiert.");
-		        }
-		      };
-
-		      reportService.init(initReportGeneratorCallback);
+//		      final AsyncCallback<Void> initReportGeneratorCallback = new AsyncCallback<Void>() {
+//		        @Override
+//				public void onFailure(Throwable caught) {
+//		          ClientSideSettings.getLogger().severe(
+//		              "Der ReportGenerator konnte nicht initialisiert werden!");
+//		        }
+//
+//		        @Override
+//				public void onSuccess(Void result) {
+//		          ClientSideSettings.getLogger().info(
+//		              "Der ReportGenerator wurde initialisiert.");
+//		        }
+//		      };
+//
+//		      reportService.init(initReportGeneratorCallback);
 		    }
 
 		    // So, nun brauchen wir den ReportGenerator nur noch zurückzugeben.

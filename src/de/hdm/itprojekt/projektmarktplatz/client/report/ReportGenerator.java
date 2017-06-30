@@ -26,8 +26,6 @@ public class ReportGenerator implements EntryPoint {
 	}
 
 	private void loadGUI() {
-//		home h = new home();
-//		RootPanel.get("mainReport").add(h);
 		btLogout.addClickHandler(new LogoutClickHandler());
 		ReportNavPanel repnav = new ReportNavPanel();
 		RootPanel.get("nav").add(repnav);
