@@ -103,6 +103,7 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 
 		// Push the data into the widget.
+		//test
 		cellList.setRowData(0, PROJEKTMARKTPLAETZE);
 
 //		this.getData(cellList);
