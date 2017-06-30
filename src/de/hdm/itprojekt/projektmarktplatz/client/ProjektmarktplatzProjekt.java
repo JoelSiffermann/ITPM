@@ -89,7 +89,6 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //	        	Organisationseinheit o = new Organisationseinheit();
 //	        	o.setEmail(loginInfo.getEmailAddress());
 //	        	loadGUI(o);
-	        	loadGUI();
 	        } else {
 	          loadLogin();
 	        }
