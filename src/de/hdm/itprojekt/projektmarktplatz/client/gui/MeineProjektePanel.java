@@ -39,7 +39,7 @@ public class MeineProjektePanel extends HorizontalPanel {
 	
 //	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 	
-	Projekt projekt = new Projekt();
+	Projekt projekt; // = new Projekt();
 	
 	public MeineProjektePanel(Projekt p){
 		this.projekt = p;
