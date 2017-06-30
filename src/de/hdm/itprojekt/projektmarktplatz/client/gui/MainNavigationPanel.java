@@ -4,33 +4,16 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
-
-public class MainNavigationPanel extends VerticalPanel{
-
+public class MainNavigationPanel extends VerticalPanel {
 	HorizontalPanel nav = new HorizontalPanel();
 	HorizontalPanel info = new HorizontalPanel();
 
-	Organisationseinheit o;
-	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
-	
-	public MainNavigationPanel(){
-		
-	}
-	
-	public MainNavigationPanel(Organisationseinheit o) {
-		// TODO Auto-generated constructor stub
-		this.o = o;
-	}
 	public void onLoad() {
 		super.onLoad();
 		StackPanel panel = new StackPanel();
@@ -47,24 +30,12 @@ public class MainNavigationPanel extends VerticalPanel{
 	}
 
 	private VerticalPanel profilStack() {
-
-		
-		projektService.readByEmail(o, new CheckUser(o));
-	    StackPanel panel = new StackPanel();
-	    panel.add(profilStack(), "Mein Profil");
-	    panel.add(projektStack(), "Projekte");
-	    panel.add(beteiligungStack(), "Beteiligung");
-	    panel.add(bewerbungStack(), "Bewerbung");
-	    panel.add(projektmarktplatzStack(), "Projektmarktplatz");
-	    panel.add(reportStack(), "Report");
-	    nav.add(panel);
-	    RootPanel.get("nav").add(nav);
-	    RootPanel.get("main").clear();
-	    RootPanel.get("main").add(info);
-	    return null;
-	    
-	  }
-
+		VerticalPanel profilstack = new VerticalPanel();
+		Button btMeinProfil = new Button("Anzeigen");
+		btMeinProfil.addClickHandler(new MeinProfilClickHandler());
+		profilstack.add(btMeinProfil);
+		return profilstack;
+	}
 
 	private VerticalPanel projektStack() {
 		VerticalPanel projektstack = new VerticalPanel();
@@ -217,45 +188,5 @@ public class MainNavigationPanel extends VerticalPanel{
 		public void onClick(ClickEvent event) {
 			Window.open(GWT.getHostPageBaseURL() + "ProjektmarktplatzProjektReport.html", "_self", "enable");
 		}
-
-		}
-	
-	private class CheckUser implements AsyncCallback<Organisationseinheit>{
-
-		Organisationseinheit org;
-		public CheckUser() {
-			// TODO Auto-generated constructor stub
-		}
-		public CheckUser(Organisationseinheit org) {
-			// TODO Auto-generated constructor stub
-			this.org = org;
-		}
-		@Override
-		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			Window.alert("Fehler " +caught); 
-			ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
-			projektService.insertOrg(org, new AsyncCallback<Organisationseinheit>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(Organisationseinheit result) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
-		}
-
-		@Override
-		public void onSuccess(Organisationseinheit result) {
-			Window.alert("User existiert " + result.getEmail()); 
-			
-		}
-
 	}
 }
