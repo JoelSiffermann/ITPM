@@ -174,6 +174,7 @@ public class ProjektMapper {
 					Projekt p = new Projekt();
 					p.setId(rs.getInt("Projekt_ID"));
 					p.setName(rs.getString("Name"));
+					System.out.println("Datum Start "+rs.getString("Start"));
 					p.setStart(rs.getDate("Start"));
 					p.setEnde(rs.getDate("Ende"));
 					Projektmarktplatz pm = new Projektmarktplatz();
