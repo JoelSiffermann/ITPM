@@ -28,7 +28,6 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
-
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 //import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 //import de.hdm.itprojekt.projektmarktplatz.shared.CompositePM;
@@ -83,7 +82,25 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 		cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
 		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
 
+
 		cellList.setRowCount(PROJEKTMARKTPLAETZE.size(), true);
+
+		// Add a selection model to handle user selection.
+		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
+		cellList.setSelectionModel(selectionModel);
+		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+			public void onSelectionChange(SelectionChangeEvent event) {
+				String selected = selectionModel.getSelectedObject();
+
+				if (selected != null) {
+					Window.alert("You selected: " + selected);
+					
+				}
+
+			}
+		});
+
+
 
 		// Push the data into the widget.
 		cellList.setRowData(0, PROJEKTMARKTPLAETZE);
