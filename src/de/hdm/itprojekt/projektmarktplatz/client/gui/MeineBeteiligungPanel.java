@@ -72,44 +72,12 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 	}
 	
 	public void onLoad() {
-
 		super.onLoad();
 		if(this.projekt!=null){
 			lblProjektName.setText(projekt.getName());
 		}
 		
-//
-//		// Create a cell to render each value.
-//
-//
-//		// Create a CellList that uses the cell.
-//		CellList<String> cellList = new CellList<String>(textCell);
-//		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-//
-//		// Add a selection model to handle user selection.
-//		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
-//		cellList.setSelectionModel(selectionModel);
-//		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-//			public void onSelectionChange(SelectionChangeEvent event) {
-//				String selected = selectionModel.getSelectedObject();
-//
-//				if (selected != null) {
-//					// Window.alert("You selected: " + selected);
-//					lblProjektName.setText(selected.toString());
-//				}
-//
-//			}
-//		});
-//
-//		cellList.addStyleName("scrollable");
-//		cellList.setPageSize(30);
-//		cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
-//		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
-//
-//		cellList.setRowCount(PROJEKTE.size(), true);
-//
-//		// Push the data into the widget.
-//		cellList.setRowData(0, PROJEKTE);
+
 
 		// Set the value in the text box when the user selects a date
 		startPickerProjekt.addValueChangeHandler(new ValueChangeHandler<Date>() {

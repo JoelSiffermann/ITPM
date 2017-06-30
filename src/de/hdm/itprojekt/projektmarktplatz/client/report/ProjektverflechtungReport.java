@@ -17,11 +17,11 @@ public class ProjektverflechtungReport extends VerticalPanel{
 	private final ProjektmarktplatzReportAdminAsync reportService = GWT.create(ProjektmarktplatzReportAdmin.class);
 	private final FlexTable table = new FlexTable();
 	private final FlexTable table2 = new FlexTable();
-	private VerticalPanel vp = new VerticalPanel();
 	private Projekt p = new Projekt();
 	private int row = 1;
 	
-	public ProjektverflechtungReport(){
+	public void onLoad(){
+		super.onLoad();
 		//TODO
 		p.setId(60);
 		table.addStyleName("Table");
@@ -40,103 +40,14 @@ public class ProjektverflechtungReport extends VerticalPanel{
 		table2.setText(0, 1, "Start");
 		table2.setText(0, 2, "Ende");
 		table2.setText(0, 3, "Umfang");
+		getVerflechtung();
 		
-//		reportService.getTest(new AsyncCallback<String>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("klappt ned " + caught.getMessage());
-//				dialogBox.show();
-//			}
-//
-//			@Override
-//			public void onSuccess(String result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("klappt " + result);
-//				dialogBox.show();
-//			}
-//		});
-		
-		reportService.getPersonenByProjekt(p, new AsyncCallback<ArrayList<Organisationseinheit>>(){
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-			}
-			@Override
-			public void onSuccess(ArrayList<Organisationseinheit> result) {
-				for(Organisationseinheit o : result){
-					int i = 1;
-					i++;
-					setRow(i);
-					reportService.getBewerbungenByNutzer(o, new AsyncCallback<ArrayList<Bewerbung>>(){
-						@Override
-						public void onFailure(Throwable caught) {
-							// TODO Auto-generated method stub
-							final DialogBox dialogBox = new DialogBox();
-							dialogBox.setText("klappt ned " + caught.getMessage());
-							dialogBox.show();
-						}
+		this.add(table);
+		this.add(table2);
+	}
 
-						@Override
-						public void onSuccess(ArrayList<Bewerbung> result) {
-							for(Bewerbung b : result){
-								table.setText(getRow(), 0, b.getId() + "");
-								table.setText(getRow(), 1, b.getInhalt());
-								table.setText(getRow(), 2, b.getErstelldatum().toString());
-							};
-						}
-					});
-					reportService.getBeteiligungByProjektteilnehmer(o, p, new AsyncCallback<Beteiligung>(){
-						@Override
-						public void onFailure(Throwable caught) {
-							// TODO Auto-generated method stub
-							final DialogBox dialogBox = new DialogBox();
-							dialogBox.setText("klappt ned " + caught.getMessage());
-							dialogBox.show();
-						}
-
-						@Override
-						public void onSuccess(Beteiligung result) {
-							table2.setText(getRow(), 3, result.getId() + "");
-							table2.setText(getRow(), 4, result.getStart().toString());
-							table2.setText(getRow(), 5, result.getEnde().toString());
-							table2.setText(getRow(), 6, result.getUmfang() + "");
-							};
-						}
-					);
-				}
-			}
-			
-		});
-		
-//		reportService.getBewerbungenByNutzer(o, new AsyncCallback<ArrayList<Bewerbung>>(){
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("klappt ned " + caught.getMessage());
-//				dialogBox.show();
-//			}
-//
-//			@Override
-//			public void onSuccess(ArrayList<Bewerbung> result) {
-//				int reihe = 0;
-//				
-//				for(Bewerbung b : result){
-//					reihe++;
-//					table.setText(reihe, 0, b.getId() + "");
-//					table.setText(reihe, 1, b.getInhalt());
-//					table.setText(reihe, 2, b.getErstelldatum().toString());
-//				};
-//			}
-//		});
-		
-		vp.add(table);
-		vp.add(table2);
-		this.add(vp);
+	private void getVerflechtung() {
+		reportService.getPersonenByProjekt(p, new TeilnehmerCallback());
 	}
 	
 	public int getRow(){
@@ -145,5 +56,59 @@ public class ProjektverflechtungReport extends VerticalPanel{
 	
 	public void setRow(int row){
 		row = this.row;
+	}
+	
+	private class BewerbungenCallback implements AsyncCallback<ArrayList<Bewerbung>> {
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void onSuccess(ArrayList<Bewerbung> result) {
+			for(Bewerbung b : result){
+				table.setText(getRow(), 0, b.getId() + "");
+				table.setText(getRow(), 1, b.getInhalt());
+				table.setText(getRow(), 2, b.getErstelldatum().toString());
+			};
+		}
+	}
+	
+	private class BeteiligungenCallback implements AsyncCallback<Beteiligung> {
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void onSuccess(Beteiligung result) {
+			table2.setText(getRow(), 3, result.getId() + "");
+			table2.setText(getRow(), 4, result.getStart().toString());
+			table2.setText(getRow(), 5, result.getEnde().toString());
+			table2.setText(getRow(), 6, result.getUmfang() + "");
+		};
+	}
+	
+	private class TeilnehmerCallback implements AsyncCallback<ArrayList<Organisationseinheit>> {
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+		}
+		@Override
+		public void onSuccess(ArrayList<Organisationseinheit> result) {
+			for(Organisationseinheit o : result){
+				int i = 1;
+				i++;
+				setRow(i);
+				getBewerbungen(o);
+				getBeteiligungen(o);
+			}
+		}
+		private void getBeteiligungen(Organisationseinheit o) {
+			reportService.getBeteiligungByProjektteilnehmer(o, p, new BeteiligungenCallback());
+		}
+		private void getBewerbungen(Organisationseinheit o) {
+			reportService.getBewerbungenByNutzer(o, new BewerbungenCallback());
+		}
 	}
 }

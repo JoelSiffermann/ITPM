@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class ReportNavPanel extends VerticalPanel{
 	HorizontalPanel nav = new HorizontalPanel();
 	HorizontalPanel info = new HorizontalPanel();
+	
 	public void onLoad() {
 		super.onLoad();
 	    StackPanel panel = new StackPanel();

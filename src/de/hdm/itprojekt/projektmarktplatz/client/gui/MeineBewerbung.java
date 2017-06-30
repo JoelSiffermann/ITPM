@@ -40,31 +40,12 @@ public class MeineBewerbung extends HorizontalPanel {
 	}
 
 	public void onLoad() {
-		
+
 		super.onLoad();
 		if(this.bewerbung!=null){
 //			lblInhalt.setText(bewerbung.getInhalt());
 		}
 
-		// final List<String> MEINEBEWERBUNGEN = Arrays.asList("Bewerbung 1",
-		// "Bewerbung 2", "Bewerbung 3", "Bewerbung 4");
-		// // Create a cell to render each value.
-		// TextCell textCell = new TextCell();
-		//
-		// // Create a CellList that uses the cell.
-		// CellList<String> cellList = new CellList<String>(textCell);
-		// cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-		// cellList.addStyleName("scrollable");
-		// cellList.setPageSize(20);
-		// cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
-		// cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
-		//
-		// cellList.setRowCount(MEINEBEWERBUNGEN.size(), true);
-		//
-		// // Push the data into the widget.
-		// cellList.setRowData(0, MEINEBEWERBUNGEN);
-
-		// hPanel.add(cellList);
 		vPanel2.add(lblDatum);
 		vPanel2.add(taAnschreiben);
 		hPanel.add(vPanel2);
