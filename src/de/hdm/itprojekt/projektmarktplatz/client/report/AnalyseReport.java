@@ -13,19 +13,17 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.*;
 
 public class AnalyseReport extends VerticalPanel{
 
-	private final ProjektmarktplatzReportAdminAsync reportService = GWT.create(ProjektmarktplatzReportAdmin.class);
-	private final FlexTable table = new FlexTable();
+	private ProjektmarktplatzReportAdminAsync reportService = null;
+	private FlexTable table = new FlexTable();
 	private Projekt p = new Projekt();
 	private int anz = 0;
 	private int anzahlbew = 0;
 	private int anzahlbet = 0;
 	private int anzahlaus = 0;
 	
-	//TODO DataGrid statt Flextable
-	
-	//TODO onLoad() wichtig!
-	
-	public AnalyseReport(){
+	public void onLoad(){
+		super.onLoad();
+		//TODO
 		p.setId(60);
 		table.addStyleName("Table");
 		table.setCellPadding(6);
@@ -37,97 +35,87 @@ public class AnalyseReport extends VerticalPanel{
 		table.setText(0, 1, "Bewerbungen");
 		table.setText(0, 2, "Beteiligungen");
 		table.setText(0, 3, "Ausschreibungen");
-		
 		table.setText(1, 0, p.getId() + "");
 		
-//		reportService.getTest(new AsyncCallback<String>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("klappt ned " + caught.getMessage());
-//				dialogBox.show();
-//			}
-//
-//			@Override
-//			public void onSuccess(String result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("klappt " + result);
-//				dialogBox.show();
-//			}
-//		});
-		
-		reportService.getPersonenByProjekt(p, new AsyncCallback<ArrayList<Organisationseinheit>>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(ArrayList<Organisationseinheit> result) {
-				for(Organisationseinheit o : result){
-					anzahlbew = getAnz(o);
-					table.setText(1, 1, anzahlbew + "");
-				}
-			}
-			
-		});
-		
-		reportService.getAnzahlAusschreibungen(p, new AsyncCallback<Integer>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(Integer result) {
-				anzahlaus = result;
-				table.setText(1, 3, anzahlaus + "");
-			}
-			
-		});
-		
-		reportService.getAnzahlBeteiligungen(p, new AsyncCallback<Integer>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(Integer result) {
-				anzahlbet = result;
-				table.setText(1, 2, anzahlbet + "");
-			}
-			
-		});
-		
+		getProjektTeilnehmer();
+		getAnzahlAusschreibungen();
+		getAnzahlBeteiligungen();
 		
 		this.add(table);
 	}
+
+	private void getAnzahlBeteiligungen() {
+		reportService.getAnzahlBeteiligungen(p, new AnzahlBeteiligungenCallback());
+	}
+
+	private void getAnzahlAusschreibungen() {
+		reportService.getAnzahlAusschreibungen(p, new AnzahlAusschreibungenCallback());
+	}
+
+	private void getProjektTeilnehmer() {
+		reportService.getPersonenByProjekt(p, new ProjektTeilnehmerCallback());
+	}
 	
 	public int getAnz(Organisationseinheit o){
-		reportService.getAnzahlBewerbungen(o, new AsyncCallback<Integer>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(Integer result) {
-				anz = result;
-			}
-			
-		});
+		reportService.getAnzahlBewerbungen(o, new AnzahlBewerbungenCallback());
 		return anz;
+	}
+	
+	private class AnzahlBewerbungenCallback implements AsyncCallback<Integer> {
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Integer result) {
+			anz = result;
+		}
+	}
+	
+	private class ProjektTeilnehmerCallback implements AsyncCallback<ArrayList<Organisationseinheit>> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(ArrayList<Organisationseinheit> result) {
+			for(Organisationseinheit o : result){
+				anzahlbew = getAnz(o);
+				table.setText(1, 1, anzahlbew + "");
+			}
+		}
+	}
+	
+	private class AnzahlAusschreibungenCallback implements AsyncCallback<Integer> {
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Integer result) {
+			anzahlaus = result;
+			table.setText(1, 3, anzahlaus + "");
+		}
+	}
+	
+	private class AnzahlBeteiligungenCallback implements AsyncCallback<Integer> {
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Integer result) {
+			anzahlbet = result;
+			table.setText(1, 2, anzahlbet + "");
+		}
 	}
 }

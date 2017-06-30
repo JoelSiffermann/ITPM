@@ -29,7 +29,7 @@ public class MeineBewerbung extends HorizontalPanel {
 		final Label lDatum = new Label("Datum: ");
 		final TextArea taAnschreiben = new TextArea();
 		final Button btBearbeiten = new Button("Bewerbung bearbeiten");
-		final Button btLoeschen = new Button("Bewerbung löschen");
+		final Button btLoeschen = new Button("Bewerbung entfernen");
 		final Button btAnzeigen = new Button("Bewerbung anzeigen");
 		final Button btAusschreiben = new Button("Ausschreibung anzeigen");
 		final List<String> MEINEBEWERBUNGEN = Arrays.asList("Bewerbung 1", "Bewerbung 2", "Bewerbung 3", "Bewerbung 4");

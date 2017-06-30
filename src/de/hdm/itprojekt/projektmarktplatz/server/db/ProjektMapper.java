@@ -94,6 +94,7 @@ public class ProjektMapper {
 				Projekt pr = new Projekt();
 				pr.setId(rs.getInt("Projekt_ID"));
 				pr.setName(rs.getString("Name"));
+				pr.setInhalt(rs.getString("Inhalt"));
 				pr.setStart(rs.getDate("Start"));
 				pr.setEnde(rs.getDate("Ende"));
 				Projektmarktplatz pm = new Projektmarktplatz();
@@ -131,6 +132,7 @@ public class ProjektMapper {
 					Projekt p = new Projekt();
 					p.setId(rs.getInt("Projekt_ID"));
 					p.setName(rs.getString("Name"));
+					p.setInhalt(rs.getString("Inhalt"));
 					p.setStart(rs.getDate("Start"));
 					p.setEnde(rs.getDate("Ende"));
 					Projektmarktplatz pm = new Projektmarktplatz();
@@ -174,7 +176,8 @@ public class ProjektMapper {
 					Projekt p = new Projekt();
 					p.setId(rs.getInt("Projekt_ID"));
 					p.setName(rs.getString("Name"));
-					System.out.println("Datum Start "+rs.getString("Start"));
+					//System.out.println("Datum Start "+rs.getString("Start"));
+					p.setInhalt(rs.getString("Inhalt"));
 					p.setStart(rs.getDate("Start"));
 					p.setEnde(rs.getDate("Ende"));
 					Projektmarktplatz pm = new Projektmarktplatz();
@@ -214,6 +217,7 @@ public class ProjektMapper {
 					Projekt p = new Projekt();
 					p.setId(rs.getInt("Projekt_ID"));
 					p.setName(rs.getString("Name"));
+					p.setInhalt(rs.getString("Inhalt"));
 					p.setStart(rs.getDate("Start"));
 					p.setEnde(rs.getDate("Ende"));
 					Projektmarktplatz pm = new Projektmarktplatz();

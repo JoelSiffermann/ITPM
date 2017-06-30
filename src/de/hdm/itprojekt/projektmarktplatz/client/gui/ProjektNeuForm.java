@@ -51,10 +51,10 @@ public class ProjektNeuForm extends VerticalPanel {
 	public void onLoad() {
 
 		super.onLoad();
-		Label lblProjektName = new Label("Projektname:");
+		
 		Label lblStart = new Label("Start:");
 		Label lblEnde = new Label("Ende:");
-		Label lblInhalt = new Label("Inhalt:");
+		
 		Button btSpeichern = new Button("Projekt speichern");
 		Button btAbbrechen = new Button("Abbrechen");
 		
@@ -88,9 +88,8 @@ public class ProjektNeuForm extends VerticalPanel {
 //		gridProjektForm1.setWidget(1, 0, lblInhalt);
 //		gridProjektForm1.setWidget(1, 1, taInhalt);
 
-		vpProjektForm1.add(lblProjektName);
+		
 		vpProjektForm1.add(tbProjektName);
-		vpProjektForm1.add(lblInhalt);
 		vpProjektForm1.add(taProjektInhalt);
 		
 //		gridProjektForm2.setWidget(0, 0, lblStart);

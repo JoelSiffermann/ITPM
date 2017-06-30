@@ -55,8 +55,10 @@ public class ProjektPanel extends VerticalPanel {
 						dialogBox.show();
 						clear(vpProjektPanel);
 						// Window.alert("clickhandler");
+
 				//		ProjektForm pfMeineProjekte = new ProjektForm();
 					//	addProjektPanel(pfMeineProjekte);
+
 						// Window.alert("ende clickhandler");
 					}
 
@@ -93,6 +95,8 @@ public class ProjektPanel extends VerticalPanel {
 				// Window.alert("clickhandler");
 			//	ProjektForm pfAlleProjekte = new ProjektForm();
 			//	addProjektPanel(pfAlleProjekte);
+//				ProjektForm pfAlleProjekte = new ProjektForm();
+//				addProjektPanel(pfAlleProjekte);
 				// Window.alert("ende clickhandler");
 			}
 		});

@@ -33,13 +33,13 @@ public class Projekt extends BusinessObjekt{
 		name = string;
 	}
 	public void setStart(Date start){
-		start = start;
+		this.start = start;
 	}
 	public void setEnde(Date ende){
-		ende = ende;
+		this.ende = ende;
 	}
 	public void setInhalt(String inhalt){
-		inhalt = inhalt;
+		this.inhalt = inhalt;
 	}
 
 	public Person getPerson() {

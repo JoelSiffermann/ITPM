@@ -67,6 +67,7 @@ public class MeineProjektePanel extends HorizontalPanel {
 
 	public void onLoad() {
 		
+		
 		if(this.projekt!=null){
 			lblProjektName.setText(projekt.getName());
 			taProjektBeschreibung.setText(projekt.getInhalt());
