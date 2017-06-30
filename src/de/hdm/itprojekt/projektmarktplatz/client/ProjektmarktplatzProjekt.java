@@ -79,23 +79,23 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
 //	        	Cookies.setCookie("email", "email@test.de");
 //	    		org.setEmail(Cookies.getCookie("email")); 
-	        	Organisationseinheit o = new Organisationseinheit();
-	        	o.setEmail(loginInfo.getEmailAddress());
-	        	loadGUI(o);
+//	        	Organisationseinheit o = new Organisationseinheit();
+//	        	o.setEmail(loginInfo.getEmailAddress());
+//	        	loadGUI(o);
 	        } else {
 	          loadLogin();
 	        }
 	      }
 	    });
 
-		//loadGUI();
+		loadGUI();
 
 		
 	}
 	
-	private void loadGUI(Organisationseinheit o){
+	private void loadGUI(){
 //		Home mp = new Home();
-		MainNavigationPanel mainnav = new MainNavigationPanel(o);
+		MainNavigationPanel mainnav = new MainNavigationPanel();
 		RootPanel.get("nav").add(mainnav);
 //		RootPanel.get("main").add(mp);
 	
