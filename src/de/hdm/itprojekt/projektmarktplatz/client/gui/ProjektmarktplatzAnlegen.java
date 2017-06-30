@@ -39,7 +39,7 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel {
 	TextArea taName = new TextArea();
 	HorizontalPanel hPanel2 = new HorizontalPanel();
 	VerticalPanel vPanel = new VerticalPanel();
-	Label lblBez = new Label("Bezeichnung");
+	Label lblBez = new Label("Bezeichnung: ");
 
 	public void onLoad() {
 

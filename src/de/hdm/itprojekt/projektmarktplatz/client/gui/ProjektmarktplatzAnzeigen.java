@@ -90,7 +90,7 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 //		this.getData(cellList);
 		Button btErstellen = new Button("Erstellen");
-		Button btAndere = new Button("Andere Projektmarktplätze");
+		Button btAndere = new Button("Andere Projektmarktplaetze");
 
 		btErstellen.addClickHandler(new ErstellenClickHandler(this));
 		btAndere.addClickHandler(new AnzeigenClickHandler(this, cellList));

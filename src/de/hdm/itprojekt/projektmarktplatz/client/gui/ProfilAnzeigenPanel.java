@@ -22,32 +22,18 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 	public void onLoad(){
 		//Superklasse ->Methodenaufrauf    
 		super.onLoad();
-		final VerticalPanel vpProfilForm1 = new VerticalPanel();
-		final VerticalPanel vpProfilForm2 = new VerticalPanel();
-		final TextBox tbName = new TextBox();
-		final TextBox tbVorname = new TextBox();
-		final TextBox tbBeruf = new TextBox();
-		final TextBox tbJahreszahl = new TextBox();
-		final Label lblBerufserfahrung = new Label("Berufserfahrung: ");
-		final Label lblJahre = new Label("Jahre");
-		final Grid gridProfil = new Grid(7, 2);
-
 		
-		final Button btProfilBearbeiten = new Button("Profil bearbeiten");
-		final Button btProfilEntfernen = new Button("Profil entfernen");
 	
 		tbName.getElement().setPropertyString("placeholder", "Name");
 		tbVorname.getElement().setPropertyString("placeholder", "Vorname");
 		tbBeruf.getElement().setPropertyString("placeholder", "Beruf");
-		tbJahreszahl.getElement().setPropertyString("placeholder", "Jahreszahl");
+		tbJahreszahl.getElement().setPropertyString("placeholder", "Berufserfahrung in Jahre");
 		
 		gridProfil.setWidget(0, 0, tbJahreszahl);
-		gridProfil.setWidget(0, 1, lblJahre);
 		
 		vpProfilForm1.add(tbVorname);
 		vpProfilForm1.add(tbName);
 		vpProfilForm1.add(tbBeruf);
-		vpProfilForm1.add(lblBerufserfahrung);
 		vpProfilForm1.add(gridProfil);
 		
 		vpProfilForm2.add(btProfilBearbeiten);
@@ -59,5 +45,17 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 		this.add(vpProfilForm2);
 
 	}
+	
+	 VerticalPanel vpProfilForm1 = new VerticalPanel();
+	 VerticalPanel vpProfilForm2 = new VerticalPanel();
+	 TextBox tbName = new TextBox();
+	 TextBox tbVorname = new TextBox();
+	 TextBox tbBeruf = new TextBox();
+	 TextBox tbJahreszahl = new TextBox();
+	 Grid gridProfil = new Grid(7, 2);
+
+	
+	 Button btProfilBearbeiten = new Button("Profil bearbeiten");
+	 Button btProfilEntfernen = new Button("Profil entfernen");
 
 }

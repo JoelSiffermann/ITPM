@@ -60,7 +60,7 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 		final Label lblUmfang = new Label("Umfang");
 		final Label lblTage = new Label("Tage");
 
-		final Button btBeteiligungKuendigen = new Button("Beteiligung kuendigen");
+		final Button btBeteiligungKuendigen = new Button("Beteiligung beenden");
 
 		final Grid gridUmfang = new Grid(1, 2);
 
