@@ -107,6 +107,7 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 			}
 		});
 
+
 		this.add(vPanel);
 
 	}
