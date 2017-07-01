@@ -58,5 +58,13 @@ public interface ProjektmarktplatzReportAdmin extends RemoteService {
 
 	ArrayList<Organisationseinheit> getPersonenByProjekt(Projekt p);
 
+	int getAnzahlBeteiligungen(Organisationseinheit o)
+			throws IllegalArgumentException;
+
+	ArrayList<String> getFanAnalyse() throws IllegalArgumentException;
+
+	ArrayList<Projekt> getProjekteByNutzer(Organisationseinheit o)
+			throws IllegalArgumentException;
+
 
 }

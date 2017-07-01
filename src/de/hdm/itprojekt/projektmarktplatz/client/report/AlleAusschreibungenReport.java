@@ -8,6 +8,7 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -25,6 +26,13 @@ public class AlleAusschreibungenReport extends VerticalPanel{
 		getData();
 		cellTable = new CellTable<Ausschreibung>();
 		cellTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+		TextColumn<Ausschreibung> idColumn = new TextColumn<Ausschreibung>() {
+		      @Override
+		      public String getValue(Ausschreibung object) {
+		        return "Nr. " + object.getId();
+		      }
+		    };
+		cellTable.addColumn(idColumn, "Ausschreibung");
 		TextColumn<Ausschreibung> bezColumn = new TextColumn<Ausschreibung>() {
 		      @Override
 		      public String getValue(Ausschreibung object) {
@@ -58,8 +66,7 @@ public class AlleAusschreibungenReport extends VerticalPanel{
 
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			
+			Window.alert("Ein Fehler ist aufgetreten.");
 		}
 
 		@Override
