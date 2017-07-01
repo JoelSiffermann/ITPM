@@ -55,6 +55,11 @@ public class PersonMapper {
 
 	public Person speichern(Person p) throws Exception {
 		Connection con = DBConnection.connection();
+		System.out.println("Person speichern"); 
+		String sql = "UPDATE `person` SET `Vorname` = '" + p.getVorname() + "', `Beruf` = '" + p.getBeruf()
+		+ "', " + "`Erfahrung` = '" + p.getErfahrung() + "', `ID` = '" + p.getId() + "', " + "`o_id` = '"
+		+ p.getOrganisationseinheit().getId() + "' WHERE `person`.`ID` = " + p.getId()+";";
+		System.out.println(sql); 
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate("UPDATE `person` SET `Vorname` = '" + p.getVorname() + "', `Beruf` = '" + p.getBeruf()

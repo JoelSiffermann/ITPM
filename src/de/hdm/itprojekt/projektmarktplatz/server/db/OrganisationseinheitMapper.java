@@ -61,6 +61,11 @@ public class OrganisationseinheitMapper {
 
 	public Organisationseinheit speichern(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
+		String sql = "UPDATE `organisationseinheit` SET `Organisationseinheit_ID` = '" + o.getId() + "', "
+				+ "`Name` = '" + o.getName() + "', `E-Mail` = '" + o.getEmail() + "', `partnerprofil_id` = '"
+				+ o.getPartnerprofil().getId() + "' " + "WHERE `organisationseinheit`.`Organisationseinheit_ID` = "
+				+ o.getId();
+		System.out.println(sql); 
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate("UPDATE `organisationseinheit` SET `Organisationseinheit_ID` = '" + o.getId() + "', "

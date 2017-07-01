@@ -24,6 +24,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -76,19 +77,23 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	        loginInfo = result;
 	        if(loginInfo.isLoggedIn()) {
 	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
-//	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
+//	        	Window.alert("Login erfolgt.");
+	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
 //	        	Cookies.setCookie("email", "email@test.de");
 //	    		org.setEmail(Cookies.getCookie("email")); 
 //	        	Organisationseinheit o = new Organisationseinheit();
 //	        	o.setEmail(loginInfo.getEmailAddress());
 //	        	loadGUI(o);
+	        	loadGUI();
 	        } else {
 	          loadLogin();
 	        }
 	      }
 	    });
-
-		loadGUI();
+	    
+//	    Cookies.setCookie("email", "hdm@hdm.de");
+//	    Cookies.setCookie("profilid", "2");
+//		loadGUI();
 
 		
 	}

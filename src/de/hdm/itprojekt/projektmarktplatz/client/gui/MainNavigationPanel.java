@@ -3,7 +3,9 @@ package de.hdm.itprojekt.projektmarktplatz.client.gui;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -12,6 +14,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 
 public class MainNavigationPanel extends VerticalPanel {
 	HorizontalPanel nav = new HorizontalPanel();
@@ -32,6 +35,23 @@ public class MainNavigationPanel extends VerticalPanel {
 
 	public void onLoad() {
 		super.onLoad();
+
+		Organisationseinheit o = new Organisationseinheit();
+		o.setEmail(Cookies.getCookie("email"));
+		projektService.readByEmail(o, new AsyncCallback<Organisationseinheit>() {
+			
+			@Override
+			public void onSuccess(Organisationseinheit result) {
+
+				Cookies.setCookie("profilid", result.getPartnerprofil().getId()+"");
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		
 //		projektService.readByEmail(o, new CheckUser(o));

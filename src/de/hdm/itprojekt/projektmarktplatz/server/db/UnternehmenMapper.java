@@ -55,6 +55,11 @@ public class UnternehmenMapper {
 
 	public Unternehmen speichern(Unternehmen u) throws Exception {
 		Connection con = DBConnection.connection();
+		String sql = "UPDATE `unternehmen` SET `Geschaeftsform` = '" + u.getGeschaeftsform()
+		+ "', `Geschaeftsfeld` = '" + u.getGeschaeftsfeld() + "', `ID` = '" + u.getId() + "', `o_id` = '"
+		+ u.getOrganisationseinheit().getId() + "' WHERE `unternehmen`.`ID` = " + u.getId();
+		
+		System.out.println(sql);
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate("UPDATE `unternehmen` SET `Geschaeftsform` = '" + u.getGeschaeftsform()
