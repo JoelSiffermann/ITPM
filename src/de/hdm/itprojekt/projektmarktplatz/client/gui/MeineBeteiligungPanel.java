@@ -1,19 +1,13 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
-import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
@@ -23,11 +17,10 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
 
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
+import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 public class MeineBeteiligungPanel extends HorizontalPanel {
@@ -36,9 +29,8 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 	 * Neues Design
 	 */
 
-//	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
-//	List<String> PROJEKTE = Arrays.asList("Projekt 1", "Projekt 2", "Projekt 3", "Projekt 4");
 	VerticalPanel vpMeineBeteiligungForm1 = new VerticalPanel();
 	VerticalPanel vpMeineBeteiligungForm2 = new VerticalPanel();
 	HorizontalPanel hpMeineBeteiligung = new HorizontalPanel();
@@ -65,7 +57,9 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 	Grid gridUmfang = new Grid(1, 2);
 	TextCell textCell = new TextCell();
 	
-	Projekt projekt = new Projekt();
+	Projekt projekt;
+	
+	Ausschreibung ausschreibung;
 	
 	public MeineBeteiligungPanel (Projekt p) {
 		this.projekt = p;
@@ -73,8 +67,15 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 	
 	public void onLoad() {
 		super.onLoad();
+		
+		taProjektBeschreibung.setHeight("300px");
+		taProjektBeschreibung.setWidth("300px");
+		taProjektBeschreibung.setEnabled(false);
+		
 		if(this.projekt!=null){
 			lblProjektName.setText(projekt.getName());
+			taProjektBeschreibung.setText(projekt.getInhalt());
+//			tbTage.setText(ausschreibung.getFrist().toString());
 		}
 		
 
@@ -89,7 +90,7 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 		});
 
 		// Set the default value
-		startPickerProjekt.setValue(new Date(), true);
+		startPickerProjekt.setValue(projekt.getStart(), true);
 
 		// Set the value in the text box when the user selects a date
 		endPickerProjekt.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -99,6 +100,8 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 				// Window.alert("You selected " +dateString);
 			}
 		});
+
+		endPickerProjekt.setValue(projekt.getEnde(), true);
 
 		// Set the value in the text box when the user selects a date
 		startPickerAusschreibung.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -110,7 +113,7 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 		});
 
 		// Set the default value
-		startPickerAusschreibung.setValue(new Date(), true);
+		startPickerAusschreibung.setValue(projekt.getStart(), true);
 
 		// Set the value in the text box when the user selects a date
 		endPickerAusschreibung.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -121,7 +124,7 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 			}
 		});
 
-		endPickerAusschreibung.setValue(new Date(), true);
+		endPickerAusschreibung.setValue(projekt.getEnde(), true);
 
 		btBeteiligungKuendigen.addClickHandler(new ClickHandler() {
 

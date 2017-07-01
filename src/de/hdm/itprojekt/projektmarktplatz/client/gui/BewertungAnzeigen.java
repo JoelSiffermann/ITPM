@@ -1,45 +1,60 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Text;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
+import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 
 public class BewertungAnzeigen extends VerticalPanel {
-	
+
 	/*
 	 * Neues Design
 	 */
+
+	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
+
+	Label lblBewertungSkala = new Label("Bewertung: ");
+	Label lblBegruendung = new Label("Begruendung: ");
+	TextArea taBewertungInhalt = new TextArea();
+	TextBox tbSkalaWert = new TextBox();
+	Grid gridBewertung = new Grid(1, 2);
 	
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	Bewertung bewertung;
+	Beteiligung beteiligung;
+	
+	public BewertungAnzeigen(Beteiligung selection) {
+		this.beteiligung = selection;
+	}
 
 	public void onLoad() {
+
+		super.onLoad();
 		
-		final Label lblBewertungSkala = new Label("Bewertung: ");
-		final Label lblBegruendung = new Label("Begruendung: ");
-		final TextArea taBewertungInhalt = new TextArea();
-		final TextBox tbSkalaWert = new TextBox();
-		final Grid gridBewertung = new Grid(1, 2);
+		taBewertungInhalt.setWidth("300px");
+		taBewertungInhalt.setHeight("300px");
+		taBewertungInhalt.setEnabled(false);
 		
-		final Button btZurueck = new Button("Zurueck");
-			
+		if (this.bewertung != null) {
+//			lblBewertungSkala.setText(bewertung.getSkala());
+			lblBegruendung.setText(bewertung.getInhalt());
+		}
+
 		gridBewertung.setWidget(0, 0, lblBewertungSkala);
 		gridBewertung.setWidget(0, 1, tbSkalaWert);
-		
+
 		this.clear();
 		this.add(gridBewertung);
 		this.add(lblBegruendung);
 		this.add(taBewertungInhalt);
-		this.add(btZurueck);
-		
+
 	}
 
 }

@@ -41,11 +41,23 @@ public class ProjektmarktplatzMapper {
 			 * Primärschlüssel.
 			 */
 			// p.setId(rs.getInt("") + 1);
-			stmt = con.createStatement();
+			
+			 ResultSet rs = stmt.executeQuery("SELECT MAX(`Projektmarktplatz_ID`) AS maxid "
+			          + "FROM `projektmarktplatz` ");
+			 
+		      if (rs.next()) {
+		          
+		    	  p.setId(rs.getInt("maxid") + 1);
+
+		          stmt = con.createStatement();
+
+		      
+
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate("INSERT INTO `projektmarktplatz` (`Projektmarktplatz_ID`, `Bezeichnung`) VALUES ('"
 					+ p.getId() + "', '" + p.getBezeichnung() + "');");
-		} catch (SQLException e) {
+		}
+	}catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return p;

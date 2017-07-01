@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -88,7 +89,6 @@ public class AlleProjektmarktplatzList extends HorizontalPanel{
 			hpInfo.clear();
 			hpInfo.add(apl);
 		}
-		
 	}
 	
 	Projektmarktplatz getSelectedProjektmarktplatz() {
