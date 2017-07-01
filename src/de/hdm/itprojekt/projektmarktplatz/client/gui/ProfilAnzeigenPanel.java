@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -16,6 +18,20 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 	/*
 	 * Neues Design
 	 */
+
+	 VerticalPanel vpProfilForm1 = new VerticalPanel();
+	 VerticalPanel vpProfilForm2 = new VerticalPanel();
+	 TextBox tbName = new TextBox();
+	 TextBox tbVorname = new TextBox();
+	 TextBox tbBeruf = new TextBox();
+	 TextBox tbJahreszahl = new TextBox();
+	 Grid gridProfil = new Grid(7, 2);
+
+	
+	 Button btProfilBearbeiten = new Button("Profil bearbeiten");
+	 Button btProfilEntfernen = new Button("Profil entfernen");
+
+
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class); //gehört in entrypoint klasse rein
 	
@@ -46,16 +62,14 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 
 	}
 	
-	 VerticalPanel vpProfilForm1 = new VerticalPanel();
-	 VerticalPanel vpProfilForm2 = new VerticalPanel();
-	 TextBox tbName = new TextBox();
-	 TextBox tbVorname = new TextBox();
-	 TextBox tbBeruf = new TextBox();
-	 TextBox tbJahreszahl = new TextBox();
-	 Grid gridProfil = new Grid(7, 2);
 
+		
 	
-	 Button btProfilBearbeiten = new Button("Profil bearbeiten");
-	 Button btProfilEntfernen = new Button("Profil entfernen");
+	
+
 
 }
+
+
+
+		
