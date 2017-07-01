@@ -38,7 +38,7 @@ public class AndereBeteiligungList extends HorizontalPanel {
 		super.onLoad();
 		ssmProjekt = new SingleSelectionModel<Projekt>();
 		ssmProjekt.addSelectionChangeHandler(new SelectionHandler());
-		cellTable.addColumn(col, "Beteiligungen");
+		cellTable.addColumn(col, "Projekte");
 		fillTable();
 		cellTable.setSelectionModel(ssmProjekt);
 		hpList.add(cellTable);

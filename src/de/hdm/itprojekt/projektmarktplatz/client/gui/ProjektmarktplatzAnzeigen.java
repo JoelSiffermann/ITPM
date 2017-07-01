@@ -56,6 +56,8 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 	Button btErstellen = new Button();
 	Button btAndere = new Button();
 
+	
+	
 	/*
 	 * Im Konstruktor werden die Widgets z.T. erzeugt. Alle werden in einem
 	 * Raster angeordnet, dessen Größe sich aus dem Platzbedarf der
@@ -193,7 +195,7 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 			this.l = new String[result.size()];
 			int i = 0;
 			for (Projektmarktplatz p : result) {
-				// Window.alert(p.getBezeichnung());
+//				 Window.alert(p.getBezeichnung());
 				l[i] = p.getBezeichnung();
 				i++;
 			}

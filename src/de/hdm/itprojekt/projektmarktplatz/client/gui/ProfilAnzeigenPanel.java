@@ -46,14 +46,12 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 	Button btProfilBearbeiten = new Button("Profil bearbeiten");
 	Button btProfilEntfernen = new Button("Profil entfernen");
 
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class); // gehört
-																											// in
-																											// entrypoint
-																											// klasse
-																											// rein
+	
 
-	public void onLoad() {
-		// Superklasse ->Methodenaufrauf
+	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
+	
+	public void onLoad(){
+		
 		super.onLoad();
 
 //		tbName.getElement().setPropertyString("placeholder", "Name");

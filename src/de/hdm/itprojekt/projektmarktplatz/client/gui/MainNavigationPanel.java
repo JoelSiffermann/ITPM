@@ -161,7 +161,7 @@ public class MainNavigationPanel extends VerticalPanel {
 	private class ProjektAnlegenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			ProjektNeuForm pn = new ProjektNeuForm();
+			ProjektNeuForm pn = new ProjektNeuForm(null);
 			info.clear();
 			info.add(pn);
 		}

@@ -29,8 +29,8 @@ public class BewerbungNeuForm extends VerticalPanel {
 	
 	Bewerbung bewerbung = new Bewerbung();
 	
-	public BewerbungNeuForm (Bewerbung p) {
-		this.bewerbung = p;
+	public BewerbungNeuForm (Bewerbung b) {
+		this.bewerbung = b;
 	}
 	
 	public void onLoad() {
