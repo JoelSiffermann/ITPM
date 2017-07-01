@@ -41,14 +41,6 @@ public class AndereProjekteList extends HorizontalPanel{
 	
 	//Gerade auskommentiert, wird nicht gebraucht evtl?
 	
-//	private class KeyProvider implements ProvidesKey<Projekt> {
-//		@Override
-//		public Integer getKey(Projekt item) {
-//			return new Integer(item.getId());
-//		}
-//		
-//	}
-	
 	public AndereProjekteList(Projektmarktplatz pm) {
 		
 		this.projektmarktplatz = pm;
@@ -58,7 +50,6 @@ public class AndereProjekteList extends HorizontalPanel{
 		super.onLoad();
 		ssmProjekt = new SingleSelectionModel<Projekt>();
 		ssmProjekt.addSelectionChangeHandler(new SelectionHandler());
-//		projektDataProvider = new ListDataProvider<Projekt>();
 		cellTable.addColumn(col, "Projekte");
 		fillTable();
 		cellTable.setSelectionModel(ssmProjekt);
@@ -95,9 +86,9 @@ public class AndereProjekteList extends HorizontalPanel{
 		public void onSelectionChange(SelectionChangeEvent event) {
 
 			Projekt selection = getSelectedProjekt();
-			AusschreibungAnzeigenForm pml = new AusschreibungAnzeigenForm(selection);
+			AndereProjektePanel ap = new AndereProjektePanel(selection);
 			hpInfo.clear();
-			hpInfo.add(pml);
+			hpInfo.add(ap);
 		}
 		
 	}

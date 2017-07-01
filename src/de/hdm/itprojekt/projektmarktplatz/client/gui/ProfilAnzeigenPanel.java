@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -8,6 +10,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 
@@ -17,7 +20,21 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 	 * Neues Design
 	 */
 
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class); //gehört in entrypoint klasse rein
+	 VerticalPanel vpProfilForm1 = new VerticalPanel();
+	 VerticalPanel vpProfilForm2 = new VerticalPanel();
+	 TextBox tbName = new TextBox();
+	 TextBox tbVorname = new TextBox();
+	 TextBox tbBeruf = new TextBox();
+	 TextBox tbJahreszahl = new TextBox();
+	 Grid gridProfil = new Grid(7, 2);
+
+	
+	 Button btProfilBearbeiten = new Button("Profil bearbeiten");
+	 Button btProfilEntfernen = new Button("Profil entfernen");
+
+
+
+	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	
 	public void onLoad(){
 		//Superklasse ->Methodenaufrauf    
@@ -46,16 +63,14 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 
 	}
 	
-	 VerticalPanel vpProfilForm1 = new VerticalPanel();
-	 VerticalPanel vpProfilForm2 = new VerticalPanel();
-	 TextBox tbName = new TextBox();
-	 TextBox tbVorname = new TextBox();
-	 TextBox tbBeruf = new TextBox();
-	 TextBox tbJahreszahl = new TextBox();
-	 Grid gridProfil = new Grid(7, 2);
 
+		
 	
-	 Button btProfilBearbeiten = new Button("Profil bearbeiten");
-	 Button btProfilEntfernen = new Button("Profil entfernen");
+	
+
 
 }
+
+
+
+		
