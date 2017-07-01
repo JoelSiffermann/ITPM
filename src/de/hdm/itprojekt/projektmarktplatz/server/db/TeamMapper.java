@@ -135,6 +135,8 @@ public class TeamMapper {
 	
 	public Team getByOrgId(Organisationseinheit org) throws Exception {
 		Connection con = DBConnection.connection();
+		String sql = "SELECT * FROM `team` WHERE `o_id` = " + org.getId();
+		System.out.println(sql);
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `team` WHERE `o_id` = " + org.getId());
