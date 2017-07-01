@@ -133,7 +133,7 @@ public class MeineProjektePanel extends HorizontalPanel {
 		
 		btProjektBearbeiten.addClickHandler(new ClickHandler() {
 
-			ProjektNeuForm projektNeu = new ProjektNeuForm();
+			ProjektNeuForm projektNeu = new ProjektNeuForm(projekt);
 
 			@Override
 			public void onClick(ClickEvent event) {

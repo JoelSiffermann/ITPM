@@ -27,8 +27,10 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 public class ProjektNeuForm extends VerticalPanel {
@@ -37,7 +39,7 @@ public class ProjektNeuForm extends VerticalPanel {
 	 * Neues Design
 	 */
 
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	HorizontalPanel hpProjektForm = new HorizontalPanel();
 	VerticalPanel vpProjektForm1 = new VerticalPanel();
 	VerticalPanel vpProjektForm2 = new VerticalPanel();
@@ -47,6 +49,11 @@ public class ProjektNeuForm extends VerticalPanel {
 	DatePicker startPicker = new DatePicker();
 	DatePicker endPicker = new DatePicker();
 	
+	Projekt projekt = new Projekt();
+	
+	public ProjektNeuForm (Projekt p) {
+		this.projekt = p;
+	}
 	
 	public void onLoad() {
 
