@@ -68,7 +68,8 @@ public class AndereProjekteList extends HorizontalPanel{
 	}
 	
 	public void fillTable(){
-		projektService.readAllProjekt(new ReadProjektCallback());
+//		projektService.readAllProjekt(new ReadProjektCallback());
+		projektService.readByIdProjektProjektmarktplatz(this.projektmarktplatz, new ReadProjektCallback());
 	}
 	
 	private class ReadProjektCallback implements AsyncCallback<ArrayList<Projekt>> {
