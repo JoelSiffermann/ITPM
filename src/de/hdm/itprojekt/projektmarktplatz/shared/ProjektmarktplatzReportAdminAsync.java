@@ -55,5 +55,13 @@ public interface ProjektmarktplatzReportAdminAsync {
 
 	void getAnzahlBeteiligungen(Projekt p, AsyncCallback<Integer> callback);
 
+	void getAnzahlBeteiligungen(Organisationseinheit o,
+			AsyncCallback<Integer> callback);
+
+	void getFanAnalyse(AsyncCallback<ArrayList<String>> callback);
+
+	void getProjekteByNutzer(Organisationseinheit o,
+			AsyncCallback<ArrayList<Projekt>> callback);
+
 
 }

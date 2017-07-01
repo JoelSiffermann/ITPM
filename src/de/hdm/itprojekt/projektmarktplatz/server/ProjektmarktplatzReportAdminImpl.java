@@ -146,7 +146,12 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	@Override
 	public ArrayList<Beteiligung> getBeteiligungByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
-		// return this.projBetMapper.getByPartnerprofil();
+		try {
+			return this.projBetMapper.getAllByNutzer(o);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -212,6 +217,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	@Override
 	public int getAnzahlBeteiligungen(Projekt p) throws IllegalArgumentException {
 		ArrayList<Beteiligung> b = this.getBeteiligungenByProjekt(p);
+		int count = b.size();
+		return count;
+	}
+	
+	@Override
+	public int getAnzahlBeteiligungen(Organisationseinheit o) throws IllegalArgumentException {
+		ArrayList<Beteiligung> b = this.getBeteiligungByNutzer(o);
 		int count = b.size();
 		return count;
 	}
@@ -362,4 +374,28 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 //		}
 //		return null;
 //	}
+	
+	@Override
+	public ArrayList<String> getFanAnalyse() throws IllegalArgumentException {
+		ArrayList<String> result = new ArrayList<String>();
+		ArrayList<Organisationseinheit> teilnehmer = this.getAllPersProfile();
+		for(Organisationseinheit o : teilnehmer){
+			int bewerbungen = this.getAnzahlBewerbungen(o);
+			int beteiligungen = this.getBeteiligungByNutzer(o).size();
+			result.add(o.getName() + " " + o.getEmail() + " " + bewerbungen + " " + beteiligungen);
+		}
+		return result;
+	}
+	
+	@Override
+	public ArrayList<Projekt> getProjekteByNutzer(Organisationseinheit o) throws IllegalArgumentException {
+		try {
+			return this.projMapper.getAllbyNutzer(o);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

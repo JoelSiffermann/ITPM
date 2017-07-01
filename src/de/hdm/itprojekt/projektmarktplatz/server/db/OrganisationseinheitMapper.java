@@ -171,18 +171,10 @@ public class OrganisationseinheitMapper {
 					p.setId(rs.getInt("partnerprofil_id"));
 					o.setPartnerprofil(p);
 					result.add(o);
-//					stmt = con.createStatement();
-					// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-//					stmt.executeUpdate("");
-					System.out.println("Orga getAll");
 				}
-				
-//			}
-//			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
-
 	}
 }
