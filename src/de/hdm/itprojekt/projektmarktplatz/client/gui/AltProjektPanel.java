@@ -17,11 +17,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
-public class ProjektPanel extends VerticalPanel {
+public class AltProjektPanel extends VerticalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
-	public ProjektPanel() {
+	public AltProjektPanel() {
 
 		// muss hier dynamisch sein
 		final VerticalPanel vpProjektPanel = new VerticalPanel();
@@ -55,8 +55,8 @@ public class ProjektPanel extends VerticalPanel {
 						dialogBox.show();
 						clear(vpProjektPanel);
 						// Window.alert("clickhandler");
-						ProjektForm pfMeineProjekte = new ProjektForm();
-						addProjektPanel(pfMeineProjekte);
+//						ProjektForm pfMeineProjekte = new ProjektForm();
+//						addProjektPanel(pfMeineProjekte);
 						// Window.alert("ende clickhandler");
 					}
 
@@ -91,8 +91,8 @@ public class ProjektPanel extends VerticalPanel {
 				clear(vpProjektPanel);
 
 				// Window.alert("clickhandler");
-				ProjektForm pfAlleProjekte = new ProjektForm();
-				addProjektPanel(pfAlleProjekte);
+//				ProjektForm pfAlleProjekte = new ProjektForm();
+//				addProjektPanel(pfAlleProjekte);
 				// Window.alert("ende clickhandler");
 			}
 		});

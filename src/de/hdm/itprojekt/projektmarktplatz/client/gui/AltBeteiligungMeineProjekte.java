@@ -15,7 +15,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 
-public class BeteiligungMeineProjekte extends VerticalPanel {
+public class AltBeteiligungMeineProjekte extends VerticalPanel {
 	
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 	

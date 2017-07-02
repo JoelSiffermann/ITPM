@@ -11,12 +11,16 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -33,67 +37,88 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel {
 	// private final ProjektmarktplatzAdminAsync projektService =
 	// GWT.create(ProjektmarktplatzAdmin.class);
 	private final ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
-	// in bankprojekt nachsehen!
 
-	HorizontalPanel hPanel = new HorizontalPanel();
-	TextArea taName = new TextArea();
-	HorizontalPanel hPanel2 = new HorizontalPanel();
-	VerticalPanel vPanel = new VerticalPanel();
-	Label lblBez = new Label("Bezeichnung");
-
-	public void onLoad() {
-
-		Button btSpeichern = new Button("Speichern");
-		Button btAbbrechen = new Button("Abbrechen");
-
-		btSpeichern.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-		btAbbrechen.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				hPanel.clear();
-				ProjektmarktplatzAnzeigen pa = new ProjektmarktplatzAnzeigen();
-				hPanel.add(pa);
-			}
-		});
-
-		hPanel.add(vPanel);
-		vPanel.add(lblBez);
-		vPanel.add(taName);
-		vPanel.add(hPanel2);
-		hPanel2.add(btSpeichern);
-		hPanel2.add(btAbbrechen);
-
-		this.add(hPanel);
-
-	}
+	Button btOk = new Button("Sichern");
+	Button btAbbruch = new Button("Abbrechen");
 	
-	private class Save implements ClickHandler{
+	VerticalPanel vpanel = new VerticalPanel();
+	HorizontalPanel hpanel = new HorizontalPanel();
+	
+	Label pmName = new Label ("Projektmarktplatzbezeichnung: ");
+	TextArea bez = new TextArea();
+	FlexTable pmSeite = new FlexTable();
 
-		String name = "";
+//	public DialogboxPmErstellen(){
+//		this.setText("Projektmarktplatz anlegen");
+//		this.setAnimationEnabled(false);
+//		this.setGlassEnabled(true);
 		
-		public Save(String name) {
-			this.name = name;
-			
-			
-		}
+	public ProjektmarktplatzAnlegen(){
+			this.setText("Projektmarktplatz anlegen");
+		btOk.setStylePrimaryName("button");
+		btAbbruch.setStylePrimaryName("button");
 		
-		@Override
-		public void onClick(ClickEvent event) {
+		hpanel.add(btOk);
+		hpanel.add(btAbbruch);
+
+		
+		btOk.addClickHandler(new ClickHandler() {
+	
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				if(bez.getText().isEmpty()){
+					Window.alert("Projektmarktplatzbezeichnung eingeben: ");
+				}
+
+				else{
+					Projektmarktplatz projMark = new Projektmarktplatz();
+				projMark.setBezeichnung(bez.getText());
+				projektService.insertProjektmarktplatz(projMark, new SetPM());
+				}
+				}
+				
+			}
+
+				);
+		btAbbruch.addClickHandler(new ClickHandler() {
 			
-			
-		}
+			@Override
+			public void onClick(ClickEvent event) {
+				RootPanel.get("Details").clear();
+				
+			}
+		});
+		
+		pmSeite.setWidget(1, 0, pmName);
+		pmSeite.setWidget(2, 0, bez);
+		
+		vpanel.add(pmSeite);
+		vpanel.add(hpanel);
+		this.add(vpanel);
 		
 	}
+		private void setText(String string) {
+			// TODO Auto-generated method stub
+			
+		}
+		private class SetPM implements AsyncCallback<Projektmarktplatz> {
+
+	@Override
+	public void onFailure(Throwable caught) {
+		Window.alert("Projektmarktplatz konnte nicht angelegt werden");
+		
+	}
+
+	@Override
+	public void onSuccess(Projektmarktplatz result) {
+		Window.alert("Projektmarktplatz wurde erfolgreich angelegt");
+		RootPanel.get("Details").clear();
+	}
+
+	
+	
+}
 	
 	
 

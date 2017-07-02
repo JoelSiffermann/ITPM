@@ -1,16 +1,10 @@
 package de.hdm.itprojekt.projektmarktplatz.client;
 
-import de.hdm.itprojekt.projektmarktplatz.client.gui.Home;
-import de.hdm.itprojekt.projektmarktplatz.client.gui.MainPanel;
+import de.hdm.itprojekt.projektmarktplatz.client.gui.MainNavigationPanel;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginService;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginServiceAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.LoginInfo;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
@@ -30,6 +24,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -61,499 +56,19 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	private Label loginLabel = new Label("Bitte mit Ihrem Google-Account einloggen.");
 	private Anchor signInLink = new Anchor("Sign In");
 //	private Anchor signOutLink = new Anchor("Sign Out");
+	
+	VerticalPanel vpNavigation = new VerticalPanel();
+	Button btStartseite = new Button("Startseite");
+	Button btPost = new Button("Post");
+	Button btImpressum = new Button("Impressum");
+	Button btAusloggen = new Button("Ausloggen");
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		
 
-
-		Ausschreibung a = new Ausschreibung();
-		Partnerprofil p = new Partnerprofil();
-		Projekt proj = new Projekt();
-		Date date = new Date();
-		Bewerbung b = new Bewerbung();
-		final Organisationseinheit org = new Organisationseinheit();
-		Eigenschaft eg = new Eigenschaft();
-		Bewertung bt = new Bewertung ();
-		Person pers = new Person ();
-		Beteiligung projBet = new Beteiligung ();
-		
-//		eg.setBezeichnung("test_bearbeiten");
-//		eg.setId(2);
-//		eg.setPartnerprofil(p);
-//		eg.setWert("test");
-		
-		p.setId(11);
-		p.setAenderungsdatum(date);
-		p.setErstelldatum(date);
-		
-		a.setId(0);
-		org.setId(13);
-		proj.setId(23);
-		
-//		p.setAusschreibung(a);
-//		p.setOrganisationseinheit(org);
-		
-//		pers.setBeruf("Student");
-//		pers.setErfahrung(1.1f);
-//		pers.setId(4);
-//		pers.setOrganisationseinheit(org);
-//		pers.setVorname("Ersin");
-		
-		projBet.setEnde(date);
-		projBet.setId(1);
-		projBet.setOrganisationseinheit(org);
-		projBet.setProjekt(proj);
-		projBet.setStart(date);
-		projBet.setUmfang(16);
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, Anfang: Testen der Methoden für Projektbeteiligung-Objekte
-		   * ***************************************************************************
-		   */
-		
-
-
-//		projektService.insertBeteiligung(projBet, new AsyncCallback<Beteiligung>() {
-//			
-//			@Override
-//			public void onSuccess(Beteiligung result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat funktioniert");
-//				dialogBox.show();
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-
-		
-		
-		
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, Anfang: Testen der Methoden für Person-Objekte
-		   * ***************************************************************************
-		   */
-		//----> Löschen einer Person 
-		
-//		projektService.deletePerson(pers, new AsyncCallback<Void>() {
-//			
-//			@Override
-//			public void onSuccess(Void result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt - Person ");
-//				dialogBox.show();
-//
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-		
-		
-		
-		//----> lesen aller Personen 
-		
-//		projektService.readAllPerson(new AsyncCallback<ArrayList<Person>>() {
-//			
-//			@Override
-//			public void onSuccess(ArrayList<Person> result) {
-//				// TODO Auto-generated method stub
-//				String id = "";
-//				for (Person pers : result){
-//					id = id + " " + pers.getId();
-//				}
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt" + id);
-//				dialogBox.show();
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-
-		
-		//-------> Lesen einer Person 
-//		projektService.readByIdPerson(pers, new AsyncCallback<Person>() {
-//			
-//			@Override
-//			public void onSuccess(Person result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt - Person " + result.getVorname());
-//				dialogBox.show();
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, Anfang: Testen der Methoden für Partnerprofil-Objekte
-		   * ***************************************************************************
-		   */
-		
-//				projektService.updatePartnerprofil(p, new AsyncCallback<Partnerprofil>() {
-//		
-//		@Override
-//		public void onSuccess(Partnerprofil result) {
-//			// TODO Auto-generated method stub
-//			final DialogBox dialogBox = new DialogBox();
-//			dialogBox.setText("hat geklappt ");
-//			dialogBox.show();
-//		}
-//		
-//		@Override
-//		public void onFailure(Throwable caught) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//	});
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, Anfang: Testen der Methoden für Eigenschaft-Objekte
-		   * ***************************************************************************
-		   */
-		
-	
-		//-------> Lesen einer Eigenschaft    
-		
-
-//		projektService.readByIdEigenschaft(eg, new AsyncCallback<Eigenschaft>() {
-//	
-//		@Override
-//		public void onFailure(Throwable caught) {
-//			// TODO Auto-generated method stub
-//			final DialogBox d = new DialogBox();
-//			d.setText(caught.getMessage());
-//			d.show();
-//		}
-//		@Override
-//		public void onSuccess(Eigenschaft result) {
-//			// TODO Auto-generated method stub
-//			final DialogBox dialogBox = new DialogBox();
-//			dialogBox.setText("hat geklappt " + result.getBezeichnung());
-//			dialogBox.show();
-//		}
-//	});
-	
-		//         --------> Lesen ALLER Eigenschaften
-//
-//		projektService.readAllEigenschaft(new AsyncCallback<ArrayList<Eigenschaft>>() {
-//			
-//			@Override
-//			public void onSuccess(ArrayList<Eigenschaft> result) {
-//				// TODO Auto-generated method stub
-//				String id = "";
-//				for (Eigenschaft eg : result){
-//					id = id + " " + eg.getId(); 
-//				}
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt" + id);
-//				dialogBox.show();
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-		
-//		//BEWERTUNG
-//		bt.setId(3);
-//		bt.setInhalt("test test test - update_Test");
-//		bt.setSkala(3.64f);
-//		pers.setVorname("Ersin");
-//		pers.setBeruf("Student");
-//		pers.setErfahrung(3.64f);
-//		bt.setPerson(pers);
-//		
-//		
-//		org.setId(3);
-//		org.setEmail("email@test.de");
-//		org.setName("HdM 3.0");
-//		org.setPartnerprofil(p);
-//		
-//		p.setId(0); 
-//		org.setPartnerprofil(p);
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, Anfang: Testen der Methoden für Bewertung-Objekte --> Lesen aller Bewertungen
-		   * ***************************************************************************
-		   */
-//		projektService.readAllBewertung(new AsyncCallback<ArrayList<Bewertung>>() {
-//			
-//			@Override
-//			public void onSuccess(ArrayList<Bewertung> result) {
-//				// TODO Auto-generated method stub
-//				String id = "";
-//				for(Bewertung bt : result){
-//					id = id + " " + bt.getId();
-//				}
-//				
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt " + id );
-//				dialogBox.show();
-//				
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat nicht geklappt " + caught.getMessage() );
-//				dialogBox.show();
-//			}
-//		});
-		
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, ENDE: Testen der Methoden für Bewertung-Objekte --> Lesen aller Bewertungen
-		   * ***************************************************************************
-		   */		
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, ANFANG: Testen der Methoden für Bewerbung-Objekte --> Einfügen einer Bewerbung
-		   * ***************************************************************************
-		   */
-
-		
-		
-		//BEWERBUNG--
-//		b.setId(31);
-//		b.setInhalt("Neuer Test von Ersin");
-//		b.setErstelldatum(date);
-//		
-//		a.setId(666);
-//		
-//		b.setAusschreibung(a);
-//		
-		
-		//--> Erstellen einer Bewerbung
-		
-/*		projektService.insertBewerbung(b, new AsyncCallback<Bewerbung>() {
-			
-			@Override
-			public void onSuccess(Bewerbung result) {
-				// TODO Auto-generated method stub
-				final DialogBox dialogBox = new DialogBox();
-				dialogBox.setText("hat geklappt ");
-				dialogBox.show();
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});*/
-		
-		
-		//--> Bearbeiten einer Bewerbung
-
-		
-//		projektService.updateBewerbung(b, new AsyncCallback<Bewerbung>() {
-//			
-//			@Override
-//			public void onSuccess(Bewerbung result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt!! ");
-//				dialogBox.show();
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-//		
-		//--> Lesen einer Bewerbung
-		
-//		projektService.readByIdBewerbung(b, new AsyncCallback<Bewerbung>() {
-//			
-//			@Override
-//			public void onSuccess(Bewerbung result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt " + result.getInhalt());
-//				dialogBox.show();
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, ANFANG: Testen der Methoden für Ausschreibung-Objekte
-		   * ***************************************************************************
-		   */
-
-		
-		
-//		p.setId(1);
-//		proj.setId(1);
-//		a.setBezeichnung("Hdm Bezeichnung"); 
-//		a.setFrist(date);
-//		a.setId(4);
-//		a.setInhalt("Suche Programmierer 2");
-//		a.setPartnerprofil(p);
-//		a.setProjekt(proj); 
-	
-		//--> Lesen aller Ausschreibungen
-
-//		projektService.readAllAusschreibung(new AsyncCallback<ArrayList<Ausschreibung>>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void onSuccess(ArrayList<Ausschreibung> result) {
-//				// TODO Auto-generated method stub
-//				String id = "";
-//				for(Ausschreibung a : result){
-//					id = id + " " + a.getId();
-//				}
-//				
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt " + id );
-//				dialogBox.show();
-//			}
-//		});
-		
-		//--> Lesen einer Ausschreibung
-		
-//		projektService.readByIdAusschreibung(a, new AsyncCallback<Ausschreibung>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void onSuccess(Ausschreibung result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt " + result.getBezeichnung());
-//				dialogBox.show();
-//			}
-//		});
-		
-		//--> Löschen einer Ausschreibung
-		
-//		projektService.deleteAusschreibung(a, new AsyncCallback<Void>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void onSuccess(Void result) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-		
-		//--> Erstellen einer Ausschreibung
-
-//		projektService.insertAusschreibung(a, new AsyncCallback<Ausschreibung>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void onSuccess(Ausschreibung result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt ");
-//				dialogBox.show();
-//			}
-//		});
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, Ende: Testen der Methoden für Ausschreibung-Objekte
-		   * ***************************************************************************
-		   */
-		
-		/*
-		   * ***************************************************************************
-		   * ABSCHNITT, ANFANG: Testen der Methoden für Organisationseinheit-Objekte
-		   * ***************************************************************************
-		   */
-		
-		
-//		org.setId(3);
-//		org.setEmail("email@test.de");
-//		org.setName("HdM 3.0");
-//		org.setPartnerprofil(p);
-		
-//		p.setId(0); 
-//		org.setPartnerprofil(p);
-		
-		//--> Lesen einer Organisationseinheit
-
-//		projektService.readByIdOrg(org, new AsyncCallback<Organisationseinheit>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("Fehler " + caught.getMessage());
-//				dialogBox.show();
-//				
-//			}
-//
-//			@Override
-//			public void onSuccess(Organisationseinheit result) {
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("hat geklappt " + result.getEmail());
-//				dialogBox.show();
-//				
-//			}
-//		});
-//		Cookies.setCookie("email", "test@hdm-stuttgart.de");
-		
-		
-//	    LoginServiceAsync loginService = GWT.create(LoginService.class);
+	    LoginServiceAsync loginService = GWT.create(LoginService.class);
+	    
 //	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 //	      public void onFailure(Throwable error) {
 //	      }
@@ -562,140 +77,36 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //	        loginInfo = result;
 //	        if(loginInfo.isLoggedIn()) {
 //	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
-////	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
-//	        	Organisationseinheit orga = new Organisationseinheit();
-//	        	orga.setEmail(loginInfo.getEmailAddress());
-//	        	orga.setName(loginInfo.getNickname());
-//	        	insertOrga(orga);
-//	        	Cookies.setCookie("email", "email@test.de");
+////	        	Window.alert("Login erfolgt.");
+//	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
+////	        	Cookies.setCookie("email", "email@test.de");
 ////	    		org.setEmail(Cookies.getCookie("email")); 
+////	        	Organisationseinheit o = new Organisationseinheit();
+////	        	o.setEmail(loginInfo.getEmailAddress());
+////	        	loadGUI(o);
 //	        	loadGUI();
 //	        } else {
 //	          loadLogin();
 //	        }
 //	      }
-//
-//		private void insertOrga(Organisationseinheit orga) {
-//			projektService.insertOrg(orga, new AsyncCallback<Organisationseinheit>(){
-//
-//				@Override
-//				public void onFailure(Throwable caught) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//
-//				@Override
-//				public void onSuccess(Organisationseinheit result) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//				
-//			});
-//		}
 //	    });
-		
-		
+	    
+
+	    Cookies.setCookie("email", "joel@test.de");
+	    Cookies.setCookie("profilid", "53");
+
 		loadGUI();
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// Check login status using login service.
-		
-//		Cookies.setCookie("email", "test@hdm-stuttgart.de");
-//		org.setEmail(Cookies.getCookie("email")); 
-		
 
-//		projektService.readByEmail(org , new AsyncCallback<Organisationseinheit>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("Fehler " + caught.getLocalizedMessage());
-//				Button closeButton = new Button("OK", new ClickHandler() {
-//
-//					@Override
-//					public void onClick(ClickEvent event) {
-//						// TODO Auto-generated method stub
-//						dialogBox.hide();
-//					}
-//				});
-//
-//				dialogBox.add(closeButton);
-//				dialogBox.show();
-//			
-//			}
-//
-//			@Override
-//			public void onSuccess(Organisationseinheit result) {
-				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText("Erfolgreich " + result.getPartnerprofil().getId());
-//				Button closeButton = new Button("OK", new ClickHandler() {
-//
-//					@Override
-//					public void onClick(ClickEvent event) {
-//						// TODO Auto-generated method stub
-//						dialogBox.hide();
-//					}
-//				});
-//
-//				dialogBox.add(closeButton);
-//				dialogBox.show();
-//			
-//				Cookies.setCookie("userid", result.getId()+"");
-//				Cookies.setCookie("partnerprofilid", result.getPartnerprofil().getId()+""); 
-//				
-//			}
-//		});
-		
-
-	    
-	    
-		// We can add style names to widgets
-//		sendButton.addStyleName("sendButton");
-//		projektService.getTest(new AsyncCallback<String>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void onSuccess(String result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText(result);
-//				dialogBox.show();
-//			}
-//		});
-//		projektService.getTest(new AsyncCallback<String>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void onSuccess(String result) {
-//				// TODO Auto-generated method stub
-//				final DialogBox dialogBox = new DialogBox();
-//				dialogBox.setText(result);
-//			}
-//		});
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-//		RootPanel.get("nameFieldContainer").add(nameField);
-//		RootPanel.get("sendButtonContainer").add(sendButton);
-//		RootPanel.get("errorLabelContainer").add(errorLabel);
-
-		// Focus the cursor on the name field when the app loads
 		
 	}
 	
 	private void loadGUI(){
-		Home mp = new Home();
-		RootPanel.get("main").add(mp);
+//		Home mp = new Home();
+		btImpressum.addClickHandler(new ImpressumClickHandler());
+		MainNavigationPanel mainnav = new MainNavigationPanel();
+		RootPanel.get("nav").add(mainnav);
+		RootPanel.get("footer").add(btImpressum);
+//		RootPanel.get("main").add(mp);
 	
 	}
 	
@@ -706,4 +117,15 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	    loginPanel.add(signInLink);
 	    RootPanel.get("main").add(loginPanel);
 	  }
+	
+	private class ImpressumClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			Impressum imp = new Impressum();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(imp);
+		}
+		
+	}
 }

@@ -1,19 +1,13 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
-import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
@@ -23,11 +17,11 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
 
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
+import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 public class MeineBeteiligungPanel extends HorizontalPanel {
 
@@ -35,66 +29,56 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 	 * Neues Design
 	 */
 
-	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
+	VerticalPanel vpMeineBeteiligungForm1 = new VerticalPanel();
+	VerticalPanel vpMeineBeteiligungForm2 = new VerticalPanel();
+	HorizontalPanel hpMeineBeteiligung = new HorizontalPanel();
+
+	TextArea taProjektBeschreibung = new TextArea();
+	TextBox tbTage = new TextBox();
+
+	DatePicker startPickerProjekt = new DatePicker();
+	DatePicker endPickerProjekt = new DatePicker();
+	DatePicker startPickerAusschreibung = new DatePicker();
+	DatePicker endPickerAusschreibung = new DatePicker();
+
+	Label lblProjektName = new Label("Projektbezeichnung");
+	Label lblStartProjekt = new Label("Start:");
+	Label lblEndeProjekt = new Label("Ende:");
+	Label lblProjektBeschreibung = new Label("Projektbeschreibung:");
+	Label lblStartAusschreibung = new Label("Start:");
+	Label lblEndeAusschreibung = new Label("Ende:");
+	Label lblUmfang = new Label("Umfang");
+	Label lblTage = new Label("Tage");
+
+	Button btBeteiligungKuendigen = new Button("Beteiligung kuendigen");
+
+	Grid gridUmfang = new Grid(1, 2);
+	TextCell textCell = new TextCell();
+	
+	Projekt projekt;
+	
+	Ausschreibung ausschreibung;
+	
+	public MeineBeteiligungPanel (Projekt p) {
+		this.projekt = p;
+	}
+	
 	public void onLoad() {
+		super.onLoad();
+		
+		taProjektBeschreibung.setHeight("300px");
+		taProjektBeschreibung.setWidth("300px");
+		taProjektBeschreibung.setEnabled(false);
+		
+		if(this.projekt!=null){
+			lblProjektName.setText(projekt.getName());
+			taProjektBeschreibung.setText(projekt.getInhalt());
+//			tbTage.setText(ausschreibung.getFrist().toString());
+		}
+		
 
-		final List<String> PROJEKTE = Arrays.asList("Projekt 1", "Projekt 2", "Projekt 3", "Projekt 4");
-		final VerticalPanel vpMeineProjekteForm1 = new VerticalPanel();
-		final VerticalPanel vpMeineProjekteForm2 = new VerticalPanel();
-
-		final TextArea taProjektBeschreibung = new TextArea();
-		final TextBox tbTage = new TextBox();
-
-		final DatePicker startPickerProjekt = new DatePicker();
-		final DatePicker endPickerProjekt = new DatePicker();
-		final DatePicker startPickerAusschreibung = new DatePicker();
-		final DatePicker endPickerAusschreibung = new DatePicker();
-
-		final Label lblProjektName = new Label("Projektbezeichnung");
-		final Label lblStartProjekt = new Label("Start:");
-		final Label lblEndeProjekt = new Label("Ende:");
-		final Label lblProjektBeschreibung = new Label("Projektbeschreibung:");
-		final Label lblStartAusschreibung = new Label("Start:");
-		final Label lblEndeAusschreibung = new Label("Ende:");
-		final Label lblUmfang = new Label("Umfang");
-		final Label lblTage = new Label("Tage");
-
-		final Button btBeteiligungKuendigen = new Button("Beteiligung kuendigen");
-
-		final Grid gridUmfang = new Grid(1, 2);
-
-		// Create a cell to render each value.
-		TextCell textCell = new TextCell();
-
-		// Create a CellList that uses the cell.
-		CellList<String> cellList = new CellList<String>(textCell);
-		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-
-		// Add a selection model to handle user selection.
-		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
-		cellList.setSelectionModel(selectionModel);
-		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-			public void onSelectionChange(SelectionChangeEvent event) {
-				String selected = selectionModel.getSelectedObject();
-
-				if (selected != null) {
-					// Window.alert("You selected: " + selected);
-					lblProjektName.setText(selected.toString());
-				}
-
-			}
-		});
-
-		cellList.addStyleName("scrollable");
-		cellList.setPageSize(30);
-		cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
-		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
-
-		cellList.setRowCount(PROJEKTE.size(), true);
-
-		// Push the data into the widget.
-		cellList.setRowData(0, PROJEKTE);
 
 		// Set the value in the text box when the user selects a date
 		startPickerProjekt.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -106,7 +90,7 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 		});
 
 		// Set the default value
-		startPickerProjekt.setValue(new Date(), true);
+		startPickerProjekt.setValue(projekt.getStart(), true);
 
 		// Set the value in the text box when the user selects a date
 		endPickerProjekt.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -116,6 +100,8 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 				// Window.alert("You selected " +dateString);
 			}
 		});
+
+		endPickerProjekt.setValue(projekt.getEnde(), true);
 
 		// Set the value in the text box when the user selects a date
 		startPickerAusschreibung.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -127,7 +113,7 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 		});
 
 		// Set the default value
-		startPickerAusschreibung.setValue(new Date(), true);
+		startPickerAusschreibung.setValue(projekt.getStart(), true);
 
 		// Set the value in the text box when the user selects a date
 		endPickerAusschreibung.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -138,7 +124,7 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 			}
 		});
 
-		endPickerAusschreibung.setValue(new Date(), true);
+		endPickerAusschreibung.setValue(projekt.getEnde(), true);
 
 		btBeteiligungKuendigen.addClickHandler(new ClickHandler() {
 
@@ -153,26 +139,28 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 		gridUmfang.setWidget(0, 0, tbTage);
 		gridUmfang.setWidget(0, 1, lblTage);
 
-		vpMeineProjekteForm1.add(lblProjektName);
-		vpMeineProjekteForm1.add(lblStartProjekt);
-		vpMeineProjekteForm1.add(startPickerProjekt);
-		vpMeineProjekteForm1.add(lblEndeProjekt);
-		vpMeineProjekteForm1.add(endPickerProjekt);
-		vpMeineProjekteForm1.add(lblProjektBeschreibung);
-		vpMeineProjekteForm1.add(taProjektBeschreibung);
+		vpMeineBeteiligungForm1.add(lblProjektName);
+		vpMeineBeteiligungForm1.add(lblStartProjekt);
+		vpMeineBeteiligungForm1.add(startPickerProjekt);
+		vpMeineBeteiligungForm1.add(lblEndeProjekt);
+		vpMeineBeteiligungForm1.add(endPickerProjekt);
+		vpMeineBeteiligungForm1.add(lblProjektBeschreibung);
+		vpMeineBeteiligungForm1.add(taProjektBeschreibung);
 
-		vpMeineProjekteForm2.add(lblStartAusschreibung);
-		vpMeineProjekteForm2.add(startPickerAusschreibung);
-		vpMeineProjekteForm2.add(lblEndeAusschreibung);
-		vpMeineProjekteForm2.add(endPickerAusschreibung);
-		vpMeineProjekteForm2.add(lblUmfang);
-		vpMeineProjekteForm2.add(gridUmfang);
-		vpMeineProjekteForm2.add(btBeteiligungKuendigen);
+		vpMeineBeteiligungForm2.add(lblStartAusschreibung);
+		vpMeineBeteiligungForm2.add(startPickerAusschreibung);
+		vpMeineBeteiligungForm2.add(lblEndeAusschreibung);
+		vpMeineBeteiligungForm2.add(endPickerAusschreibung);
+		vpMeineBeteiligungForm2.add(lblUmfang);
+		vpMeineBeteiligungForm2.add(gridUmfang);
+		vpMeineBeteiligungForm2.add(btBeteiligungKuendigen);
 
 		this.clear();
-		this.add(cellList);
-		this.add(vpMeineProjekteForm1);
-		this.add(vpMeineProjekteForm2);
+		
+		hpMeineBeteiligung.add(vpMeineBeteiligungForm1);
+		hpMeineBeteiligung.add(vpMeineBeteiligungForm2);
+//		this.add(cellList);
+		this.add(hpMeineBeteiligung);
 
 	}
 

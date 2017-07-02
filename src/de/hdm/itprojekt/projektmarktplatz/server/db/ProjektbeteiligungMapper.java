@@ -142,10 +142,10 @@ public class ProjektbeteiligungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `beteiligung`");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			if (rs.next()) {
+//			if (rs.next()) {
 				while (rs.next()) {
 			          Beteiligung b = new Beteiligung();//default Konstruktor in Beteiligung.java einf�gen damit es kein Fehler anzeigt
 			          b.setId(rs.getInt("Beteilgung_ID"));
@@ -171,14 +171,14 @@ public class ProjektbeteiligungMapper {
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("");
-				return result;
-			}
+//				stmt.executeUpdate("");
+//				return result;
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 
 	}
 
@@ -201,6 +201,36 @@ public class ProjektbeteiligungMapper {
 					  b.setProjekt(p);
 					  Organisationseinheit o = new Organisationseinheit();
 					  b.setId(rs.getInt("orga_id"));
+					  b.setOrganisationseinheit(o);
+					  result.add(b);
+					}
+				return result;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Beteiligung> getAllByNutzer(Organisationseinheit o) throws Exception {
+		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			/*
+			 * Zunächst schauen wir nach, welches der momentan höchste
+			 * Primärschlüsselwert ist.
+			 */
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `beteiligung` WHERE `orga_id` = " + o.getId());
+				while (rs.next()) {
+			          Beteiligung b = new Beteiligung();//default Konstruktor in Beteiligung.java einf�gen damit es kein Fehler anzeigt
+			          b.setId(rs.getInt("Beteilgung_ID"));
+			          b.setStart(rs.getDate("Start"));
+			          b.setEnde(rs.getDate("Ende"));
+			          b.setUmfang(rs.getInt("Umfang"));
+			          Projekt p = new Projekt();
+			          p.setId(rs.getInt("projekt_ID"));
+			          b.setProjekt(p);
 					  b.setOrganisationseinheit(o);
 					  result.add(b);
 					}

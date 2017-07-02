@@ -1,30 +1,57 @@
 package de.hdm.itprojekt.projektmarktplatz.client.report;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdmin;
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.client.Impressum;
 
 public class ReportGenerator implements EntryPoint {
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final ProjektmarktplatzReportAdminAsync reportService = GWT.create(ProjektmarktplatzReportAdmin.class);
+	HorizontalPanel hpHeader = new HorizontalPanel();
+	HorizontalPanel hpInfo = new HorizontalPanel();
+	Button btLogout = new Button("Logout");
+	Button btImpressum = new Button("Impressum");
 	
 	@Override
 	public void onModuleLoad() {
 		
 		loadGUI();
-		
 	}
 
 	private void loadGUI() {
+		btLogout.addClickHandler(new LogoutClickHandler());
+		btImpressum.addClickHandler(new ImpressumClickHandler());
 		ReportNavPanel repnav = new ReportNavPanel();
-		RootPanel.get("mainReport").add(repnav);
+		RootPanel.get("nav").add(repnav);
+		RootPanel.get("header").add(btLogout);
+		RootPanel.get("footer").add(btImpressum);
 	}
+	
+	private class ImpressumClickHandler implements ClickHandler {
 
+		@Override
+		public void onClick(ClickEvent event) {
+			Impressum imp = new Impressum();
+			RootPanel.get("mainReport").clear();
+			RootPanel.get("mainReport").add(imp);
+		}
+		
+	}
+	
+	private class LogoutClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			RootPanel.get("nav").clear();
+			RootPanel.get("mainReport").clear();
+			RootPanel.get("header").clear();
+			Window.open("https://www.google.de/", "_self", "");
+		}
+		
+	}
 }

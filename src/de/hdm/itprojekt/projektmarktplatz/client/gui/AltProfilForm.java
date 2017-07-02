@@ -30,11 +30,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
-public class ProfilForm extends VerticalPanel {
+public class AltProfilForm extends VerticalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
-	public ProfilForm() {
+	public AltProfilForm() {
 
 		/**
 		 * <p>

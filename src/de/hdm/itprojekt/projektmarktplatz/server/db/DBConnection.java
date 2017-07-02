@@ -25,6 +25,7 @@ import com.google.appengine.api.utils.SystemProperty;
  * 
  * @author Thies
  */
+
 public class DBConnection {
 
     /**
@@ -50,8 +51,11 @@ public class DBConnection {
 //    private static String googleUrl = "jdbc:google:mysql://prof-thies.de:thies-bankproject:thies-bankproject/bankproject?user=demo&password=demo";
     private static String googleUrl = "jdbc:google:mysql://it-projekt-170811:it-projekt170811:it-projekt/itproj?user=root&password=123";
 
+
     //    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
+
     private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
+
     //PORT GEÄNDERT IN 3307!!! 
     
     /**
@@ -77,6 +81,11 @@ public class DBConnection {
      * 
      * @return DAS <code>DBConncetion</code>-Objekt.
      * @see con
+     */
+    /**
+     * 
+     * @return Connection
+     * @throws Exception
      */
     public static Connection connection() throws Exception {
         // Wenn es bisher keine Conncetion zur DB gab, ...
@@ -115,6 +124,13 @@ public class DBConnection {
         
 
     }
+    /**
+     * 
+     * @param rs ResultSet
+     * @param stmt Statement
+     * @param con Connection
+     * @throws Exception
+     */
 	public static void closeAll(ResultSet rs, Statement stmt, Connection con) throws Exception {
 //		try {
 //			if (rs != null) {

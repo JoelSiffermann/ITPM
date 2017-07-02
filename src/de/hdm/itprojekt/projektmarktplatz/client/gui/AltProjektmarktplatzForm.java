@@ -26,11 +26,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
-public class ProjektmarktplatzForm extends HorizontalPanel {
+public class AltProjektmarktplatzForm extends HorizontalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
-	public ProjektmarktplatzForm(final ArrayList<Projektmarktplatz> result) {
+	public AltProjektmarktplatzForm(final ArrayList<Projektmarktplatz> result) {
 
 		final List<String> PROJEKTMARKTPLATZ = Arrays.asList("Projektmarktplatz 1", "Projektmarktplatz 2",
 				"Projektmarktplatz 3", "Projektmarktplatz 4");
@@ -72,9 +72,9 @@ public class ProjektmarktplatzForm extends HorizontalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 
-				ProjektForm pfMeineProjekte = new ProjektForm();
-				vpProjektmarktplatz.clear();
-				vpProjektmarktplatz.add(pfMeineProjekte.getMeineProjekte(result));
+//				ProjektForm pfMeineProjekte = new ProjektForm();
+//				vpProjektmarktplatz.clear();
+//				vpProjektmarktplatz.add(pfMeineProjekte.getMeineProjekte(result));
 
 			}
 		});
@@ -95,9 +95,9 @@ public class ProjektmarktplatzForm extends HorizontalPanel {
 					public void onSuccess(ArrayList<Projektmarktplatz> result) {
 
 						for (Projektmarktplatz pm : result) {
-							ProjektForm pfMeineProjekte = new ProjektForm();
-							vpProjektmarktplatz.clear();
-							vpProjektmarktplatz.add(pfMeineProjekte.getAlleProjekte(result));
+//							ProjektForm pfMeineProjekte = new ProjektForm();
+//							vpProjektmarktplatz.clear();
+//							vpProjektmarktplatz.add(pfMeineProjekte.getAlleProjekte(result));
 
 						}
 

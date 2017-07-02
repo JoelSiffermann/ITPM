@@ -50,6 +50,10 @@ h1 {
 	text-align: left;
 }
 
+.mainReport {
+	text-align: left;
+}
+
 header {
 	background: black;
 	color: white;
@@ -102,5 +106,26 @@ footer {
 		-webkit-order: 3;
 		order: 3;
 	}
+}
+
+.Table td {
+  border: 1px solid color: none;
+  padding: 5px 30px;
+}
+
+.Table tr {
+	background: #eee;
+}
+
+.TableHeader {
+	background: #aaa;
+}
+
+.ImprTable td {
+	padding: 20px 20px;
+}
+
+.ImprHeader {
+	font-size: 24px
 }
 

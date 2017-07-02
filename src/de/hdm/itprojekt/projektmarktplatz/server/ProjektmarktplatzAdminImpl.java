@@ -73,7 +73,7 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		this.projBetMapper = ProjektbeteiligungMapper.projektbeteilitungMapper();
 		this.projMapper = ProjektMapper.projektMapper();
 		this.projMarkMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
-		// this.tMapper = TeamMapper.teamMapper();
+		 this.tMapper = TeamMapper.teamMapper();
 		this.uMapper = UnternehmenMapper.unternehmenMapper();
 
 	}
@@ -565,7 +565,7 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 				persMapper.einfuegen(pers);
 			}
 			// try {
-			// System.out.println("Einfüngen von Person " +
+			// System.out.println("Einfï¿½ngen von Person " +
 			// orgMapper.getByEmail(pers.getOrganisationseinheit()).getId());
 			// pers.getOrganisationseinheit().setId(orgMapper.getByEmail(pers.getOrganisationseinheit()).getId());
 			// persMapper.speichern(pers);
@@ -584,29 +584,39 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		try {
 			Person p = new Person();
 			p = persMapper.getByOrgId(o);
-
+			Unternehmen u = new Unternehmen();
+			Team t = new Team();
 			if (p != null) {
+				p.setOrganisationseinheit(o); 
 				arr.add("Person");
 				arr.add(p.getVorname());
 				arr.add(p.getBeruf());
+				arr.add(p.getId()+"");
 			} else {
-				Unternehmen u = new Unternehmen();
-
+				
+				u = uMapper.getByOrgId(o);
+				
 				if (u != null) {
+					u.setOrganisationseinheit(o); 
 					arr.add("Unternehmen");
 					arr.add(u.getGeschaeftsform());
 					arr.add(u.getGeschaeftsfeld());
-				} else {
-					Team t = new Team();
-
-					if (t != null) {
-						arr.add("Team");
-						arr.add(t.getGroesse() + "");
-						arr.add(t.getArbeitsfeld());
-					}
+					arr.add(u.getId()+"");
 				}
 			}
 		
+			if (p == null && u == null) {
+				
+				t = tMapper.getByOrgId(o);
+				
+				if (t != null) {
+					t.setOrganisationseinheit(o); 
+					arr.add("Team");
+					arr.add(t.getGroesse() + "");
+					arr.add(t.getArbeitsfeld());
+					arr.add(t.getId()+"");
+				}
+			}
 			return arr;
 		} catch (Exception e) {
 			e.getMessage();
@@ -918,7 +928,8 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 
 	public Team readByIdTeam(Team t) throws IllegalArgumentException {
 		try {
-			tMapper.getById(t);
+			System.out.println(t.getId());
+			return tMapper.getById(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -969,7 +980,7 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 
 	public Unternehmen updateUnternehmen(Unternehmen u) throws IllegalArgumentException {
 		try {
-			uMapper.speichern(u);
+			return uMapper.speichern(u);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1007,6 +1018,41 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public Partnerprofil getProfilbyAusschreibung(Ausschreibung a)  throws IllegalArgumentException {
+		try {
+			return this.ppMapper.getByAusschreibungId(a);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Eigenschaft getGesuchtesProf(Partnerprofil p) throws IllegalArgumentException {
+		try {
+			System.out.println("Partnerprofil suche " + p.getId());
+			
+			return this.eMapper.getByProfil(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public ArrayList<Beteiligung> getBeteiligungBy(Projekt p) throws IllegalArgumentException {
+		try {
+			return this.projBetMapper.getAllByProjekt(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

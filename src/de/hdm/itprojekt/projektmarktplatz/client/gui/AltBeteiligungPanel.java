@@ -19,11 +19,11 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 
-public class BeteiligungPanel extends HorizontalPanel {
+public class AltBeteiligungPanel extends HorizontalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 	
-	public BeteiligungPanel() {
+	public AltBeteiligungPanel() {
 
 		final VerticalPanel vpBeteiligung = new VerticalPanel();
 		final VerticalPanel vpBeteiligung2 = new VerticalPanel();

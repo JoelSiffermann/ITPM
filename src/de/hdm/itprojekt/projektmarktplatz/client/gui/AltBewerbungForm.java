@@ -23,11 +23,11 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 
-public class BewerbungForm extends VerticalPanel {
+public class AltBewerbungForm extends VerticalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
-	public BewerbungForm() {
+	public AltBewerbungForm() {
 
 	}
 
@@ -133,7 +133,7 @@ public class BewerbungForm extends VerticalPanel {
 				bewerbungTextPanel.clear();
 				hpUnten.clear();
 				// Window.alert("clickhandler");
-				BewertungForm bewertungSchreiben = new BewertungForm();
+				AltBewertungForm bewertungSchreiben = new AltBewertungForm();
 				vpKopf.add(bewertungSchreiben.getBewertungenSchreiben(lbTitel.getSelectedValue()));
 				// Window.alert("ende clickhandler");
 			}
@@ -145,7 +145,7 @@ public class BewerbungForm extends VerticalPanel {
 				vpKopf.clear();
 				bewerbungTextPanel.clear();
 				hpUnten.clear();
-				BewertungForm bewertungAnzeigen = new BewertungForm();
+				AltBewertungForm bewertungAnzeigen = new AltBewertungForm();
 				vpKopf.add(bewertungAnzeigen.getBewertungenAnzeigen());
 
 			}

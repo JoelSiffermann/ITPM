@@ -35,10 +35,16 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
-public class ProjektForm extends HorizontalPanel {
+public class AltProjektForm extends HorizontalPanel {
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
+	Projekt projekt = new Projekt();
+	
+	public AltProjektForm(Projekt p) {
+		this.projekt = p;
+	}
+	
 	public HorizontalPanel BeteiligungAnMeineProjekte() {
 
 		final List<String> BETEILIGUNGPERSONEN = Arrays.asList("Person 1", "Person 2", "Person 3", "Person 4");
@@ -457,7 +463,7 @@ public class ProjektForm extends HorizontalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 
-				AusschreibungPanel ap = new AusschreibungPanel();
+				AltAusschreibungPanel ap = new AltAusschreibungPanel();
 				vpProjektform.clear();
 				vpProjektform.add(ap.getAusschreibungAnlegen());
 
@@ -469,7 +475,7 @@ public class ProjektForm extends HorizontalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 
-				AusschreibungPanel ap = new AusschreibungPanel();
+				AltAusschreibungPanel ap = new AltAusschreibungPanel();
 				vpProjektform.clear();
 				vpProjektform.add(ap.getAusschreibungAnzeigen());
 
@@ -645,7 +651,7 @@ public class ProjektForm extends HorizontalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 
-				AusschreibungPanel ap = new AusschreibungPanel();
+				AltAusschreibungPanel ap = new AltAusschreibungPanel();
 				vpProjektform.clear();
 				vpProjektform.add(ap.getAusschreibungAnlegen());
 
@@ -657,7 +663,7 @@ public class ProjektForm extends HorizontalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 
-				AusschreibungPanel ap = new AusschreibungPanel();
+				AltAusschreibungPanel ap = new AltAusschreibungPanel();
 				vpProjektform.clear();
 				vpProjektform.add(ap.getAusschreibungBewerben());
 

@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
-
-//@author samina
+/**
+ * 
+ * @author student
+ *
+ */
 public class AusschreibungMapper {
 
 	private static AusschreibungMapper aMapper = null;
@@ -20,7 +23,10 @@ public class AusschreibungMapper {
 	protected AusschreibungMapper(){
 		
 	}
-
+/**
+ * 
+ * @return aMapper
+ */
 	public static AusschreibungMapper ausschreibungMapper() {
 		if (aMapper == null) {
 			aMapper = new AusschreibungMapper();
@@ -30,7 +36,12 @@ public class AusschreibungMapper {
 	}
 	
 
-
+/**
+ * 
+ * @param a Ausschreibung
+ * @return aMapper
+ * @throws Exception
+ */
 	public Ausschreibung einfuegen(Ausschreibung a) throws Exception {
 		Connection con = DBConnection.connection();
 		String datum = "";
@@ -68,6 +79,12 @@ public class AusschreibungMapper {
 		return a;
 	}
 
+	/**
+	 * 
+	 * @param a Ausschreibung
+	 * @return aMapper
+	 * @throws Exception
+	 */
 	public Ausschreibung speichern(Ausschreibung a) throws Exception {
 		Connection con = DBConnection.connection();
 		String datum = "";
@@ -86,6 +103,11 @@ public class AusschreibungMapper {
 		return a;
 	}
 	
+	/**
+	 * 
+	 * @param a Ausschreibung
+	 * @throws Exception
+	 */
 	public void loeschen(Ausschreibung a) throws Exception {
 	    Connection con = DBConnection.connection();
 
@@ -99,6 +121,12 @@ public class AusschreibungMapper {
 	    }
 	  }
 
+	/**
+	 * 
+	 * @param a Ausschreibung
+	 * @return aMapper
+	 * @throws Exception
+	 */
 	public Ausschreibung getById(Ausschreibung a) throws Exception{
 		 Connection con = DBConnection.connection();
 
@@ -135,7 +163,11 @@ public class AusschreibungMapper {
 		    }
 		    return a;
 	}
-
+/**
+ * 
+ * @return result
+ * @throws Exception
+ */
 	public ArrayList<Ausschreibung> getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();
@@ -191,7 +223,12 @@ public class AusschreibungMapper {
 		return result;
 
 	}
-	
+	/**
+	 * 
+	 * @param p Partnerprofil
+	 * @return null
+	 * @throws Exception
+	 */
 	public Ausschreibung getAusschreibungByPartnerprofil(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
 		try {
@@ -216,6 +253,12 @@ public class AusschreibungMapper {
 		}
 		return null;
 	}
+	/**
+	 * Liste aller Ausschreibungen für ein Projekt
+	 * @param p Projekt
+	 * @return result
+	 * @throws Exception
+	 */
 	
 	public ArrayList<Ausschreibung> getAusschreibungenByProjekt(Projekt p) throws Exception {
 		Connection con = DBConnection.connection();
