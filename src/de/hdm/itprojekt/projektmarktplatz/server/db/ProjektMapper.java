@@ -21,6 +21,10 @@ public class ProjektMapper {
 	protected ProjektMapper() {
 
 	}
+	
+	/**
+	 * @return projektMapper
+	 */ 
 
 	public static ProjektMapper projektMapper() {
 		if (projektMapper == null) {
@@ -28,7 +32,12 @@ public class ProjektMapper {
 		}
 		return projektMapper;
 	}
-
+	/**
+	 * Fügt ein neues Projekt hinzu
+	 * @param p Projekt
+	 * @return p
+	 * @throws Exception
+	 */
 	public Projekt einfuegen(Projekt p) throws Exception {
 		Connection con = DBConnection.connection();
 		try {
@@ -59,6 +68,12 @@ public class ProjektMapper {
 		}
 		return p;
 	}
+	/**
+	 * Speichert Änderungen an einem Projekt
+	 * @param p Projekt
+	 * @return p
+	 * @throws Exception
+	 */
 
 	public Projekt speichern(Projekt p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -74,6 +89,12 @@ public class ProjektMapper {
 		}
 		return p;
 	}
+	
+	/**
+	 * Loescht ein Projekt
+	 * @param p Projekt
+	 * @throws Exception
+	 */
 
 	public void loeschen(Projekt p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -84,6 +105,15 @@ public class ProjektMapper {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/**
+	 * Liest ein Projekt aus
+	 * @param p Projekt
+	 * @return p
+	 * @throws Exception
+	 */
+	
 
 	public Projekt getById(Projekt p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -111,6 +141,15 @@ public class ProjektMapper {
 		}
 		return p;
 	}
+	
+	/**
+	 * Liest alle Projekte zu einem Projektmarktplatz 
+	 * @param pr Projektmarktplatz 
+	 * @return result
+	 * @throws Exception
+	 */
+	
+	
 
 	public ArrayList<Projekt> getAllByProjektmarktplatz(Projektmarktplatz pr) throws Exception {
 		Connection con = DBConnection.connection();
@@ -156,6 +195,15 @@ public class ProjektMapper {
 		return result;
 	}
 	
+	
+	/**
+	 * Liest alle Projekte  
+	 * @return result
+	 * @throws Exception
+	 */
+	
+	
+	
 	public ArrayList<Projekt> getAll() throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Projekt> result = new ArrayList<Projekt>();
@@ -193,6 +241,13 @@ public class ProjektMapper {
 		}
 		return result;
 	}
+	
+	/**
+	 * Liest alle Projekte eines Nutzers 
+	 * @param o Organisationseinheit 
+	 * @return result
+	 * @throws Exception
+	 */
 	
 	public ArrayList<Projekt> getAllbyNutzer(Organisationseinheit o) throws Exception {
 		

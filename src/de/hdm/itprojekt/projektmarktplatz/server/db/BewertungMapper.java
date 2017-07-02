@@ -33,7 +33,7 @@ public class BewertungMapper {
 	
 
 	/**
-	 * 
+	 * Eine Bewertung wird hinzugefügt
 	 * @param b Bewertung
 	 * @return bwMapper
 	 * @throws Exception
@@ -73,7 +73,7 @@ public class BewertungMapper {
 	}
 
 	/**
-	 * 
+	 * Die Bewertung wird gespeichert, auch Änderungen
 	 * @param b Bewertung
 	 * @return bwMapper
 	 * @throws Exception
@@ -94,7 +94,7 @@ public class BewertungMapper {
 	}
 	
 	/**
-	 * 
+	 * Die Bewertung wird gelöscht
 	 * @param b Bewertung
 	 * @throws Exception
 	 */
@@ -112,7 +112,7 @@ public class BewertungMapper {
 	  }
 	
 	/**
-	 * 
+	 * Liest die Id der Bewertung
 	 * @param bt Bewertung
 	 * @return null
 	 * @throws Exception
@@ -142,7 +142,7 @@ public class BewertungMapper {
 		    return null;
 	}
 	/**
-	 * 
+	 * Zeigt alle Bewertungen an
 	 * @return result
 	 * @throws Exception
 	 */
