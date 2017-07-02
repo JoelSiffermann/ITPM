@@ -18,11 +18,22 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdminAsy
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 
+/**
+ * Klasse zur Darstellung des Reports aus Bewerbungen
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class AusBewerbungenReport extends VerticalPanel{
 
 	private ProjektmarktplatzReportAdminAsync reportService = ClientSideSettings.getReportGenerator();
 	private CellTable<Bewerbung> cellTable;
 	private Organisationseinheit o = new Organisationseinheit();
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
@@ -65,6 +76,11 @@ public class AusBewerbungenReport extends VerticalPanel{
 	private void getData() {
 		reportService.getBewerbungenByAusschreibung(o, new BewerbungenCallback());
 	}
+	
+	/**
+	 * Die innere Klasse BewerbungenCallback ruft die Array-Liste Bewerbung auf.
+	 *
+	 */
 	
 	private class BewerbungenCallback implements AsyncCallback<ArrayList<Bewerbung>> {
 		@Override

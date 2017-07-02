@@ -167,7 +167,7 @@ public class ProjektbeteiligungMapper {
 	
 	/**
 	 * Liest alle Beteiligungen 
-	 * @return return
+	 * @return result
 	 * @throws Exception
 	 */	
 	

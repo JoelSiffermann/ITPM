@@ -8,7 +8,9 @@ public class Impressum extends VerticalPanel{
 	
 	final Label lbHeader = new Label("Impressum");
 	final FlexTable table = new FlexTable();
-
+	/**
+	 * Impressum mit Namen befüllen
+	 */
 	public void onLoad(){
 		super.onLoad();
 		lbHeader.setStyleName("ImprHeader");

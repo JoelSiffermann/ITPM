@@ -235,6 +235,13 @@ public class PartnerprofilMapper {
 		    return null;
 	}
 	
+	/**
+	 * Liest alle Partnerprofile  zur Ausschreibung
+	 * @param aId AusschreibungID
+	 * @return null
+	 * @throws Exception
+	 */
+	
 	public Partnerprofil getByAusschreibungId(Ausschreibung aId) throws Exception{
 		 Connection con = DBConnection.connection();
 

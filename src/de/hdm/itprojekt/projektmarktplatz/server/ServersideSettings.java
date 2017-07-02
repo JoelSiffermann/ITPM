@@ -4,6 +4,11 @@ import java.util.logging.Logger;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.CommonSettings;
 
+/**
+ * @author Ayse Guelay
+ * @author Ersin Barut
+ */
+
 public class ServersideSettings extends CommonSettings {
 
 	private static final String LOGGER_NAME = "ProjektMarktplatz Server";

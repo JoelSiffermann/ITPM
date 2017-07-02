@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 //@author samina
 public class BewerbungMapper {
@@ -84,6 +86,7 @@ public class BewerbungMapper {
 	 * @throws Exception
 	 */
 	public Bewerbung speichern(Bewerbung b) throws Exception {
+		System.out.println("" + b.getInhalt());
 		Connection con = DBConnection.connection();
 		String datum = "";
 		
@@ -212,7 +215,7 @@ public class BewerbungMapper {
 	 * @return result
 	 * @throws Exception
 	 */
-	public ArrayList<Bewerbung> getAllByAusschreibungId(String id) throws Exception {
+	public ArrayList<Bewerbung> getAllByAusschreibung(Ausschreibung a) throws Exception {
 
 		Connection con = DBConnection.connection();
 		ArrayList<Bewerbung> result = new ArrayList<Bewerbung>();
@@ -223,7 +226,7 @@ public class BewerbungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `bewerbung` WHERE `ausschreibung_id` = " + id);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `bewerbung` WHERE `ausschreibung_id` = " + a.getId());
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 //			if (rs.next()) {
 				/*
@@ -236,10 +239,8 @@ public class BewerbungMapper {
 					b.setId(rs.getInt("Bewerbung_ID"));
 					b.setInhalt(rs.getString("Inhalt"));
 					b.setErstelldatum(rs.getDate("Erstelldatum"));
-					Ausschreibung a = new Ausschreibung();
 					Organisationseinheit o = new Organisationseinheit();
 					o.setId(rs.getInt("bewerber_id"));
-					a.setId(rs.getInt("ausschreibung_id"));
 					b.setBewerber(o);
 					b.setAusschreibung(a);
 					result.add(b);
@@ -308,6 +309,41 @@ public class BewerbungMapper {
 		}
 		return result;
 
+	}
+	
+	public Ausschreibung getAusschreibung(Bewerbung b) throws Exception {
+		Connection con = DBConnection.connection();
+
+		try {
+			Statement stmt = con.createStatement();
+
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `ausschreibung` WHERE `Auschhreibung_ID` = " + b.getAusschreibung().getId());
+			if (rs.next()){
+				Ausschreibung as = new Ausschreibung();
+		    	  Partnerprofil pp = new Partnerprofil();
+		    	  Projekt p = new Projekt();
+		    	  as.setId(rs.getInt("Ausschreibung_ID"));
+		    	  as.setBezeichnung(rs.getString("Bezeichnung"));
+		    	  as.setFrist(rs.getDate("Frist"));
+		    	  as.setInhalt(rs.getString("Inhalt"));
+		    	  
+		    	  
+		    	  pp.setId(rs.getInt("partnerprofil_id"));
+		    	  
+		    	  as.setPartnerprofil(pp);
+		    	  
+		    	  p.setId(rs.getInt("projekt_id"));
+		    	  
+		    	  as.setProjekt(p);
+		    	  
+		    	  return as;
+			}
+		}
+
+		catch (SQLException e) {
+
+		}
+		return null;
 	}
 
 }

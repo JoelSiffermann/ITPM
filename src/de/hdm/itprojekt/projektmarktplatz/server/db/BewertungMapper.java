@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
@@ -195,6 +196,29 @@ public class BewertungMapper {
 		}
 		return result;
 
+	}
+
+	public Bewertung getByBewerber(Organisationseinheit o) throws Exception {
+		Connection con = DBConnection.connection();
+
+	    try {
+	      Statement stmt = con.createStatement();
+
+	      ResultSet rs = stmt.executeQuery("SELECT * FROM `bewertung` WHERE `person_id` = " + o.getId());
+	      if (rs.next()){
+	    	  Bewertung b = new Bewertung();//default Konstruktor in Bewertung.java einf�gen damit es kein Fehler anzeigt
+	          b.setId(rs.getInt("Bewertung_ID"));
+	          b.setInhalt(rs.getString("Inhalt"));
+	          b.setSkala(rs.getFloat("Skala"));
+	          b.setPerson(o);
+				
+			return b;
+	      }
+	    }
+	    catch (SQLException e) {
+	    	
+	    }
+	    return null;
 	}
 
 }

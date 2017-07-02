@@ -27,32 +27,47 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
+/**
+ * Klasse zur Darstellung von neuen Profil-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class ProfilNeuForm extends VerticalPanel {
-	
-	/*
-	 * Neues Design
-	 */
 
 	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
 
+	VerticalPanel vpKopf = new VerticalPanel();
+	TextBox tbName = new TextBox();
+	TextBox tbVorname = new TextBox();
+	TextBox tbBeruf = new TextBox();
+	ListBox listOrg = new ListBox();
+	Label lbKenntnisse = new Label("Kenntnisse");
+	TextBox tbGroesse = new TextBox();
+	TextBox tbArbeitsfeld = new TextBox();
+	TextBox tbGeschform = new TextBox();
+	TextBox tbGeschfeld = new TextBox();
+	HorizontalPanel hpButton = new HorizontalPanel();
+
+	Button btSpeichern = new Button("Speichern");
+	Button btAbbrechen = new Button("Abbrechen");
+
+	ArrayList<Eigenschaft> eig = new ArrayList<Eigenschaft>();
+	VerticalPanel kBereich = new VerticalPanel();
+	FlexTable ftKenntnis = new FlexTable();
+
+	TextBox tbKenntnis = new TextBox();
+	TextBox tbJahr = new TextBox();
+	FlexTable ftKenntnisListe = new FlexTable();
+
+	Partnerprofil partnerprofil = new Partnerprofil();
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
+	
 	public void onLoad() {
-		// TODO Auto-generated method stub
-		final VerticalPanel vpKopf = new VerticalPanel();
-		final TextBox tbName = new TextBox();
-		final TextBox tbVorname = new TextBox();
-		final TextBox tbBeruf = new TextBox();
-		final ListBox listOrg = new ListBox();
-		final Label lbKenntnisse = new Label("Kenntnisse");
-		final TextBox tbGroesse = new TextBox();
-		final TextBox tbArbeitsfeld = new TextBox();
-		final TextBox tbGeschform = new TextBox();
-		final TextBox tbGeschfeld = new TextBox();
-		final HorizontalPanel hpButton = new HorizontalPanel();
-
-		final Button btSpeichern = new Button("Speichern");
-		final Button btAbbrechen = new Button("Abbrechen");
-
-		final ArrayList<Eigenschaft> eig = new ArrayList<Eigenschaft>();
 
 		listOrg.addItem("Person");
 		listOrg.addItem("Team");
@@ -86,18 +101,6 @@ public class ProfilNeuForm extends VerticalPanel {
 
 		vpKopf.add(tbBeruf);
 
-		// **********************************************
-
-		/*
-		 * <p>Kenntnisse Bereich </p>
-		 */
-		final VerticalPanel kBereich = new VerticalPanel();
-		final FlexTable ftKenntnis = new FlexTable();
-
-		final TextBox tbKenntnis = new TextBox();
-		final TextBox tbJahr = new TextBox();
-
-		Partnerprofil partnerprofil = new Partnerprofil();
 		partnerprofil.setId(Integer.parseInt(Cookies.getCookie("partnerprofilid")));
 		tbKenntnis.getElement().setPropertyString("placeholder", "Kenntnisse");
 		tbJahr.getElement().setPropertyString("placeholder", "Anzahl der Jahre");
@@ -106,7 +109,6 @@ public class ProfilNeuForm extends VerticalPanel {
 		ftKenntnis.setText(0, 2, "Jahr");
 
 		kBereich.add(ftKenntnis);
-		final FlexTable ftKenntnisListe = new FlexTable();
 		kBereich.add(ftKenntnisListe);
 		
 		Organisationseinheit org = new Organisationseinheit();
@@ -269,7 +271,6 @@ public class ProfilNeuForm extends VerticalPanel {
 		ftKenntnisListe.setWidget(0, 0, new Label("Kenntnisse"));
 		ftKenntnisListe.setWidget(0, 1, new Label("Jahre"));
 		ftKenntnisListe.setWidget(0, 2, new Label("ID"));
-		// **********************************************
 
 		listOrg.addChangeHandler(new ChangeHandler() {
 

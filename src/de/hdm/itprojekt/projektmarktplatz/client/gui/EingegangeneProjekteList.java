@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -14,7 +15,15 @@ import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+
+/**
+ * Klasse zur Darstellung der Liste von eingegangenen Projekt-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
 public class EingegangeneProjekteList extends HorizontalPanel{
 	
@@ -22,11 +31,10 @@ public class EingegangeneProjekteList extends HorizontalPanel{
 	private Projekt selectedProjekt = null;
 	private SingleSelectionModel<Projekt> ssmProjekt = null;
 	private ListDataProvider<Projekt> projektDataProvider = null;
-	private KeyProvider projKey = new KeyProvider();
 	private CellTable<Projekt> cellTable = new CellTable<Projekt>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
-
+	Organisationseinheit o = new Organisationseinheit();
 	Column<Projekt, String> col = new Column<Projekt, String>(new ClickableTextCell()){
 		@Override
 		public String getValue(Projekt object) {
@@ -34,17 +42,14 @@ public class EingegangeneProjekteList extends HorizontalPanel{
 			return object.getName();
 		}
 	};
-	
-	private class KeyProvider implements ProvidesKey<Projekt> {
-		@Override
-		public Integer getKey(Projekt item) {
-			return new Integer(item.getId());
-		}
 		
-	}
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
+		o.setEmail(Cookies.getCookie("email"));
 		ssmProjekt = new SingleSelectionModel<Projekt>();
 		ssmProjekt.addSelectionChangeHandler(new SelectionHandler());
 		cellTable.addColumn(col, "Projekte");
@@ -55,9 +60,18 @@ public class EingegangeneProjekteList extends HorizontalPanel{
 		this.add(hpInfo);
 	}
 	
+	/**
+	 * die Methode fillTable() ruft alle Projektmarktplaetze aus Datenbank aus.
+	 */
+	
 	public void fillTable(){
-		projektService.readAllProjekt(new ReadProjektCallback());
+		projektService.getMeineProjekte(o, new ReadProjektCallback());
 	}
+	
+	/**
+	 * Die innere Klasse ReadProjektCallback ruft die Array-Liste Projekt auf.
+	 *
+	 */
 	
 	private class ReadProjektCallback implements AsyncCallback<ArrayList<Projekt>> {
 
@@ -74,6 +88,11 @@ public class EingegangeneProjekteList extends HorizontalPanel{
 		}
 		
 	}
+	
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
 	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 

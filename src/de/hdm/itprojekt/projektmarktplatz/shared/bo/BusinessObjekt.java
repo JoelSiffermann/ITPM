@@ -34,14 +34,21 @@ public abstract class BusinessObjekt implements Serializable{
 	public String toString(){
 		return this.getClass().getName()+"#"+this.id;
 	}
-	
+	/**
+	 * auslesen der Id
+	 * @return id
+	 */
 	public int getId(){
 		return this.id;
 	}
-	
+	/**
+	 * setzt die ID
+	 * @param id int
+	 */
 	public void setId(int id){
 		this.id = id;
 	}
+	
 	
 	public int hashCode() {
 		  return this.id;

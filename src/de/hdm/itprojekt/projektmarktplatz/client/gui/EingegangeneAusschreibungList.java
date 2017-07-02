@@ -16,16 +16,22 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
+/**
+ * Klasse zur Darstellung der Liste von eingegangenen Ausschreibung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class EingegangeneAusschreibungList extends HorizontalPanel{
 	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	
-	Projekt projekt = null;
+	Projekt projekt = new Projekt();
 
 	private Ausschreibung selectedAusschreibung = null;
 	private SingleSelectionModel<Ausschreibung> ssmAusschreibung = null;
 	private ListDataProvider<Ausschreibung> projektDataProvider = null;
-//	private KeyProvider projKey = new KeyProvider();
 	private CellTable<Ausschreibung> cellTable = new CellTable<Ausschreibung>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
@@ -37,13 +43,20 @@ public class EingegangeneAusschreibungList extends HorizontalPanel{
 			return object.getBezeichnung();
 		}
 	};
-	
-	//Gerade auskommentiert, wird nicht gebraucht evtl?
+
+	/**
+	 * Konstruktor
+	 * @param pm Projekt
+	 */
 	
 	public EingegangeneAusschreibungList(Projekt pm) {
 		
 		this.projekt = pm;
 	}
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
@@ -57,12 +70,24 @@ public class EingegangeneAusschreibungList extends HorizontalPanel{
 		this.add(hpInfo);
 	}
 	
+	/**
+	 * die Methode fillTable() ruft alle Projektmarktplaetze aus Datenbank aus.
+	 */
+	
 	public void fillTable(){
+
 //		projektService.readAllProjekt(new ReadProjektCallback());
 //		projektService.readByIdProjektProjektmarktplatz(this.projekt, new ReadAusschreibungCallback());
-		projektService.readAllAusschreibung(new ReadAusschreibungCallback());
+		projektService.getAusschreibungenByProjekt(projekt, new ReadAusschreibungCallback());
+
 
 	}
+	
+	
+	/**
+	 * Die innere Klasse ReadAusschreibungCallback ruft die Array-Liste Ausschreibung auf.
+ 	 * Implementiert das AysncCallback Interface.
+	 */
 	
 	private class ReadAusschreibungCallback implements AsyncCallback<ArrayList<Ausschreibung>> {
 
@@ -80,6 +105,11 @@ public class EingegangeneAusschreibungList extends HorizontalPanel{
 		}
 		
 	}
+	
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
 	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 

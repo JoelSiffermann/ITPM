@@ -1,6 +1,5 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
@@ -9,15 +8,17 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 
-public class BewertungAnzeigen extends VerticalPanel {
+/**
+ * Klasse zur Darstellung von Bewertung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
-	/*
-	 * Neues Design
-	 */
+public class BewertungAnzeigen extends VerticalPanel {
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
@@ -30,10 +31,19 @@ public class BewertungAnzeigen extends VerticalPanel {
 	Bewertung bewertung;
 	Beteiligung beteiligung;
 	
+	/**
+	 * Konstruktor
+	 * @param selection
+	 */
+	
 	public BewertungAnzeigen(Beteiligung selection) {
 		this.beteiligung = selection;
 	}
 
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
+	
 	public void onLoad() {
 
 		super.onLoad();
@@ -43,7 +53,6 @@ public class BewertungAnzeigen extends VerticalPanel {
 		taBewertungInhalt.setEnabled(false);
 		
 		if (this.bewertung != null) {
-//			lblBewertungSkala.setText(bewertung.getSkala());
 			lblBegruendung.setText(bewertung.getInhalt());
 		}
 
