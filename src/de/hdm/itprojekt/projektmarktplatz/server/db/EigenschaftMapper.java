@@ -10,6 +10,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 //@author samina
 
+
 public class EigenschaftMapper {
 	
 	  private static EigenschaftMapper eigenschaftMapper = null;
@@ -18,6 +19,10 @@ public class EigenschaftMapper {
 		  
 	  }
 
+	  /**
+	   * 
+	   * @return eigenschaftMapper
+	   */
 		public static EigenschaftMapper eigenschaftMapper() {
 			if (eigenschaftMapper == null) {
 				eigenschaftMapper = new EigenschaftMapper();
@@ -28,6 +33,12 @@ public class EigenschaftMapper {
 	
 
 
+		/**
+		 * 
+		 * @param eg Eigenschaft
+		 * @return eigenschaftMapper
+		 * @throws Exception
+		 */
 	public ArrayList<Eigenschaft> einfuegen(ArrayList<Eigenschaft> eg) throws Exception {//c f�r character
 		Connection con = DBConnection.connection();
 
@@ -61,6 +72,12 @@ public class EigenschaftMapper {
 		return eg;
 	}
 
+	/**
+	 * 
+	 * @param c Eigenschaft
+	 * @return c
+	 * @throws Exception
+	 */
 	public Eigenschaft speichern(Eigenschaft c) throws Exception {
 		Connection con = DBConnection.connection();
 
@@ -76,6 +93,11 @@ public class EigenschaftMapper {
 		return c;
 	}
 	
+	/**
+	 * 
+	 * @param c Eigenschaft
+	 * @throws Exception
+	 */
 	public void loeschen(Eigenschaft c) throws Exception {
 	    Connection con = DBConnection.connection();
 
@@ -88,6 +110,12 @@ public class EigenschaftMapper {
 	      e.printStackTrace();
 	    }
 	  }
+	/**
+	 * 
+	 * @param ch Eigenschaft
+	 * @return null
+	 * @throws Exception
+	 */
 	
 	public Eigenschaft getById(Eigenschaft ch) throws Exception{
 		 Connection con = DBConnection.connection();
@@ -115,6 +143,11 @@ public class EigenschaftMapper {
 		    }
 		    return null;
 	}
+	/**
+	 * 
+	 * @return result
+	 * @throws Exception
+	 */
 	public ArrayList<Eigenschaft> getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();
@@ -160,6 +193,13 @@ public class EigenschaftMapper {
 		return result;
 
 	}
+	
+	/**
+	 * 
+	 * @param p Partnerprofil
+	 * @return result
+	 * @throws Exception
+	 */
 
 	public ArrayList<Eigenschaft> getEigenschaftenByPartnerprofil(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -183,6 +223,12 @@ public class EigenschaftMapper {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param s String
+	 * @return result
+	 * @throws Exception
+	 */
 	public ArrayList<Eigenschaft> equals(String s) throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Eigenschaft> result = new ArrayList<Eigenschaft>();
