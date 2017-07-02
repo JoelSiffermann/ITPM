@@ -54,7 +54,8 @@ public class DBConnection {
 
     //    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
 
-    private static String localUrl = "jdbc:mysql://127.0.0.1:3306/dbproj?user=root";
+
+    private static String localUrl = "jdbc:mysql://127.0.0.1:3308/dbproj?user=root";
 
     //PORT GEÄNDERT IN 3307!!! 
     

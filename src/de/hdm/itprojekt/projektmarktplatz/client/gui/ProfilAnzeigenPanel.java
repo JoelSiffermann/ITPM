@@ -42,7 +42,7 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 	TextBox tbGform = new TextBox();
 	TextBox tbGfeld = new TextBox();
 	Grid gridProfil = new Grid(1, 2);
-
+	Organisationseinheit org = new Organisationseinheit();
 	Button btProfilBearbeiten = new Button("Profil bearbeiten");
 	Button btProfilEntfernen = new Button("Profil entfernen");
 
@@ -51,10 +51,42 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 	/**
 	 * Die Methode onLoad() baut das Widget auf.
 	 */
-	
-	public void onLoad() {
 
+	public void onLoad(){
+		
 		super.onLoad();
+		org.setEmail(Cookies.getCookie("email"));
+		tbName.getElement().setPropertyString("placeholder", "Name");
+		tbVorname.getElement().setPropertyString("placeholder", "Vorname");
+		tbBeruf.getElement().setPropertyString("placeholder", "Beruf");
+		tbJahreszahl.getElement().setPropertyString("placeholder", "Berufserfahrung in Jahre");
+
+		tbGfeld.getElement().setPropertyString("placeholder", "Geschï¿½ftsfeld");
+		tbGform.getElement().setPropertyString("placeholder", "Geschï¿½ftsform");
+		tbArbeitsfeld.getElement().setPropertyString("placeholder", "Arbeitsfeld");
+		tbGroesse.getElement().setPropertyString("placeholder", "Grï¿½sse");
+
+		vpProfilForm1.add(tbVorname);
+		vpProfilForm1.add(tbName);
+		vpProfilForm1.add(tbBeruf);
+		vpProfilForm1.add(gridProfil);
+
+		vpProfilForm1.add(tbGfeld);
+		vpProfilForm1.add(tbGform);
+
+		vpProfilForm1.add(tbArbeitsfeld);
+		vpProfilForm1.add(tbGroesse);
+
+		gridProfil.setWidget(0, 0, tbJahreszahl);
+
+		vpProfilForm2.add(btProfilBearbeiten);
+		vpProfilForm2.add(btProfilEntfernen);
+
+		this.clear();// nicht nÃ¶tig, weil frisch angelegt wurde
+
+		this.add(vpProfilForm1);
+		this.add(vpProfilForm2);
+
 
 		pruefeUser(this);
 	}
@@ -64,7 +96,7 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 		o.setEmail(Cookies.getCookie("email"));
 
 		projektService.readByEmail(o, new pruefeUserCallback());
-
+		
 	}
 
 	/**
@@ -129,10 +161,10 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 					tbBeruf.getElement().setPropertyString("placeholder", "Beruf");
 					tbJahreszahl.getElement().setPropertyString("placeholder", "Berufserfahrung in Jahre");
 
-					tbGfeld.getElement().setPropertyString("placeholder", "Geschäftsfeld");
-					tbGform.getElement().setPropertyString("placeholder", "Geschäftsform");
+					tbGfeld.getElement().setPropertyString("placeholder", "Geschï¿½ftsfeld");
+					tbGform.getElement().setPropertyString("placeholder", "Geschï¿½ftsform");
 					tbArbeitsfeld.getElement().setPropertyString("placeholder", "Arbeitsfeld");
-					tbGroesse.getElement().setPropertyString("placeholder", "Grösse");
+					tbGroesse.getElement().setPropertyString("placeholder", "Grï¿½sse");
 
 					vpProfilForm1.add(tbName);
 
@@ -165,6 +197,8 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 
 						vpProfilForm1.add(tbArbeitsfeld);
 						vpProfilForm1.add(tbGroesse);
+						
+						
 					}
 
 					btProfilBearbeiten.addClickHandler(new ClickHandler() {

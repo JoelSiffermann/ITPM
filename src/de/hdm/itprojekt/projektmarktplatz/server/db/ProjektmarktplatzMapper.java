@@ -16,7 +16,9 @@ public class ProjektmarktplatzMapper {
 	protected ProjektmarktplatzMapper() {
 
 	}
-
+	/**
+	 * @return projektmarktplatzMapper
+	 */ 
 	public static ProjektmarktplatzMapper projektmarktplatzMapper() {
 		if (projektmarktplatzMapper == null) {
 			projektmarktplatzMapper = new ProjektmarktplatzMapper();
@@ -24,6 +26,14 @@ public class ProjektmarktplatzMapper {
 		return projektmarktplatzMapper;
 	}
 
+	
+	/**
+	 * Fügt ein neuen Projektmarktplatz hinzu
+	 * @param p Projektmarktplatz
+	 * @return p
+	 * @throws Exception
+	 */
+	
 	public Projektmarktplatz einfuegen(Projektmarktplatz p) throws Exception {
 		Connection con = DBConnection.connection();
 		try {
@@ -51,7 +61,8 @@ public class ProjektmarktplatzMapper {
 
 		          stmt = con.createStatement();
 
-		      
+		      System.out.println("INSERT INTO `projektmarktplatz` (`Projektmarktplatz_ID`, `Bezeichnung`) VALUES ('"
+					+ p.getId() + "', '" + p.getBezeichnung() + "');");
 
 			// Jetzt erst erfolgt die tatsÃ¤chliche EinfÃ¼geoperation
 			stmt.executeUpdate("INSERT INTO `projektmarktplatz` (`Projektmarktplatz_ID`, `Bezeichnung`) VALUES ('"
@@ -62,6 +73,13 @@ public class ProjektmarktplatzMapper {
 		}
 		return p;
 	}
+	
+	/**
+	 * Fügt ein neuen Projektmarktplatz hinzu
+	 * @param p Projektmarktplatz
+	 * @return p
+	 * @throws Exception
+	 */
 
 	public Projektmarktplatz speichern(Projektmarktplatz p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -75,6 +93,13 @@ public class ProjektmarktplatzMapper {
 		}
 		return p;
 	}
+	
+	/**
+	 * Loescht ein Projektmarktplatz 
+	 * @param p Projektmarktplatz
+	 * @return p
+	 * @throws Exception
+	 */
 
 	public void loeschen(Projektmarktplatz p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -85,6 +110,13 @@ public class ProjektmarktplatzMapper {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Liest ein Projektmarktplatz
+	 * @param p Projektmarktplatz
+	 * @return p
+	 * @throws Exception
+	 */
 
 	public Projektmarktplatz getById(Projektmarktplatz p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -104,6 +136,13 @@ public class ProjektmarktplatzMapper {
 		return p;
 	}
 
+	/**
+	 * Liest alle Projektmarktplätze zu einer Organisationseinheit
+	 * @param pm Projektmarktplatz
+	 * @return result
+	 * @throws Exception
+	 */
+	
 	public ArrayList<Projektmarktplatz> getAllByOrg(Projektmarktplatz pm) throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
@@ -138,6 +177,13 @@ public class ProjektmarktplatzMapper {
 		return result;
 	}
 	
+	/**
+	 * Liest ein Projektmarktplatz zu einer Organisationseinheit
+	 * @param p Projektmarktplatz
+	 * @return result
+	 * @throws Exception
+	 */
+	
 	public ArrayList<Projektmarktplatz> getProjketmarkplatzByOrg(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
@@ -167,6 +213,15 @@ public class ProjektmarktplatzMapper {
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * Zeigt alle Projektmarktplätze an
+	 * @return result
+	 * @throws Exception
+	 */
+	
+	
 	public ArrayList<Projektmarktplatz> getAll() throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();

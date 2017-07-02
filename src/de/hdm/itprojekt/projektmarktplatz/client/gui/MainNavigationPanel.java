@@ -137,10 +137,16 @@ public class MainNavigationPanel extends VerticalPanel {
 	private class MeinProfilClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+
+			RootPanel.get("main").clear();
+//			Window.alert("profilbutton");
+			info = new HorizontalPanel();
 			ProfilAnzeigenPanel pp = new ProfilAnzeigenPanel();
+//			ProfilNeuForm pp = new ProfilNeuForm();
 			info.clear();
 			info.add(pp);
 
+			RootPanel.get("main").add(info);
 		}
 	}
 
@@ -190,9 +196,10 @@ public class MainNavigationPanel extends VerticalPanel {
 	private class ProjektAnlegenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+
 			RootPanel.get("main").clear();
 			info = new HorizontalPanel();
-			ProjektNeuForm pn = new ProjektNeuForm(null);
+			ProjektNeuForm pn = new ProjektNeuForm();
 			info.clear();
 			info.add(pn);
 			RootPanel.get("main").add(info);

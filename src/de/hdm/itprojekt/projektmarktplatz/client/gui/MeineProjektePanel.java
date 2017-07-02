@@ -107,8 +107,8 @@ public class MeineProjektePanel extends HorizontalPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 				pm.setId(2);
-				ProjektNeuForm projektNeu = new ProjektNeuForm(pm);
-				
+//				ProjektNeuForm projektNeu = new ProjektNeuForm(pm);
+				ProjektNeuForm projektNeu = new ProjektNeuForm();
 				hpMeineProjekteForm.clear();
 				hpMeineProjekteForm.add(projektNeu);
 			}

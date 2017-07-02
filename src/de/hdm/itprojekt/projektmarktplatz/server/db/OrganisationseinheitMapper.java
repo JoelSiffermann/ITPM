@@ -13,6 +13,14 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 
 //@autor ï¿½mer
+
+
+/**
+ * 
+ *
+ * @return organisationseinheitMapper
+ */
+
 public class OrganisationseinheitMapper {
 	private static OrganisationseinheitMapper organisationseinheitMapper = null;
 
@@ -26,6 +34,14 @@ public class OrganisationseinheitMapper {
 		return organisationseinheitMapper;
 	}
 
+	/**
+	 * Fügt eine neue Organisationseinheit hinzu
+	 * @param o Organisationseinheit
+	 * @return o
+	 * @throws Exception
+	 */
+	
+	
 	public Organisationseinheit einfuegen(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
 		try {
@@ -60,6 +76,13 @@ public class OrganisationseinheitMapper {
 		}
 		return o;
 	}
+	
+	/**
+	 * Speichert Änderungen einer Organisationseinheit 
+	 * @param o Organisationseinheit
+	 * @return o
+	 * @throws Exception
+	 */
 
 	public Organisationseinheit speichern(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
@@ -79,7 +102,13 @@ public class OrganisationseinheitMapper {
 		}
 		return o;
 	}
-
+	
+	/**
+	 * Loescht eine Organisationseinheit
+	 * @param o Organisationseinheit
+	 * @throws Exception
+	 */
+	
 	public void loeschen(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
 		try {
@@ -90,6 +119,13 @@ public class OrganisationseinheitMapper {
 		}
 	}
 
+	/**
+	 * Liest alle Organisationseinheiten zur Id
+	 * @param o Organisationseinheit
+	 * @return o
+	 * @throws Exception
+	 */
+	
 	public Organisationseinheit getById(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
 		try {
@@ -111,10 +147,19 @@ public class OrganisationseinheitMapper {
 		return o;
 	}
 
+	/**
+	 * Liest alle Organisationseinheiten zur Email
+	 * @param o Organisationseinheit
+	 * @return null
+	 * @throws Exception
+	 */
+	
+	
 	public Organisationseinheit getByEmail(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
+			System.out.println("SELECT * FROM organisationseinheit WHERE `E-Mail` = '" + o.getEmail() + "'"); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM organisationseinheit WHERE `E-Mail` = '" + o.getEmail() + "'");
 			if (rs.next()) {
 				Organisationseinheit or = new Organisationseinheit();
@@ -130,6 +175,14 @@ public class OrganisationseinheitMapper {
 		}
 		return null;
 	}
+	
+	/**
+	 * Liest alle Organisationseinheiten zum Partnerprofil
+	 * @param pp Partnerprofil
+	 * @return null
+	 * @throws Exception
+	 */
+	
 	
 	public Organisationseinheit getByPartnerprofilId(Partnerprofil pp) throws Exception {
 		Connection con = DBConnection.connection();
@@ -151,6 +204,12 @@ public class OrganisationseinheitMapper {
 		}
 		return null;
 	}
+	
+	/**
+	 * Liest alle Organisationseinheiten
+	 * @return result
+	 * @throws Exception
+	 */
 	
 	public ArrayList<Organisationseinheit> getAll() throws Exception {
 		Connection con = DBConnection.connection();

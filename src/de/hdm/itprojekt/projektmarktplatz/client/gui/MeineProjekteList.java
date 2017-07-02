@@ -14,6 +14,7 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -27,6 +28,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 /**
@@ -45,6 +47,7 @@ public class MeineProjekteList extends HorizontalPanel{
 	private CellTable<Projekt> cellTable = new CellTable<Projekt>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
+	Organisationseinheit o = new Organisationseinheit();
 
 	Column<Projekt, String> col = new Column<Projekt, String>(new ClickableTextCell()){
 		@Override
@@ -60,6 +63,7 @@ public class MeineProjekteList extends HorizontalPanel{
 	
 	public void onLoad(){
 		super.onLoad();
+		o.setEmail(Cookies.getCookie("email"));
 		ssmProjekt = new SingleSelectionModel<Projekt>();
 		ssmProjekt.addSelectionChangeHandler(new SelectionHandler());
 		cellTable.addColumn(col, "Projekte");
@@ -75,7 +79,7 @@ public class MeineProjekteList extends HorizontalPanel{
 	 */
 	
 	public void fillTable(){
-		projektService.readAllProjekt(new ReadProjektCallback());
+		projektService.getMeineProjekte(o, new ReadProjektCallback());
 	}
 	
 	/**
