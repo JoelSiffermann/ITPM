@@ -17,6 +17,13 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 
+/**
+ * Klasse zur Darstellung der Liste von meinen Bwerbung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class MeineBewerbungList extends HorizontalPanel {
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	private Bewerbung selectedBewerbung = null;
@@ -36,6 +43,10 @@ public class MeineBewerbungList extends HorizontalPanel {
 		}
 	};
 	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
+	
 	public void onLoad(){
 		super.onLoad();
 		o.setEmail(Cookies.getCookie("email"));
@@ -50,9 +61,18 @@ public class MeineBewerbungList extends HorizontalPanel {
 		this.add(hpInfo);
 	}
 	
+	/**
+	 * die Methode fillTable() ruft alle Projektmarktplaetze aus Datenbank aus.
+	 */
+	
 	public void fillTable(){
 		projektService.getMeineBewerbung(o, new ReadBewerbungCallback());
 	}
+	
+	/**
+	 * Die innere Klasse ReadBewerbungCallback ruft die Array-Liste Bewerbung auf.
+	 *
+	 */
 	
 	private class ReadBewerbungCallback implements AsyncCallback<ArrayList<Bewerbung>> {
 
@@ -69,6 +89,11 @@ public class MeineBewerbungList extends HorizontalPanel {
 		}
 		
 	}
+	
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
 	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 

@@ -16,6 +16,11 @@ public class UnternehmenMapper {
 	protected UnternehmenMapper() {
 
 	}
+	
+	/**
+	 * 
+	 * @return unternehmenMapper
+	 */
 
 	public static UnternehmenMapper unternehmenMapper() {
 		if (unternehmenMapper == null) {
@@ -23,6 +28,13 @@ public class UnternehmenMapper {
 		}
 		return unternehmenMapper;
 	}
+	
+	/**
+	 * Fügt ein neues Unternehmen hinzu
+	 * @param u Unternehmen
+	 * @return u
+	 * @throws Exception
+	 */
 
 	public Unternehmen einfuegen(Unternehmen u) throws Exception {
 		Connection con = DBConnection.connection();
@@ -53,6 +65,14 @@ public class UnternehmenMapper {
 		return u;
 	}
 
+	/**
+	 * Fügt Änderungen an einem Unternehmen hinzu
+	 * @param u Unternehmen
+	 * @return u
+	 * @throws Exception
+	 */ 
+	
+	
 	public Unternehmen speichern(Unternehmen u) throws Exception {
 		Connection con = DBConnection.connection();
 		String sql = "UPDATE `unternehmen` SET `Geschaeftsform` = '" + u.getGeschaeftsform()
@@ -70,6 +90,12 @@ public class UnternehmenMapper {
 		}
 		return u;
 	}
+	
+	/**
+	 * Loescht ein  Unternehmen 
+	 * @param u Unternehmem
+	 * @throws Exception
+	 */
 
 	public void loeschen(Unternehmen u) throws Exception {
 		Connection con = DBConnection.connection();
@@ -80,6 +106,12 @@ public class UnternehmenMapper {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Liest ein Unternehmen 
+	 * @param u Unternehmen
+	 * @return u
+	 * @throws Exception
+	 */
 
 	public Unternehmen getById(Unternehmen u) throws Exception {
 		Connection con = DBConnection.connection();
@@ -102,6 +134,14 @@ public class UnternehmenMapper {
 		return u;
 	}
 
+	/**
+	 * Zeigt alle Unternehmen an
+	 * @param u Unternehmen
+	 * @return null
+	 * @throws Exception
+	 */
+	
+	
 	public ArrayList<Unternehmen> getAll() throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Unternehmen> result = new ArrayList<Unternehmen>();
@@ -138,7 +178,12 @@ public class UnternehmenMapper {
 		}
 		return null;
 	}
-	
+	/**
+	 * Liest ein Unternehmen aus einer Organisationseinheit
+	 * @param org Organisationseinheit
+	 * @return null
+	 * @throws Exception
+	 */
 	public Unternehmen getByOrgId(Organisationseinheit org) throws Exception {
 		Connection con = DBConnection.connection();
 		try {

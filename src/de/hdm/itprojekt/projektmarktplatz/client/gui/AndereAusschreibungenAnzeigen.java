@@ -25,11 +25,15 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 
+	/**
+	 * Klasse zur Darstellung von allen anderen Ausschreibungen
+	 * 
+	 * @author Vi Quan, Joey Siffermann
+	 *
+	 */
+
 public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 
-	/*
-	 * Neues Design
-	 */
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
 	VerticalPanel vpAusschreibungAnzeigenForm1 = new VerticalPanel();
@@ -53,18 +57,20 @@ public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 	Ausschreibung ausschreibung;
 	Partnerprofil partnerprofil;
 	Eigenschaft eigenschaft;
-//	Bewerbung bewerbung;
+
 	/**
 	 * Konstruktor
 	 * @param a Ausschreibung
 	 */
+	
 	public AndereAusschreibungenAnzeigen(Ausschreibung a) {
 		this.ausschreibung = a;
 	}
 
 	/**
-	 * Baut das Widget auf.
+	 * Die Methode onLoad() baut das Widget auf.
 	 */
+	
 	public void onLoad() {
 
 		super.onLoad();
@@ -120,7 +126,12 @@ public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 	private void getPartnerprofil() {
 		projektService.getProfilbyAusschreibung(ausschreibung, new ProfilCallback());
 	}
-
+	
+	/**
+	 * Die innere Klasse ProfilCallback ruft das Objekt Partnerprofil auf.
+	 *
+	 */
+	
 	private class ProfilCallback implements AsyncCallback<Partnerprofil>{
 
 		@Override
@@ -144,6 +155,11 @@ public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 		
 	}
 	
+	/**
+	 * Die innere Klasse EigenschaftCallback ruft das Objekt Eigenschaft auf.
+	 *
+	 */
+	
 	private class EigenschaftCallback implements AsyncCallback<Eigenschaft> {
 
 		@Override
@@ -161,11 +177,17 @@ public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 		}
 		
 	}
+
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 	
 	private class SichBewerbenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			BewerbungNeuForm bnf = new BewerbungNeuForm(ausschreibung);
+			BewerbungNeuForm bnf = new BewerbungNeuForm(null);
 			vpAusschreibungAnzeigenForm2.clear();
 			vpAusschreibungAnzeigenForm2.add(bnf);
 		}

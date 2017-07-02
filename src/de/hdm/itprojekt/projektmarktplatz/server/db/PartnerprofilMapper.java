@@ -14,20 +14,32 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 //@author samina
 public class PartnerprofilMapper {
 
+
 	private static PartnerprofilMapper partnerprofilMapper = null;
 	
 	protected PartnerprofilMapper(){
 		
 	}
 
+	/**
+	 * 
+	 * @return partnerprofilMapper
+	 */
 	public static PartnerprofilMapper partnerprofilMapper() {
 		if (partnerprofilMapper == null) {
 			partnerprofilMapper = new PartnerprofilMapper();
 		}
 
 		return partnerprofilMapper;
-	}
+	}	
 
+	/**
+	 * Fügt ein Partnerprofil hinzu
+	 * @param p Partnerprofil
+	 * @return p
+	 * @throws Exception
+	 */
+	
 	public Partnerprofil einfuegen(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
 		String datum = "";
@@ -80,7 +92,15 @@ public class PartnerprofilMapper {
 			e.printStackTrace();
 		}
 		return p;
+	
 	}
+	
+	/**
+	 * Speichert Änderungen an einem Partnerprofil
+	 * @param p Partnerprofil
+	 * @return p
+	 * @throws Exception
+	 */
 
 	public Partnerprofil speichern(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -111,6 +131,12 @@ public class PartnerprofilMapper {
 		return p;
 	}
 	
+	/**
+	 * Loescht ein Partnerprofil
+	 * @param p Partnerprofil
+	 * @throws Exception
+	 */
+	
 	public void loeschen(Partnerprofil p) throws Exception {
 	    Connection con = DBConnection.connection();
 
@@ -124,6 +150,14 @@ public class PartnerprofilMapper {
 	    }
 	  }
 
+	/**
+	 * Liest Partnerprofile zur Id
+	 * @param p Partnerprofil
+	 * @return null
+	 * @throws Exception
+	 */
+	
+	
 	public Partnerprofil getById(Partnerprofil p) throws Exception{
 		 Connection con = DBConnection.connection();
 
@@ -160,6 +194,12 @@ public class PartnerprofilMapper {
 		    }
 		    return null;
 	}
+	/**
+	 * Liest alle Partnerprofile zu Ausschreibungen 
+	 * @param aId Ausschreibungen
+	 * @return null
+	 * @throws Exception
+	 */
 	
 	public Partnerprofil getByOrgId(Organisationseinheit p) throws Exception{
 		 Connection con = DBConnection.connection();
@@ -194,6 +234,13 @@ public class PartnerprofilMapper {
 		    }
 		    return null;
 	}
+	
+	/**
+	 * Liest alle Partnerprofile  zur Ausschreibung
+	 * @param aId AusschreibungID
+	 * @return null
+	 * @throws Exception
+	 */
 	
 	public Partnerprofil getByAusschreibungId(Ausschreibung aId) throws Exception{
 		 Connection con = DBConnection.connection();
@@ -231,6 +278,12 @@ public class PartnerprofilMapper {
 		    }
 		    return null;
 	}
+	
+	/**
+	 * Liest alle Partnerprofile
+	 * @return null
+	 * @throws Exception
+	 */
 	
 	public ArrayList<Partnerprofil> getAll() throws Exception{
 		ArrayList<Partnerprofil> result = new ArrayList<Partnerprofil>();

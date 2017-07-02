@@ -19,13 +19,15 @@ import de.hdm.itprojekt.projektmarktplatz.server.db.ProjektmarktplatzMapper;
 import de.hdm.itprojekt.projektmarktplatz.server.db.TeamMapper;
 import de.hdm.itprojekt.projektmarktplatz.server.db.UnternehmenMapper;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdmin;
+/**
+ * @author Ayse Guelay
+ * @author Ersin Barut
+ */
 
 public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		implements ProjektmarktplatzReportAdmin {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -4685023405692030606L;
 
 	private AusschreibungMapper aMapper = null;
@@ -38,10 +40,20 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	private TeamMapper tMapper = null;
 	private UnternehmenMapper uMapper = null;
 
+	
+	/**
+	 *
+	 * @throws IllegalArgumentException 
+	 */
+	
 	public ProjektmarktplatzReportAdminImpl() throws IllegalArgumentException {
 
 	}
-
+	/**
+	 *Beinhaltet alle Mapper- Klassen
+	 * @throws IllegalArgumentException 
+	 */
+	
 	@Override
 	public void init() throws IllegalArgumentException {
 		/*
@@ -67,6 +79,11 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	 * ***************************************************
 	 * *******************************************
 	 */
+	/**
+	 *Liest alle Nutzer mit der E-Mail
+	 *@param o Organisationseinheit
+	 * @return null
+	 */
 	
 	@Override
 	public Organisationseinheit getNutzerByEmail(Organisationseinheit o){
@@ -81,7 +98,12 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return null;
 	}
 
-	// Ausgabe aller Ausschreibungen
+	
+	/**
+	 *Ausgabe aller Ausschreibungen 
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	@Override
 	public ArrayList<Ausschreibung> getAllAusschreibung()
 			throws IllegalArgumentException {
@@ -109,7 +131,14 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 //		return result;
 //	}
 
-	// Abfrage aller Bewerbungen eines Nutzers
+
+	
+	/**
+	 *Abfrage aller Bewerbungen eines Nutzers
+	 *@param o Organsiationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	@Override
 	public ArrayList<Bewerbung> getBewerbungenByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
@@ -123,6 +152,12 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return null;
 	}
 
+	/**
+	 *Anzeige aller Bewerbungen eines Nutzers
+	 *@param o Organsiationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	@Override
 	public ArrayList<Bewerbung> getBewerbungByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
@@ -135,7 +170,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return null;
 	}
 	
-	// Abfrage aller Bewerbungen auf eine Ausschreibung
+	
+	/**
+	 *Abfrage aller Bewerbungen auf einer Ausschreibung
+	 *@param o Organsiationseinheit
+	 * @return result
+	 * @throws IllegalArgumentException 
+	 */
 	@Override
 	public ArrayList<Bewerbung> getBewerbungenByAusschreibung(Organisationseinheit o)
 			throws IllegalArgumentException {
@@ -152,9 +193,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		}
 		return result;
 	}
-
-	// Abfrage aller Beteiligungen eines Nutzers
-
+	
+	/**
+	 *Abfrage aller Beteiligungen eines Nutzers
+	 *@param o Organsiationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public ArrayList<Beteiligung> getBeteiligungByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
 		try {
@@ -166,7 +211,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return null;
 	}
 
-	// Abfrage aller Ausschreibungen eines Nutzers
+
+	/**
+	 *Abfrage aller Ausschreibungen eines Nutzers
+	 *@param o Organsiationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	
 	public ArrayList<Ausschreibung> getAusschreibungenByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
@@ -196,7 +247,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	 * ********************
 	 */
 
-	// Abfrage aller Nutzer
+	// 
+	/**
+	 *Abfrage aller Nutzer
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+	
 	public ArrayList<Organisationseinheit> getAllPersProfile()
 			throws IllegalArgumentException {
 		try {
@@ -207,7 +264,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return null;
 	}
 
-	// Abfrage der Anzahl aller Bewerbungen pro Teilnehmer (Fan-In)
+	
+	/**
+	 *Abfrage der Anzahl aller Bewerbungen pro Teilnehmer (Fan-In)
+	 *@param o Organsiationseinheit
+	 * @return count
+	 * @throws IllegalArgumentException 
+	 */
 	
 	public int getAnzahlBewerbungen(Organisationseinheit o) throws IllegalArgumentException {
 		ArrayList<Bewerbung> b = this.getBewerbungenByNutzer(o);
@@ -215,7 +278,14 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return count;
 	}
 
-	// Abfrage der Anzahl aller Ausschreibungen pro Projekt (Fan-Out)
+	// 
+	
+	/**
+	 *Abfrage der Anzahl aller Ausschreibungen pro Projekt (Fan-Out)
+	 *@param p Projekt
+	 * @return count
+	 * @throws IllegalArgumentException 
+	 */
 
 	public int getAnzahlAusschreibungen(Projekt p) throws IllegalArgumentException {
 		ArrayList<Ausschreibung> a = this.getAusschreibungenByProjekt(p);
@@ -223,13 +293,27 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return count;
 	}
 	
-	//Abfrage der Anzahl aller Beteiligungen pro Projekt (Fan-In)
+	
+	/**
+	 *Abfrage der Anzahl aller Beteiligungen pro Projekt (Fan-In)
+	 *@param p Projekt
+	 * @return count
+	 * @throws IllegalArgumentException 
+	 */
 
 	public int getAnzahlBeteiligungen(Projekt p) throws IllegalArgumentException {
 		ArrayList<Beteiligung> b = this.getBeteiligungenByProjekt(p);
 		int count = b.size();
 		return count;
 	}
+	
+	
+	/**
+	 *Abfrage der Anzahl aller Beteiligungen pro Organisationseinheit (Fan-In)
+	 *@param p Projekt
+	 * @return count
+	 * @throws IllegalArgumentException 
+	 */
 
 	public int getAnzahlBeteiligungen(Organisationseinheit o) throws IllegalArgumentException {
 		ArrayList<Beteiligung> b = this.getBeteiligungByNutzer(o);
@@ -240,7 +324,12 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	//-------------------------------------------------------------------------------------------------------
 	//------------------------------------------Neuer Abschnitt----------------------------------------------
 	//-------------------------------------------------------------------------------------------------------
-	
+	/**
+	 *Vergleicht die Organisationseinheit
+	 *@param o Organisationseinheit
+	 * @return s
+	 * @throws IllegalArgumentException 
+	 */
 	public String getVergleichswert(Organisationseinheit o)
 			throws IllegalArgumentException {
 		String s = null;
@@ -280,7 +369,12 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 //		}
 //		return result;
 //	}
-	
+	/**
+	 *Liest alle Ausschreibungen 
+	 *@param o Organisationseinheit
+	 * @return result
+	 * @throws IllegalArgumentException 
+	 */
 	@Override
 	public ArrayList<Ausschreibung> getEmpfAusschreibungen(Organisationseinheit o) throws IllegalArgumentException {
 		Organisationseinheit org = this.getNutzerByEmail(o);
@@ -306,6 +400,14 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return result;
 	}
 	
+	/**
+	 *Liest alle Ausschreibungen zum Projekt
+	 *@param p Projekt
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+	
+	
 	public ArrayList<Ausschreibung> getAusschreibungenByProjekt(Projekt p){
 		try {
 			return this.aMapper.getAusschreibungenByProjekt(p);
@@ -315,6 +417,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		}
 		return null;
 	}
+	
+	/**
+	 *Liest alle Bewerbungen zur Ausschreibung
+	 *@param a Ausschreibung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	
 	public ArrayList<Bewerbung> getBewerbungbyAusschreibung(Ausschreibung a){
 		try {
@@ -326,6 +435,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return null;
 	}
 	
+	/**
+	 *Liest alle Beteiligungen zum Projekt
+	 *@param p Projekt
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+	
 	public ArrayList<Beteiligung> getBeteiligungenByProjekt(Projekt p){
 		try {
 			return this.projBetMapper.getAllByProjekt(p);
@@ -335,6 +451,14 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		}
 		return null;
 	}
+	
+	/**
+	 *Liest alle Personen vom Projekt
+	 *@param p Projekt
+	 * @return result
+	 * @throws IllegalArgumentException 
+	 */
+	
 	
 	@Override
 	public ArrayList<Organisationseinheit> getPersonenByProjekt(Projekt p){
@@ -355,6 +479,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		}
 		return result;
 	}
+	/**
+	 *Liest alle Beteiligungen der Nutzer
+	 *@param o Organisationseinheit
+	 *@param p Projekt
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	
 	@Override
 	public Beteiligung getBeteiligungByProjektteilnehmer(Organisationseinheit o, Projekt p){
@@ -378,6 +509,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 //		return null;
 //	}
 	
+	/**
+	 *Fan- Analyse wird durchgeführt
+	 * @return result
+	 * @throws IllegalArgumentException 
+	 */
+	
+	
 	@Override
 	public ArrayList<String> getFanAnalyse() throws IllegalArgumentException {
 		ArrayList<String> result = new ArrayList<String>();
@@ -389,6 +527,14 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		}
 		return result;
 	}
+	
+	/**
+	 *Liest alle Projekte vom Nutzer
+	 *@param o Organisationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+	
 	
 	@Override
 	public ArrayList<Projekt> getProjekteByNutzer(Organisationseinheit o) throws IllegalArgumentException {

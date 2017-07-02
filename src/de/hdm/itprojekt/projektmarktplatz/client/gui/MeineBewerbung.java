@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSe
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -26,10 +28,18 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
+
+/**
+ * Klasse zur Darstellung von meinen Bewerbung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 
 public class MeineBewerbung extends HorizontalPanel {
 
@@ -49,17 +59,28 @@ public class MeineBewerbung extends HorizontalPanel {
 
 	Bewerbung bewerbung = new Bewerbung();
 
+	/**
+	 * Konstruktor
+	 * @param p
+	 */
+	
 	public MeineBewerbung (Bewerbung p) {
 		this.bewerbung = p;
 	}
 
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
+	
 	public void onLoad() {
 
 		super.onLoad();
 		o.setEmail(Cookies.getCookie("email"));
 		if(this.bewerbung!=null){
+
 			taAnschreiben.setText(bewerbung.getInhalt());
 			eDatum.setValue(bewerbung.getErstelldatum());
+
 		}
 
 //		btAusschreiben.addClickHandler(new AusschreibenClickHandler());

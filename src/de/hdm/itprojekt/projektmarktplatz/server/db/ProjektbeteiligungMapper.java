@@ -20,6 +20,11 @@ public class ProjektbeteiligungMapper {
 		
 	}
 
+	
+	/**
+	 * @return projektbeteiligungMapper
+	 */ 
+	
 	public static ProjektbeteiligungMapper projektbeteilitungMapper() {
 		if (projektbeteiligungMapper == null) {
 			projektbeteiligungMapper = new ProjektbeteiligungMapper();
@@ -28,7 +33,12 @@ public class ProjektbeteiligungMapper {
 		return projektbeteiligungMapper;
 	}
 	
-
+	/**
+	 * Fügt eine Beteiligung hinzu
+	 * @param b Beteiligung
+	 * @return b
+	 * @throws Exception
+	 */
 
 	public Beteiligung einfuegen(Beteiligung b) throws Exception {
 		Connection con = DBConnection.connection();
@@ -70,6 +80,13 @@ public class ProjektbeteiligungMapper {
 		return b;
 	}
 
+	/**
+	 * Speichert Änderungen der Beteiligungen 
+	 * @param b Beteiligung
+	 * @return b
+	 * @throws Exception
+	 */
+	
 	public Beteiligung speichern(Beteiligung b) throws Exception {
 		Connection con = DBConnection.connection();
 		String datum = "";
@@ -90,6 +107,12 @@ public class ProjektbeteiligungMapper {
 		return b;
 	}
 	
+	/**
+	 * Loescht eine Beteiligung 
+	 * @param b Beteiligung
+	 * @throws Exception
+	 */
+	
 	public void loeschen(Beteiligung b) throws Exception {
 	    Connection con = DBConnection.connection();
 
@@ -102,6 +125,16 @@ public class ProjektbeteiligungMapper {
 	      e.printStackTrace();
 	    }
 	  }
+	
+	
+	/**
+	 * Liest eine Beteiligung zur Id
+	 * @param bt Beteiligung
+	 * @return null
+	 * @throws Exception
+	 */
+	
+	
 	public Beteiligung getById(Beteiligung bt) throws Exception{
 		 Connection con = DBConnection.connection();
 
@@ -131,6 +164,13 @@ public class ProjektbeteiligungMapper {
 		    }
 		    return null;
 	}
+	
+	/**
+	 * Liest alle Beteiligungen 
+	 * @return result
+	 * @throws Exception
+	 */	
+	
 	public ArrayList<Beteiligung> getAll() throws Exception{
 		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
 		Connection con = DBConnection.connection();
@@ -181,6 +221,13 @@ public class ProjektbeteiligungMapper {
 		return result;
 
 	}
+	
+	/**
+	 * Liest alle Beteiligungen zum Projekt
+	 * @param p Projekt
+	 * @return null
+	 * @throws Exception
+	 */
 
 	public ArrayList<Beteiligung> getAllByProjekt(Projekt p) throws Exception {
 		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
@@ -212,6 +259,13 @@ public class ProjektbeteiligungMapper {
 		return null;
 	}
 	
+	/**
+	 * Liest alle Beteiligungen von einem Nutzer
+	 * @param o Organisationseinheit
+	 * @return null
+	 * @throws Exception
+	 */
+	
 	public ArrayList<Beteiligung> getAllByNutzer(Organisationseinheit o) throws Exception {
 		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
 		Connection con = DBConnection.connection();
@@ -242,6 +296,13 @@ public class ProjektbeteiligungMapper {
 		return null;
 	}
 
+	/**
+	 *Gibt eine Beteiligung eines Nutzers an Projekten zurück
+	 * @param o Organisationseinheit, p Projekt
+	 * @return null
+	 * @throws Exception
+	 */
+	
 	public Beteiligung getByPersonAndProjekt(Organisationseinheit o, Projekt p) throws Exception{
 		Connection con = DBConnection.connection();
 	    try {

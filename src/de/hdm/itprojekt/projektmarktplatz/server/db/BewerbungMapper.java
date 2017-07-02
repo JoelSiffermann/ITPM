@@ -35,7 +35,7 @@ public class BewerbungMapper {
 	}
 
 	/**
-	 * 
+	 * Fügt eine Bewerbung hinzu
 	 * @param b Bewerbung
 	 * @return bewerbungMapper
 	 * @throws Exception
@@ -80,7 +80,7 @@ public class BewerbungMapper {
 	}
 
 	/**
-	 * 
+	 * Speicherung aller Änderung einer Bewerbung
 	 * @param b Bewerbung
 	 * @return bewerbungMapper
 	 * @throws Exception
@@ -105,7 +105,7 @@ public class BewerbungMapper {
 	}
 	
 	/**
-	 * 
+	 * Loescht eine Bewerbung
 	 * @param b Bewerbung
 	 * @throws Exception
 	 */
@@ -123,7 +123,7 @@ public class BewerbungMapper {
 	}
 
 	/**
-	 * 
+	 * Liest die Id der Bewerbungen
 	 * @param b Bewerbung
 	 * @return bewerbungMapper
 	 * @throws Exception
@@ -158,7 +158,7 @@ public class BewerbungMapper {
 	}
 
 	/**
-	 * 
+	 * Zeigt alle Bewerbungen an
 	 * @return result
 	 * @throws Exception
 	 */
@@ -210,7 +210,7 @@ public class BewerbungMapper {
 	}
 	
 	/**
-	 * 
+	 * Ruft alle Bewerbungen mit Hilfe der AusschreibungId
 	 * @param id AusschreibungId
 	 * @return result
 	 * @throws Exception
@@ -261,7 +261,7 @@ public class BewerbungMapper {
 	}
 	
 	/**
-	 * 
+	 * Liest alle Bewerbungen eines Bewerbers 
 	 * @param o Organisationseinheit
 	 * @return result
 	 * @throws Exception

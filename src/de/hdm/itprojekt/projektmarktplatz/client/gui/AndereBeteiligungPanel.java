@@ -33,11 +33,14 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
-public class AndereBeteiligungPanel extends HorizontalPanel {
+/**
+ * Klasse zur Darstellung von anderen Beteiligung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
-	/*
-	 * Neues Design
-	 */
+public class AndereBeteiligungPanel extends HorizontalPanel {
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
@@ -52,12 +55,10 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 
 	HorizontalPanel hpAndereProjekteForm = new HorizontalPanel();
 
-	//Orga
 	Label lblEMail = new Label("Email:");
 	Label lblName = new Label("Name:");
 	TextBox tbEmail = new TextBox();
 	TextBox tbName = new TextBox();
-	//Beteiligung
 	TextBox tbUmfang = new TextBox();
 	TextBox startPicker = new TextBox();
 	TextBox endPicker = new TextBox();
@@ -82,9 +83,18 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		}
 	};
 	
+	/**
+	 * Konstruktor 
+	 * @param p Projekt
+	 */
+	
 	public AndereBeteiligungPanel(Projekt p) {
 		this.projekt = p;
 	}
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad() {
 
@@ -106,9 +116,19 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		this.add(hpAndereProjekteForm);
 	}
 
+	/**
+	 * die Methode fillTable() ruft die Beteiligung aus Datenbank aus.
+	 */
+	
 	public void fillTable() {
 		projektService.getBeteiligungBy(projekt, new ReadBeteiligungCallback());
 	}
+	
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 	
 	private class BeendenClickHandler implements ClickHandler {
 
@@ -118,6 +138,12 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		}
 		
 	}
+	
+	/**
+	 * Die innere Klasse DeleteCallback löscht das Objekt Beteiligung.
+	 * Implementiert das AysncCallback Interface.
+	 *
+	 */
 	
 	private class DeleteCallback implements AsyncCallback<Void> {
 
@@ -133,6 +159,12 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 
 	}
 
+	/**
+	 * Die innere Klasse ReadBeteiligungCallback liest die ArrayList Beteiligung.
+	 * Implementiert das AysncCallback Interface.
+	 *
+	 */
+	
 	private class ReadBeteiligungCallback implements AsyncCallback<ArrayList<Beteiligung>> {
 
 		@Override
@@ -150,6 +182,11 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		}
 	}
 
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
+	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 
 		@Override
@@ -178,6 +215,12 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		}
 	}
 	
+	/**
+	 * Die innere Klasse OrgaCallBack liest das Objekt Organisationseinheit.
+	 * Implementiert das AysncCallback Interface.
+	 *
+	 */
+	
 	private class OrgaCallBack implements AsyncCallback<Organisationseinheit>{
 
 		@Override
@@ -200,6 +243,12 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		}
 		
 	}
+	
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 	
 	private class BewertungClickHandler implements ClickHandler{
 

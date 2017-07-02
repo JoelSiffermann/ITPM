@@ -14,8 +14,8 @@ public class CompositePM {
 		private ArrayList<Projektmarktplatz> subPM = new ArrayList<Projektmarktplatz>();
 
 		/**
-		 * HinzufÃ¼gen ei nes Teil-Reports.
-		 * @param r der hinzuzufÃ¼gende Teil-Report.
+		 * Hinzufügen eines Teil-Reports.
+		 * @param r der hinzuzufügende Teil-Report.
 		 */
 		public void addSubPM(Projektmarktplatz r) {
 			this.subPM.add(r);
@@ -39,7 +39,7 @@ public class CompositePM {
 
 		/**
 		 * Auslesen eines einzelnen Teil-Reports.
-		 * @param i Position des Teilreports. Bei n Elementen lÃ¤uft der Index i von 0
+		 * @param i Position des Teilreports. Bei n Elementen läuft der Index i von 0
 		 * bis n-1.
 		 * 
 		 * @return Position des Teil-Reports.

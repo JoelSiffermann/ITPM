@@ -34,7 +34,7 @@ public class EigenschaftMapper {
 
 
 		/**
-		 * 
+		 * Fügt eine Eigenschaft hinzu
 		 * @param eg Eigenschaft
 		 * @return eigenschaftMapper
 		 * @throws Exception
@@ -72,7 +72,7 @@ public class EigenschaftMapper {
 	}
 
 	/**
-	 * 
+	 * Speichert Änderungen einer Eigenschaft
 	 * @param c Eigenschaft
 	 * @return c
 	 * @throws Exception
@@ -93,7 +93,7 @@ public class EigenschaftMapper {
 	}
 	
 	/**
-	 * 
+	 * die Eigenschaft wird gelöscht
 	 * @param c Eigenschaft
 	 * @throws Exception
 	 */
@@ -110,7 +110,7 @@ public class EigenschaftMapper {
 	    }
 	  }
 	/**
-	 * 
+	 * Liest alle Eigenschaften zur Id
 	 * @param ch Eigenschaft
 	 * @return null
 	 * @throws Exception
@@ -143,7 +143,7 @@ public class EigenschaftMapper {
 		    return null;
 	}
 	/**
-	 * 
+	 * Liest alle Eigenschaften raus
 	 * @return result
 	 * @throws Exception
 	 */
@@ -194,7 +194,7 @@ public class EigenschaftMapper {
 	}
 	
 	/**
-	 * 
+	 * Liest alle Eigenschaften zum Partnerprofil
 	 * @param p Partnerprofil
 	 * @return result
 	 * @throws Exception
@@ -223,7 +223,7 @@ public class EigenschaftMapper {
 	}
 	
 	/**
-	 * 
+	 * Vergleicht Eigenschaften
 	 * @param s String
 	 * @return result
 	 * @throws Exception
@@ -250,6 +250,12 @@ public class EigenschaftMapper {
 		return result;
 	}
 	
+	/**
+	 * Liest alle Eigenschaften zum Profil
+	 * @param p Partnerprofil
+	 * @return null
+	 * @throws Exception
+	 */
 	public Eigenschaft getByProfil(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
 		try {

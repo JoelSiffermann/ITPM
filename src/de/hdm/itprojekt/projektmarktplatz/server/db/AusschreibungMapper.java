@@ -37,7 +37,7 @@ public class AusschreibungMapper {
 	
 
 /**
- * 
+ * Die Methode einfuegen(Ausschreibung a)  fügt eine Ausschreibung hinzu
  * @param a Ausschreibung
  * @return aMapper
  * @throws Exception
@@ -80,7 +80,7 @@ public class AusschreibungMapper {
 	}
 
 	/**
-	 * 
+	 * Die Methode speichern(Ausschreibung a) speichert die vorgenommenen Änderungen 
 	 * @param a Ausschreibung
 	 * @return aMapper
 	 * @throws Exception
@@ -104,7 +104,7 @@ public class AusschreibungMapper {
 	}
 	
 	/**
-	 * 
+	 *  Die Methode loeschen(Ausschreibung a) löscht eine Ausschreibung
 	 * @param a Ausschreibung
 	 * @throws Exception
 	 */
@@ -122,7 +122,7 @@ public class AusschreibungMapper {
 	  }
 
 	/**
-	 * 
+	 * Die Methode getById(Ausschreibung a) liest die Id der Ausschreibungen
 	 * @param a Ausschreibung
 	 * @return aMapper
 	 * @throws Exception
@@ -164,7 +164,7 @@ public class AusschreibungMapper {
 		    return a;
 	}
 /**
- * 
+ * Die Methode getAll() zeigt alle vorhandenen Ausschreibungen an 
  * @return result
  * @throws Exception
  */
@@ -224,7 +224,7 @@ public class AusschreibungMapper {
 
 	}
 	/**
-	 * 
+	 * Liest alle Ausschreibungen zum Partnerprofil
 	 * @param p Partnerprofil
 	 * @return null
 	 * @throws Exception

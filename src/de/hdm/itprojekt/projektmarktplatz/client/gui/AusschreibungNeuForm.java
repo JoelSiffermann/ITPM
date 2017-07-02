@@ -28,12 +28,14 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
+/**
+ * Klasse zur Darstellung von Ausschreibung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
 public class AusschreibungNeuForm extends VerticalPanel {
-	
-	/*
-	 * Neues Design
-	 */
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	Ausschreibung a = new Ausschreibung();
@@ -41,6 +43,10 @@ public class AusschreibungNeuForm extends VerticalPanel {
 	public AusschreibungNeuForm(Projekt p) {
 		this.p = p;
 	}
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad() {
 		

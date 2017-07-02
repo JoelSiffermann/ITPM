@@ -8,6 +8,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import de.hdm.itprojekt.projektmarktplatz.shared.LoginService;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.LoginInfo;
 
+/**
+ * @author Ayse Guelay
+ * @author Ersin Barut
+ */
 public class LoginServiceImpl extends RemoteServiceServlet implements
     LoginService {
 

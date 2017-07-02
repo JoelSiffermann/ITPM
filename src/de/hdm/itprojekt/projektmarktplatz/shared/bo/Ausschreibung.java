@@ -31,7 +31,7 @@ public class Ausschreibung extends BusinessObjekt {
 	}
 	
 	 /**
-	   *  Konstruktur:  fügt dem Objekt Eigenschaften hinzu 
+	   *  Konstruktor:  fügt dem Objekt Eigenschaften hinzu 
 	   */ 
 	
 	public Ausschreibung(String bezeichnung, String inhalt, Date frist)
@@ -40,36 +40,57 @@ public class Ausschreibung extends BusinessObjekt {
 		this.inhalt=inhalt;
 		this.frist=frist;
 	}
-	// Auslesen der Bezeichhnung
+	
+	/**
+	 * Auslesen der Bezeichhnung
+	 * @return bezeichnung
+	 */
 	
 	 public String getBezeichnung() {
 		    return bezeichnung;
 		  }
 	 
-	 //Auslesen des Inhalts
+	 
+	 /**
+	  * Auslesen des Inhalts
+	  * @return inhalt
+	  */
 	 
 	 public String getInhalt() {
 		 
 		 return inhalt;
 	 }
-	 
-	 //Auslesen der Frist
+	 /**
+	  * Auslesen der Frist
+	  * @return frist
+	  */
 	 
 	 public Date getFrist(){
 		 return frist;
 	 }
-	 // Setzen der Bezeichnung einer Ausschreibung
+	 /**
+	  * setzt die Bezeichnungen
+	  * @param string String
+	  */
+
 	public void setBezeichnung(String string) {
 	    bezeichnung = string;
 	}
 	
-	// Setzt den Inhalt einer Ausschreibung 
-	
+	 
+	/**
+	 * Setzt den Inhalt einer Ausschreibung
+	 * @param string String
+	 */
 	public void setInhalt(String string){
 		inhalt = string;
 	}
 	
-	// Setzt die Frist fï¿½r die Gï¿½ltigkeit einer Ausschreibung bzw. wie lange man sich bewerben kann
+	
+	/**
+	 * Setzt die Frist fuer die Guetigkeit einer Ausschreibung bzw. wie lange man sich bewerben kann
+	 * @param date Date
+	 */
 	public void setFrist(Date date){
 		frist= date;
 	}
@@ -77,8 +98,11 @@ public class Ausschreibung extends BusinessObjekt {
 
 
 
-	//Auslesen von Projekten
 
+/**
+ * Auslesen von Projekten
+ * @return projekt
+ */
 	public Projekt getProjekt() {
 		return projekt;
 	}
@@ -86,7 +110,10 @@ public class Ausschreibung extends BusinessObjekt {
 
 
 
-	//Auslesen von Partnerprofilen
+	
+	/**Auslesen von Partnerprofilen
+	 * @return partnerprofil
+	 */
 
 	public Partnerprofil getPartnerprofil() {
 		return partnerprofil;
@@ -95,7 +122,11 @@ public class Ausschreibung extends BusinessObjekt {
 
 
 
-	//Setzt die Werte eines Projekts 
+	
+	/**
+	 * Setzt die Werte eines Projekts 
+	 * @param projekt Projekt
+	 */
 
 	public void setProjekt(Projekt projekt) {
 		this.projekt = projekt;
@@ -103,9 +134,12 @@ public class Ausschreibung extends BusinessObjekt {
 
 
 
-	//Legt ein neues Partnerprofil an
 
 
+/**
+ * Legt ein neues Partnerprofil an
+ * @param partnerprofil Partnerprofil
+ */
 	public void setPartnerprofil(Partnerprofil partnerprofil) {
 		this.partnerprofil = partnerprofil;
 	}

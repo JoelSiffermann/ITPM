@@ -16,6 +16,12 @@ public class PersonMapper {
 
 	}
 
+	
+	/**
+	 * @return personMapper
+	 */
+	
+	
 	public static PersonMapper personMapper() {
 		if (personMapper == null) {
 			personMapper = new PersonMapper();
@@ -23,6 +29,13 @@ public class PersonMapper {
 		return personMapper;
 	}
 
+	/**
+	 * Fügt eine Person hinzu
+	 * @param p Person
+	 * @return p
+	 * @throws Exception
+	 */
+	
 	public Person einfuegen(Person p) throws Exception {
 		Connection con = DBConnection.connection();
 		
@@ -52,7 +65,16 @@ public class PersonMapper {
 		}
 		return p;
 	}
-
+	
+	
+	/**
+	 * Speichert alle Änderungen an einer Person
+	 * @param p Person
+	 * @return p
+	 * @throws Exception
+	 */
+	
+	
 	public Person speichern(Person p) throws Exception {
 		Connection con = DBConnection.connection();
 		System.out.println("Person speichern"); 
@@ -70,6 +92,11 @@ public class PersonMapper {
 		}
 		return p;
 	}
+	/**
+	 * Loescht eine Person 
+	 * @param p Person
+	 * @throws Exception
+	 */
 
 	public void loeschen(Person p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -80,6 +107,13 @@ public class PersonMapper {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Liest alle Personen zur Id 
+	 * @param p Person
+	 * @return p
+	 * @throws Exception
+	 */
 
 	public Person getById(Person p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -102,6 +136,13 @@ public class PersonMapper {
 		}
 		return p;
 	}
+	
+	/**
+	 * Liest alle Personen einer Organisationseinheit
+	 * @param org Organisationseinheit
+	 * @return null
+	 * @throws Exception
+	 */
 
 	public Person getByOrgId(Organisationseinheit org) throws Exception {
 		Connection con = DBConnection.connection();
@@ -124,6 +165,12 @@ public class PersonMapper {
 		}
 		return null;
 	}
+	
+	/**
+	 * Liest alle Personen
+	 * @return result
+	 * @throws Exception
+	 */
 	
 	public ArrayList<Person> getAll() throws Exception {
 		Connection con = DBConnection.connection();

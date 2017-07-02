@@ -1,48 +1,47 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
-import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
-import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
+
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
+
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
+/**
+ * Klasse zur Darstellung von meinen Projekt-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class MeineProjektePanel extends HorizontalPanel {
 	
-	/*
-	 * Neues Design
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.Widget#onLoad()
-	 */
-	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
+
+	Projekt projekt;
 	
-	Projekt projekt; // = new Projekt();
+	/**
+	 * Konstruktor
+	 * @param p Projekt
+	 */
+
 	
 	public MeineProjektePanel(Projekt p){
 		this.projekt = p;
@@ -68,16 +67,24 @@ public class MeineProjektePanel extends HorizontalPanel {
 	Button btAusschreibungAnzeigen = new Button("Ausschreibungen anzeigen");
 	Button btAusschreibungErstellen = new Button("Ausschreibung erstellen");
 
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
+	
 	public void onLoad() {
 		
 		super.onLoad();
+		
+		taProjektBeschreibung.setHeight("300px");
+		taProjektBeschreibung.setWidth("300px");
+		taProjektBeschreibung.setEnabled(false);
 		if(this.projekt!=null){
 			lblProjektName.setText(projekt.getName());
 			taProjektBeschreibung.setText(projekt.getInhalt());
 			taProjektBeschreibung.setValue(projekt.getInhalt());
 		}
 		
-//	
+
 		startPicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
 			public void onValueChange(ValueChangeEvent<Date> event) {
 				Date date = event.getValue();
@@ -183,7 +190,6 @@ public class MeineProjektePanel extends HorizontalPanel {
 		hpMeineProjekteForm.add(vpMeineProjekteForm2);
 
 		this.clear();
-//		this.add(cellList);
 		this.add(hpMeineProjekteForm);
 		
 	}
