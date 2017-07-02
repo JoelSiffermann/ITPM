@@ -175,6 +175,9 @@ public interface ProjektmarktplatzAdminAsync {
 
 	void getBeteiligungBy(Projekt p,
 			AsyncCallback<ArrayList<Beteiligung>> callback);
+
+	void getOrgaByBeteiligung(Beteiligung b,
+			AsyncCallback<Organisationseinheit> callback);
 	
 	
 }

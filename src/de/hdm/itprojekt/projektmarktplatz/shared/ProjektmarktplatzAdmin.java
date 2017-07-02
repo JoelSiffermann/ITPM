@@ -113,5 +113,8 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 
 	ArrayList<Beteiligung> getBeteiligungBy(Projekt p)
 			throws IllegalArgumentException;
+
+	Organisationseinheit getOrgaByBeteiligung(Beteiligung b)
+			throws IllegalArgumentException;
 	
 }

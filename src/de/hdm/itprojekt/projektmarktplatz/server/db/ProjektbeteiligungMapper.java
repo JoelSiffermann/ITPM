@@ -200,7 +200,7 @@ public class ProjektbeteiligungMapper {
 			          b.setUmfang(rs.getInt("Umfang"));
 					  b.setProjekt(p);
 					  Organisationseinheit o = new Organisationseinheit();
-					  b.setId(rs.getInt("orga_id"));
+					  o.setId(rs.getInt("orga_id"));
 					  b.setOrganisationseinheit(o);
 					  result.add(b);
 					}

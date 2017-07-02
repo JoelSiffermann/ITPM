@@ -1054,5 +1054,18 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
+	
+	@Override
+	public Organisationseinheit getOrgaByBeteiligung(Beteiligung b) throws IllegalArgumentException {
+		Organisationseinheit o = new Organisationseinheit();
+		o.setId(b.getOrganisationseinheit().getId());
+		try {
+			return this.orgMapper.getById(o);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
