@@ -8,6 +8,7 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -26,12 +27,7 @@ public class EmpfAusschreibungReport extends VerticalPanel {
 	
 	public void onLoad(){
 		super.onLoad();
-		//TODO get Aktueller nutzer
-		id = 1;
-		e.setId(id);
-		e.setEmail("test@test.de");
-		e.setName("teest");
-		//
+		e.setEmail(Cookies.getCookie("email"));
 		getData();
 		cellTable = new CellTable<Ausschreibung>();
 		cellTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);

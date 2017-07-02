@@ -6,6 +6,7 @@ import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -44,8 +45,7 @@ public class ProjektverflechtungReport extends VerticalPanel{
 	
 	public void onLoad(){
 		super.onLoad();
-		//TODO
-		o.setId(60);
+		o.setEmail(Cookies.getCookie("email"));
 		ssmProjekt = new SingleSelectionModel<Projekt>();
 		ssmProjekt.addSelectionChangeHandler(new SelectionHandler());
 		cellTable.addColumn(col, "Projekte");
@@ -73,7 +73,7 @@ public class ProjektverflechtungReport extends VerticalPanel{
 		hp.add(hp3);
 		this.add(hp);
 	}
-
+	
 	private void fillTable() {
 		reportService.getProjekteByNutzer(o, new ProjekteCallback());
 	}
@@ -177,7 +177,7 @@ public class ProjektverflechtungReport extends VerticalPanel{
 			reportService.getBeteiligungByProjektteilnehmer(o, selectedProjekt, new BeteiligungenCallback());
 		}
 		private void getBewerbungen(Organisationseinheit o) {
-			reportService.getBewerbungenByNutzer(o, new BewerbungenCallback());
+			reportService.getBewerbungByNutzer(o, new BewerbungenCallback());
 		}
 	}
 }

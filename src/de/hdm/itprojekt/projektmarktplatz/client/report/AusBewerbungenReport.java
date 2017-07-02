@@ -8,6 +8,7 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -25,8 +26,7 @@ public class AusBewerbungenReport extends VerticalPanel{
 	
 	public void onLoad(){
 		super.onLoad();
-		//TODO get aktueller nutzer
-		o.setId(60);
+		o.setEmail(Cookies.getCookie("email"));
 		getData();
 		cellTable = new CellTable<Bewerbung>();
 		cellTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
