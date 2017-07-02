@@ -52,7 +52,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList<Organisationseinheit> readAllOrg() throws IllegalArgumentException;
 	/**
-	 * löschen von Organisationseinheit
+	 * lï¿½schen von Organisationseinheit
 	 * @param org Organisationseinheit
 	 * @throws IllegalArgumentException
 	 */
@@ -91,7 +91,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList<Ausschreibung> readAllAusschreibung () throws IllegalArgumentException;
 	/**
-	 * löschen von Ausschreibung
+	 * lï¿½schen von Ausschreibung
 	 * @param a Ausschreibung
 	 * @throws IllegalArgumentException
 	 */
@@ -124,7 +124,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList <Bewerbung> readAllBewerbung() throws IllegalArgumentException;
 	/**
-	 * löschen von Bewerbung
+	 * lï¿½schen von Bewerbung
 	 * @param b Bewerbung
 	 * @throws IllegalArgumentException
 	 */
@@ -163,7 +163,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList <Bewertung> readAllBewertung() throws IllegalArgumentException;
 	/**
-	 * löschen von Bewertung
+	 * lï¿½schen von Bewertung
 	 * @param bt Bewertung
 	 * @throws IllegalArgumentException
 	 */
@@ -208,7 +208,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList <Eigenschaft> readAllEigenschaft() throws IllegalArgumentException;
 	/**
-	 * Eigenschaft löschen
+	 * Eigenschaft lï¿½schen
 	 * @param eg Eigenschaft
 	 * @throws IllegalArgumentException
 	 */
@@ -248,7 +248,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList <Partnerprofil> readAllPartnerprofil() throws IllegalArgumentException;
 	/**
-	 * löschen von Partnerprofil
+	 * lï¿½schen von Partnerprofil
 	 * @param pp Partnerprofil
 	 * @throws IllegalArgumentException
 	 */
@@ -281,7 +281,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList <Person> readAllPerson() throws IllegalArgumentException;
 	/**
-	 * löschen von Person
+	 * lï¿½schen von Person
 	 * @param pers Person
 	 * @throws IllegalArgumentException
 	 */
@@ -321,7 +321,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList<Beteiligung> readAllBeteiligung() throws IllegalArgumentException;
 	/**
-	 * löschen von Beteiligung
+	 * lï¿½schen von Beteiligung
 	 * @param projBet Beteiligung
 	 * @throws IllegalArgumentException
 	 */
@@ -355,7 +355,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList<Projekt> readAllProjekt() throws IllegalArgumentException;
 	/**
-	 * löschen von Projekt
+	 * lï¿½schen von Projekt
 	 * @param proj Projekt
 	 * @throws IllegalArgumentException
 	 */
@@ -389,13 +389,13 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList<Projektmarktplatz> readAllProjektmarktplatz() throws IllegalArgumentException;
 	/**
-	 * löschen von Projektmarktplatz
+	 * lï¿½schen von Projektmarktplatz
 	 * @param projMark Projektmarktplatz
 	 * @throws IllegalArgumentException
 	 */
 	public void deleteProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
 	/**
-	 * alle Projektmarktplätze anhand der Organisationseinheit auslesen
+	 * alle Projektmarktplï¿½tze anhand der Organisationseinheit auslesen
 	 * @param o Organisationseinheit
 	 * @return Projektmarktplatz
 	 * @throws IllegalArgumentException
@@ -436,7 +436,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList<Team> readAllTeam() throws IllegalArgumentException;
 	/**
-	 * Team löschen
+	 * Team lï¿½schen
 	 * @param t Team
 	 * @throws IllegalArgumentException
 	 */
@@ -469,13 +469,13 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 */
 	public ArrayList<Unternehmen> readAllUnternehmen() throws IllegalArgumentException;
 	/**
-	 * löschen von Unternehmen
+	 * lï¿½schen von Unternehmen
 	 * @param u Unternehmen
 	 * @throws IllegalArgumentException
 	 */
 	public void deleteUnternehmen(Unternehmen u) throws IllegalArgumentException;
 	/**
-	 * gesuchtes Partnerprofil wird zurückgegeben
+	 * gesuchtes Partnerprofil wird zurï¿½ckgegeben
 	 * @param p Partnerprofil
 	 * @return Partnerprofil
 	 * @throws IllegalArgumentException
@@ -483,7 +483,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	Eigenschaft getGesuchtesProf(Partnerprofil p)
 			throws IllegalArgumentException;
 	/**
-	 * Ausschreibung wird zurückgegeben
+	 * Ausschreibung wird zurï¿½ckgegeben
 	 * @param a Ausschreibung 
 	 * @return Ausschreibung
 	 * @throws IllegalArgumentException
@@ -491,7 +491,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	Partnerprofil getProfilbyAusschreibung(Ausschreibung a)
 			throws IllegalArgumentException;
 	/**
-	 * Beteiligung an Projekt wird zurückgegeben
+	 * Beteiligung an Projekt wird zurï¿½ckgegeben
 	 * @param p Projekt
 	 * @return Projekt
 	 * @throws IllegalArgumentException
@@ -499,7 +499,7 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	ArrayList<Beteiligung> getBeteiligungBy(Projekt p)
 			throws IllegalArgumentException;
 	/**
-	 * Beteiligung wird zurückgegeben
+	 * Beteiligung wird zurï¿½ckgegeben
 	 * @param b Beteiligung
 	 * @return Beteiligung
 	 * @throws IllegalArgumentException
@@ -539,6 +539,6 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	Ausschreibung getAusschreibungByBewerbung(Bewerbung b)
 			throws IllegalArgumentException;
 	
-	public Organisationseinheit updateOrg2(Organisationseinheit org, Team t, Person p, Unternehmen u) throws IllegalArgumentException;
+//	public Organisationseinheit updateOrg2(Organisationseinheit org, Team t, Person p, Unternehmen u) throws IllegalArgumentException;
 	
 }

@@ -36,8 +36,8 @@ public interface ProjektmarktplatzAdminAsync {
 	void updateOrg(Organisationseinheit org,
 			AsyncCallback<Organisationseinheit> callback);
 	
-	void updateOrg2(Organisationseinheit org, Team t, Person p, Unternehmen u,
-			AsyncCallback<Organisationseinheit> callback);
+//	void updateOrg2(Organisationseinheit org, Team t, Person p, Unternehmen u,
+//			AsyncCallback<Organisationseinheit> callback);
 
 
 	/**
