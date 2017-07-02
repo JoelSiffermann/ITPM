@@ -16,9 +16,10 @@ public class ProjektmarktplatzMapper {
 	protected ProjektmarktplatzMapper() {
 
 	}
+
 	/**
 	 * @return projektmarktplatzMapper
-	 */ 
+	 */
 	public static ProjektmarktplatzMapper projektmarktplatzMapper() {
 		if (projektmarktplatzMapper == null) {
 			projektmarktplatzMapper = new ProjektmarktplatzMapper();
@@ -26,14 +27,14 @@ public class ProjektmarktplatzMapper {
 		return projektmarktplatzMapper;
 	}
 
-	
 	/**
 	 * F�gt ein neuen Projektmarktplatz hinzu
+	 * 
 	 * @param p Projektmarktplatz
 	 * @return p
 	 * @throws Exception
 	 */
-	
+
 	public Projektmarktplatz einfuegen(Projektmarktplatz p) throws Exception {
 		Connection con = DBConnection.connection();
 		try {
@@ -51,31 +52,32 @@ public class ProjektmarktplatzMapper {
 			 * Primärschlüssel.
 			 */
 			// p.setId(rs.getInt("") + 1);
-			
-			 ResultSet rs = stmt.executeQuery("SELECT MAX(`Projektmarktplatz_ID`) AS maxid "
-			          + "FROM `projektmarktplatz` ");
-			 
-		      if (rs.next()) {
-		          
-		    	  p.setId(rs.getInt("maxid") + 1);
 
-		          stmt = con.createStatement();
+			ResultSet rs = stmt
+					.executeQuery("SELECT MAX(`Projektmarktplatz_ID`) AS maxid " + "FROM `projektmarktplatz` ");
 
-		      System.out.println("INSERT INTO `projektmarktplatz` (`Projektmarktplatz_ID`, `Bezeichnung`) VALUES ('"
-					+ p.getId() + "', '" + p.getBezeichnung() + "');");
+			if (rs.next()) {
 
-			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-			stmt.executeUpdate("INSERT INTO `projektmarktplatz` (`Projektmarktplatz_ID`, `Bezeichnung`) VALUES ('"
-					+ p.getId() + "', '" + p.getBezeichnung() + "');");
-		}
-	}catch (SQLException e) {
+				p.setId(rs.getInt("maxid") + 1);
+
+				stmt = con.createStatement();
+
+				System.out.println("INSERT INTO `projektmarktplatz` (`Projektmarktplatz_ID`, `Bezeichnung`) VALUES ('"
+						+ p.getId() + "', '" + p.getBezeichnung() + "');");
+
+				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+				stmt.executeUpdate("INSERT INTO `projektmarktplatz` (`Projektmarktplatz_ID`, `Bezeichnung`) VALUES ('"
+						+ p.getId() + "', '" + p.getBezeichnung() + "');");
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return p;
 	}
-	
+
 	/**
 	 * F�gt ein neuen Projektmarktplatz hinzu
+	 * 
 	 * @param p Projektmarktplatz
 	 * @return p
 	 * @throws Exception
@@ -93,9 +95,10 @@ public class ProjektmarktplatzMapper {
 		}
 		return p;
 	}
-	
+
 	/**
-	 * Loescht ein Projektmarktplatz 
+	 * Loescht ein Projektmarktplatz
+	 * 
 	 * @param p Projektmarktplatz
 	 * @return p
 	 * @throws Exception
@@ -110,9 +113,10 @@ public class ProjektmarktplatzMapper {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Liest ein Projektmarktplatz
+	 * 
 	 * @param p Projektmarktplatz
 	 * @return p
 	 * @throws Exception
@@ -138,11 +142,12 @@ public class ProjektmarktplatzMapper {
 
 	/**
 	 * Liest alle Projektmarktpl�tze zu einer Organisationseinheit
+	 * 
 	 * @param pm Projektmarktplatz
 	 * @return result
 	 * @throws Exception
 	 */
-	
+
 	public ArrayList<Projektmarktplatz> getAllByOrg(Projektmarktplatz pm) throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
@@ -152,38 +157,40 @@ public class ProjektmarktplatzMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `projektmarktplatz` WHERE `Projektmarktplatz_ID` = " + pm.getId());
-			
+			ResultSet rs = stmt
+					.executeQuery("SELECT * FROM `projektmarktplatz` WHERE `Projektmarktplatz_ID` = " + pm.getId());
+
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-//			if (rs.next()) {
-				/*
-				 * c erhält den bisher maximalen, nun um 1 inkrementierten
-				 * Primärschlüssel.
-				 */
-				while (rs.next()) {
-					Projektmarktplatz p = new Projektmarktplatz();
-					p.setId(rs.getInt("Projektmarktplatz_ID"));
-					p.setBezeichnung(rs.getString("Bezeichnung"));
-					result.add(p);
-				}
-				stmt = con.createStatement();
-				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-//				stmt.executeUpdate("");
-//				return result;
+			// if (rs.next()) {
+			/*
+			 * c erhält den bisher maximalen, nun um 1 inkrementierten
+			 * Primärschlüssel.
+			 */
+			while (rs.next()) {
+				Projektmarktplatz p = new Projektmarktplatz();
+				p.setId(rs.getInt("Projektmarktplatz_ID"));
+				p.setBezeichnung(rs.getString("Bezeichnung"));
+				result.add(p);
+			}
+			stmt = con.createStatement();
+			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+			// stmt.executeUpdate("");
+			// return result;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Liest ein Projektmarktplatz zu einer Organisationseinheit
+	 * 
 	 * @param p Projektmarktplatz
 	 * @return result
 	 * @throws Exception
 	 */
-	
+
 	public ArrayList<Projektmarktplatz> getProjketmarkplatzByOrg(Organisationseinheit o) throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
@@ -197,31 +204,30 @@ public class ProjektmarktplatzMapper {
 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `orga_pmarkt` WHERE `orga_id` = " + o.getId());
 
-				/*
-				 * c erhält den bisher maximalen, nun um 1 inkrementierten
-				 * Primärschlüssel.
-				 */
-				while (rs.next()) {
-					Projektmarktplatz p = new Projektmarktplatz();
-					p.setId(rs.getInt("pmarkt_id"));
-					result.add(p);
-				}
-				stmt = con.createStatement();
-			
+			/*
+			 * c erhält den bisher maximalen, nun um 1 inkrementierten
+			 * Primärschlüssel.
+			 */
+			while (rs.next()) {
+				Projektmarktplatz p = new Projektmarktplatz();
+				p.setId(rs.getInt("pmarkt_id"));
+				result.add(p);
+			}
+			stmt = con.createStatement();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
-	
+
 	/**
 	 * Zeigt alle Projektmarktpl�tze an
+	 * 
 	 * @return result
 	 * @throws Exception
 	 */
-	
-	
+
 	public ArrayList<Projektmarktplatz> getAll() throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Projektmarktplatz> result = new ArrayList<Projektmarktplatz>();
@@ -233,22 +239,22 @@ public class ProjektmarktplatzMapper {
 			 */
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `projektmarktplatz`");
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-//			if (rs.next()) {
-				/*
-				 * c erhält den bisher maximalen, nun um 1 inkrementierten
-				 * Primärschlüssel.
-				 */
-				while (rs.next()) {
-					Projektmarktplatz p = new Projektmarktplatz();
-					p.setId(rs.getInt("Projektmarktplatz_ID"));
-					p.setBezeichnung(rs.getString("Bezeichnung"));
-					result.add(p);
-				}
-				stmt = con.createStatement();
-				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-//				stmt.executeUpdate("");
-//				return result;
-//			}
+			// if (rs.next()) {
+			/*
+			 * c erhält den bisher maximalen, nun um 1 inkrementierten
+			 * Primärschlüssel.
+			 */
+			while (rs.next()) {
+				Projektmarktplatz p = new Projektmarktplatz();
+				p.setId(rs.getInt("Projektmarktplatz_ID"));
+				p.setBezeichnung(rs.getString("Bezeichnung"));
+				result.add(p);
+			}
+			stmt = con.createStatement();
+			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+			// stmt.executeUpdate("");
+			// return result;
+			// }
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

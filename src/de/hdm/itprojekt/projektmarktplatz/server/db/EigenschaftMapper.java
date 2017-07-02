@@ -93,7 +93,7 @@ public class EigenschaftMapper {
 	}
 	
 	/**
-	 * 
+	 * die Eigenschaft wird gelöscht
 	 * @param c Eigenschaft
 	 * @throws Exception
 	 */

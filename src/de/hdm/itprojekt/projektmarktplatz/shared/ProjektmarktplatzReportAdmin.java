@@ -13,8 +13,13 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 @RemoteServiceRelativePath("projektmarktplatzreport")
-public interface ProjektmarktplatzReportAdmin extends RemoteService {
 
+public interface ProjektmarktplatzReportAdmin extends RemoteService {
+	/**
+	 * 
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	ArrayList<Ausschreibung> getAllAusschreibung()
 			throws IllegalArgumentException;
 

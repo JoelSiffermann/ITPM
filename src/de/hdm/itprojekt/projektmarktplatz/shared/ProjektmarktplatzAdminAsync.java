@@ -17,9 +17,13 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
-
+/**
+ * 
+ * @author samina
+ *
+ */
 public interface ProjektmarktplatzAdminAsync {
-
+	
 	void getTest(AsyncCallback<String> callback);
 
 	void insertOrg(Organisationseinheit org, AsyncCallback<Organisationseinheit> callback);

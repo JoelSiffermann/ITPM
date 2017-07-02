@@ -280,6 +280,13 @@ public class ProjektMapper {
 		return result;
 	}
 	
+	/**
+	 * Liest alle Projekte von einem andere Nutzer
+	 * @param o Organisationseinheit
+	 * @param pm Projektmarktplatz
+	 * @return result
+	 * @throws Exception
+	 */
 	public ArrayList<Projekt> getByAndereNutzer(Organisationseinheit o, Projektmarktplatz pm) throws Exception {
 		
 		Connection con = DBConnection.connection();
