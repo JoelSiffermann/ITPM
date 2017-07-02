@@ -69,6 +69,10 @@ public class MeineProjektePanel extends HorizontalPanel {
 	public void onLoad() {
 		
 		super.onLoad();
+		
+		taProjektBeschreibung.setHeight("300px");
+		taProjektBeschreibung.setWidth("300px");
+		taProjektBeschreibung.setEnabled(false);
 		if(this.projekt!=null){
 			lblProjektName.setText(projekt.getName());
 			taProjektBeschreibung.setText(projekt.getInhalt());

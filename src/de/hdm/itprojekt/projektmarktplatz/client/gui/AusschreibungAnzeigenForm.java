@@ -70,6 +70,12 @@ public class AusschreibungAnzeigenForm extends HorizontalPanel {
 	public void onLoad() {
 		
 		super.onLoad();
+		
+		tbPartnerProfilWert.setEnabled(false);
+		tbPartnerProfilBeschreibung.setEnabled(false);
+		taAusschreibungInhalt.setEnabled(false);
+		taAusschreibungInhalt.setHeight("300px");
+		taAusschreibungInhalt.setWidth("300px");
 		// Create a CellList that uses the cell.
 //		CellList<String> cellList = new CellList<String>(textCell);
 //		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
