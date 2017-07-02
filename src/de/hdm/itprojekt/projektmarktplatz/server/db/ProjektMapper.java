@@ -35,7 +35,7 @@ public class ProjektMapper {
 		return projektMapper;
 	}
 	/**
-	 * Fügt ein neues Projekt hinzu
+	 * Fï¿½gt ein neues Projekt hinzu
 	 * @param p Projekt
 	 * @return p
 	 * @throws Exception
@@ -66,7 +66,7 @@ public class ProjektMapper {
 		return p;
 	}
 	/**
-	 * Speichert Änderungen an einem Projekt
+	 * Speichert ï¿½nderungen an einem Projekt
 	 * @param p Projekt
 	 * @return p
 	 * @throws Exception

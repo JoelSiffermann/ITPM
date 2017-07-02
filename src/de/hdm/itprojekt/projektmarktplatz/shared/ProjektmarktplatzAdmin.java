@@ -123,4 +123,6 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	ArrayList<Projekt> getAndereProjekte(Organisationseinheit o, Projektmarktplatz pm)
 			throws IllegalArgumentException;
 	
+	public Organisationseinheit updateOrg2(Organisationseinheit org, Team t, Person p, Unternehmen u) throws IllegalArgumentException;
+	
 }

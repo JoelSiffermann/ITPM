@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.itprojekt.projektmarktplatz.server.db.AusschreibungMapper;
@@ -149,6 +150,30 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public Organisationseinheit updateOrg2(Organisationseinheit org, Team t, Person p, Unternehmen u) throws IllegalArgumentException {
+		System.out.println("update Org2");
+		try {
+
+			orgMapper.speichern(org);
+
+			if(t != null){
+				tMapper.speichern(t);
+			}else if (p != null){
+				persMapper.speichern(p);
+			}else if (u != null){
+				uMapper.speichern(u);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getLocalizedMessage());
+			
 		}
 
 		return null;
@@ -583,6 +608,8 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		ArrayList<String> arr = new ArrayList<String>();
 		try {
 			Person p = new Person();
+			Organisationseinheit org = new Organisationseinheit();
+			org = orgMapper.getById(o);
 			p = persMapper.getByOrgId(o);
 			Unternehmen u = new Unternehmen();
 			Team t = new Team();
@@ -591,6 +618,8 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 				arr.add("Person");
 				arr.add(p.getVorname());
 				arr.add(p.getBeruf());
+				arr.add(p.getErfahrung()+"");
+				arr.add(org.getName());
 				arr.add(p.getId()+"");
 			} else {
 				
@@ -601,6 +630,7 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 					arr.add("Unternehmen");
 					arr.add(u.getGeschaeftsform());
 					arr.add(u.getGeschaeftsfeld());
+					arr.add(org.getName());
 					arr.add(u.getId()+"");
 				}
 			}
@@ -614,6 +644,7 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 					arr.add("Team");
 					arr.add(t.getGroesse() + "");
 					arr.add(t.getArbeitsfeld());
+					arr.add(org.getName());
 					arr.add(t.getId()+"");
 				}
 			}

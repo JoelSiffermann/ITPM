@@ -133,20 +133,20 @@ public class DBConnection {
      * @throws Exception
      */
 	public static void closeAll(ResultSet rs, Statement stmt, Connection con) throws Exception {
-//		try {
-//			if (rs != null) {
-//				rs.close();
-//			}
-//			if (stmt != null) {
-//				stmt.close();
-//			} 
-//			if (con != null) {
-//				con.close();
-//			}
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new Exception("Connection close Fehler!" + e.toString());
-//		}
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (stmt != null) {
+				stmt.close();
+			} 
+			if (con != null) {
+				con.close();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Connection close Fehler!" + e.toString());
+		}
 	}
 }

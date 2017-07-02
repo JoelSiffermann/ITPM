@@ -30,7 +30,7 @@ public class PersonMapper {
 	}
 
 	/**
-	 * F�gt eine Person hinzu
+	 * F�gt eine Person hinzu
 	 * @param p Person
 	 * @return p
 	 * @throws Exception
@@ -55,6 +55,10 @@ public class PersonMapper {
 			 * Primärschlüssel.
 			 */
 			// p.setId(rs.getInt("") + 1);
+			System.out.println("INSERT INTO `person` (`Vorname`, `Beruf`, `Erfahrung`, `ID`, `o_id`) VALUES " + "('"
+					+ p.getVorname() + " ', '" + p.getBeruf() + "', '" + p.getErfahrung() + "', NULL, '"
+					+ p.getOrganisationseinheit().getId() + "');"); 
+			
 			stmt = con.createStatement();
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate("INSERT INTO `person` (`Vorname`, `Beruf`, `Erfahrung`, `ID`, `o_id`) VALUES " + "('"
@@ -68,7 +72,7 @@ public class PersonMapper {
 	
 	
 	/**
-	 * Speichert alle �nderungen an einer Person
+	 * Speichert alle �nderungen an einer Person
 	 * @param p Person
 	 * @return p
 	 * @throws Exception
@@ -87,9 +91,11 @@ public class PersonMapper {
 			stmt.executeUpdate("UPDATE `person` SET `Vorname` = '" + p.getVorname() + "', `Beruf` = '" + p.getBeruf()
 					+ "', " + "`Erfahrung` = '" + p.getErfahrung() + "', `ID` = '" + p.getId() + "', " + "`o_id` = '"
 					+ p.getOrganisationseinheit().getId() + "' WHERE `person`.`ID` = " + p.getId()+";");
+			DBConnection.closeAll(null, stmt, con); 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return p;
 	}
 	/**

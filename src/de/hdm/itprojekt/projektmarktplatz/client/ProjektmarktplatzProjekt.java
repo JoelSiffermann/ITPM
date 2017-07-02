@@ -103,8 +103,6 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	private void loadGUI(){
 		Organisationseinheit o = new Organisationseinheit();
 		
-		
-		
 		o.setEmail(Cookies.getCookie("email")); 
 	    projektService.readByEmail(o, new AsyncCallback<Organisationseinheit>() {
 			
