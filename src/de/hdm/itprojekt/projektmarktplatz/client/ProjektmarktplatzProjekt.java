@@ -69,36 +69,60 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 
 	    LoginServiceAsync loginService = GWT.create(LoginService.class);
 	    
-	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-	      public void onFailure(Throwable error) {
-	      }
-
-	      public void onSuccess(LoginInfo result) {
-	        loginInfo = result;
-	        if(loginInfo.isLoggedIn()) {
-	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
-//	        	Window.alert("Login erfolgt.");
-	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
-//	        	Cookies.setCookie("email", "email@test.de");
-//	    		org.setEmail(Cookies.getCookie("email")); 
-//	        	Organisationseinheit o = new Organisationseinheit();
-//	        	o.setEmail(loginInfo.getEmailAddress());
-//	        	loadGUI(o);
-	        	loadGUI();
-	        } else {
-	          loadLogin();
-	        }
-	      }
-	    });
+//	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+//	      public void onFailure(Throwable error) {
+//	      }
+//
+//	      public void onSuccess(LoginInfo result) {
+//	        loginInfo = result;
+//	        if(loginInfo.isLoggedIn()) {
+//	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
+////	        	Window.alert("Login erfolgt.");
+//	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
+////	        	Cookies.setCookie("email", "email@test.de");
+////	    		org.setEmail(Cookies.getCookie("email")); 
+////	        	Organisationseinheit o = new Organisationseinheit();
+////	        	o.setEmail(loginInfo.getEmailAddress());
+////	        	loadGUI(o);
+//	        	loadGUI();
+//	        } else {
+//	          loadLogin();
+//	        }
+//	      }
+//	    });
 	    
-//	    Cookies.setCookie("email", "hdm@hdm.de");
+	    Cookies.setCookie("email", "hdm@hdm.de");
 //	    Cookies.setCookie("profilid", "2");
-//		loadGUI();
+//	    Cookies.setCookie("userid", "3");
+	   
+
+		loadGUI();
 
 		
 	}
 	
 	private void loadGUI(){
+		Organisationseinheit o = new Organisationseinheit();
+		
+		
+		
+		o.setEmail(Cookies.getCookie("email")); 
+	    projektService.readByEmail(o, new AsyncCallback<Organisationseinheit>() {
+			
+			@Override
+			public void onSuccess(Organisationseinheit result) {
+//				Window.alert("ID  " + result.getId());
+				Cookies.setCookie("userid", result.getId()+"");
+				Cookies.setCookie("profilid", result.getPartnerprofil().getId()+"");
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+
+				Window.alert("Fehler aufgetreten"); 
+			}
+		});
+	    
 //		Home mp = new Home();
 		MainNavigationPanel mainnav = new MainNavigationPanel();
 		RootPanel.get("nav").add(mainnav);

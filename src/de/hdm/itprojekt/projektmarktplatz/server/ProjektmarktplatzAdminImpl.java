@@ -634,6 +634,36 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 			return org;
 		} catch (Exception e) {
 
+			try {
+				
+				Partnerprofil p = new Partnerprofil();
+				Ausschreibung a = new Ausschreibung ();
+				a.setId(0); 
+				o.setPartnerprofil(p);
+				
+				orgMapper.einfuegen(o);
+				
+				o.setId(orgMapper.getByEmail(o).getId());
+				p.setAenderungsdatum(new Date());
+				p.setErstelldatum(new Date()); 
+				p.setOrganisationseinheit(o); 
+				p.setAusschreibung(a); 
+				
+				ppMapper.einfuegen(p);
+				
+				p.setId(ppMapper.getByOrgId(o).getId());
+				
+				o.setPartnerprofil(p); 
+				
+				orgMapper.speichern(o);
+
+				return o;
+				
+				
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		return null;
