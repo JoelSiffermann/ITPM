@@ -17,6 +17,13 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
+/**
+ * Klasse zur Darstellung der Liste von anderen Projekt-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class AndereProjekteList extends HorizontalPanel{
 	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
@@ -41,10 +48,19 @@ public class AndereProjekteList extends HorizontalPanel{
 	
 	//Gerade auskommentiert, wird nicht gebraucht evtl?
 	
+	/**
+	 * Konstruktor
+	 * @param pm Projektmarktplatz
+	 */
+	
 	public AndereProjekteList(Projektmarktplatz pm) {
 		
 		this.projektmarktplatz = pm;
 	}
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
@@ -58,10 +74,20 @@ public class AndereProjekteList extends HorizontalPanel{
 		this.add(hpInfo);
 	}
 	
+	/**
+	 * die Methode fillTable() ruft alle Projektmarktplaetze aus Datenbank aus.
+	 */
+	
 	public void fillTable(){
 //		projektService.readAllProjekt(new ReadProjektCallback());
 		projektService.readByIdProjektProjektmarktplatz(this.projektmarktplatz, new ReadProjektCallback());
 	}
+	
+	/**
+	 * Die innere Klasse ReadProjektCallback ruft die Array-Liste Projekt auf.
+ 	 * Implementiert das AysncCallback Interface.
+	 *
+	 */
 	
 	private class ReadProjektCallback implements AsyncCallback<ArrayList<Projekt>> {
 
@@ -79,6 +105,11 @@ public class AndereProjekteList extends HorizontalPanel{
 		}
 		
 	}
+	
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
 	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 

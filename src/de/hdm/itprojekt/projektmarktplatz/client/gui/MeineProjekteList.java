@@ -29,13 +29,19 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
+/**
+ * Klasse zur Darstellung der Liste von meinen Projekt-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class MeineProjekteList extends HorizontalPanel{
 	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	private Projekt selectedProjekt = null;
 	private SingleSelectionModel<Projekt> ssmProjekt = null;
 	private ListDataProvider<Projekt> projektDataProvider = null;
-	private KeyProvider projKey = new KeyProvider();
 	private CellTable<Projekt> cellTable = new CellTable<Projekt>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
@@ -48,21 +54,14 @@ public class MeineProjekteList extends HorizontalPanel{
 		}
 	};
 	
-	//Gerade auskommentiert, wird nicht gebraucht evtl?
-	
-	private class KeyProvider implements ProvidesKey<Projekt> {
-		@Override
-		public Integer getKey(Projekt item) {
-			return new Integer(item.getId());
-		}
-		
-	}
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
 		ssmProjekt = new SingleSelectionModel<Projekt>();
 		ssmProjekt.addSelectionChangeHandler(new SelectionHandler());
-//		projektDataProvider = new ListDataProvider<Projekt>();
 		cellTable.addColumn(col, "Projekte");
 		fillTable();
 		cellTable.setSelectionModel(ssmProjekt);
@@ -71,9 +70,18 @@ public class MeineProjekteList extends HorizontalPanel{
 		this.add(hpInfo);
 	}
 	
+	/**
+	 * die Methode fillTable() ruft alle Projektmarktplaetze aus Datenbank aus.
+	 */
+	
 	public void fillTable(){
 		projektService.readAllProjekt(new ReadProjektCallback());
 	}
+	
+	/**
+	 * Die innere Klasse ReadProjektCallback ruft die Array-Liste Projekt auf.
+	 *
+	 */
 	
 	private class ReadProjektCallback implements AsyncCallback<ArrayList<Projekt>> {
 
@@ -87,23 +95,23 @@ public class MeineProjekteList extends HorizontalPanel{
 		public void onSuccess(ArrayList<Projekt> result) {
 			cellTable.setRowData(0, result);
 			cellTable.setRowCount(result.size(), true);
-//			for (Projekt p : result) {
-//				projektDataProvider.getList().add(p);
-//			}
+
 		}
 		
 	}
+	
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
 	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
-//			Projekt selection = ssmProjekt.getSelectedObject();
-//			setSelectedProjekt((Projekt) selection);
+
 			Projekt selection = getSelectedProjekt();
-//			DialogBox d = new DialogBox();
-//			d.setText("id " + selection.getId() + " Inhalt" + selection.getInhalt() + " Name" + selection.getName());
-//			d.show();
+
 			MeineProjektePanel pm = new MeineProjektePanel(selection);
 			hpInfo.clear();
 			hpInfo.add(pm);

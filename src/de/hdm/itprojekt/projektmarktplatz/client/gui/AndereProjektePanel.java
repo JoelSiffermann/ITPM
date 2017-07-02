@@ -25,11 +25,14 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
-public class AndereProjektePanel extends HorizontalPanel {
+/**
+ * Klasse zur Darstellung von allen anderen Projekt-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
-	/*
-	 * Neues Design
-	 */
+public class AndereProjektePanel extends HorizontalPanel {
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
@@ -64,10 +67,18 @@ public class AndereProjektePanel extends HorizontalPanel {
 		}
 	};
 
+	/**
+	 * Konstruktor 
+	 * @param p Projekt
+	 */
 	public AndereProjektePanel(Projekt p) {
 		this.projekt = p;
 	}
 
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
+	
 	public void onLoad() {
 
 		super.onLoad();
@@ -125,10 +136,20 @@ public class AndereProjektePanel extends HorizontalPanel {
 
 	}
 
+	/**
+	 * die Methode fillTable() ruft alle Projektmarktplaetze aus Datenbank aus.
+	 */
+	
 	public void fillTable() {
 		projektService.readAllAusschreibung(new ReadAusschreibungCallback());
 	}
 
+	/**
+	 * Die innere Klasse ReadAusschreibungCallback ruft die Array-Liste Ausschreibung auf.
+ 	 * Implementiert das AysncCallback Interface.
+	 *
+	 */
+	
 	private class ReadAusschreibungCallback implements AsyncCallback<ArrayList<Ausschreibung>> {
 
 		@Override
@@ -146,6 +167,11 @@ public class AndereProjektePanel extends HorizontalPanel {
 
 	}
 
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
+	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 
 		@Override

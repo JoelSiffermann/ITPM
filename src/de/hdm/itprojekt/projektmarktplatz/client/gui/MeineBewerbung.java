@@ -1,13 +1,5 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
-import java.util.Arrays;
-import java.util.List;
-
-import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
-import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -15,9 +7,15 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+
+/**
+ * Klasse zur Darstellung von meinen Bewerbung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
 public class MeineBewerbung extends HorizontalPanel {
 
@@ -35,15 +33,23 @@ public class MeineBewerbung extends HorizontalPanel {
 
 	Bewerbung bewerbung = new Bewerbung();
 
+	/**
+	 * Konstruktor
+	 * @param p
+	 */
+	
 	public MeineBewerbung (Bewerbung p) {
 		this.bewerbung = p;
 	}
 
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
+	
 	public void onLoad() {
 
 		super.onLoad();
 		if(this.bewerbung!=null){
-//			lblInhalt.setText(bewerbung.getInhalt());
 		}
 
 		vPanel2.add(lblDatum);

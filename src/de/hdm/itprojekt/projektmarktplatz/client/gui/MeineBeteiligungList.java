@@ -15,13 +15,19 @@ import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
+/**
+ * Klasse zur Darstellung der Liste von meinen Beteiligung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class MeineBeteiligungList extends HorizontalPanel {
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	private Projekt selectedProjekt = null;
 	private SingleSelectionModel<Projekt> ssmProjekt = null;
 	private ListDataProvider<Projekt> projektDataProvider = null;
-//	private KeyProvider projKey = new KeyProvider();
 	private CellTable<Projekt> cellTable = new CellTable<Projekt>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
@@ -33,6 +39,10 @@ public class MeineBeteiligungList extends HorizontalPanel {
 			return object.getName();
 		}
 	};
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
@@ -46,9 +56,18 @@ public class MeineBeteiligungList extends HorizontalPanel {
 		this.add(hpInfo);
 	}
 	
+	/**
+	 * die Methode fillTable() ruft alle Projektmarktplaetze aus Datenbank aus.
+	 */
+	
 	public void fillTable(){
 		projektService.readAllProjekt(new ReadProjektCallback());
 	}
+	
+	/**
+	 * Die innere Klasse ReadProjektCallback ruft die Array-Liste Projekt auf.
+	 *
+	 */
 	
 	private class ReadProjektCallback implements AsyncCallback<ArrayList<Projekt>> {
 
@@ -65,6 +84,11 @@ public class MeineBeteiligungList extends HorizontalPanel {
 		}
 		
 	}
+	
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
 	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 

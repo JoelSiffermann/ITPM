@@ -23,11 +23,14 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
-public class MeineBeteiligungPanel extends HorizontalPanel {
+/**
+ * Klasse zur Darstellung von meinen Beteiligung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
-	/*
-	 * Neues Design
-	 */
+public class MeineBeteiligungPanel extends HorizontalPanel {
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
@@ -61,9 +64,18 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 	
 	Ausschreibung ausschreibung;
 	
+	/**
+	 * Konstruktor
+	 * @param p Projekt
+	 */
+	
 	public MeineBeteiligungPanel (Projekt p) {
 		this.projekt = p;
 	}
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad() {
 		super.onLoad();
@@ -75,12 +87,8 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 		if(this.projekt!=null){
 			lblProjektName.setText(projekt.getName());
 			taProjektBeschreibung.setText(projekt.getInhalt());
-//			tbTage.setText(ausschreibung.getFrist().toString());
 		}
 		
-
-
-		// Set the value in the text box when the user selects a date
 		startPickerProjekt.addValueChangeHandler(new ValueChangeHandler<Date>() {
 			public void onValueChange(ValueChangeEvent<Date> event) {
 				Date date = event.getValue();
@@ -159,7 +167,6 @@ public class MeineBeteiligungPanel extends HorizontalPanel {
 		
 		hpMeineBeteiligung.add(vpMeineBeteiligungForm1);
 		hpMeineBeteiligung.add(vpMeineBeteiligungForm2);
-//		this.add(cellList);
 		this.add(hpMeineBeteiligung);
 
 	}

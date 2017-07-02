@@ -17,14 +17,20 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 
+/**
+ * Klasse zur Darstellung von Ausschreibung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
 public class AusschreibungNeuForm extends VerticalPanel {
-	
-	/*
-	 * Neues Design
-	 */
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad() {
 		

@@ -16,22 +16,21 @@ import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 
+/**
+ * Klasse für die Navigation des Hauptmenüs
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 public class MainNavigationPanel extends VerticalPanel {
 	HorizontalPanel nav = new HorizontalPanel();
 	HorizontalPanel info = new HorizontalPanel();
 
-
-//	Organisationseinheit o;
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
-	
-//	public MainNavigationPanel(){
-//		
-//	}
-	
-//	public MainNavigationPanel(Organisationseinheit o) {
-//		// TODO Auto-generated constructor stub
-//		this.o = o;
-//	}
+
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 
 	public void onLoad() {
 		super.onLoad();
@@ -39,36 +38,34 @@ public class MainNavigationPanel extends VerticalPanel {
 		Organisationseinheit o = new Organisationseinheit();
 		o.setEmail(Cookies.getCookie("email"));
 		projektService.readByEmail(o, new AsyncCallback<Organisationseinheit>() {
-			
+
 			@Override
 			public void onSuccess(Organisationseinheit result) {
 
-				Cookies.setCookie("profilid", result.getPartnerprofil().getId()+"");
+				Cookies.setCookie("profilid", result.getPartnerprofil().getId() + "");
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 
-		
-//		projektService.readByEmail(o, new CheckUser(o));
-	    StackPanel panel = new StackPanel();
-	    panel.add(profilStack(), "Mein Profil");
-	    panel.add(projektStack(), "Projekte");
-	    panel.add(beteiligungStack(), "Beteiligung");
-	    panel.add(bewerbungStack(), "Bewerbung");
-	    panel.add(projektmarktplatzStack(), "Projektmarktplatz");
-	    panel.add(reportStack(), "Report");
-	    nav.add(panel);
-	    RootPanel.get("nav").add(nav);
-	    RootPanel.get("main").clear();
-	    RootPanel.get("main").add(info);
-	  }
-	
-	private VerticalPanel profilStack(){
+		StackPanel panel = new StackPanel();
+		panel.add(profilStack(), "Mein Profil");
+		panel.add(projektStack(), "Projekte");
+		panel.add(beteiligungStack(), "Beteiligung");
+		panel.add(bewerbungStack(), "Bewerbung");
+		panel.add(projektmarktplatzStack(), "Projektmarktplatz");
+		panel.add(reportStack(), "Report");
+		nav.add(panel);
+		RootPanel.get("nav").add(nav);
+		RootPanel.get("main").clear();
+		RootPanel.get("main").add(info);
+	}
+
+	private VerticalPanel profilStack() {
 		VerticalPanel profilstack = new VerticalPanel();
 		Button btMeinProfil = new Button("Anzeigen");
 		btMeinProfil.addClickHandler(new MeinProfilClickHandler());
@@ -131,16 +128,27 @@ public class MainNavigationPanel extends VerticalPanel {
 		return reportstack;
 	}
 
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
+
 	private class MeinProfilClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-//			Window.alert("profilbutton");
 			ProfilAnzeigenPanel pp = new ProfilAnzeigenPanel();
 			info.clear();
 			info.add(pp);
-			
+
 		}
 	}
+
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 
 	private class MeineProjekteClickHandler implements ClickHandler {
 		@Override
@@ -148,12 +156,18 @@ public class MainNavigationPanel extends VerticalPanel {
 			RootPanel.get("main").clear();
 			info = new HorizontalPanel();
 			MeineProjekteList mpl = new MeineProjekteList();
-			
+
 			info.clear();
 			info.add(mpl);
 			RootPanel.get("main").add(info);
 		}
 	}
+
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 
 	private class AndereProjekteClickHandler implements ClickHandler {
 		@Override
@@ -166,6 +180,12 @@ public class MainNavigationPanel extends VerticalPanel {
 			RootPanel.get("main").add(info);
 		}
 	}
+
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 
 	private class ProjektAnlegenClickHandler implements ClickHandler {
 		@Override
@@ -191,10 +211,15 @@ public class MainNavigationPanel extends VerticalPanel {
 		}
 	}
 
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
+
 	private class AndereBeteiligungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-//			Window.alert("Andere beteiligung Button " + info);
 			RootPanel.get("main").clear();
 			info = new HorizontalPanel();
 			AndereBeteiligungList abl = new AndereBeteiligungList();
@@ -203,6 +228,12 @@ public class MainNavigationPanel extends VerticalPanel {
 			RootPanel.get("main").add(info);
 		}
 	}
+
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 
 	private class MeineBewerbungClickHandler implements ClickHandler {
 		@Override
@@ -216,6 +247,12 @@ public class MainNavigationPanel extends VerticalPanel {
 		}
 	}
 
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
+
 	private class EingegangeneBewerbungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
@@ -227,6 +264,12 @@ public class MainNavigationPanel extends VerticalPanel {
 			RootPanel.get("main").add(info);
 		}
 	}
+
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 
 	private class PMAnzeigenClickHandler implements ClickHandler {
 		@Override
@@ -240,6 +283,12 @@ public class MainNavigationPanel extends VerticalPanel {
 		}
 	}
 
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
+
 	private class PMErstellenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
@@ -252,50 +301,18 @@ public class MainNavigationPanel extends VerticalPanel {
 		}
 	}
 
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
+
 	private class ReportClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
 			Window.open(GWT.getHostPageBaseURL() + "ProjektmarktplatzProjektReport.html", "_self", "enable");
 		}
 
-		}
-	
-//	private class CheckUser implements AsyncCallback<Organisationseinheit>{
-//
-//		Organisationseinheit org;
-//		public CheckUser() {
-//			// TODO Auto-generated constructor stub
-//		}
-//		public CheckUser(Organisationseinheit org) {
-//			// TODO Auto-generated constructor stub
-//			this.org = org;
-//		}
-//		@Override
-//		public void onFailure(Throwable caught) {
-//			// TODO Auto-generated method stub
-//			Window.alert("Fehler " +caught); 
-//			ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
-//			projektService.insertOrg(org, new AsyncCallback<Organisationseinheit>() {
-//
-//				@Override
-//				public void onFailure(Throwable caught) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//
-//				@Override
-//				public void onSuccess(Organisationseinheit result) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//			});
-//		}
-//
-//		@Override
-//		public void onSuccess(Organisationseinheit result) {
-//			Window.alert("User existiert " + result.getEmail()); 
-//			
-//		}
-//		
-//	}
+	}
+
 }
