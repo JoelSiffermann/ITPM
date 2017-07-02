@@ -28,6 +28,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
 public class MeineProjektePanel extends HorizontalPanel {
 	
@@ -133,15 +134,17 @@ public class MeineProjektePanel extends HorizontalPanel {
 		
 		btProjektBearbeiten.addClickHandler(new ClickHandler() {
 
-			ProjektNeuForm projektNeu = new ProjektNeuForm(projekt);
+			Projektmarktplatz pm = new Projektmarktplatz();
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
+				pm.setId(2);
+				ProjektNeuForm projektNeu = new ProjektNeuForm(pm);
+				
 				hpMeineProjekteForm.clear();
 				hpMeineProjekteForm.add(projektNeu);
 			}
-					
+
 		});
 		
 		btProjektEntfernen.addClickHandler(new ClickHandler() {

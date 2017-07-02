@@ -52,7 +52,8 @@ public class ProjektmarktplatzAnlegen extends VerticalPanel {
 //		this.setText("Projektmarktplatz anlegen");
 //		this.setAnimationEnabled(false);
 //		this.setGlassEnabled(true);
-		public ProjektmarktplatzAnlegen(){
+		
+	public ProjektmarktplatzAnlegen(){
 			this.setText("Projektmarktplatz anlegen");
 		btOk.setStylePrimaryName("button");
 		btAbbruch.setStylePrimaryName("button");
