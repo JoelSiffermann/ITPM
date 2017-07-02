@@ -21,7 +21,7 @@ public class MainNavigationPanel extends VerticalPanel {
 	HorizontalPanel info = new HorizontalPanel();
 
 
-//	Organisationseinheit o;
+	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	
 //	public MainNavigationPanel(){
@@ -37,7 +37,7 @@ public class MainNavigationPanel extends VerticalPanel {
 		super.onLoad();
 
 //		Organisationseinheit o = new Organisationseinheit();
-//		o.setEmail(Cookies.getCookie("email"));
+		
 //		projektService.readByEmail(o, new AsyncCallback<Organisationseinheit>() {
 //
 //			@Override
@@ -136,11 +136,14 @@ public class MainNavigationPanel extends VerticalPanel {
 	private class MeinProfilClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+			RootPanel.get("main").clear();
 //			Window.alert("profilbutton");
+			info = new HorizontalPanel();
 			ProfilAnzeigenPanel pp = new ProfilAnzeigenPanel();
+//			ProfilNeuForm pp = new ProfilNeuForm();
 			info.clear();
 			info.add(pp);
-			
+			RootPanel.get("main").add(info);
 		}
 	}
 

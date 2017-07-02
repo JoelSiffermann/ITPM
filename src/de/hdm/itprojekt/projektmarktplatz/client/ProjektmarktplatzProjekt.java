@@ -91,7 +91,7 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //	      }
 //	    });
 
-	    Cookies.setCookie("email", "hdm@hdm.de");
+	    Cookies.setCookie("email", "hdm@hdm4.de");
 //	    Cookies.setCookie("profilid", "2");
 //	    Cookies.setCookie("userid", "3");
 	   
