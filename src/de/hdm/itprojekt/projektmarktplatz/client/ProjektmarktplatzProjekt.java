@@ -91,8 +91,10 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //	      }
 //	    });
 	    
+
 	    Cookies.setCookie("email", "joel@test.de");
 	    Cookies.setCookie("profilid", "53");
+
 		loadGUI();
 
 		

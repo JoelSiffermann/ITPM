@@ -99,9 +99,11 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		cellTable.setSelectionModel(ssmBeteiligung);
 		vpAndereProjekteForm2.add(cellTable);
 		
-		if (this.beteiligung != null) {
-			lblName.setText(beteiligung.getOrganisationseinheit().getName());
-			lblBeruf.setText(beteiligung.getOrganisationseinheit().getPartnerprofil().getAusschreibung().getBezeichnung());
+		if (this.projekt != null) {
+			lblName.setText(projekt.getName());
+//			lblErfahrung.setText(projekt.getPerson().getErfahrung() + "");
+//			lblName.setText(beteiligung.getOrganisationseinheit().getName());
+//			lblBeruf.setText(beteiligung.getOrganisationseinheit().getPartnerprofil().getAusschreibung().getBezeichnung());
 		}
 		
 //		lbBeteiligung.addItem("Beteiligung 1");
@@ -162,6 +164,7 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 	}
 
 	public void fillTable() {
+
 		projektService.getBeteiligungBy(projekt, new ReadBeteiligungCallback());
 	}
 	
@@ -185,7 +188,7 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		public void onSuccess(Void result) {
 			RootPanel.get("main").clear();
 		}
-		
+
 	}
 
 	private class ReadBeteiligungCallback implements AsyncCallback<ArrayList<Beteiligung>> {
@@ -198,11 +201,11 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 
 		@Override
 		public void onSuccess(ArrayList<Beteiligung> result) {
+			
 			cellTable.setRowData(0, result);
 			cellTable.setRowCount(result.size(), true);
 
 		}
-
 	}
 
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
