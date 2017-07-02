@@ -90,17 +90,38 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 //	        }
 //	      }
 //	    });
-	    
 
-	    Cookies.setCookie("email", "joel@test.de");
-	    Cookies.setCookie("profilid", "53");
-
+	    Cookies.setCookie("email", "hdm@hdm.de");
+//	    Cookies.setCookie("profilid", "2");
+//	    Cookies.setCookie("userid", "3");
+	   
 		loadGUI();
 
 		
 	}
 	
 	private void loadGUI(){
+		Organisationseinheit o = new Organisationseinheit();
+		
+		
+		
+		o.setEmail(Cookies.getCookie("email")); 
+	    projektService.readByEmail(o, new AsyncCallback<Organisationseinheit>() {
+			
+			@Override
+			public void onSuccess(Organisationseinheit result) {
+//				Window.alert("ID  " + result.getId());
+				Cookies.setCookie("userid", result.getId()+"");
+				Cookies.setCookie("profilid", result.getPartnerprofil().getId()+"");
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+
+				Window.alert("Fehler aufgetreten"); 
+			}
+		});
+	    
 //		Home mp = new Home();
 		btImpressum.addClickHandler(new ImpressumClickHandler());
 		MainNavigationPanel mainnav = new MainNavigationPanel();

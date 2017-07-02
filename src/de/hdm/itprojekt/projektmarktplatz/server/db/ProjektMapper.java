@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
@@ -48,11 +50,24 @@ public class ProjektMapper {
 			 * Primärschlüssel.
 			 */
 			// p.setId(rs.getInt("") + 1);
+			String datum = "";
+			String datum2 = "";
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			datum = dateFormat.format(p.getStart());
+			datum2 = dateFormat.format(p.getEnde());
+			
+			String sql = "INSERT INTO `projekt` (`Projekt_ID`, `Name`, `Start`, `Ende`, `Inhalt`, "
+					+ "`projektmarktplatz_id`, `person_id`) VALUES " + "('" + p.getId() + "', '" + p.getName() + "', '"
+					+ datum+ "', '" + datum2+ "', " + "'" + p.getInhalt() + "', '"
+					+ p.getProjektmarktplatz().getId() + "', '" + p.getPerson().getId() + "');";
+					
+			System.out.println(sql); 
+			
 			stmt = con.createStatement();
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate("INSERT INTO `projekt` (`Projekt_ID`, `Name`, `Start`, `Ende`, `Inhalt`, "
 					+ "`projektmarktplatz_id`, `person_id`) VALUES " + "('" + p.getId() + "', '" + p.getName() + "', '"
-					+ p.getStart() + "', '" + p.getEnde() + "', " + "'" + p.getInhalt() + "', '"
+					+ datum + "', '" + datum2 + "', " + "'" + p.getInhalt() + "', '"
 					+ p.getProjektmarktplatz().getId() + "', '" + p.getPerson().getId() + "');");
 		} catch (SQLException e) {
 			e.printStackTrace();
