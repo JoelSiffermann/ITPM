@@ -1068,4 +1068,39 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
+	@Override
+	public ArrayList<Projekt> getMeineProjekte(Organisationseinheit o) throws IllegalArgumentException {
+		Organisationseinheit org = this.getNutzerByEmail(o);
+		try {
+			return this.projMapper.getAllbyNutzer(org);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public ArrayList<Projekt> getAndereProjekte(Organisationseinheit o, Projektmarktplatz pm) throws IllegalArgumentException {
+		Organisationseinheit org = this.getNutzerByEmail(o);
+		try {
+			return this.projMapper.getByAndereNutzer(org, pm);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Organisationseinheit getNutzerByEmail(Organisationseinheit o){
+		try {
+			Organisationseinheit org = this.orgMapper.getByEmail(o);
+			System.out.println(org.getId() + " " + org.getEmail());
+			return org;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
