@@ -34,7 +34,10 @@ public class ClientSideSettings extends CommonSettings{
 	  public static Logger getLogger() {
 		    return log;
 		  }
-	  
+	  /**
+	   * auslesen von Projektmarktplatz Verwaltung
+	   * @return projektService
+	   */
 	  public static ProjektmarktplatzAdminAsync getProjektmarktplatzVerwaltung() {
 		    // Gab es bislang noch keine PMAdministration-Instanz, dann...
 		    if (projektService == null) {
@@ -43,7 +46,10 @@ public class ClientSideSettings extends CommonSettings{
 		    }
 		    return projektService;
 	  }
-	  
+	  /**
+	   * auslesen von report Generator
+	   * @return reportService
+	   */
 	  public static ProjektmarktplatzReportAdminAsync getReportGenerator() {
 		    // Gab es bislang noch keine ReportGenerator-Instanz, dann...
 		    if (reportService == null) {

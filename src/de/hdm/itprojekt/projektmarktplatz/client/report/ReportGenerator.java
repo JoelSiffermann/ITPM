@@ -10,12 +10,22 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.Impressum;
 
+	/**
+	 * Entrypoint der Klasse ReportGenerator
+	 * @author Vi Quan, Joey Siffermann
+	 *
+	 */
+
 public class ReportGenerator implements EntryPoint {
 
 	HorizontalPanel hpHeader = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
 	Button btLogout = new Button("Logout");
 	Button btImpressum = new Button("Impressum");
+	
+	/**
+	 * Die Methode onModuleLoad() baut das Widget auf.
+	 */
 	
 	@Override
 	public void onModuleLoad() {
@@ -32,6 +42,12 @@ public class ReportGenerator implements EntryPoint {
 		RootPanel.get("footer").add(btImpressum);
 	}
 	
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
+	
 	private class ImpressumClickHandler implements ClickHandler {
 
 		@Override
@@ -42,6 +58,12 @@ public class ReportGenerator implements EntryPoint {
 		}
 		
 	}
+	
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 	
 	private class LogoutClickHandler implements ClickHandler {
 

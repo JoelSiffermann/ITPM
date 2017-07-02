@@ -19,6 +19,13 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.*;
 
+/**
+ * Klasse zur Darstellung des Reports von Projektverflechtungen
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class ProjektverflechtungReport extends VerticalPanel{
 	
 	private final ProjektmarktplatzReportAdminAsync reportService = GWT.create(ProjektmarktplatzReportAdmin.class);
@@ -42,6 +49,10 @@ public class ProjektverflechtungReport extends VerticalPanel{
 			return object.getName();
 		}
 	};
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
@@ -74,9 +85,19 @@ public class ProjektverflechtungReport extends VerticalPanel{
 		this.add(hp);
 	}
 	
+	/**
+	 * die Methode fillTable() ruft alle Projektmarktplaetze aus Datenbank aus.
+	 */
+	
 	private void fillTable() {
 		reportService.getProjekteByNutzer(o, new ProjekteCallback());
 	}
+	
+	/**
+	 * Innere Klasse zum Behandeln von ClickEvents.
+	 * 
+	 *
+	 */
 	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 
@@ -112,6 +133,11 @@ public class ProjektverflechtungReport extends VerticalPanel{
 		row = this.row;
 	}
 	
+	/**
+	 * Die innere Klasse BewerbungenCallback ruft die Array-Liste Bewerbung auf.
+	 *
+	 */
+	
 	private class BewerbungenCallback implements AsyncCallback<ArrayList<Bewerbung>> {
 		@Override
 		public void onFailure(Throwable caught) {
@@ -128,6 +154,11 @@ public class ProjektverflechtungReport extends VerticalPanel{
 		}
 	}
 	
+	/**
+	 * Die innere Klasse BeteiligungenCallback ruft die Array-Liste Beteiligung auf.
+	 *
+	 */
+	
 	private class BeteiligungenCallback implements AsyncCallback<Beteiligung> {
 		@Override
 		public void onFailure(Throwable caught) {
@@ -143,6 +174,11 @@ public class ProjektverflechtungReport extends VerticalPanel{
 		};
 	}
 	
+	/**
+	 * Die innere Klasse ProjekteCallback ruft die Array-Liste Projekt auf.
+	 *
+	 */
+	
 	private class ProjekteCallback implements AsyncCallback<ArrayList<Projekt>> {
 
 		@Override
@@ -157,6 +193,11 @@ public class ProjektverflechtungReport extends VerticalPanel{
 		}
 		
 	}
+		
+	/**
+	 * Die innere Klasse TeilnehmerCallback ruft die Array-Liste Organisationseinheit auf.
+	 *
+	 */
 	
 	private class TeilnehmerCallback implements AsyncCallback<ArrayList<Organisationseinheit>> {
 		@Override

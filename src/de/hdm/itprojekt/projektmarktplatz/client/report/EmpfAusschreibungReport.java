@@ -18,12 +18,23 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdminAsy
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;;
 
+/**
+ * Klasse zur Darstellung des Reports von den empfohlenen Ausschreibungen
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class EmpfAusschreibungReport extends VerticalPanel {
 
 	private ProjektmarktplatzReportAdminAsync reportService = ClientSideSettings.getReportGenerator();
 	private CellTable<Ausschreibung> cellTable;
 	private Organisationseinheit e = new Organisationseinheit();
 	int id;
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
@@ -66,6 +77,11 @@ public class EmpfAusschreibungReport extends VerticalPanel {
 	private void getData() {
 		reportService.getEmpfAusschreibungen(e , new AusschreibungenCallback());
 	}
+	
+	/**
+	 * Die innere Klasse AusschreibungenCallback ruft die Array-Liste Ausschreibung auf.
+	 *
+	 */
 	
 	private class AusschreibungenCallback implements AsyncCallback<ArrayList<Ausschreibung>>{
 		@Override
