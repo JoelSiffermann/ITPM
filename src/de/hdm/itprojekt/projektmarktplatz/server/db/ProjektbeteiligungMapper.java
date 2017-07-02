@@ -20,6 +20,11 @@ public class ProjektbeteiligungMapper {
 		
 	}
 
+	
+	/**
+	 * @return projektbeteiligungMapper
+	 */ 
+	
 	public static ProjektbeteiligungMapper projektbeteilitungMapper() {
 		if (projektbeteiligungMapper == null) {
 			projektbeteiligungMapper = new ProjektbeteiligungMapper();
@@ -28,7 +33,12 @@ public class ProjektbeteiligungMapper {
 		return projektbeteiligungMapper;
 	}
 	
-
+	/**
+	 * F�gt eine Beteiligung hinzu
+	 * @param b Beteiligung
+	 * @return b
+	 * @throws Exception
+	 */
 
 	public Beteiligung einfuegen(Beteiligung b) throws Exception {
 		Connection con = DBConnection.connection();
@@ -40,7 +50,7 @@ public class ProjektbeteiligungMapper {
 		datum2 = dateFormat.format(b.getStart());
 		System.out.println("test "+b.getOrganisationseinheit().getId());
 		String sql = "INSERT INTO `beteiligung` (`Beteilgung_ID`, `Start`, `Ende`, `Umfang`, `projekt_ID`, `orga_id`) "
-				+ "VALUES (NULL, '"+datum2+"', '"+datum+"', '"+b.getUmfang()+"', '"+b.getProjekt().getId()+"', '"+b.getOrganisationseinheit().getId()+"');";
+				+ "VALUES (" + b.getId() + "', '"+datum2+"', '"+datum+"', '"+b.getUmfang()+"', '"+b.getProjekt().getId()+"', '"+b.getOrganisationseinheit().getId()+"');";
 		try {
 			Statement stmt = con.createStatement();
 
@@ -48,21 +58,21 @@ public class ProjektbeteiligungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			//ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(`Beteilgung_ID`) AS maxid FROM beteiligung");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			//if (rs.next()) {
+			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-				//b.setId(rs.getInt("") + 1);
+				b.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 				stmt.executeUpdate("INSERT INTO `beteiligung` (`Beteilgung_ID`, `Start`, `Ende`, `Umfang`, `projekt_ID`, `orga_id`) VALUES (NULL, '"+datum2+"', '"+datum+"', '"+b.getUmfang()+"', '"+b.getProjekt().getId()+"', '"+b.getOrganisationseinheit().getId()+"');");
-			//}
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,6 +80,13 @@ public class ProjektbeteiligungMapper {
 		return b;
 	}
 
+	/**
+	 * Speichert �nderungen der Beteiligungen 
+	 * @param b Beteiligung
+	 * @return b
+	 * @throws Exception
+	 */
+	
 	public Beteiligung speichern(Beteiligung b) throws Exception {
 		Connection con = DBConnection.connection();
 		String datum = "";
@@ -90,18 +107,34 @@ public class ProjektbeteiligungMapper {
 		return b;
 	}
 	
+	/**
+	 * Loescht eine Beteiligung 
+	 * @param b Beteiligung
+	 * @throws Exception
+	 */
+	
 	public void loeschen(Beteiligung b) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `beteiligung` WHERE Beteilgung_ID = "+b.getId());
+	      stmt.executeUpdate("DELETE FROM `beteiligung` WHERE `Beteilgung_ID` = "+b.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
 	    }
 	  }
+	
+	
+	/**
+	 * Liest eine Beteiligung zur Id
+	 * @param bt Beteiligung
+	 * @return null
+	 * @throws Exception
+	 */
+	
+	
 	public Beteiligung getById(Beteiligung bt) throws Exception{
 		 Connection con = DBConnection.connection();
 
@@ -131,6 +164,13 @@ public class ProjektbeteiligungMapper {
 		    }
 		    return null;
 	}
+	
+	/**
+	 * Liest alle Beteiligungen 
+	 * @return return
+	 * @throws Exception
+	 */	
+	
 	public ArrayList<Beteiligung> getAll() throws Exception{
 		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
 		Connection con = DBConnection.connection();
@@ -181,6 +221,13 @@ public class ProjektbeteiligungMapper {
 		return result;
 
 	}
+	
+	/**
+	 * Liest alle Beteiligungen zum Projekt
+	 * @param p Projekt
+	 * @return null
+	 * @throws Exception
+	 */
 
 	public ArrayList<Beteiligung> getAllByProjekt(Projekt p) throws Exception {
 		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
@@ -212,6 +259,13 @@ public class ProjektbeteiligungMapper {
 		return null;
 	}
 	
+	/**
+	 * Liest alle Beteiligungen von einem Nutzer
+	 * @param o Organisationseinheit
+	 * @return null
+	 * @throws Exception
+	 */
+	
 	public ArrayList<Beteiligung> getAllByNutzer(Organisationseinheit o) throws Exception {
 		ArrayList<Beteiligung> result = new ArrayList<Beteiligung>();
 		Connection con = DBConnection.connection();
@@ -242,6 +296,13 @@ public class ProjektbeteiligungMapper {
 		return null;
 	}
 
+	/**
+	 *Gibt eine Beteiligung eines Nutzers an Projekten zur�ck
+	 * @param o Organisationseinheit, p Projekt
+	 * @return null
+	 * @throws Exception
+	 */
+	
 	public Beteiligung getByPersonAndProjekt(Organisationseinheit o, Projekt p) throws Exception{
 		Connection con = DBConnection.connection();
 	    try {

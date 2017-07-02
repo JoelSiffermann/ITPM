@@ -14,20 +14,32 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
 //@author samina
 public class PartnerprofilMapper {
 
+
 	private static PartnerprofilMapper partnerprofilMapper = null;
 	
 	protected PartnerprofilMapper(){
 		
 	}
 
+	/**
+	 * 
+	 * @return partnerprofilMapper
+	 */
 	public static PartnerprofilMapper partnerprofilMapper() {
 		if (partnerprofilMapper == null) {
 			partnerprofilMapper = new PartnerprofilMapper();
 		}
 
 		return partnerprofilMapper;
-	}
+	}	
 
+	/**
+	 * F�gt ein Partnerprofil hinzu
+	 * @param p Partnerprofil
+	 * @return p
+	 * @throws Exception
+	 */
+	
 	public Partnerprofil einfuegen(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
 		String datum = "";
@@ -42,11 +54,11 @@ public class PartnerprofilMapper {
 		if (p.getAusschreibung().getId() != 0){
 			sql = "INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, "
 					+ "`orga_id`, `ausschreibung_id`) "
-					+ "VALUES (NULL, '"+datum2+"', '"+datum+"', NULL, '"+p.getAusschreibung().getId() +"');";
+					+ "VALUES (" + p.getId() + "', '"+datum2+"', '"+datum+"', NULL, '"+p.getAusschreibung().getId() +"');";
 		} else if (!p.getOrganisationseinheit().equals(null)){
 			sql = "INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, "
 					+ "`orga_id`, `ausschreibung_id`) "
-					+ "VALUES (NULL, '"+datum2+"', '"+datum+"', '"+p.getOrganisationseinheit().getId() +"', NULL);";
+					+ "VALUES (" + p.getId() + "', '"+datum2+"', '"+datum+"', '"+p.getOrganisationseinheit().getId() +"', NULL);";
 		}
 		System.out.println(sql);
 
@@ -57,16 +69,15 @@ public class PartnerprofilMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			//ResultSet rs = stmt.executeQuer
-			//("");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(`Partnerprofil_ID`) AS maxid FROM partnerprofil");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			//if (rs.next()) {
+			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-				//p.setId(rs.getInt("") + 1);
+				p.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
@@ -74,13 +85,22 @@ public class PartnerprofilMapper {
 //				stmt.executeUpdate("INSERT INTO `partnerprofil` (`Partnerprofil_ID`, `Erstelldatum`, `Aenderungsdatum`, `orga_id`) VALUES (NULL, '"+p.getErstelldatum()+"', '"+p.getAenderungsdatum()+"', '"+p.getOrganisationseinheit().getId());
 			//}
 				stmt.executeUpdate(sql);
+			}
 
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return p;
+	
 	}
+	
+	/**
+	 * Speichert �nderungen an einem Partnerprofil
+	 * @param p Partnerprofil
+	 * @return p
+	 * @throws Exception
+	 */
 
 	public Partnerprofil speichern(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
@@ -111,19 +131,33 @@ public class PartnerprofilMapper {
 		return p;
 	}
 	
+	/**
+	 * Loescht ein Partnerprofil
+	 * @param p Partnerprofil
+	 * @throws Exception
+	 */
+	
 	public void loeschen(Partnerprofil p) throws Exception {
 	    Connection con = DBConnection.connection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `partnerprofil` WHERE Partnerprofil_ID = "+p.getId());
+	      stmt.executeUpdate("DELETE FROM `partnerprofil` WHERE `Partnerprofil_ID` = "+p.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
 	    }
 	  }
 
+	/**
+	 * Liest Partnerprofile zur Id
+	 * @param p Partnerprofil
+	 * @return null
+	 * @throws Exception
+	 */
+	
+	
 	public Partnerprofil getById(Partnerprofil p) throws Exception{
 		 Connection con = DBConnection.connection();
 
@@ -160,6 +194,12 @@ public class PartnerprofilMapper {
 		    }
 		    return null;
 	}
+	/**
+	 * Liest alle Partnerprofile zu Ausschreibungen 
+	 * @param aId Ausschreibungen
+	 * @return null
+	 * @throws Exception
+	 */
 	
 	public Partnerprofil getByOrgId(Organisationseinheit p) throws Exception{
 		 Connection con = DBConnection.connection();
@@ -231,6 +271,12 @@ public class PartnerprofilMapper {
 		    }
 		    return null;
 	}
+	
+	/**
+	 * Liest alle Partnerprofile
+	 * @return null
+	 * @throws Exception
+	 */
 	
 	public ArrayList<Partnerprofil> getAll() throws Exception{
 		ArrayList<Partnerprofil> result = new ArrayList<Partnerprofil>();

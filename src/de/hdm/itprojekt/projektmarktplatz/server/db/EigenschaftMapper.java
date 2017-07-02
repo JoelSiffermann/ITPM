@@ -34,7 +34,7 @@ public class EigenschaftMapper {
 
 
 		/**
-		 * 
+		 * F�gt eine Eigenschaft hinzu
 		 * @param eg Eigenschaft
 		 * @return eigenschaftMapper
 		 * @throws Exception
@@ -44,27 +44,26 @@ public class EigenschaftMapper {
 
 		try {
 			Statement stmt = con.createStatement();
-
+			for(Eigenschaft c : eg){
 			/*
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			//ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(`Eigenschaft_ID`) AS maxid FROM eigenschaft");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			//if (rs.next()) {
+			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-				//c.setId(rs.getInt("") + 1);
+				c.setId(rs.getInt("maxid") + 1);
 
-				stmt = con.createStatement();
-
-				for(Eigenschaft c : eg){
+				
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-					stmt.executeUpdate("INSERT INTO `eigenschaft` (`Eigenschaft_ID`, `Bezeichnung`, `Wert`, `partner_id`) VALUES (NULL, '"+c.getBezeichnung()+"', '"+c.getWert()+"', '"+c.getPartnerprofil().getId()+"');");
+					stmt.executeUpdate("INSERT INTO `eigenschaft` (`Eigenschaft_ID`, `Bezeichnung`, `Wert`, `partner_id`) VALUES (" + c.getId() + "', '"+c.getBezeichnung()+"', '"+c.getWert()+"', '"+c.getPartnerprofil().getId()+"');");
 				}
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,7 +72,7 @@ public class EigenschaftMapper {
 	}
 
 	/**
-	 * 
+	 * Speichert �nderungen einer Eigenschaft
 	 * @param c Eigenschaft
 	 * @return c
 	 * @throws Exception
@@ -104,14 +103,14 @@ public class EigenschaftMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `eigenschaft` WHERE Eigenschaft_ID = "+c.getId());
+	      stmt.executeUpdate("DELETE FROM `eigenschaft` WHERE `Eigenschaft_ID` = "+c.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
 	    }
 	  }
 	/**
-	 * 
+	 * Liest alle Eigenschaften zur Id
 	 * @param ch Eigenschaft
 	 * @return null
 	 * @throws Exception
@@ -144,7 +143,7 @@ public class EigenschaftMapper {
 		    return null;
 	}
 	/**
-	 * 
+	 * Liest alle Eigenschaften raus
 	 * @return result
 	 * @throws Exception
 	 */
@@ -195,7 +194,7 @@ public class EigenschaftMapper {
 	}
 	
 	/**
-	 * 
+	 * Liest alle Eigenschaften zum Partnerprofil
 	 * @param p Partnerprofil
 	 * @return result
 	 * @throws Exception
@@ -224,7 +223,7 @@ public class EigenschaftMapper {
 	}
 	
 	/**
-	 * 
+	 * Vergleicht Eigenschaften
 	 * @param s String
 	 * @return result
 	 * @throws Exception
@@ -251,6 +250,12 @@ public class EigenschaftMapper {
 		return result;
 	}
 	
+	/**
+	 * Liest alle Eigenschaften zum Profil
+	 * @param p Partnerprofil
+	 * @return null
+	 * @throws Exception
+	 */
 	public Eigenschaft getByProfil(Partnerprofil p) throws Exception {
 		Connection con = DBConnection.connection();
 		try {
