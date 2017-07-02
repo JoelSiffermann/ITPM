@@ -1049,5 +1049,53 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public Partnerprofil getProfilbyAusschreibung(Ausschreibung a)  throws IllegalArgumentException {
+		try {
+			return this.ppMapper.getByAusschreibungId(a);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Eigenschaft getGesuchtesProf(Partnerprofil p) throws IllegalArgumentException {
+		try {
+			System.out.println("Partnerprofil suche " + p.getId());
+			
+			return this.eMapper.getByProfil(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public ArrayList<Beteiligung> getBeteiligungBy(Projekt p) throws IllegalArgumentException {
+		try {
+			return this.projBetMapper.getAllByProjekt(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Organisationseinheit getOrgaByBeteiligung(Beteiligung b) throws IllegalArgumentException {
+		Organisationseinheit o = new Organisationseinheit();
+		o.setId(b.getOrganisationseinheit().getId());
+		try {
+			return this.orgMapper.getById(o);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

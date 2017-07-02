@@ -136,91 +136,122 @@ public class MainNavigationPanel extends VerticalPanel {
 	private class MeinProfilClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+//			Window.alert("profilbutton");
 			ProfilAnzeigenPanel pp = new ProfilAnzeigenPanel();
 			info.clear();
 			info.add(pp);
+			
 		}
 	}
 
 	private class MeineProjekteClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+			RootPanel.get("main").clear();
+			info = new HorizontalPanel();
 			MeineProjekteList mpl = new MeineProjekteList();
+			
 			info.clear();
 			info.add(mpl);
+			RootPanel.get("main").add(info);
 		}
 	}
 
 	private class AndereProjekteClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+			RootPanel.get("main").clear();
+			info = new HorizontalPanel();
 			AndereProjektmarktplatzList pml = new AndereProjektmarktplatzList();
 			info.clear();
 			info.add(pml);
+			RootPanel.get("main").add(info);
 		}
 	}
 
 	private class ProjektAnlegenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+
+			RootPanel.get("main").clear();
+			info = new HorizontalPanel();
 			ProjektNeuForm pn = new ProjektNeuForm();
 			info.clear();
 			info.add(pn);
+			RootPanel.get("main").add(info);
 		}
 	}
 
 	private class MeineBeteiligungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+			RootPanel.get("main").clear();
+			info = new HorizontalPanel();
 			MeineBeteiligungList mbl = new MeineBeteiligungList();
 			info.clear();
 			info.add(mbl);
+			RootPanel.get("main").add(info);
 		}
 	}
 
 	private class AndereBeteiligungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+//			Window.alert("Andere beteiligung Button " + info);
+			RootPanel.get("main").clear();
+			info = new HorizontalPanel();
 			AndereBeteiligungList abl = new AndereBeteiligungList();
 			info.clear();
 			info.add(abl);
+			RootPanel.get("main").add(info);
 		}
 	}
 
 	private class MeineBewerbungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+			RootPanel.get("main").clear();
+			info = new HorizontalPanel();
 			MeineBeteiligungList mbl = new MeineBeteiligungList();
 			info.clear();
 			info.add(mbl);
+			RootPanel.get("main").add(info);
 		}
 	}
 
 	private class EingegangeneBewerbungClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			// TODO
+			RootPanel.get("main").clear();
+			info = new HorizontalPanel();
+			EingegangeneProjekteList epl = new EingegangeneProjekteList();
 			info.clear();
-			Window.alert("Panel fehlt");
-			// info.add(m);
+			info.add(epl);
+			RootPanel.get("main").add(info);
 		}
 	}
 
 	private class PMAnzeigenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+			RootPanel.get("main").clear();
+			info = new HorizontalPanel();
 			AlleProjektmarktplatzList apml = new AlleProjektmarktplatzList();
 			info.clear();
 			info.add(apml);
+			RootPanel.get("main").add(info);
 		}
 	}
 
 	private class PMErstellenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+			RootPanel.get("main").clear();
+			info = new HorizontalPanel();
 			ProjektmarktplatzAnlegen pma = new ProjektmarktplatzAnlegen();
 			info.clear();
 			info.add(pma);
+			RootPanel.get("main").add(info);
 		}
 	}
 

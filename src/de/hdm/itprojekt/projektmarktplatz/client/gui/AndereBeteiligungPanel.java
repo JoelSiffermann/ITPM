@@ -12,12 +12,14 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -28,6 +30,7 @@ import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 public class AndereBeteiligungPanel extends HorizontalPanel {
@@ -43,25 +46,24 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 
 	VerticalPanel vpAndereProjekteForm1 = new VerticalPanel();
 	VerticalPanel vpAndereProjekteForm2 = new VerticalPanel();
-	VerticalPanel vpAndereProjekteForm3 = new VerticalPanel();
+	VerticalPanel vpBewertung = new VerticalPanel();
+	VerticalPanel vpOrga = new VerticalPanel();
+	VerticalPanel vpBet = new VerticalPanel();
 
 	HorizontalPanel hpAndereProjekteForm = new HorizontalPanel();
 
-//	ListBox lbBeteiligung = new ListBox();
-	TextBox tbBeruf = new TextBox();
-	TextBox tbName = new TextBox();
-	TextBox tbUmfang = new TextBox();
-	TextBox tbErfahrung = new TextBox();
-	DatePicker startPicker = new DatePicker();
-	DatePicker endPicker = new DatePicker();
+	//Orga
+	Label lblEMail = new Label("Email:");
 	Label lblName = new Label("Name:");
+	TextBox tbEmail = new TextBox();
+	TextBox tbName = new TextBox();
+	//Beteiligung
+	TextBox tbUmfang = new TextBox();
+	TextBox startPicker = new TextBox();
+	TextBox endPicker = new TextBox();
+	Label lblUmfang = new Label("Umfang:");
 	Label lblStart = new Label("Start:");
 	Label lblEnde = new Label("Ende:");
-	Label lblBeruf = new Label("Beruf:");
-	Label lblUmfang = new Label("Umfang:");
-	Label lblJahre = new Label("Jahre");
-	Label lblTage = new Label("Tage");
-	Label lblErfahrung = new Label("Erfahrung:");
 	Button btBewertungAnzeigen = new Button("Bewertung anzeigen");
 	Button btBeteiligungBeenden = new Button("Beteiligung beenden");
 	Grid gridErfahrung = new Grid(1, 2);
@@ -93,71 +95,42 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		cellTable.addColumn(col, "Beteiligung");
 		fillTable();
 		cellTable.setSelectionModel(ssmBeteiligung);
-		vpAndereProjekteForm2.add(cellTable);
-		
-		if (this.beteiligung != null) {
-			lblName.setText(beteiligung.getOrganisationseinheit().getName());
-			lblBeruf.setText(beteiligung.getOrganisationseinheit().getPartnerprofil().getAusschreibung().getBezeichnung());
-		}
-		
-//		lbBeteiligung.addItem("Beteiligung 1");
-//		lbBeteiligung.addItem("Beteiligung 2");
-
-		// Set the value in the text box when the user selects a date
-		startPicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				Date date = event.getValue();
-				String dateString = DateTimeFormat.getMediumDateFormat().format(date);
-				// Window.alert("You selected " +dateString);
-			}
-		});
-
-		startPicker.setValue(new Date(), true);
-
-		// Set the value in the text box when the user selects a date
-		endPicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				Date date = event.getValue();
-				String dateString = DateTimeFormat.getMediumDateFormat().format(date);
-			}
-		});
-
-		btBewertungAnzeigen.addClickHandler(new BewertungAnzeigenClickHandler());
-
-		endPicker.setValue(new Date(), true);
-
-		gridErfahrung.setWidget(0, 0, tbErfahrung);
-		gridErfahrung.setWidget(0, 1, lblJahre);
-
-		gridUmfang.setWidget(0, 0, tbUmfang);
-		gridUmfang.setWidget(0, 1, lblTage);
-
-//		vpAndereProjekteForm1.add(lbBeteiligung);
-		vpAndereProjekteForm1.add(lblName);
-		vpAndereProjekteForm1.add(tbName);
-		vpAndereProjekteForm1.add(lblBeruf);
-		vpAndereProjekteForm1.add(tbBeruf);
-		vpAndereProjekteForm1.add(lblErfahrung);
-		vpAndereProjekteForm1.add(gridErfahrung);
-		vpAndereProjekteForm1.add(lblStart);
-		vpAndereProjekteForm1.add(startPicker);
-		vpAndereProjekteForm1.add(lblEnde);
-		vpAndereProjekteForm1.add(endPicker);
-		vpAndereProjekteForm1.add(lblUmfang);
-		vpAndereProjekteForm1.add(gridUmfang);
-
-		vpAndereProjekteForm2.add(btBewertungAnzeigen);
-		vpAndereProjekteForm2.add(btBeteiligungBeenden);
-
-		this.clear();
-		this.add(vpAndereProjekteForm1);
-		this.add(vpAndereProjekteForm2);
-		this.add(vpAndereProjekteForm3);
-
+		btBeteiligungBeenden.addClickHandler(new BeendenClickHandler());
+		btBewertungAnzeigen.addClickHandler(new BewertungClickHandler());
+		vpAndereProjekteForm1.add(cellTable);
+		vpAndereProjekteForm2.add(vpOrga);
+		vpAndereProjekteForm2.add(vpBet);
+		hpAndereProjekteForm.add(vpAndereProjekteForm1);
+		hpAndereProjekteForm.add(vpAndereProjekteForm2);
+		hpAndereProjekteForm.add(vpBewertung);
+		this.add(hpAndereProjekteForm);
 	}
 
 	public void fillTable() {
-		projektService.readAllBeteiligung(new ReadBeteiligungCallback());
+		projektService.getBeteiligungBy(projekt, new ReadBeteiligungCallback());
+	}
+	
+	private class BeendenClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			projektService.deleteBeteiligung(selectedBeteiligung, new DeleteCallback());
+		}
+		
+	}
+	
+	private class DeleteCallback implements AsyncCallback<Void> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			Window.alert("Konnte nicht gelöscht werden");
+		}
+
+		@Override
+		public void onSuccess(Void result) {
+			RootPanel.get("main").clear();
+		}
+
 	}
 
 	private class ReadBeteiligungCallback implements AsyncCallback<ArrayList<Beteiligung>> {
@@ -170,11 +143,11 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 
 		@Override
 		public void onSuccess(ArrayList<Beteiligung> result) {
+			
 			cellTable.setRowData(0, result);
 			cellTable.setRowCount(result.size(), true);
 
 		}
-
 	}
 
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
@@ -183,11 +156,60 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		public void onSelectionChange(SelectionChangeEvent event) {
 
 			Beteiligung selection = getSelectedBeteiligung();
-			BewertungAnzeigen ap = new BewertungAnzeigen(selection);
-			vpAndereProjekteForm3.clear();
-			vpAndereProjekteForm3.add(ap);
+			projektService.getOrgaByBeteiligung(selection, new OrgaCallBack());
+			loadPanel(selection);
 		}
 
+		private void loadPanel(Beteiligung selection) {
+			vpBet.clear();
+			vpBet.add(lblUmfang);
+			vpBet.add(tbUmfang);
+			vpBet.add(lblStart);
+			vpBet.add(startPicker);
+			vpBet.add(lblEnde);
+			vpBet.add(endPicker);
+			vpBet.add(btBewertungAnzeigen);
+			vpBet.add(btBeteiligungBeenden);
+			if(selection!=null){
+				tbUmfang.setText(selection.getUmfang() + "");
+				startPicker.setText(selection.getStart() + "");
+				endPicker.setText(selection.getEnde()+ "");
+			}
+		}
+	}
+	
+	private class OrgaCallBack implements AsyncCallback<Organisationseinheit>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Organisationseinheit result) {
+			vpOrga.clear();
+			vpOrga.add(lblName);
+			vpOrga.add(tbName);
+			vpOrga.add(lblEMail);
+			vpOrga.add(tbEmail);
+			if(result != null) {
+				tbName.setText(result.getName());
+				tbEmail.setText(result.getEmail());
+			}
+		}
+		
+	}
+	
+	private class BewertungClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			BewertungAnzeigen ba = new BewertungAnzeigen(selectedBeteiligung);
+			vpBewertung.clear();
+			vpBewertung.add(ba);
+		}
+		
 	}
 
 	Beteiligung getSelectedBeteiligung() {
@@ -197,14 +219,4 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 	void setSelectedBeteiligung(Beteiligung a) {
 		selectedBeteiligung = a;
 	}
-	
-	private class BewertungAnzeigenClickHandler implements ClickHandler {
-		@Override
-		public void onClick(ClickEvent event) {
-			BewertungAnzeigen ba = new BewertungAnzeigen(null);
-			vpAndereProjekteForm3.clear();
-			vpAndereProjekteForm3.add(ba);
-		}
-	}
-
 }

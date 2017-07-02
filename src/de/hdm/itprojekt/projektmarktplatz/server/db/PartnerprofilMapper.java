@@ -288,4 +288,28 @@ public class PartnerprofilMapper {
 		return null;
 
 	}
+	
+//	public Partnerprofil getByAusschreibung(Ausschreibung a) throws Exception {
+//		Connection con = DBConnection.connection();
+//	    try {
+//	      Statement stmt = con.createStatement();
+//	      ResultSet rs = stmt.executeQuery("SELECT * FROM `partnerprofil` WHERE `ausschreibung_id` = " + a.getId());
+//	      if(rs.next()){
+//	    	  Partnerprofil pp = new Partnerprofil();//default Konstruktor in Partnerprofil.java einf�gen damit es kein Fehler anzeigt
+//	          pp.setId(rs.getInt("Partnerprofil_ID"));
+//	          pp.setErstelldatum(rs.getDate("Erstelldatum"));
+//	          pp.setAenderungsdatum(rs.getDate("Aenderungsdatum"));
+//	          pp.setAusschreibung(a);
+//	          Organisationseinheit o = new Organisationseinheit();
+//	          o.setId(rs.getInt("orga_id"));
+//	          o = OrganisationseinheitMapper.organisationseinheitMapper().getById(o);
+//	          pp.setOrganisationseinheit(o);
+//	          return pp;
+//	      }
+//	    }
+//	    catch (SQLException e) {
+//	    	
+//	    }
+//	    return null;
+//	}
 }

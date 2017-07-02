@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 //@author samina
+
+
 public class BewertungMapper {
 
 	private static BewertungMapper bwMapper = null;
@@ -17,6 +19,10 @@ public class BewertungMapper {
 		
 	}
 
+	/**
+	 * 
+	 * @return bewertungMapper
+	 */
 	public static BewertungMapper bewertungMapper() {
 		if (bwMapper == null) {
 			bwMapper = new BewertungMapper();
@@ -26,6 +32,12 @@ public class BewertungMapper {
 	}
 	
 
+	/**
+	 * 
+	 * @param b Bewertung
+	 * @return bwMapper
+	 * @throws Exception
+	 */
 
 	public Bewertung einfuegen(Bewertung b) throws Exception {
 		Connection con = DBConnection.connection();
@@ -60,6 +72,12 @@ public class BewertungMapper {
 		return b;
 	}
 
+	/**
+	 * 
+	 * @param b Bewertung
+	 * @return bwMapper
+	 * @throws Exception
+	 */
 	public Bewertung speichern(Bewertung b) throws Exception {
 		Connection con = DBConnection.connection();
 
@@ -75,6 +93,11 @@ public class BewertungMapper {
 		return b;
 	}
 	
+	/**
+	 * 
+	 * @param b Bewertung
+	 * @throws Exception
+	 */
 	public void loeschen(Bewertung b) throws Exception {
 	    Connection con = DBConnection.connection();
 
@@ -87,6 +110,13 @@ public class BewertungMapper {
 	      e.printStackTrace();
 	    }
 	  }
+	
+	/**
+	 * 
+	 * @param bt Bewertung
+	 * @return null
+	 * @throws Exception
+	 */
 	public Bewertung getById(Bewertung bt) throws Exception{
 		 Connection con = DBConnection.connection();
 
@@ -111,6 +141,11 @@ public class BewertungMapper {
 		    }
 		    return null;
 	}
+	/**
+	 * 
+	 * @return result
+	 * @throws Exception
+	 */
 	public ArrayList<Bewertung> getAll() throws Exception{
 		
 		Connection con = DBConnection.connection();

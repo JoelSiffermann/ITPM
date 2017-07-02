@@ -167,6 +167,17 @@ public interface ProjektmarktplatzAdminAsync {
 	void readAllEigenschaft(AsyncCallback<ArrayList<Eigenschaft>> callback);
 
 	void readUserByOrg(Organisationseinheit o, AsyncCallback<ArrayList<String>> callback);
+
+	void getGesuchtesProf(Partnerprofil p, AsyncCallback<Eigenschaft> callback);
+
+	void getProfilbyAusschreibung(Ausschreibung a,
+			AsyncCallback<Partnerprofil> callback);
+
+	void getBeteiligungBy(Projekt p,
+			AsyncCallback<ArrayList<Beteiligung>> callback);
+
+	void getOrgaByBeteiligung(Beteiligung b,
+			AsyncCallback<Organisationseinheit> callback);
 	
 	
 }
