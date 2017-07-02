@@ -18,8 +18,8 @@ public interface ProjektmarktplatzReportAdmin extends RemoteService {
 	ArrayList<Ausschreibung> getAllAusschreibung()
 			throws IllegalArgumentException;
 
-	ArrayList<Ausschreibung> getAuschreibungenByPartnerprofil(Partnerprofil p)
-			throws IllegalArgumentException;
+//	ArrayList<Ausschreibung> getAuschreibungenByPartnerprofil(Partnerprofil p)
+//			throws IllegalArgumentException;
 
 	ArrayList<Bewerbung> getBewerbungenByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException;
@@ -27,26 +27,23 @@ public interface ProjektmarktplatzReportAdmin extends RemoteService {
 	ArrayList<Bewerbung> getBewerbungenByAusschreibung(Organisationseinheit o)
 			throws IllegalArgumentException;
 
-	Ausschreibung getAusschreibungByBewerbung(Bewerbung b)
-			throws IllegalArgumentException;
+//	Ausschreibung getAusschreibungByBewerbung(Bewerbung b)
+//			throws IllegalArgumentException;
 
-	ArrayList<Beteiligung> getBeteiligungByNutzer(Organisationseinheit o)
-			throws IllegalArgumentException;
+//	ArrayList<Beteiligung> getBeteiligungByNutzer(Organisationseinheit o)
+//			throws IllegalArgumentException;
+//
+//	ArrayList<Ausschreibung> getAusschreibungenByNutzer(Organisationseinheit o)
+//			throws IllegalArgumentException;
+//
+//	ArrayList<Organisationseinheit> getAllPersProfile()
+//			throws IllegalArgumentException;
 
-	ArrayList<Ausschreibung> getAusschreibungenByNutzer(Organisationseinheit o)
-			throws IllegalArgumentException;
-
-	ArrayList<Organisationseinheit> getAllPersProfile()
-			throws IllegalArgumentException;
-
-	int getAnzahlBewerbungen(Organisationseinheit o) throws IllegalArgumentException;
-
-	int getAnzahlAusschreibungen(Projekt p) throws IllegalArgumentException;
-	
-	int getAnzahlBeteiligungen(Projekt p) throws IllegalArgumentException;
-
-	public String getTest() throws IllegalArgumentException;
-
+//	int getAnzahlBewerbungen(Organisationseinheit o) throws IllegalArgumentException;
+//
+//	int getAnzahlAusschreibungen(Projekt p) throws IllegalArgumentException;
+//	
+//	int getAnzahlBeteiligungen(Projekt p) throws IllegalArgumentException;
 
 	void init() throws IllegalArgumentException;
 
@@ -57,6 +54,19 @@ public interface ProjektmarktplatzReportAdmin extends RemoteService {
 			Projekt p);
 
 	ArrayList<Organisationseinheit> getPersonenByProjekt(Projekt p);
+
+//	int getAnzahlBeteiligungen(Organisationseinheit o)
+//			throws IllegalArgumentException;
+
+	ArrayList<String> getFanAnalyse() throws IllegalArgumentException;
+
+	ArrayList<Projekt> getProjekteByNutzer(Organisationseinheit o)
+			throws IllegalArgumentException;
+
+	Organisationseinheit getNutzerByEmail(Organisationseinheit o);
+
+	ArrayList<Bewerbung> getBewerbungByNutzer(Organisationseinheit o)
+			throws IllegalArgumentException;
 
 
 }

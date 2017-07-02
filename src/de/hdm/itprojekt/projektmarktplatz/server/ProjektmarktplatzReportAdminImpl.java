@@ -31,13 +31,10 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	private AusschreibungMapper aMapper = null;
 	private OrganisationseinheitMapper orgMapper = null;
 	private BewerbungMapper bMapper = null;
-	// private BewertungMapper bwMapper = null;
 	private EigenschaftMapper eMapper = null;
-	private PartnerprofilMapper pPMapper = null;
 	private PersonMapper persMapper = null;
 	private ProjektbeteiligungMapper projBetMapper = null;
 	private ProjektMapper projMapper = null;
-	// private ProjektmarktplatzMapper projMarkMapper = null;
 	private TeamMapper tMapper = null;
 	private UnternehmenMapper uMapper = null;
 
@@ -56,16 +53,11 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		this.projMapper = ProjektMapper.projektMapper();
 		this.orgMapper = OrganisationseinheitMapper.organisationseinheitMapper();
 		this.bMapper = BewerbungMapper.bewerbungMapper();
-		// this.bwMapper = BewertungMapper.bewertungMapper();
-		 this.eMapper = EigenschaftMapper.eigenschaftMapper();
-		this.pPMapper = PartnerprofilMapper.partnerprofilMapper();
-		// this.persMapper = PersonMapper.personMapper();
-		this.projBetMapper = ProjektbeteiligungMapper
-				.projektbeteilitungMapper();
-		// this.projMarkMapper =
-		// ProjektmarktplatzMapper.projektmarktplatzMapper();
-		// this.tMapper = TeamMapper.teamMapper();
-		// this.uMapper = UnternehmenMapper.unternehmenMapper();
+		this.eMapper = EigenschaftMapper.eigenschaftMapper();
+		this.persMapper = PersonMapper.personMapper();
+		this.projBetMapper = ProjektbeteiligungMapper.projektbeteilitungMapper();
+		this.tMapper = TeamMapper.teamMapper();
+		this.uMapper = UnternehmenMapper.unternehmenMapper();
 	}
 
 	/*
@@ -75,6 +67,19 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	 * ***************************************************
 	 * *******************************************
 	 */
+	
+	@Override
+	public Organisationseinheit getNutzerByEmail(Organisationseinheit o){
+		try {
+			Organisationseinheit org = this.orgMapper.getByEmail(o);
+			System.out.println(org.getId() + " " + org.getEmail());
+			return org;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	// Ausgabe aller Ausschreibungen
 	@Override
@@ -89,24 +94,37 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	}
 
 	// Abfrage der Ausschreibungen die dem Partnerprofil des Nutzers entsprechen
-	@Override
-	public ArrayList<Ausschreibung> getAuschreibungenByPartnerprofil(
-			Partnerprofil p) throws IllegalArgumentException {
-		ArrayList<Partnerprofil> p2 = null; // this.pPMapper.getAll();
-		ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
-		for (int i = 0; i < p2.size(); i++) {
-			if (p.equals(p2.get(i))) {
-				// TODO: Methode zum Vergleich des Persoenlichen Profils und des
-				// Suchprofils
-				// result.add(this.aMapper.getByPartnerprofil(p2.get(i).getId()));
-			}
-		}
-		return result;
-	}
+//	@Override
+//	public ArrayList<Ausschreibung> getAuschreibungenByPartnerprofil(
+//			Partnerprofil p) throws IllegalArgumentException {
+//		ArrayList<Partnerprofil> p2 = null; // this.pPMapper.getAll();
+//		ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
+//		for (int i = 0; i < p2.size(); i++) {
+//			if (p.equals(p2.get(i))) {
+//				// TODO: Methode zum Vergleich des Persoenlichen Profils und des
+//				// Suchprofils
+//				// result.add(this.aMapper.getByPartnerprofil(p2.get(i).getId()));
+//			}
+//		}
+//		return result;
+//	}
 
 	// Abfrage aller Bewerbungen eines Nutzers
 	@Override
 	public ArrayList<Bewerbung> getBewerbungenByNutzer(Organisationseinheit o)
+			throws IllegalArgumentException {
+		Organisationseinheit org = this.getNutzerByEmail(o);
+		try {
+			return this.bMapper.getBewerbungenByBewerber(org);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<Bewerbung> getBewerbungByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
 		try {
 			return this.bMapper.getBewerbungenByBewerber(o);
@@ -116,12 +134,13 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		}
 		return null;
 	}
-
+	
 	// Abfrage aller Bewerbungen auf eine Ausschreibung
 	@Override
 	public ArrayList<Bewerbung> getBewerbungenByAusschreibung(Organisationseinheit o)
 			throws IllegalArgumentException {
-		ArrayList<Ausschreibung> a = this.getAusschreibungenByNutzer(o);
+		Organisationseinheit org = this.getNutzerByEmail(o);
+		ArrayList<Ausschreibung> a = this.getAusschreibungenByNutzer(org);
 		ArrayList<Bewerbung> result = new ArrayList<Bewerbung>();
 		for(Ausschreibung a1 : a){
 			try {
@@ -134,24 +153,21 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return result;
 	}
 
-	// Abfrage einer Ausschreibung auf Basis der zugehörigen Bewerbung
-	@Override
-	public Ausschreibung getAusschreibungByBewerbung(Bewerbung b)
-			throws IllegalArgumentException {
-		// return this.aMapper.getByBewerbung();
-		return null;
-	}
-
 	// Abfrage aller Beteiligungen eines Nutzers
-	@Override
+
 	public ArrayList<Beteiligung> getBeteiligungByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
-		// return this.projBetMapper.getByPartnerprofil();
+		try {
+			return this.projBetMapper.getAllByNutzer(o);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	// Abfrage aller Ausschreibungen eines Nutzers
-	@Override
+	
 	public ArrayList<Ausschreibung> getAusschreibungenByNutzer(Organisationseinheit o)
 			throws IllegalArgumentException {
 		ArrayList<Projekt> p = new ArrayList<Projekt>();
@@ -181,7 +197,6 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	 */
 
 	// Abfrage aller Nutzer
-	@Override
 	public ArrayList<Organisationseinheit> getAllPersProfile()
 			throws IllegalArgumentException {
 		try {
@@ -193,7 +208,7 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	}
 
 	// Abfrage der Anzahl aller Bewerbungen pro Teilnehmer (Fan-In)
-	@Override
+	
 	public int getAnzahlBewerbungen(Organisationseinheit o) throws IllegalArgumentException {
 		ArrayList<Bewerbung> b = this.getBewerbungenByNutzer(o);
 		int count = b.size();
@@ -201,7 +216,7 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	}
 
 	// Abfrage der Anzahl aller Ausschreibungen pro Projekt (Fan-Out)
-	@Override
+
 	public int getAnzahlAusschreibungen(Projekt p) throws IllegalArgumentException {
 		ArrayList<Ausschreibung> a = this.getAusschreibungenByProjekt(p);
 		int count = a.size();
@@ -209,9 +224,15 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	}
 	
 	//Abfrage der Anzahl aller Beteiligungen pro Projekt (Fan-In)
-	@Override
+
 	public int getAnzahlBeteiligungen(Projekt p) throws IllegalArgumentException {
 		ArrayList<Beteiligung> b = this.getBeteiligungenByProjekt(p);
+		int count = b.size();
+		return count;
+	}
+
+	public int getAnzahlBeteiligungen(Organisationseinheit o) throws IllegalArgumentException {
+		ArrayList<Beteiligung> b = this.getBeteiligungByNutzer(o);
 		int count = b.size();
 		return count;
 	}
@@ -223,22 +244,21 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	public String getVergleichswert(Organisationseinheit o)
 			throws IllegalArgumentException {
 		String s = null;
-//		try {
-//			Person p = this.persMapper.getByOrgId(o);
-//			Team t = this.tMapper.getByOrgId(o);
-//			Unternehmen u = this.uMapper.getByOrgId(o);
-//			if (p != null) {
-//				s = p.getBeruf();
-//			} else if (t != null) {
-//				s = t.getArbeitsfeld();
-//			} else if (u != null) {
-//				s = u.getGeschaeftsfeld();
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			Person p = this.persMapper.getByOrgId(o);
+			Team t = this.tMapper.getByOrgId(o);
+			Unternehmen u = this.uMapper.getByOrgId(o);
+			if (p != null) {
+				s = p.getBeruf();
+			} else if (t != null) {
+				s = t.getArbeitsfeld();
+			} else if (u != null) {
+				s = u.getGeschaeftsfeld();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		s = "Web";
 		return s;
 	}
 	
@@ -263,10 +283,11 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	
 	@Override
 	public ArrayList<Ausschreibung> getEmpfAusschreibungen(Organisationseinheit o) throws IllegalArgumentException {
+		Organisationseinheit org = this.getNutzerByEmail(o);
 		ArrayList<Ausschreibung> result = new ArrayList<Ausschreibung>();
 		ArrayList<Eigenschaft> e = new ArrayList<Eigenschaft>();
 //		ArrayList<Partnerprofil> p = new ArrayList<Partnerprofil>();
-		String vglw = this.getVergleichswert(o);
+		String vglw = this.getVergleichswert(org);
 		try {
 			e = this.eMapper.equals(vglw);
 		} catch (Exception e2) {
@@ -346,12 +367,6 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		return null;
 	}
 
-	@Override
-	public String getTest() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 //	public ArrayList<Eigenschaft> getEquals(Organisationseinheit o) throws IllegalArgumentException {
 //		String vglw = this.getVergleichswert(o);
 //		try {
@@ -362,4 +377,29 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 //		}
 //		return null;
 //	}
+	
+	@Override
+	public ArrayList<String> getFanAnalyse() throws IllegalArgumentException {
+		ArrayList<String> result = new ArrayList<String>();
+		ArrayList<Organisationseinheit> teilnehmer = this.getAllPersProfile();
+		for(Organisationseinheit o : teilnehmer){
+			int bewerbungen = this.getAnzahlBewerbungen(o);
+			int beteiligungen = this.getBeteiligungByNutzer(o).size();
+			result.add(o.getName() + " " + o.getEmail() + " " + bewerbungen + " " + beteiligungen);
+		}
+		return result;
+	}
+	
+	@Override
+	public ArrayList<Projekt> getProjekteByNutzer(Organisationseinheit o) throws IllegalArgumentException {
+		Organisationseinheit org = this.getNutzerByEmail(o);
+		try {
+			return this.projMapper.getAllbyNutzer(org);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

@@ -93,15 +93,17 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	    
 //	    Cookies.setCookie("email", "hdm@hdm.de");
 //	    Cookies.setCookie("profilid", "2");
-//		loadGUI();
+		loadGUI();
 
 		
 	}
 	
 	private void loadGUI(){
 //		Home mp = new Home();
+		btImpressum.addClickHandler(new ImpressumClickHandler());
 		MainNavigationPanel mainnav = new MainNavigationPanel();
 		RootPanel.get("nav").add(mainnav);
+		RootPanel.get("footer").add(btImpressum);
 //		RootPanel.get("main").add(mp);
 	
 	}
@@ -113,4 +115,15 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 	    loginPanel.add(signInLink);
 	    RootPanel.get("main").add(loginPanel);
 	  }
+	
+	private class ImpressumClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			Impressum imp = new Impressum();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(imp);
+		}
+		
+	}
 }

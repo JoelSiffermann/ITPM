@@ -109,6 +109,7 @@ public class ReportNavPanel extends VerticalPanel{
 		@Override
 		public void onClick(ClickEvent event) {
 			ProjektverflechtungReport prep = new ProjektverflechtungReport();
+//			ProjVerTest prep = new ProjVerTest();
 			RootPanel.get("mainReport").clear();
 			RootPanel.get("mainReport").add(prep);
 		}	

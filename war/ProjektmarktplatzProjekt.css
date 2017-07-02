@@ -108,3 +108,24 @@ footer {
 	}
 }
 
+.Table td {
+  border: 1px solid color: none;
+  padding: 5px 30px;
+}
+
+.Table tr {
+	background: #eee;
+}
+
+.TableHeader {
+	background: #aaa;
+}
+
+.ImprTable td {
+	padding: 20px 20px;
+}
+
+.ImprHeader {
+	font-size: 24px
+}
+
