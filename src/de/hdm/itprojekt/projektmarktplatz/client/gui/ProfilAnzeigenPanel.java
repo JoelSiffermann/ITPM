@@ -23,7 +23,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
 /**
- * Klasse zur Darstellung von Profil-Objekten 
+ * Klasse zur Darstellung von Profil-Objekten
  * 
  * @author Vi Quan, Joey Siffermann
  *
@@ -52,8 +52,8 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 	 * Die Methode onLoad() baut das Widget auf.
 	 */
 
-	public void onLoad(){
-		
+	public void onLoad() {
+
 		super.onLoad();
 		org.setEmail(Cookies.getCookie("email"));
 		tbName.getElement().setPropertyString("placeholder", "Name");
@@ -87,7 +87,6 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 		this.add(vpProfilForm1);
 		this.add(vpProfilForm2);
 
-
 		pruefeUser(this);
 	}
 
@@ -96,15 +95,15 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 		o.setEmail(Cookies.getCookie("email"));
 
 		projektService.readByEmail(o, new pruefeUserCallback());
-		
+
 	}
 
 	/**
-	 * Die innere Klasse pruefeUserCallback ruft das Objekt Organisationseinheit.
-	 * Implementiert das AysncCallback Interface.
+	 * Die innere Klasse pruefeUserCallback ruft das Objekt
+	 * Organisationseinheit. Implementiert das AysncCallback Interface.
 	 *
 	 */
-	
+
 	private class pruefeUserCallback implements AsyncCallback<Organisationseinheit> {
 
 		HorizontalPanel hp = new HorizontalPanel();
@@ -197,8 +196,7 @@ public class ProfilAnzeigenPanel extends HorizontalPanel {
 
 						vpProfilForm1.add(tbArbeitsfeld);
 						vpProfilForm1.add(tbGroesse);
-						
-						
+
 					}
 
 					btProfilBearbeiten.addClickHandler(new ClickHandler() {

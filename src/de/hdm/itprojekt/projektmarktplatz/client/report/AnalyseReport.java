@@ -12,10 +12,21 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzReportAdminAsync;
 
+/**
+ * Klasse zur Darstellung des Reports von der Analyse
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class AnalyseReport extends VerticalPanel {
 
 	private ProjektmarktplatzReportAdminAsync reportService = ClientSideSettings.getReportGenerator();
 	private CellTable<String> cellTable;
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
@@ -64,6 +75,11 @@ public class AnalyseReport extends VerticalPanel {
 	private void getData() {
 		reportService.getFanAnalyse(new TeilnehmerCallback());
 	}
+	
+	/**
+	 * Die innere Klasse TeilnehmerCallback ruft die Array-Liste String auf.
+	 *
+	 */
 	
 	private class TeilnehmerCallback implements AsyncCallback<ArrayList<String>> {
 		
