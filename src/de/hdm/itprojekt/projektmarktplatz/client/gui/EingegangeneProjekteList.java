@@ -8,20 +8,21 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
-
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
-public class AndereBeteiligungList extends HorizontalPanel {
+public class EingegangeneProjekteList extends HorizontalPanel{
+	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	private Projekt selectedProjekt = null;
 	private SingleSelectionModel<Projekt> ssmProjekt = null;
 	private ListDataProvider<Projekt> projektDataProvider = null;
-//	private KeyProvider projKey = new KeyProvider();
+	private KeyProvider projKey = new KeyProvider();
 	private CellTable<Projekt> cellTable = new CellTable<Projekt>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
@@ -34,9 +35,16 @@ public class AndereBeteiligungList extends HorizontalPanel {
 		}
 	};
 	
+	private class KeyProvider implements ProvidesKey<Projekt> {
+		@Override
+		public Integer getKey(Projekt item) {
+			return new Integer(item.getId());
+		}
+		
+	}
+	
 	public void onLoad(){
 		super.onLoad();
-		this.clear();
 		ssmProjekt = new SingleSelectionModel<Projekt>();
 		ssmProjekt.addSelectionChangeHandler(new SelectionHandler());
 		cellTable.addColumn(col, "Projekte");
@@ -71,11 +79,10 @@ public class AndereBeteiligungList extends HorizontalPanel {
 
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
-
 			Projekt selection = getSelectedProjekt();
-			AndereBeteiligungPanel pbm = new AndereBeteiligungPanel(selection);
+			EingegangeneAusschreibungList pm = new EingegangeneAusschreibungList(selection);
 			hpInfo.clear();
-			hpInfo.add(pbm);
+			hpInfo.add(pm);
 		}
 		
 	}
@@ -87,5 +94,4 @@ public class AndereBeteiligungList extends HorizontalPanel {
 	void setSelectedProjekt(Projekt p){
 		selectedProjekt = p;
 	}
-
 }
