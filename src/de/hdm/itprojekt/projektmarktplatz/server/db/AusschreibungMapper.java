@@ -37,7 +37,7 @@ public class AusschreibungMapper {
 	
 
 /**
- * 
+ * Die Methode einfuegen(Ausschreibung a)  f�gt eine Ausschreibung hinzu
  * @param a Ausschreibung
  * @return aMapper
  * @throws Exception
@@ -56,22 +56,22 @@ public class AusschreibungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-//			ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(`Ausschreibung_ID`) AS maxid FROM ausschreibung");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-//			if (rs.next()) {
+			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-//				a.setId(rs.getInt("Ausschreibung_ID") + 1);
+				a.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation 
 				stmt.executeUpdate("INSERT INTO `ausschreibung` (`Ausschreibung_ID`, `Bezeichnung`, `Inhalt`, `Frist`, `projekt_id`, `partnerprofil_id`) "
-						+ "VALUES (NULL, '"+a.getBezeichnung()+"', '"+a.getInhalt()+"', '"+datum+"', '"+a.getProjekt().getId()+"', '"+a.getPartnerprofil().getId()+"');");
-//			}
+						+ "VALUES (" + a.getId() + "', '"+a.getBezeichnung()+"', '"+a.getInhalt()+"', '"+datum+"', '"+a.getProjekt().getId()+"', '"+a.getPartnerprofil().getId()+"');");
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -80,7 +80,7 @@ public class AusschreibungMapper {
 	}
 
 	/**
-	 * 
+	 * Die Methode speichern(Ausschreibung a) speichert die vorgenommenen �nderungen 
 	 * @param a Ausschreibung
 	 * @return aMapper
 	 * @throws Exception
@@ -104,7 +104,7 @@ public class AusschreibungMapper {
 	}
 	
 	/**
-	 * 
+	 *  Die Methode loeschen(Ausschreibung a) l�scht eine Ausschreibung
 	 * @param a Ausschreibung
 	 * @throws Exception
 	 */
@@ -114,7 +114,7 @@ public class AusschreibungMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `ausschreibung` WHERE Ausschreibung_ID = "+a.getId());
+	      stmt.executeUpdate("DELETE FROM `ausschreibung` WHERE `Ausschreibung_ID` = "+a.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -122,7 +122,7 @@ public class AusschreibungMapper {
 	  }
 
 	/**
-	 * 
+	 * Die Methode getById(Ausschreibung a) liest die Id der Ausschreibungen
 	 * @param a Ausschreibung
 	 * @return aMapper
 	 * @throws Exception
@@ -164,7 +164,7 @@ public class AusschreibungMapper {
 		    return a;
 	}
 /**
- * 
+ * Die Methode getAll() zeigt alle vorhandenen Ausschreibungen an 
  * @return result
  * @throws Exception
  */
@@ -224,7 +224,7 @@ public class AusschreibungMapper {
 
 	}
 	/**
-	 * 
+	 * Liest alle Ausschreibungen zum Partnerprofil
 	 * @param p Partnerprofil
 	 * @return null
 	 * @throws Exception

@@ -21,7 +21,7 @@ public class MainNavigationPanel extends VerticalPanel {
 	HorizontalPanel info = new HorizontalPanel();
 
 
-//	Organisationseinheit o;
+	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	
 //	public MainNavigationPanel(){
@@ -36,22 +36,24 @@ public class MainNavigationPanel extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 
-		Organisationseinheit o = new Organisationseinheit();
-		o.setEmail(Cookies.getCookie("email"));
-		projektService.readByEmail(o, new AsyncCallback<Organisationseinheit>() {
-			
-			@Override
-			public void onSuccess(Organisationseinheit result) {
-
-				Cookies.setCookie("profilid", result.getPartnerprofil().getId()+"");
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+//		Organisationseinheit o = new Organisationseinheit();
+		
+//		projektService.readByEmail(o, new AsyncCallback<Organisationseinheit>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void onSuccess(Organisationseinheit result) {
+//				Window.alert("Org Id " + result.getId());
+//				Cookies.setCookie("userid", result.getId()+"");
+//				
+//			}
+//		});
+		
 
 		
 //		projektService.readByEmail(o, new CheckUser(o));
@@ -134,11 +136,14 @@ public class MainNavigationPanel extends VerticalPanel {
 	private class MeinProfilClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+			RootPanel.get("main").clear();
 //			Window.alert("profilbutton");
+			info = new HorizontalPanel();
 			ProfilAnzeigenPanel pp = new ProfilAnzeigenPanel();
+//			ProfilNeuForm pp = new ProfilNeuForm();
 			info.clear();
 			info.add(pp);
-			
+			RootPanel.get("main").add(info);
 		}
 	}
 
@@ -170,9 +175,10 @@ public class MainNavigationPanel extends VerticalPanel {
 	private class ProjektAnlegenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
+
 			RootPanel.get("main").clear();
 			info = new HorizontalPanel();
-			ProjektNeuForm pn = new ProjektNeuForm(null);
+			ProjektNeuForm pn = new ProjektNeuForm();
 			info.clear();
 			info.add(pn);
 			RootPanel.get("main").add(info);

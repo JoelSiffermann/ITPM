@@ -16,6 +16,10 @@ public class TeamMapper {
 	protected TeamMapper() {
 
 	}
+	/**
+	 * @return teamMapper
+	 */
+	
 
 	public static TeamMapper teamMapper() {
 		if (teamMapper == null) {
@@ -23,6 +27,12 @@ public class TeamMapper {
 		}
 		return teamMapper;
 	}
+	/**
+	 * Fügt ein neues Team hinzu
+	 * @param t Team
+	 * @return t
+	 * @throws Exception
+	 */
 
 	public Team einfuegen(Team t) throws Exception {
 		Connection con = DBConnection.connection();
@@ -45,12 +55,19 @@ public class TeamMapper {
 			stmt = con.createStatement();
 			// Jetzt erst erfolgt die tatsÃ¤chliche EinfÃ¼geoperation
 			stmt.executeUpdate("INSERT INTO `team` (`Groesse`, `Arbeitsfeld`, `ID`, `o_id`) VALUES ('" + t.getGroesse()
-					+ "', '" + t.getArbeitsfeld() + "', " + t.getId() + ", '" + t.getOrganisationseinheit().getId());
+					+ "', '" + t.getArbeitsfeld() + "', NULL, '" + t.getOrganisationseinheit().getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return t;
 	}
+	
+	/**
+	 * Fügt Änderungen an einem Team hinzu
+	 * @param t Team
+	 * @return t
+	 * @throws Exception
+	 */
 
 	public Team speichern(Team t) throws Exception {
 		Connection con = DBConnection.connection();
@@ -64,6 +81,12 @@ public class TeamMapper {
 		}
 		return t;
 	}
+	
+	/**
+	 * Loescht ein Team
+	 * @param t Team
+	 * @throws Exception
+	 */
 
 	public void loeschen(Team t) throws Exception {
 		Connection con = DBConnection.connection();
@@ -74,6 +97,13 @@ public class TeamMapper {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Liest ein Team 
+	 * @param t Team
+	 * @return t
+	 * @throws Exception
+	 */
 
 	public Team getById(Team t) throws Exception {
 		Connection con = DBConnection.connection();
@@ -96,6 +126,11 @@ public class TeamMapper {
 		return t;
 	}
 
+	/**
+	 * Zeigt alle Teams an
+	 * @return null
+	 * @throws Exception
+	 */
 	public ArrayList<Team> getAll() throws Exception {
 		Connection con = DBConnection.connection();
 		ArrayList<Team> result = new ArrayList<Team>();
@@ -132,6 +167,13 @@ public class TeamMapper {
 		}
 		return null;
 	}
+	
+	/**
+	 * Liest ein Team aus einer Organisationseinheit
+	 * @param org Organisationseinheit
+	 * @return null
+	 * @throws Exception
+	 */
 	
 	public Team getByOrgId(Organisationseinheit org) throws Exception {
 		Connection con = DBConnection.connection();
