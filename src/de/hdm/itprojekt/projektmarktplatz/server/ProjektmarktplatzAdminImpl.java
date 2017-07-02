@@ -342,7 +342,7 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 			Ausschreibung a = new Ausschreibung();
 			Partnerprofil pp = new Partnerprofil();
 			Organisationseinheit o = new Organisationseinheit();
-			Person person = new Person();
+			Organisationseinheit person = new Organisationseinheit();
 
 			b.setId(Integer.parseInt(id));
 			b.setAusschreibung(bMapper.getById(b).getAusschreibung());
@@ -352,7 +352,7 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 			System.out.println("Partnerproifl ID " + pp.getId());
 			o.setId(orgMapper.getByPartnerprofilId(pp).getId());
 
-			person = persMapper.getByOrgId(o);
+			person = orgMapper.getById(person);
 			bt.setPerson(person);
 			bwMapper.einfuegen(bt);
 		} catch (Exception e) {

@@ -35,40 +35,22 @@ public class ProjektMapper {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
-			/*
-			 * Zunächst schauen wir nach, welches der momentan höchste
-			 * Primärschlüsselwert ist.
-			 */
-			// ResultSet rs = stmt.executeQuery("INSERT INTO `projekt`
-			// (`Projekt_ID`, `Name`, `Start`, `Ende`, `Inhalt`,
-			// `projektmarktplatz_id`, `person_id`) VALUES (NULL, 'Excel',
-			// '2017-05-01', '2017-05-05', 'Tabellen anlegen', '1', '1');");
-			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			// if (rs.next()) {
-			/*
-			 * c erhält den bisher maximalen, nun um 1 inkrementierten
-			 * Primärschlüssel.
-			 */
-			// p.setId(rs.getInt("") + 1);
 			String datum = "";
 			String datum2 = "";
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			datum = dateFormat.format(p.getStart());
 			datum2 = dateFormat.format(p.getEnde());
-			
-			String sql = "INSERT INTO `projekt` (`Projekt_ID`, `Name`, `Start`, `Ende`, `Inhalt`, "
-					+ "`projektmarktplatz_id`, `person_id`) VALUES " + "('" + p.getId() + "', '" + p.getName() + "', '"
-					+ datum+ "', '" + datum2+ "', " + "'" + p.getInhalt() + "', '"
-					+ p.getProjektmarktplatz().getId() + "', '" + p.getPerson().getId() + "');";
-					
-			System.out.println(sql); 
-			
+			ResultSet rs = stmt.executeQuery("SELECT MAX(`Projekt_ID`) AS maxid FROM projekt");
+			if (rs.next()){
+				p.setId(rs.getInt("maxid") + 1);
+				
 			stmt = con.createStatement();
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate("INSERT INTO `projekt` (`Projekt_ID`, `Name`, `Start`, `Ende`, `Inhalt`, "
 					+ "`projektmarktplatz_id`, `person_id`) VALUES " + "('" + p.getId() + "', '" + p.getName() + "', '"
 					+ datum + "', '" + datum2 + "', " + "'" + p.getInhalt() + "', '"
-					+ p.getProjektmarktplatz().getId() + "', '" + p.getPerson().getId() + "');");
+					+ p.getProjektmarktplatz().getId() + "', '" + p.getProjektleiter().getId() + "');");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -76,13 +58,18 @@ public class ProjektMapper {
 	}
 
 	public Projekt speichern(Projekt p) throws Exception {
+		String datum = "";
+		String datum2 = "";
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		datum = dateFormat.format(p.getStart());
+		datum2 = dateFormat.format(p.getEnde());
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate("UPDATE `projekt` SET `Projekt_ID` = '" + p.getId() + "', `Name` = '" + p.getName()
-					+ "', " + "`Start` = '" + p.getStart() + "', `Ende` = '" + p.getEnde() + "', `Inhalt` = '"
+					+ "', " + "`Start` = '" + datum + "', `Ende` = '" + datum2 + "', `Inhalt` = '"
 					+ p.getInhalt() + "', " + "`projektmarktplatz_id` = '" + p.getProjektmarktplatz().getId()
-					+ "', `person_id` = '" + p.getPerson().getId() + "" + "' WHERE `projekt`.`Projekt_ID` = "
+					+ "', `person_id` = '" + p.getProjektleiter().getId() + "" + "' WHERE `projekt`.`Projekt_ID` = "
 					+ p.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -94,7 +81,7 @@ public class ProjektMapper {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeUpdate("DELETE FROM `projekt` WHERE Projekt_ID = " + p.getId());
+			stmt.executeUpdate("DELETE FROM `projekt` WHERE `Projekt_ID` = " + p.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -113,13 +100,13 @@ public class ProjektMapper {
 				pr.setStart(rs.getDate("Start"));
 				pr.setEnde(rs.getDate("Ende"));
 				Projektmarktplatz pm = new Projektmarktplatz();
-				Person ps = new Person();
+				Organisationseinheit o = new Organisationseinheit();
 				pm.setId(rs.getInt("projektmarktplatz_id"));
 				pr.setProjektmarktplatz(pm);
 
-				ps.setId(rs.getInt("person_id"));
+				o.setId(rs.getInt("person_id"));
 
-				pr.setPerson(ps);
+				pr.setProjektleiter(o);
 				return pr;
 			}
 		} catch (SQLException e) {
@@ -132,17 +119,7 @@ public class ProjektMapper {
 		ArrayList<Projekt> result = new ArrayList<Projekt>();
 		try {
 			Statement stmt = con.createStatement();
-			/*
-			 * Zunächst schauen wir nach, welches der momentan höchste
-			 * Primärschlüsselwert ist.
-			 */
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `projekt` WHERE `projektmarktplatz_id` = " + pr.getId());
-			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-//			if (rs.next()) {
-				/*
-				 * c erhält den bisher maximalen, nun um 1 inkrementierten
-				 * Primärschlüssel.
-				 */
 				while (rs.next()) {
 					Projekt p = new Projekt();
 					p.setId(rs.getInt("Projekt_ID"));
@@ -151,20 +128,16 @@ public class ProjektMapper {
 					p.setStart(rs.getDate("Start"));
 					p.setEnde(rs.getDate("Ende"));
 					Projektmarktplatz pm = new Projektmarktplatz();
-					Person ps = new Person();
+					Organisationseinheit ps = new Organisationseinheit();
 					pm.setId(rs.getInt("projektmarktplatz_id"));
 					p.setProjektmarktplatz(pm);
 
 					ps.setId(rs.getInt("person_id"));
 
-					p.setPerson(ps);
+					p.setProjektleiter(ps);
 					result.add(p);
 				}
 				stmt = con.createStatement();
-				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-//				stmt.executeUpdate("");
-//				return result;
-//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

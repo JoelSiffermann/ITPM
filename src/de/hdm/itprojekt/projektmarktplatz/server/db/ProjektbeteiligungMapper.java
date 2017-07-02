@@ -40,7 +40,7 @@ public class ProjektbeteiligungMapper {
 		datum2 = dateFormat.format(b.getStart());
 		System.out.println("test "+b.getOrganisationseinheit().getId());
 		String sql = "INSERT INTO `beteiligung` (`Beteilgung_ID`, `Start`, `Ende`, `Umfang`, `projekt_ID`, `orga_id`) "
-				+ "VALUES (NULL, '"+datum2+"', '"+datum+"', '"+b.getUmfang()+"', '"+b.getProjekt().getId()+"', '"+b.getOrganisationseinheit().getId()+"');";
+				+ "VALUES (" + b.getId() + "', '"+datum2+"', '"+datum+"', '"+b.getUmfang()+"', '"+b.getProjekt().getId()+"', '"+b.getOrganisationseinheit().getId()+"');";
 		try {
 			Statement stmt = con.createStatement();
 
@@ -48,21 +48,21 @@ public class ProjektbeteiligungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			//ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(`Beteilgung_ID`) AS maxid FROM beteiligung");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			//if (rs.next()) {
+			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-				//b.setId(rs.getInt("") + 1);
+				b.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 				stmt.executeUpdate("INSERT INTO `beteiligung` (`Beteilgung_ID`, `Start`, `Ende`, `Umfang`, `projekt_ID`, `orga_id`) VALUES (NULL, '"+datum2+"', '"+datum+"', '"+b.getUmfang()+"', '"+b.getProjekt().getId()+"', '"+b.getOrganisationseinheit().getId()+"');");
-			//}
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,7 +96,7 @@ public class ProjektbeteiligungMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `beteiligung` WHERE Beteilgung_ID = "+b.getId());
+	      stmt.executeUpdate("DELETE FROM `beteiligung` WHERE `Beteilgung_ID` = "+b.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

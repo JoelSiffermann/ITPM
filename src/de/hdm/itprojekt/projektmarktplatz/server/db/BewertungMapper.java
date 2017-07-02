@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Person;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewertung;
 //@author samina
@@ -49,22 +50,22 @@ public class BewertungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-		//	ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(`Bewertung_ID`) AS maxid FROM bewertung");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-		//	if (rs.next()) {
+			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-			//	b.setId(rs.getInt("") + 1);
+				b.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-				stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"', '"+b.getPerson().getId()+"');");
+				stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (" + b.getId() + "', '"+b.getInhalt()+"', '"+b.getSkala()+"', '"+b.getPerson().getId()+"');");
 				//stmt.executeUpdate("INSERT INTO `bewertung` (`Bewertung_ID`, `Inhalt`, `Skala`, `person_id`) VALUES (NULL, '"+b.getInhalt()+"', '"+b.getSkala()+"');");
-		//	}
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,7 +105,7 @@ public class BewertungMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `bewertung` WHERE Bewertung_ID = "+b.getId());
+	      stmt.executeUpdate("DELETE FROM `bewertung` WHERE `Bewertung_ID` = "+b.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -129,7 +130,7 @@ public class BewertungMapper {
 		          b.setId(rs.getInt("Bewertung_ID"));
 		          b.setInhalt(rs.getString("Inhalt"));
 		          b.setSkala(rs.getFloat("Skala"));
-		          Person p = new Person();
+		          Organisationseinheit p = new Organisationseinheit();
 					b.setId(rs.getInt("person_id"));
 					b.setPerson(p);
 					
@@ -171,7 +172,7 @@ public class BewertungMapper {
 			          b.setId(rs.getInt("Bewertung_ID"));
 			          b.setInhalt(rs.getString("Inhalt"));
 			          b.setSkala(rs.getFloat("Skala"));
-			          Person p = new Person();
+			          Organisationseinheit p = new Organisationseinheit();
 						b.setId(rs.getInt("person_id"));
 						b.setPerson(p);
 						// a.setId(rs.getInt("") + 1);
