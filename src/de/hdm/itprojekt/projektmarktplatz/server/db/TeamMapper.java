@@ -55,7 +55,7 @@ public class TeamMapper {
 			stmt = con.createStatement();
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate("INSERT INTO `team` (`Groesse`, `Arbeitsfeld`, `ID`, `o_id`) VALUES ('" + t.getGroesse()
-					+ "', '" + t.getArbeitsfeld() + "', " + t.getId() + ", '" + t.getOrganisationseinheit().getId());
+					+ "', '" + t.getArbeitsfeld() + "', NULL, '" + t.getOrganisationseinheit().getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

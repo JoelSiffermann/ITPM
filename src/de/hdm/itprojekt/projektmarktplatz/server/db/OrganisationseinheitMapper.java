@@ -5,7 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Beteiligung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Partnerprofil;
@@ -157,6 +159,7 @@ public class OrganisationseinheitMapper {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
+			System.out.println("SELECT * FROM organisationseinheit WHERE `E-Mail` = '" + o.getEmail() + "'"); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM organisationseinheit WHERE `E-Mail` = '" + o.getEmail() + "'");
 			if (rs.next()) {
 				Organisationseinheit or = new Organisationseinheit();

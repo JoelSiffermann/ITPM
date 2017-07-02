@@ -57,7 +57,7 @@ public class UnternehmenMapper {
 			stmt = con.createStatement();
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate("INSERT INTO `unternehmen` (`Geschaeftsform`, `Geschaeftsfeld`, `ID`, `o_id`) VALUES ('"
-					+ u.getGeschaeftsform() + "', '" + u.getGeschaeftsfeld() + "', '" + u.getId() + "', '"
+					+ u.getGeschaeftsform() + "', '" + u.getGeschaeftsfeld() + "', NULL, '"
 					+ u.getOrganisationseinheit().getId());
 		} catch (SQLException e) {
 			e.printStackTrace();

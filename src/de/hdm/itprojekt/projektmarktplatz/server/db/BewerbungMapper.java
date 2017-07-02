@@ -53,23 +53,23 @@ public class BewerbungMapper {
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			// ResultSet rs = stmt.executeQuery("");
+			 ResultSet rs = stmt.executeQuery("SELECT MAX(`Bewerbung_ID`) AS maxid FROM bewerbung");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			// if (rs.next()) {
+			 if (rs.next()) {
 			/*
 			 * c erhält den bisher maximalen, nun um 1 inkrementierten
 			 * Primärschlüssel.
 			 */
-			// b.setId(rs.getInt("") + 1);
+			 b.setId(rs.getInt("maxid") + 1);
 
 			stmt = con.createStatement();
 
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate(
-					"INSERT INTO `bewerbung` (`Bewerbung_ID`, `Inhalt`, `Erstelldatum`, `ausschreibung_id`, `bewerber_id`)" + "VALUES (NULL, '"
+					"INSERT INTO `bewerbung` (`Bewerbung_ID`, `Inhalt`, `Erstelldatum`, `ausschreibung_id`, `bewerber_id`)" + "VALUES ('" + b.getId() + "', '"
 							+ b.getInhalt() + "','" +datum+ "', '" + b.getAusschreibung().getId()+"', '" + b.getBewerber().getId()+"');");
-			// }
+			 }
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,7 +113,7 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM `bewerbung` WHERE Bewerbung_ID = " + b.getId());
+			stmt.executeUpdate("DELETE FROM `bewerbung` WHERE `Bewerbung_ID` = " + b.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

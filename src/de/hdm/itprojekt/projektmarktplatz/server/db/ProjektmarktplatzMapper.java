@@ -61,7 +61,8 @@ public class ProjektmarktplatzMapper {
 
 		          stmt = con.createStatement();
 
-		      
+		      System.out.println("INSERT INTO `projektmarktplatz` (`Projektmarktplatz_ID`, `Bezeichnung`) VALUES ('"
+					+ p.getId() + "', '" + p.getBezeichnung() + "');");
 
 			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
 			stmt.executeUpdate("INSERT INTO `projektmarktplatz` (`Projektmarktplatz_ID`, `Bezeichnung`) VALUES ('"

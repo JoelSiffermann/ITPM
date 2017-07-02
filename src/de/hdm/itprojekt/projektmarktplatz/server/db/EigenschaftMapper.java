@@ -44,27 +44,26 @@ public class EigenschaftMapper {
 
 		try {
 			Statement stmt = con.createStatement();
-
+			for(Eigenschaft c : eg){
 			/*
 			 * Zunächst schauen wir nach, welches der momentan höchste
 			 * Primärschlüsselwert ist.
 			 */
-			//ResultSet rs = stmt.executeQuery("");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(`Eigenschaft_ID`) AS maxid FROM eigenschaft");
 
 			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-			//if (rs.next()) {
+			if (rs.next()) {
 				/*
 				 * c erhält den bisher maximalen, nun um 1 inkrementierten
 				 * Primärschlüssel.
 				 */
-				//c.setId(rs.getInt("") + 1);
+				c.setId(rs.getInt("maxid") + 1);
 
-				stmt = con.createStatement();
-
-				for(Eigenschaft c : eg){
+				
 				// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-					stmt.executeUpdate("INSERT INTO `eigenschaft` (`Eigenschaft_ID`, `Bezeichnung`, `Wert`, `partner_id`) VALUES (NULL, '"+c.getBezeichnung()+"', '"+c.getWert()+"', '"+c.getPartnerprofil().getId()+"');");
+					stmt.executeUpdate("INSERT INTO `eigenschaft` (`Eigenschaft_ID`, `Bezeichnung`, `Wert`, `partner_id`) VALUES (" + c.getId() + "', '"+c.getBezeichnung()+"', '"+c.getWert()+"', '"+c.getPartnerprofil().getId()+"');");
 				}
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,7 +103,7 @@ public class EigenschaftMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM `eigenschaft` WHERE Eigenschaft_ID = "+c.getId());
+	      stmt.executeUpdate("DELETE FROM `eigenschaft` WHERE `Eigenschaft_ID` = "+c.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
