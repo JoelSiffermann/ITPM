@@ -1,6 +1,5 @@
 package de.hdm.itprojekt.projektmarktplatz.client.gui;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -8,16 +7,17 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
-import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
-import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
+
+/**
+ * Klasse zur Darstellung von Bewerbung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
 public class BewerbungNeuForm extends VerticalPanel {
-	
-	/*
-	 * Neues Design
-	 */
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 
@@ -29,15 +29,23 @@ public class BewerbungNeuForm extends VerticalPanel {
 	
 	Bewerbung bewerbung = new Bewerbung();
 	
+	/**
+	 * Konstruktor
+	 * @param b Bewerbung
+	 */
+	
 	public BewerbungNeuForm (Bewerbung b) {
 		this.bewerbung = b;
 	}
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad() {
 
 		super.onLoad();
 		if(this.bewerbung!=null){
-//			lblInhalt.setText(bewerbung.getInhalt());
 		}
 		
 		taInhalt.setWidth("300px");

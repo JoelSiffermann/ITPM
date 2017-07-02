@@ -17,6 +17,12 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
+/**
+ * Klasse zur Darstellung der Liste von allen Projekt-Objekten
+ * 
+ * @author Vi Quan, Joey Siffermann 
+ */
+
 public class AlleProjekteList extends HorizontalPanel{
 	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
@@ -49,10 +55,19 @@ public class AlleProjekteList extends HorizontalPanel{
 //		
 //	}
 	
+	/**
+	 * Konstruktor 
+	 * @param pm Projektmarktplatz
+	 */
+	
 	public AlleProjekteList(Projektmarktplatz pm) {
 		
 		this.projektmarktplatz = pm;
 	}
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
@@ -67,9 +82,18 @@ public class AlleProjekteList extends HorizontalPanel{
 		this.add(hpInfo);
 	}
 	
+	/**
+	 * die Methode fillTable() ruft alle Projekte aus Datenbank aus.
+	 */
+	
 	public void fillTable(){
 		projektService.readAllProjekt(new ReadProjektCallback());
 	}
+	
+	/**
+	 * Die innere Klasse ReadProjektCall ruft die Array-Liste Projekt auf.
+	 *
+	 */
 	
 	private class ReadProjektCallback implements AsyncCallback<ArrayList<Projekt>> {
 
@@ -87,6 +111,11 @@ public class AlleProjekteList extends HorizontalPanel{
 		}
 		
 	}
+	
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
 	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 

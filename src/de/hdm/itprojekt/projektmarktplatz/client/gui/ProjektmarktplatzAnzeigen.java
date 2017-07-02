@@ -36,9 +36,14 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 
-public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
+/**
+ * Klasse zur Darstellung von Projektmarktplatz-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
 
-	/* Neues Design für die GUI */
+public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 	Projekt projekt = new Projekt();
 
@@ -46,7 +51,6 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 	Projektmarktplatz pm = null;
 
-	// CustomerAccountsTreeViewModel catvm = null;
 	NumberFormat decimalFormatter = NumberFormat.getDecimalFormat();
 
 	final HorizontalPanel hPanel = new HorizontalPanel();
@@ -56,27 +60,14 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 	Button btErstellen = new Button();
 	Button btAndere = new Button();
 
-	
-	
-	/*
-	 * Im Konstruktor werden die Widgets z.T. erzeugt. Alle werden in einem
-	 * Raster angeordnet, dessen Größe sich aus dem Platzbedarf der
-	 * enthaltenen Widgets bestimmt.
+	/**
+	 * Konstruktor
+	 * @param p Projektmarktplatz
 	 */
-
-	// public ProjektmarktplatzAnzeigen(Projekt p) {
-	// this.projekt = p;
-	// }
-
+	
 	public ProjektmarktplatzAnzeigen(Projektmarktplatz p) {
 		this.pm = p;
 		super.onLoad();
-
-		// ERSIN: HIER UNSERE KLASSE AN DEN KONSTRUKTOR ANPASSEN!
-		/**
-		 * Das Grid-Widget erlaubt die Anordnung anderer Widgets in einem
-		 * Gitter.
-		 */
 
 		String[] liste = {};
 
@@ -114,17 +105,10 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 
 	}
 
-	/*
-	 * Click handlers und abhängige AsyncCallback Klassen.
-	 */
-
+	
 	public void getData(CellList<String> clist) {
 		projektService.readAllProjektmarktplatz(new ReadAllPM(clist));
-		// MEINEBEWERBUNGEN = Arrays.asList(liste);
-		// cellList.setRowCount(MEINEBEWERBUNGEN.size(), true);
-		//
-		// // Push the data into the widget.
-		// cellList.setRowData(0, MEINEBEWERBUNGEN);
+
 	}
 
 	private class ErstellenClickHandler implements ClickHandler {
@@ -173,6 +157,12 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 		}
 	}
 
+	/**
+	 * Die innere Klasse ReadAllPM ruft die Array-Liste Projektmarktplatz auf.
+ 	 * Implementiert das AysncCallback Interface.
+	 *
+	 */
+	
 	private class ReadAllPM extends VerticalPanel implements AsyncCallback<ArrayList<Projektmarktplatz>> {
 		String[] l;
 		CellList<String> clist;
@@ -207,53 +197,5 @@ public class ProjektmarktplatzAnzeigen extends HorizontalPanel {
 		}
 
 	}
-
-	// public void onLoad() {
-	//
-	//
-	// final List<String> MEINEBEWERBUNGEN = Arrays.asList("PM 1", "PM 2", "PM
-	// 3", "PM 4");
-	// TextCell textCell = new TextCell();
-	// CellList<String> cellList = new CellList<String>(textCell);
-	// cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-	// cellList.addStyleName("scrollable");
-	// cellList.setPageSize(20);
-	// cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
-	// cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
-	//
-	// cellList.setRowCount(MEINEBEWERBUNGEN.size(), true);
-	//
-	// // Push the data into the widget.
-	// cellList.setRowData(0, MEINEBEWERBUNGEN);
-	//
-	// btErstellen.addClickHandler(new ClickHandler() {
-	//
-	// @Override
-	// public void onClick(ClickEvent event) {
-	// hPanel.clear();
-	// //TODO objekt von PM anlegen
-	// // in hpanel adden
-	// ProjektmarktplatzAnlegen pa = new ProjektmarktplatzAnlegen();
-	// hPanel.add(pa);
-	// }
-	// });
-	//
-	// btAndere.addClickHandler(new ClickHandler() {
-	//
-	// @Override
-	// public void onClick(ClickEvent event) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-	// });
-	//
-	// hPanel.add(hPanel2);
-	// hPanel2.add(cellList);
-	// vPanel.add(btErstellen);
-	// vPanel.add(btAndere);
-	//
-	// hPanel2.add(vPanel);
-	//
-	// this.add(hPanel);
 
 }

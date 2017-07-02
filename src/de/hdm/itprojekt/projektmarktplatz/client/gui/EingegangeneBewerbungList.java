@@ -16,6 +16,13 @@ import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
 
+/**
+ * Klasse zur Darstellung der Liste von eingegangen Bewerbung-Objekten 
+ * 
+ * @author Vi Quan, Joey Siffermann
+ *
+ */
+
 public class EingegangeneBewerbungList extends HorizontalPanel{
 	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
@@ -25,7 +32,6 @@ public class EingegangeneBewerbungList extends HorizontalPanel{
 	private Bewerbung selectedBewerbung = null;
 	private SingleSelectionModel<Bewerbung> ssmBewerbung = null;
 	private ListDataProvider<Bewerbung> projektDataProvider = null;
-//	private KeyProvider projKey = new KeyProvider();
 	private CellTable<Bewerbung> cellTable = new CellTable<Bewerbung>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
@@ -38,12 +44,19 @@ public class EingegangeneBewerbungList extends HorizontalPanel{
 		}
 	};
 	
-	//Gerade auskommentiert, wird nicht gebraucht evtl?
+	/**
+	 * Konstruktor
+	 * @param a Ausschreibung
+	 */
 	
-	public EingegangeneBewerbungList(Ausschreibung pm) {
+	public EingegangeneBewerbungList(Ausschreibung a) {
 		
-		this.ausschreibung = pm;
+		this.ausschreibung = a;
 	}
+	
+	/**
+	 * Die Methode onLoad() baut das Widget auf.
+	 */
 	
 	public void onLoad(){
 		super.onLoad();
@@ -57,12 +70,20 @@ public class EingegangeneBewerbungList extends HorizontalPanel{
 		this.add(hpInfo);
 	}
 	
+	/**
+	 * die Methode fillTable() ruft alle Projektmarktplaetze aus Datenbank aus.
+	 */
+	
 	public void fillTable(){
-//		projektService.readAllProjekt(new ReadProjektCallback());
-//		projektService.readByIdProjektProjektmarktplatz(this.projekt, new ReadAusschreibungCallback());
+
 		projektService.readAllBewerbung(new ReadBewerbungCallback());
 
 	}
+	
+	/**
+	 * Die innere Klasse ReadBewerbungCallback ruft die Array-Liste Bewerbung auf.
+ 	 * Implementiert das AysncCallback Interface.
+	 */
 	
 	private class ReadBewerbungCallback implements AsyncCallback<ArrayList<Bewerbung>> {
 
@@ -80,6 +101,11 @@ public class EingegangeneBewerbungList extends HorizontalPanel{
 		}
 		
 	}
+	
+	/**
+	 * Die innere Klasse für die Reaktion auf Selektionsereignisse.
+	 *
+	 */
 	
 	private class SelectionHandler implements SelectionChangeEvent.Handler {
 
