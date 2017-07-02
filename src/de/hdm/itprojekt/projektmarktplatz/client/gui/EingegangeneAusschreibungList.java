@@ -20,7 +20,7 @@ public class EingegangeneAusschreibungList extends HorizontalPanel{
 	
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	
-	Projekt projekt = null;
+	Projekt projekt = new Projekt();
 
 	private Ausschreibung selectedAusschreibung = null;
 	private SingleSelectionModel<Ausschreibung> ssmAusschreibung = null;
@@ -60,7 +60,7 @@ public class EingegangeneAusschreibungList extends HorizontalPanel{
 	public void fillTable(){
 //		projektService.readAllProjekt(new ReadProjektCallback());
 //		projektService.readByIdProjektProjektmarktplatz(this.projekt, new ReadAusschreibungCallback());
-		projektService.readAllAusschreibung(new ReadAusschreibungCallback());
+		projektService.getAusschreibungenByProjekt(projekt, new ReadAusschreibungCallback());
 
 	}
 	

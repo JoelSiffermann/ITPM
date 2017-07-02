@@ -212,7 +212,7 @@ public class MainNavigationPanel extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 			RootPanel.get("main").clear();
 			info = new HorizontalPanel();
-			MeineBeteiligungList mbl = new MeineBeteiligungList();
+			MeineBewerbungList mbl = new MeineBewerbungList();
 			info.clear();
 			info.add(mbl);
 			RootPanel.get("main").add(info);

@@ -84,6 +84,9 @@ public class OrganisationseinheitMapper {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
+			stmt.executeUpdate("DELETE FROM `person` WHERE `o_id` = " + o.getId());
+			stmt.executeUpdate("DELETE FROM `team` WHERE `o_id` = " + o.getId());
+			stmt.executeUpdate("DELETE FROM `unternehmen` WHERE `o_id` = " + o.getId());
 			stmt.executeUpdate("DELETE FROM `organisationseinheit` WHERE Organisationseinheit_ID = " + o.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -15,6 +16,7 @@ import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 
 public class EingegangeneBewerbungList extends HorizontalPanel{
 	
@@ -29,6 +31,7 @@ public class EingegangeneBewerbungList extends HorizontalPanel{
 	private CellTable<Bewerbung> cellTable = new CellTable<Bewerbung>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
+	Organisationseinheit o = new Organisationseinheit();
 
 	Column<Bewerbung, String> col = new Column<Bewerbung, String>(new ClickableTextCell()){
 		@Override
@@ -47,6 +50,7 @@ public class EingegangeneBewerbungList extends HorizontalPanel{
 	
 	public void onLoad(){
 		super.onLoad();
+		o.setEmail(Cookies.getCookie("email"));
 		ssmBewerbung = new SingleSelectionModel<Bewerbung>();
 		ssmBewerbung.addSelectionChangeHandler(new SelectionHandler());
 		cellTable.addColumn(col, "Bewerbung");
@@ -58,9 +62,7 @@ public class EingegangeneBewerbungList extends HorizontalPanel{
 	}
 	
 	public void fillTable(){
-//		projektService.readAllProjekt(new ReadProjektCallback());
-//		projektService.readByIdProjektProjektmarktplatz(this.projekt, new ReadAusschreibungCallback());
-		projektService.readAllBewerbung(new ReadBewerbungCallback());
+		projektService.getEingegangeneBewerbungen(o, new ReadBewerbungCallback());
 
 	}
 	
@@ -87,9 +89,9 @@ public class EingegangeneBewerbungList extends HorizontalPanel{
 		public void onSelectionChange(SelectionChangeEvent event) {
 
 			Bewerbung selection = getSelectedBewerbung();
-//			AndereAusschreibungenAnzeigen ap = new AndereAusschreibungenAnzeigen(selection);
+			BewerbungAnzeigen ba = new BewerbungAnzeigen(selection);
 			hpInfo.clear();
-//			hpInfo.add(ap);
+			hpInfo.add(ba);
 		}
 		
 	}

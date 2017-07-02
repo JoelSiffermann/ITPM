@@ -20,7 +20,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
 public interface ProjektmarktplatzAdminAsync {
 
-	void getTest(AsyncCallback<String> callback);
+	
 
 	void insertOrg(Organisationseinheit org, AsyncCallback<Organisationseinheit> callback);
 
@@ -55,7 +55,7 @@ public interface ProjektmarktplatzAdminAsync {
 	void deleteBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 	
 
-	void insertBewertung(Bewertung bt, String id, AsyncCallback<Bewertung> callback);
+	void insertBewertung(Bewertung bt, AsyncCallback<Bewertung> callback);
 
 	void updateBewertung(Bewertung bt, AsyncCallback<Bewertung> callback);
 
@@ -156,7 +156,7 @@ public interface ProjektmarktplatzAdminAsync {
 
 	void updatePerson(Person pers, AsyncCallback<Person> callback);
 
-	void readAllBewerbungByAusschreibungId(String id, AsyncCallback<ArrayList<Bewerbung>> callback);
+	void readAllBewerbungByAusschreibung(Ausschreibung a, AsyncCallback<ArrayList<Bewerbung>> callback);
 
 	void readByEmail(Organisationseinheit o, AsyncCallback<Organisationseinheit> callback);
 
@@ -184,6 +184,24 @@ public interface ProjektmarktplatzAdminAsync {
 
 	void getAndereProjekte(Organisationseinheit o, Projektmarktplatz pm,
 			AsyncCallback<ArrayList<Projekt>> callback);
+
+	void getAndereProjekte(Organisationseinheit o,
+			AsyncCallback<ArrayList<Projekt>> callback);
+
+	void getEingegangeneBewerbungen(Organisationseinheit o,
+			AsyncCallback<ArrayList<Bewerbung>> callback);
+
+	void getAusschreibungenByProjekt(Projekt p,
+			AsyncCallback<ArrayList<Ausschreibung>> callback);
+
+	void getBewertungByBewerber(Organisationseinheit o,
+			AsyncCallback<Bewertung> callback);
+
+	void getMeineBewerbung(Organisationseinheit o,
+			AsyncCallback<ArrayList<Bewerbung>> callback);
+
+	void getAusschreibungByBewerbung(Bewerbung b,
+			AsyncCallback<Ausschreibung> callback);
 	
 	
 }

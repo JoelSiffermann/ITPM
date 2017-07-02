@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -12,8 +13,8 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
-
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
 
 public class AndereBeteiligungList extends HorizontalPanel {
@@ -25,6 +26,7 @@ public class AndereBeteiligungList extends HorizontalPanel {
 	private CellTable<Projekt> cellTable = new CellTable<Projekt>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
+	Organisationseinheit o = new Organisationseinheit();
 
 	Column<Projekt, String> col = new Column<Projekt, String>(new ClickableTextCell()){
 		@Override
@@ -36,6 +38,7 @@ public class AndereBeteiligungList extends HorizontalPanel {
 	
 	public void onLoad(){
 		super.onLoad();
+		o.setEmail(Cookies.getCookie("email"));
 		this.clear();
 		ssmProjekt = new SingleSelectionModel<Projekt>();
 		ssmProjekt.addSelectionChangeHandler(new SelectionHandler());
@@ -48,7 +51,7 @@ public class AndereBeteiligungList extends HorizontalPanel {
 	}
 	
 	public void fillTable(){
-		projektService.readAllProjekt(new ReadProjektCallback());
+		projektService.getMeineProjekte(o, new ReadProjektCallback());
 	}
 	
 	private class ReadProjektCallback implements AsyncCallback<ArrayList<Projekt>> {

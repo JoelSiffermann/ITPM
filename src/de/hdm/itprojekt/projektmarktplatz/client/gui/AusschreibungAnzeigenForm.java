@@ -112,7 +112,7 @@ public class AusschreibungAnzeigenForm extends HorizontalPanel {
 		
 		btAusschreibungBearbeiten.addClickHandler(new ClickHandler() {
 			
-			AusschreibungNeuForm ausschreibungNeu = new AusschreibungNeuForm();
+			AusschreibungNeuForm ausschreibungNeu = new AusschreibungNeuForm(projekt);
 
 			@Override
 			public void onClick(ClickEvent event) {

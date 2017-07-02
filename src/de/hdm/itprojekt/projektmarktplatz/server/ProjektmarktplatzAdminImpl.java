@@ -78,10 +78,7 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 
 	}
 
-	public String getTest() throws IllegalArgumentException {
-
-		return "TEST";
-	}
+	
 
 	// TEST
 	/*
@@ -263,7 +260,8 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	// ------->Erstellen einer Bewerbung<--------
 
 	public Bewerbung insertBewerbung(Bewerbung b) throws IllegalArgumentException {
-
+		Organisationseinheit org = this.getNutzerByEmail(b.getBewerber());
+		b.setBewerber(org);
 		try {
 			bMapper.einfuegen(b);
 		} catch (Exception e) {
@@ -305,11 +303,11 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	public ArrayList<Bewerbung> readAllBewerbungByAusschreibungId(String id) throws IllegalArgumentException {
+	public ArrayList<Bewerbung> readAllBewerbungByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 
 		try {
 
-			return bMapper.getAllByAusschreibungId(id);
+			return bMapper.getAllByAusschreibung(a);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -335,25 +333,9 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 
 	// ------->Erstellen einer Bewertung<--------
 
-	public Bewertung insertBewertung(Bewertung bt, String id) throws IllegalArgumentException {
+	public Bewertung insertBewertung(Bewertung bt) throws IllegalArgumentException {
 
 		try {
-			Bewerbung b = new Bewerbung();
-			Ausschreibung a = new Ausschreibung();
-			Partnerprofil pp = new Partnerprofil();
-			Organisationseinheit o = new Organisationseinheit();
-			Organisationseinheit person = new Organisationseinheit();
-
-			b.setId(Integer.parseInt(id));
-			b.setAusschreibung(bMapper.getById(b).getAusschreibung());
-			a.setId(b.getAusschreibung().getId());
-			System.out.println("HIER Ausschreibung ID " + a.getId());
-			pp.setId(ppMapper.getByAusschreibungId(a).getId());
-			System.out.println("Partnerproifl ID " + pp.getId());
-			o.setId(orgMapper.getByPartnerprofilId(pp).getId());
-
-			person = orgMapper.getById(person);
-			bt.setPerson(person);
 			bwMapper.einfuegen(bt);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1122,11 +1104,111 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 	
+	@Override
+	public ArrayList<Projekt> getAndereProjekte(Organisationseinheit o) throws IllegalArgumentException {
+		Organisationseinheit org = this.getNutzerByEmail(o);
+		try {
+			return this.projMapper.getByAndereNutzer(org);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Organisationseinheit getNutzerByEmail(Organisationseinheit o){
 		try {
 			Organisationseinheit org = this.orgMapper.getByEmail(o);
 			System.out.println(org.getId() + " " + org.getEmail());
 			return org;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public ArrayList<Bewerbung> getEingegangeneBewerbungen(Organisationseinheit o)
+			throws IllegalArgumentException {
+		Organisationseinheit org = this.getNutzerByEmail(o);
+		ArrayList<Ausschreibung> a = this.getAusschreibungenByNutzer(org);
+		ArrayList<Bewerbung> result = new ArrayList<Bewerbung>();
+		ArrayList<Bewerbung> result2 = new ArrayList<Bewerbung>();
+		for(Ausschreibung a1 : a){
+			try {
+				result2.addAll(this.bMapper.getAllByAusschreibung(a1));
+				for(Bewerbung b : result2) {
+					org = this.readByIdOrg(b.getBewerber());
+					b.setBewerber(org);
+					result.add(b);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public ArrayList<Ausschreibung> getAusschreibungenByNutzer(Organisationseinheit o)
+			throws IllegalArgumentException {
+		ArrayList<Projekt> p = new ArrayList<Projekt>();
+		try {
+			p = this.projMapper.getAllbyNutzer(o);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for(Projekt p1 : p){
+		try {
+			return this.aMapper.getAusschreibungenByProjekt(p1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<Ausschreibung> getAusschreibungenByProjekt(Projekt p) throws IllegalArgumentException {
+		try {
+			return this.aMapper.getAusschreibungenByProjekt(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Bewertung getBewertungByBewerber(Organisationseinheit o) throws IllegalArgumentException {
+		try {
+			return this.bwMapper.getByBewerber(o);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public ArrayList<Bewerbung> getMeineBewerbung(Organisationseinheit o) throws IllegalArgumentException {
+		Organisationseinheit org = this.getNutzerByEmail(o);
+		try {
+			return this.bMapper.getBewerbungenByBewerber(org);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Ausschreibung getAusschreibungByBewerbung(Bewerbung b) throws IllegalArgumentException {
+		try {
+			return this.bMapper.getAusschreibung(b);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -252,5 +252,32 @@ public class ProjektMapper {
 		return result;
 	}
 	
+	public ArrayList<Projekt> getByAndereNutzer(Organisationseinheit o) throws Exception {
+		
+		Connection con = DBConnection.connection();
+		ArrayList<Projekt> result = new ArrayList<Projekt>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `projekt` WHERE `person_id` !='" + o.getId() + "'");
+				while (rs.next()) {
+					Projekt p = new Projekt();
+					p.setId(rs.getInt("Projekt_ID"));
+					p.setName(rs.getString("Name"));
+					p.setInhalt(rs.getString("Inhalt"));
+					p.setStart(rs.getDate("Start"));
+					p.setEnde(rs.getDate("Ende"));
+					Projektmarktplatz pa = new Projektmarktplatz();
+					pa.setId(rs.getInt("projektmarktplatz_id"));
+					p.setProjektmarktplatz(pa);;
+					p.setProjektleiter(o);
+					result.add(p);
+				}
+				stmt = con.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	
 }

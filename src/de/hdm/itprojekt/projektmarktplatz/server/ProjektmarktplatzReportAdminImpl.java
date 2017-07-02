@@ -144,7 +144,7 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 		ArrayList<Bewerbung> result = new ArrayList<Bewerbung>();
 		for(Ausschreibung a1 : a){
 			try {
-				result.addAll(this.bMapper.getAllByAusschreibungId(a1.getId() + ""));
+				result.addAll(this.bMapper.getAllByAusschreibung(a1));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -318,7 +318,7 @@ public class ProjektmarktplatzReportAdminImpl extends RemoteServiceServlet
 	
 	public ArrayList<Bewerbung> getBewerbungbyAusschreibung(Ausschreibung a){
 		try {
-			return this.bMapper.getAllByAusschreibungId(a.getId() + "");
+			return this.bMapper.getAllByAusschreibung(a);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

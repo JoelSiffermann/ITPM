@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -14,6 +15,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Bewerbung;
+import de.hdm.itprojekt.projektmarktplatz.shared.bo.Organisationseinheit;
 
 public class MeineBewerbungList extends HorizontalPanel {
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
@@ -24,6 +26,7 @@ public class MeineBewerbungList extends HorizontalPanel {
 	private CellTable<Bewerbung> cellTable = new CellTable<Bewerbung>();
 	HorizontalPanel hpList = new HorizontalPanel();
 	HorizontalPanel hpInfo = new HorizontalPanel();
+	Organisationseinheit o = new Organisationseinheit();
 
 	Column<Bewerbung, String> col = new Column<Bewerbung, String>(new ClickableTextCell()){
 		@Override
@@ -35,18 +38,20 @@ public class MeineBewerbungList extends HorizontalPanel {
 	
 	public void onLoad(){
 		super.onLoad();
+		o.setEmail(Cookies.getCookie("email"));
 		ssmBewerbung = new SingleSelectionModel<Bewerbung>();
 		ssmBewerbung.addSelectionChangeHandler(new SelectionHandler());
 		cellTable.addColumn(col, "Bewerbungen");
 		fillTable();
 		cellTable.setSelectionModel(ssmBewerbung);
 		hpList.add(cellTable);
+		this.clear();
 		this.add(hpList);
 		this.add(hpInfo);
 	}
 	
 	public void fillTable(){
-		projektService.readAllBewerbung(new ReadBewerbungCallback());
+		projektService.getMeineBewerbung(o, new ReadBewerbungCallback());
 	}
 	
 	private class ReadBewerbungCallback implements AsyncCallback<ArrayList<Bewerbung>> {

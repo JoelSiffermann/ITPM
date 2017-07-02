@@ -53,7 +53,7 @@ public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 	Ausschreibung ausschreibung;
 	Partnerprofil partnerprofil;
 	Eigenschaft eigenschaft;
-	Bewerbung bewerbung;
+//	Bewerbung bewerbung;
 	/**
 	 * Konstruktor
 	 * @param a Ausschreibung
@@ -165,7 +165,7 @@ public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 	private class SichBewerbenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			BewerbungNeuForm bnf = new BewerbungNeuForm(null);
+			BewerbungNeuForm bnf = new BewerbungNeuForm(ausschreibung);
 			vpAusschreibungAnzeigenForm2.clear();
 			vpAusschreibungAnzeigenForm2.add(bnf);
 		}

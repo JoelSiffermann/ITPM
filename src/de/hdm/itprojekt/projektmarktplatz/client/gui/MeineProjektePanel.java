@@ -15,6 +15,7 @@ import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -25,6 +26,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.projektmarktplatz.client.ClientSideSettings;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdmin;
 import de.hdm.itprojekt.projektmarktplatz.shared.ProjektmarktplatzAdminAsync;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projekt;
@@ -38,7 +40,7 @@ public class MeineProjektePanel extends HorizontalPanel {
 	 * @see com.google.gwt.user.client.ui.Widget#onLoad()
 	 */
 	
-//	private final ProjektmarktplatzAdminAsync projektService = GWT.create(ProjektmarktplatzAdmin.class);
+	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
 	
 	Projekt projekt; // = new Projekt();
 	
@@ -75,42 +77,7 @@ public class MeineProjektePanel extends HorizontalPanel {
 			taProjektBeschreibung.setValue(projekt.getInhalt());
 		}
 		
-//		final List<String> PROJEKTE = Arrays.asList("Projekt 1", "Projekt 2", "Projekt 3", "Projekt 4");
-		
-		
-		// Create a cell to render each value.
-//		TextCell textCell = new TextCell();
-
-		// Create a CellList that uses the cell.
-//		CellList<String> cellList = new CellList<String>(textCell);
-//		cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-
-		// Add a selection model to handle user selection.
-//		final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
-//		cellList.setSelectionModel(selectionModel);
-//		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-//			public void onSelectionChange(SelectionChangeEvent event) {
-//				String selected = selectionModel.getSelectedObject();
-//
-//				if (selected != null) {
-//					// Window.alert("You selected: " + selected);
-//					lblProjektName.setText(selected.toString());
-//				}
-//
-//			}
-//		});
-//
-//		cellList.addStyleName("scrollable");
-//		cellList.setPageSize(30);
-//	    cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
-//	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
-//
-//		cellList.setRowCount(PROJEKTE.size(), true);
-
-		// Push the data into the widget.
-//		cellList.setRowData(0, PROJEKTE);
-		
-		// Set the value in the text box when the user selects a date
+//	
 		startPicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
 			public void onValueChange(ValueChangeEvent<Date> event) {
 				Date date = event.getValue();
@@ -147,16 +114,6 @@ public class MeineProjektePanel extends HorizontalPanel {
 
 		});
 		
-		btProjektEntfernen.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				Window.alert("Button entfernen noch herstellen");
-			}
-			
-		});
-		
 		btAusschreibungAnzeigen.addClickHandler(new ClickHandler() {
 
 			AusschreibungAnzeigenForm ausschreibungAnzeigen = new AusschreibungAnzeigenForm(null);
@@ -172,7 +129,8 @@ public class MeineProjektePanel extends HorizontalPanel {
 		
 		btAusschreibungErstellen.addClickHandler(new ClickHandler() {
 			
-			AusschreibungNeuForm ausschreibungNeu = new AusschreibungNeuForm();
+			
+			AusschreibungNeuForm ausschreibungNeu = new AusschreibungNeuForm(projekt);
 			@Override
 			public void onClick(ClickEvent event) {
 				
@@ -184,6 +142,29 @@ public class MeineProjektePanel extends HorizontalPanel {
 
 		endPicker.setValue(projekt.getEnde(), true);
 
+		
+		btProjektEntfernen.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				projektService.deleteProjekt(projekt, new AsyncCallback<Void>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+				});
+			}
+			
+		});
 		vpMeineProjekteForm1.add(lblProjektmarktplatz);
 		vpMeineProjekteForm1.add(lblProjektName);
 		vpMeineProjekteForm1.add(lblStart);

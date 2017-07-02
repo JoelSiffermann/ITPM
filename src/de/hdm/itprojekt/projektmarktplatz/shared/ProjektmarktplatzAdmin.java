@@ -21,7 +21,7 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 @RemoteServiceRelativePath("projektmarktplatz")
 public interface ProjektmarktplatzAdmin extends RemoteService {
 
-	public String getTest() throws IllegalArgumentException;
+	
 
 	public Organisationseinheit insertOrg(Organisationseinheit org) throws IllegalArgumentException;
 	public Organisationseinheit updateOrg(Organisationseinheit org ) throws IllegalArgumentException;
@@ -42,12 +42,12 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public ArrayList <Bewerbung> readAllBewerbung() throws IllegalArgumentException;
 	public void deleteBewerbung (Bewerbung b) throws IllegalArgumentException;
 	
-	public Bewertung insertBewertung (Bewertung bt, String id) throws IllegalArgumentException;
+	public Bewertung insertBewertung (Bewertung bt) throws IllegalArgumentException;
 	public Bewertung updateBewertung (Bewertung bt) throws IllegalArgumentException;
 	public Bewertung readByIdBewertung (Bewertung bt) throws IllegalArgumentException;
 	public ArrayList <Bewertung> readAllBewertung() throws IllegalArgumentException;
 	public void deleteBewertung (Bewertung bt) throws IllegalArgumentException;
-	public ArrayList<Bewerbung> readAllBewerbungByAusschreibungId(String id) throws IllegalArgumentException;
+	public ArrayList<Bewerbung> readAllBewerbungByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 	
 	public Eigenschaft insertEigenschaft (ArrayList<Eigenschaft> eg) throws IllegalArgumentException;
 	public Eigenschaft updateEigenschaft (Eigenschaft eg) throws IllegalArgumentException;
@@ -121,6 +121,21 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 			throws IllegalArgumentException;
 
 	ArrayList<Projekt> getAndereProjekte(Organisationseinheit o, Projektmarktplatz pm)
+			throws IllegalArgumentException;
+
+	ArrayList<Projekt> getAndereProjekte(Organisationseinheit o)
+			throws IllegalArgumentException;
+
+	ArrayList<Bewerbung> getEingegangeneBewerbungen(Organisationseinheit o)
+			throws IllegalArgumentException;
+
+	ArrayList<Ausschreibung> getAusschreibungenByProjekt(Projekt p)
+			throws IllegalArgumentException;
+	Bewertung getBewertungByBewerber(Organisationseinheit o)
+			throws IllegalArgumentException;
+	ArrayList<Bewerbung> getMeineBewerbung(Organisationseinheit o)
+			throws IllegalArgumentException;
+	Ausschreibung getAusschreibungByBewerbung(Bewerbung b)
 			throws IllegalArgumentException;
 	
 }
