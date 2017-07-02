@@ -104,5 +104,14 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	public Unternehmen readByIdUnternehmen(Unternehmen u) throws IllegalArgumentException;
 	public ArrayList<Unternehmen> readAllUnternehmen() throws IllegalArgumentException;
 	public void deleteUnternehmen(Unternehmen u) throws IllegalArgumentException;
+
+	Eigenschaft getGesuchtesProf(Partnerprofil p)
+			throws IllegalArgumentException;
+
+	Partnerprofil getProfilbyAusschreibung(Ausschreibung a)
+			throws IllegalArgumentException;
+
+	ArrayList<Beteiligung> getBeteiligungBy(Projekt p)
+			throws IllegalArgumentException;
 	
 }

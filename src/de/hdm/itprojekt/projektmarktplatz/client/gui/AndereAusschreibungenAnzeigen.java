@@ -8,6 +8,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -52,15 +54,22 @@ public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 	Partnerprofil partnerprofil;
 	Eigenschaft eigenschaft;
 	Bewerbung bewerbung;
-	
+	/**
+	 * Konstruktor
+	 * @param a Ausschreibung
+	 */
 	public AndereAusschreibungenAnzeigen(Ausschreibung a) {
 		this.ausschreibung = a;
 	}
 
+	/**
+	 * Baut das Widget auf.
+	 */
 	public void onLoad() {
 
 		super.onLoad();
 
+		getPartnerprofil();
 		taAusschreibungInhalt.setWidth("300px");
 		taAusschreibungInhalt.setHeight("300px");
 		taAusschreibungInhalt.setEnabled(false);
@@ -69,8 +78,8 @@ public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 			lblAusschreibungName.setText(ausschreibung.getBezeichnung());
 			taAusschreibungInhalt.setText(ausschreibung.getInhalt());
 			taAusschreibungInhalt.setValue(ausschreibung.getInhalt());
-//			lblPartnerProfilBeschreibung.setText(partnerprofil.getAusschreibung().toString());
-//			lblPartnerProfilBeschreibung.setText(eigenschaft.getPartnerprofil().toString());
+//			tbPartnerProfilBeschreibung.setText(eigenschaft.getBezeichnung());
+//			tbPartnerProfilWert.setText(eigenschaft.getWert());
 
 		}
 		
@@ -108,6 +117,51 @@ public class AndereAusschreibungenAnzeigen extends HorizontalPanel {
 
 	};
 
+	private void getPartnerprofil() {
+		projektService.getProfilbyAusschreibung(ausschreibung, new ProfilCallback());
+	}
+
+	private class ProfilCallback implements AsyncCallback<Partnerprofil>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Partnerprofil result) {
+			// TODO Auto-generated method stub
+			if (result != null){
+				Window.alert(result.getId()+""); 
+			partnerprofil = result;
+			projektService.getGesuchtesProf(result, new EigenschaftCallback());
+			}else{
+				Window.alert("Objekt leer");
+			}
+				
+		}
+		
+	}
+	
+	private class EigenschaftCallback implements AsyncCallback<Eigenschaft> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Eigenschaft result) {
+			// TODO Auto-generated method stub
+			eigenschaft = result;
+			tbPartnerProfilBeschreibung.setText(eigenschaft.getBezeichnung());
+			tbPartnerProfilWert.setText(eigenschaft.getWert());
+		}
+		
+	}
+	
 	private class SichBewerbenClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {

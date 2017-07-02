@@ -3,6 +3,8 @@ package de.hdm.itprojekt.projektmarktplatz.client.gui;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.omg.PortableInterceptor.SUCCESSFUL;
+
 import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -12,12 +14,14 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -123,6 +127,7 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		});
 
 		btBewertungAnzeigen.addClickHandler(new BewertungAnzeigenClickHandler());
+		btBeteiligungBeenden.addClickHandler(new BeendenClickHandler());
 
 		endPicker.setValue(new Date(), true);
 
@@ -157,7 +162,30 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 	}
 
 	public void fillTable() {
-		projektService.readAllBeteiligung(new ReadBeteiligungCallback());
+		projektService.getBeteiligungBy(projekt, new ReadBeteiligungCallback());
+	}
+	
+	private class BeendenClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			projektService.deleteBeteiligung(selectedBeteiligung, new DeleteCallback());
+		}
+		
+	}
+	
+	private class DeleteCallback implements AsyncCallback<Void> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			Window.alert("Konnte nicht gelöscht werden");
+		}
+
+		@Override
+		public void onSuccess(Void result) {
+			RootPanel.get("main").clear();
+		}
+		
 	}
 
 	private class ReadBeteiligungCallback implements AsyncCallback<ArrayList<Beteiligung>> {

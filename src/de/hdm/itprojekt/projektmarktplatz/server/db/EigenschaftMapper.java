@@ -204,4 +204,26 @@ public class EigenschaftMapper {
 		}
 		return result;
 	}
+	
+	public Eigenschaft getByProfil(Partnerprofil p) throws Exception {
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+			System.out.println("SELECT * FROM `eigenschaft` WHERE `partner_id` = " + p.getId()); 
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft` WHERE `partner_id` = " + p.getId());
+			if (rs.next()) {
+				Eigenschaft c = new Eigenschaft();
+		        c.setId(rs.getInt("Eigenschaft_ID"));
+		        c.setBezeichnung(rs.getString("Bezeichnung"));
+		        c.setWert(rs.getString("Wert"));
+		        Partnerprofil pp = new Partnerprofil();
+				pp.setId(rs.getInt("partner_id"));
+				c.setPartnerprofil(pp);
+				return c;
+				}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
