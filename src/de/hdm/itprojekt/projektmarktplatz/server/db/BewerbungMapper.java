@@ -20,7 +20,10 @@ public class BewerbungMapper {
 	protected BewerbungMapper(){
 		
 	}
-	
+	/**
+	 * 
+	 * @return bewerbungMapper
+	 */
 	public static BewerbungMapper bewerbungMapper() {
 		if (bewerbungMapper == null) {
 			bewerbungMapper = new BewerbungMapper();
@@ -29,6 +32,12 @@ public class BewerbungMapper {
 		return bewerbungMapper;
 	}
 
+	/**
+	 * 
+	 * @param b Bewerbung
+	 * @return bewerbungMapper
+	 * @throws Exception
+	 */
 	public Bewerbung einfuegen(Bewerbung b) throws Exception {
 		Connection con = DBConnection.connection();
 		//1
@@ -68,6 +77,12 @@ public class BewerbungMapper {
 		return b;
 	}
 
+	/**
+	 * 
+	 * @param b Bewerbung
+	 * @return bewerbungMapper
+	 * @throws Exception
+	 */
 	public Bewerbung speichern(Bewerbung b) throws Exception {
 		Connection con = DBConnection.connection();
 		String datum = "";
@@ -85,6 +100,12 @@ public class BewerbungMapper {
 
 		return b;
 	}
+	
+	/**
+	 * 
+	 * @param b Bewerbung
+	 * @throws Exception
+	 */
 
 	public void loeschen(Bewerbung b) throws Exception {
 		Connection con = DBConnection.connection();
@@ -98,6 +119,12 @@ public class BewerbungMapper {
 		}
 	}
 
+	/**
+	 * 
+	 * @param b Bewerbung
+	 * @return bewerbungMapper
+	 * @throws Exception
+	 */
 	public Bewerbung getById(Bewerbung b) throws Exception {
 		Connection con = DBConnection.connection();
 
@@ -127,6 +154,11 @@ public class BewerbungMapper {
 		return b;
 	}
 
+	/**
+	 * 
+	 * @return result
+	 * @throws Exception
+	 */
 	public ArrayList<Bewerbung> getAll() throws Exception {
 
 		Connection con = DBConnection.connection();
@@ -174,6 +206,12 @@ public class BewerbungMapper {
 
 	}
 	
+	/**
+	 * 
+	 * @param id AusschreibungId
+	 * @return result
+	 * @throws Exception
+	 */
 	public ArrayList<Bewerbung> getAllByAusschreibungId(String id) throws Exception {
 
 		Connection con = DBConnection.connection();
@@ -221,6 +259,12 @@ public class BewerbungMapper {
 
 	}
 	
+	/**
+	 * 
+	 * @param o Organisationseinheit
+	 * @return result
+	 * @throws Exception
+	 */
 	public ArrayList<Bewerbung> getBewerbungenByBewerber(Organisationseinheit o) throws Exception {
 
 		Connection con = DBConnection.connection();
