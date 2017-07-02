@@ -69,31 +69,31 @@ public class ProjektmarktplatzProjekt implements EntryPoint {
 
 	    LoginServiceAsync loginService = GWT.create(LoginService.class);
 	    
-	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-	      public void onFailure(Throwable error) {
-	      }
-
-	      public void onSuccess(LoginInfo result) {
-	        loginInfo = result;
-	        if(loginInfo.isLoggedIn()) {
-	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
-//	        	Window.alert("Login erfolgt.");
-	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
-//	        	Cookies.setCookie("email", "email@test.de");
-//	    		org.setEmail(Cookies.getCookie("email")); 
-//	        	Organisationseinheit o = new Organisationseinheit();
-//	        	o.setEmail(loginInfo.getEmailAddress());
-//	        	loadGUI(o);
-	        	loadGUI();
-	        } else {
-	          loadLogin();
-	        }
-	      }
-	    });
+//	    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+//	      public void onFailure(Throwable error) {
+//	      }
+//
+//	      public void onSuccess(LoginInfo result) {
+//	        loginInfo = result;
+//	        if(loginInfo.isLoggedIn()) {
+//	          //TODO: Wenn Login Erfolgreich dann Gui aufrufen.
+////	        	Window.alert("Login erfolgt.");
+//	        	Cookies.setCookie("email", loginInfo.getEmailAddress());
+////	        	Cookies.setCookie("email", "email@test.de");
+////	    		org.setEmail(Cookies.getCookie("email")); 
+////	        	Organisationseinheit o = new Organisationseinheit();
+////	        	o.setEmail(loginInfo.getEmailAddress());
+////	        	loadGUI(o);
+//	        	loadGUI();
+//	        } else {
+//	          loadLogin();
+//	        }
+//	      }
+//	    });
 	    
-//	    Cookies.setCookie("email", "hdm@hdm.de");
-//	    Cookies.setCookie("profilid", "2");
-//		loadGUI();
+	    Cookies.setCookie("email", "hdm@hdm.de");
+	    Cookies.setCookie("profilid", "2");
+		loadGUI();
 
 		
 	}

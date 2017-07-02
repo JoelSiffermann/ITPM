@@ -12,6 +12,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
@@ -95,9 +96,11 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 		cellTable.setSelectionModel(ssmBeteiligung);
 		vpAndereProjekteForm2.add(cellTable);
 		
-		if (this.beteiligung != null) {
-			lblName.setText(beteiligung.getOrganisationseinheit().getName());
-			lblBeruf.setText(beteiligung.getOrganisationseinheit().getPartnerprofil().getAusschreibung().getBezeichnung());
+		if (this.projekt != null) {
+			lblName.setText(projekt.getName());
+//			lblErfahrung.setText(projekt.getPerson().getErfahrung() + "");
+//			lblName.setText(beteiligung.getOrganisationseinheit().getName());
+//			lblBeruf.setText(beteiligung.getOrganisationseinheit().getPartnerprofil().getAusschreibung().getBezeichnung());
 		}
 		
 //		lbBeteiligung.addItem("Beteiligung 1");
@@ -158,6 +161,8 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 
 	public void fillTable() {
 		projektService.readAllBeteiligung(new ReadBeteiligungCallback());
+//		projektService.readAllAusschreibung(new ReadAusschreibungCallback());
+
 	}
 
 	private class ReadBeteiligungCallback implements AsyncCallback<ArrayList<Beteiligung>> {
@@ -170,11 +175,11 @@ public class AndereBeteiligungPanel extends HorizontalPanel {
 
 		@Override
 		public void onSuccess(ArrayList<Beteiligung> result) {
+			
 			cellTable.setRowData(0, result);
 			cellTable.setRowCount(result.size(), true);
 
 		}
-
 	}
 
 	private class SelectionHandler implements SelectionChangeEvent.Handler {

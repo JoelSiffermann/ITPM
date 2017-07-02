@@ -32,7 +32,7 @@ public class AndereProjektePanel extends HorizontalPanel {
 	 */
 
 	ProjektmarktplatzAdminAsync projektService = ClientSideSettings.getProjektmarktplatzVerwaltung();
-	
+
 	Projektmarktplatz projektmarktplatz;
 	Projekt projekt;
 
@@ -63,7 +63,7 @@ public class AndereProjektePanel extends HorizontalPanel {
 			return object.getBezeichnung();
 		}
 	};
-	
+
 	public AndereProjektePanel(Projekt p) {
 		this.projekt = p;
 	}
