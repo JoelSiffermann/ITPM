@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.projektmarktplatz.server;
 
 import java.util.ArrayList;
+
+
 import java.util.Date;
 import java.util.Vector;
 
@@ -32,11 +34,15 @@ import de.hdm.itprojekt.projektmarktplatz.shared.bo.Projektmarktplatz;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Team;
 import de.hdm.itprojekt.projektmarktplatz.shared.bo.Unternehmen;
 
+/**
+ * @author Ayse Guelay
+ * @author Ersin Barut
+ */
+
+
 public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements ProjektmarktplatzAdmin {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4685023405692030606L;
 
 	private AusschreibungMapper aMapper = null;
@@ -52,10 +58,18 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	private TeamMapper tMapper = null;
 	private UnternehmenMapper uMapper = null;
 
+	/**
+	 *
+	 * @throws IllegalArgumentException 
+	 */
 	public ProjektmarktplatzAdminImpl() throws IllegalArgumentException {
 
 	}
 
+	/**
+	 *Beinhaltet alle Mapper- Klassen
+	 * @throws IllegalArgumentException 
+	 */
 	@Override
 	public void init() throws IllegalArgumentException {
 		/*
@@ -89,6 +103,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * ** ABSCHNITT, Anfang: Methoden für Ausschreibung-Objekte
 	 * *************************************************************************
 	 * **
+	 */
+	
+	/**
+	 *Ausschreibung erstellen
+	 * @return a
+	 * @throws Exception 
 	 */
 	public Ausschreibung erstellen() throws Exception {
 
@@ -130,7 +150,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * *************************************************************************
 	 * **
 	 */
-	// Erstellen einer Organisationseinheit: Achtung, mit Fremdschlüssel.
+	// 
+	
+	/**
+	 *Erstellen einer Organisationseinheit: Achtung, mit Fremdschlüssel.
+	 *@param org Organisationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Organisationseinheit insertOrg(Organisationseinheit org) throws IllegalArgumentException {
 
 		try {
@@ -142,6 +169,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
+	/**
+	 *Bearbeiten einer Organisationseinheit
+	 *@param org Organisationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Organisationseinheit updateOrg(Organisationseinheit org) throws IllegalArgumentException {
 
 		try {
@@ -153,7 +186,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 
 		return null;
 	}
-
+	/**
+	 *Liest eine Organisationseinheit 
+	 *@param org Organisationseinheit
+	 * @return org2
+	 * @throws IllegalArgumentException 
+	 */
 	public Organisationseinheit readByIdOrg(Organisationseinheit org) throws IllegalArgumentException {
 		Organisationseinheit org2 = null;
 
@@ -166,6 +204,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 
 		return org2;
 	}
+	/**
+	 *Liest alle Organisationseinheiten
+	 *@param org Organisationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Organisationseinheit> readAllOrg() throws IllegalArgumentException {
 
@@ -178,7 +222,11 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 
 		return null;
 	}
-
+	/**
+	 *Loescht eine Organisationseinheit 
+	 *@param org Organisationseinheit
+	 * @throws IllegalArgumentException 
+	 */
 	public void deleteOrg(Organisationseinheit org) throws IllegalArgumentException {
 		try {
 			orgMapper.loeschen(org);
@@ -195,7 +243,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Erstellen einer Ausschreibung<--------
+	
+	/**
+	 *Erstellen einer Ausschreibung
+	 *@param a Ausschreibung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	@Override
 	public Ausschreibung insertAusschreibung(Ausschreibung a) throws IllegalArgumentException {
@@ -209,6 +263,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	}
 
 	// ----------->Bearbeiten einer Ausschreibung<----------
+	
+	/**
+	 * Bearbeiten einer Ausschreibung
+	 *@param a Ausschreibung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Ausschreibung updateAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 		try {
@@ -219,7 +280,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// -------->Auslesen einer Ausschreibung<---------
+
+	/**
+	 * Auslesen einer Ausschreibung
+	 *@param a Ausschreibung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Ausschreibung readByIdAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 
@@ -231,7 +298,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Auslesen aller Ausschreibungen<--------
+	
+	/**
+	 * Auslesen aller Ausschreibungen
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Ausschreibung> readAllAusschreibung() throws IllegalArgumentException {
 
@@ -243,7 +315,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ----->Löschen einer Ausschreibung<--------
+
+	
+	/**
+	 * >Loeschen einer Ausschreibung
+	 *@param a Ausschreibung
+	 * @throws IllegalArgumentException 
+	 */
 
 	public void deleteAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 		try {
@@ -260,7 +338,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Erstellen einer Bewerbung<--------
+
+	
+	/**
+	 * Erstellen einer Bewerbung
+	 *@param b Bewerbung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Bewerbung insertBewerbung(Bewerbung b) throws IllegalArgumentException {
 
@@ -271,7 +356,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
-	// ------->Bearbeiten einer Bewerbung<--------
+	
+	/**
+	 *Bearbeiten einer Bewerbung
+	 *@param b Bewerbung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+
 
 	public Bewerbung updateBewerbung(Bewerbung b) throws IllegalArgumentException {
 		try {
@@ -282,7 +374,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Auslesen einer Bewerbung<--------
+	
+	/**
+	 * Auslesen einer Bewerbung
+	 *@param b Bewerbung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Bewerbung readByIdBewerbung(Bewerbung b) throws IllegalArgumentException {
 		try {
@@ -293,8 +391,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Auslesen aller Bewerbungen<--------
 
+	/**
+	 * Auslesen aller Bewerbungen
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public ArrayList<Bewerbung> readAllBewerbung() throws IllegalArgumentException {
 
 		try {
@@ -304,6 +406,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
+	
+	/**
+	 *Liest alle Bewerbungen einer Ausschreibung
+	 *@param id String
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Bewerbung> readAllBewerbungByAusschreibungId(String id) throws IllegalArgumentException {
 
@@ -316,8 +425,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Löschen einer Bewerbung<--------
 
+	/**
+	 *Loeschen einer Bewerbung<
+	 *@param b Bewerbung 
+	 * @throws IllegalArgumentException 
+	 */
+
+	
 	public void deleteBewerbung(Bewerbung b) throws IllegalArgumentException {
 		try {
 			bMapper.loeschen(b);
@@ -333,8 +448,15 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Erstellen einer Bewertung<--------
-
+	
+	/**
+	 * Erstellen einer Bewertung
+	 *@param id String
+	 *@param bt Bewertung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+	
 	public Bewertung insertBewertung(Bewertung bt, String id) throws IllegalArgumentException {
 
 		try {
@@ -361,7 +483,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Bearbeiten einer Bewertung<--------
+
+	/**
+	 * Bearbeiten einer Bewertung
+	 *@param bt Bewertung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Bewertung updateBewertung(Bewertung bt) throws IllegalArgumentException {
 		try {
@@ -372,7 +500,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Auslesen einer Bewertung<--------
+
+
+	/**
+	 * Auslesen einer Bewertung
+	 *@param bt Bewertung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Bewertung readByIdBewertung(Bewertung bt) throws IllegalArgumentException {
 		try {
@@ -383,7 +518,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Auslesen aller Bewertungen<--------
+
+	/**
+	 * Auslesung aller Bewertungen
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Bewertung> readAllBewertung() throws IllegalArgumentException {
 
@@ -395,7 +535,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Löschen einer Bewerbung<--------
+
+	/**
+	 *Loeschen einer Bewertung
+	 *@param bt Bewertung
+	 * @throws IllegalArgumentException 
+	 */
 
 	public void deleteBewertung(Bewertung bt) throws IllegalArgumentException {
 		try {
@@ -412,7 +557,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Einfügen einer Eigenschaft<--------
+
+	/**
+	 *Einfuegen einer Eigenschaft
+	 *@param eg ArrayList<Eigenschaft>
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Eigenschaft insertEigenschaft(ArrayList<Eigenschaft> eg) throws IllegalArgumentException {
 		try {
@@ -423,7 +574,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Bearbeiten einer Eigenschaft<--------
+
+	
+	/**
+	 *Bearbeiten einer Eigenschaft
+	 *@param eg Eigenschaft
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Eigenschaft updateEigenschaft(Eigenschaft eg) throws IllegalArgumentException {
 		try {
@@ -434,7 +592,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen einer Eigenschaft<--------
+	/**
+	 *Lesen einer Eigenschaft
+	 *@param eg Eigenschaft
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Eigenschaft readByIdEigenschaft(Eigenschaft eg) throws IllegalArgumentException {
 		try {
@@ -445,7 +608,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen aller Eigenschaften<--------
+	
+	/**
+	 *Lesen aller Eigenschaften
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Eigenschaft> readAllEigenschaft() throws IllegalArgumentException {
 
@@ -456,6 +624,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
+	
+	/**
+	 *Lesen aller Eigenschaften eines Partnerprofils
+	 *@param p Partnerprofil
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Eigenschaft> readAllEigenschaft(Partnerprofil p) throws IllegalArgumentException {
 
@@ -467,7 +642,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Löschen einer Eigenschaft<--------
+
+	/**
+	 *Loeschen einer Eigenschaft
+	 *@param eg Eigenschaft
+	 * @throws IllegalArgumentException 
+	 */
 
 	public void deleteEigenschaft(Eigenschaft eg) throws IllegalArgumentException {
 		try {
@@ -484,7 +664,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Einfügen eines Partnerprofils<--------
+
+	/**
+	 *Einfuegen eines Partnerprofil
+	 *@param pp Partnerprofil
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Partnerprofil insertPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 		try {
@@ -495,7 +681,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Bearbeiten eines Partnerprofils<--------
+
+	/**
+	 *Bearbeiten eines Partnerprofils
+	 *@param pp Partnerprofil
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Partnerprofil updatePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 		try {
@@ -506,7 +698,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen eines Partnerprofils<--------
+	
+	/**
+	 *Lesen eines Partnerprofil
+	 *@param pp Partnerprofil
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+
 
 	public Partnerprofil readByIdPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 		try {
@@ -518,6 +717,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	}
 
 	// ------->Lesen aller Partnerprofile<--------
+	/**
+	 *Lesen aller Partnerprofile
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+
 
 	public ArrayList<Partnerprofil> readAllPartnerprofil() throws IllegalArgumentException {
 		try {
@@ -528,7 +733,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Löschen eines Partnerprofils<--------
+
+	/**
+	 *Loeschen eines Partnerprofils
+	 *@param pp Partnerprofil
+	 * @throws IllegalArgumentException 
+	 */
+
 
 	public void deletePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 		try {
@@ -545,7 +756,16 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Einfügen einer Person<--------
+
+	
+	/**
+	 *Einfuegen eines Person
+	 *@param pers Person
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+
+	
 	public Person insertPerson(Person pers) throws IllegalArgumentException {
 		Person p = new Person();
 		try {
@@ -578,6 +798,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
+	
+	/**
+	 *Liest einen Nutzer von Organisationseinheit
+	 *@param o Organisationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
+
 
 	public ArrayList<String> readUserByOrg(Organisationseinheit o) {
 		ArrayList<String> arr = new ArrayList<String>();
@@ -625,6 +853,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
+	/**
+	 *Liest eine Organisationseinheit von der E-Mail ab
+	 *@param o Organisationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Organisationseinheit readByEmail(Organisationseinheit o) {
 
 		try {
@@ -669,7 +903,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Bearbeiten einer Person<--------
+
+	/**
+	 *Bearbeiten einer Person
+	 *@param pers Person
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Person updatePerson(Person pers) throws IllegalArgumentException {
 		try {
 			persMapper.speichern(pers);
@@ -679,7 +919,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen eines Partnerprofils<--------
+
+	
+	/**
+	 *Lesen einer Person
+	 *@param pers Person
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Person readByIdPerson(Person pers) throws IllegalArgumentException {
 		try {
 			return persMapper.getById(pers);
@@ -689,7 +936,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen aller Personen<--------
+	
+	/**
+	 *Liest alle Personen
+	 *@param pers Person
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public ArrayList<Person> readAllPerson() throws IllegalArgumentException {
 		try {
 			return persMapper.getAll();
@@ -699,7 +952,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Löschen eines Partnerprofils<--------
+	
+	/**
+	 *Loescht alle Personen
+	 *@param pers Person
+	 * @throws IllegalArgumentException 
+	 */
 	public void deletePerson(Person pers) throws IllegalArgumentException {
 		try {
 			persMapper.loeschen(pers);
@@ -715,7 +973,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Einfuegen einer Projektbeteiligung<--------
+	
+	/**
+	 *Einfuegen einer Projektbeteiligung
+	 *@param projBet Beteiligung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Beteiligung insertBeteiligung(Beteiligung projBet) throws IllegalArgumentException {
 		// Organisationseinheit org = new Organisationseinheit();
 		// org.setId(13);
@@ -730,8 +994,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Bearbeiten einer Projektbeteiligung<--------
 
+	/**
+	 *Bearbeiten einer Projektbeteiligung
+	 *@param projBet Beteiligung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Beteiligung updateBeteiligung(Beteiligung projBet) throws IllegalArgumentException {
 		try {
 			projBetMapper.speichern(projBet);
@@ -741,7 +1010,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen einer Projektbeteiligung<--------
+	/**
+	 *Lesen einer Projektbeteiligung
+	 *@param projBet Beteiligung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Beteiligung readByIdBeteiligung(Beteiligung projBet) throws IllegalArgumentException {
 		try {
 			return projBetMapper.getById(projBet);
@@ -752,6 +1026,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	}
 
 	// ------->Lesen aller Projektbeteiligung<--------
+	
+	/**
+	 *Lesen aller Projektbeteiligung
+	 *@param projBet Beteiligung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Beteiligung> readAllBeteiligung() throws IllegalArgumentException {
 
@@ -763,7 +1044,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Loeschen einer Projektbeteiligung<--------
+
+	/**
+	 *Loeschen einer Projektbeteiligung
+	 *@param projBet Beteiligung
+	 *@throws IllegalArgumentException 
+	 */
 
 	public void deleteBeteiligung(Beteiligung projBet) throws IllegalArgumentException {
 		try {
@@ -780,7 +1066,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Einfuegene eines Projektes <--------
+	
+	/**
+	 *Einfuegen eines Projektes
+	 *@param proj Projekt
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Projekt insertProjekt(Projekt proj) throws IllegalArgumentException {
 
@@ -792,7 +1084,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Bearbeiten eines Projektes<--------
+
+	/**
+	 *Bearbeiten eines Projektes
+	 *@param proj Projekt
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Projekt updateProjekt(Projekt proj) throws IllegalArgumentException {
 		try {
@@ -803,7 +1101,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen eines Projektes<--------
+	/**
+	 *Lesen eines Projektes
+	 *@param proj Projekt
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Projekt readByIdProjekt(Projekt proj) throws IllegalArgumentException {
 		try {
@@ -813,6 +1116,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
+	/**
+	 *Liest ein Projekt aus dem Projektmarktplatz
+	 *@param proj Projektmarktplatz
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Projekt> readByIdProjektProjektmarktplatz(Projektmarktplatz proj) throws IllegalArgumentException {
 		try {
@@ -824,6 +1133,11 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	}
 
 	// ------->Lesen aller Projekte<--------
+	/**
+	 *Lesen aller Projekte
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Projekt> readAllProjekt() throws IllegalArgumentException {
 
@@ -835,7 +1149,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Loeschen eines Projektes<--------
+
+	/**
+	 *Loeschen eines Projektes
+	 *@param proj Projekt
+	 * @throws IllegalArgumentException 
+	 */
 
 	public void deleteProjekt(Projekt proj) throws IllegalArgumentException {
 		try {
@@ -852,7 +1171,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Einfuegene eines Projektmarktplatzes <--------
+	/**
+	 *Einfuegen eines Projektesmarktplatzes
+	 *@param projMark Projektmarktplatz
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Projektmarktplatz insertProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException {
 
@@ -864,7 +1188,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Bearbeiten eines Projektmarktplatzes<--------
+	
+	/**
+	 *Bearbeiten eines Projektmarktplatzes
+	 *@param projMark Projektmarktplatz
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Projektmarktplatz updateProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException {
 		try {
@@ -875,7 +1205,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen eines Projektmarktplatzes<--------
+
+	
+	/**
+	 *Lesen eines Projektmarktplatzes
+	 *@param projMark Projektmarktplatz
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Projektmarktplatz readByIdProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException {
 		try {
@@ -886,7 +1223,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen aller Projektmarktpl�tze<--------
+	
+	/**
+	 *Lesen aller Projektmarktpl�tze
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Projektmarktplatz> readAllProjektmarktplatz() throws IllegalArgumentException {
 
@@ -897,6 +1239,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
+	
+	/**
+	 *Lesen aller Projektmarktplaetze von Organisationseinheit
+	 *@param o Organisationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Projektmarktplatz> readAllProjektmarktplatzByOrg(Organisationseinheit o)
 			throws IllegalArgumentException {
@@ -914,8 +1263,11 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Loeschen eines Projektmarktplatzes<--------
-
+	/**
+	 *Loeschen eines Projektmarktplatzes
+	 *@param projMark Projektmarktplatz
+	 * @throws IllegalArgumentException 
+	 */
 	public void deleteProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException {
 		try {
 			projMarkMapper.loeschen(projMark);
@@ -931,8 +1283,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Einfuegen eines Teams<--------
-
+	/**
+	 *Einfuegen eines Teams
+	 *@param t Team
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Team insertTeam(Team t) throws IllegalArgumentException {
 
 		try {
@@ -943,7 +1299,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Bearbeiten eines Teams<--------
+	/**
+	 *Bearbeiten eines Teams
+	 *@param t Team
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Team updateTeam(Team t) throws IllegalArgumentException {
 		try {
@@ -954,8 +1315,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen eines Teams<--------
 
+	/**
+	 *Lesen eines Teams
+	 *@param t Team
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Team readByIdTeam(Team t) throws IllegalArgumentException {
 		try {
 			System.out.println(t.getId());
@@ -966,7 +1332,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen aller Teams<--------
+	/**
+	 *Einfuegen aller Teams
+	 *@param t Team
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Team> readAllTeam() throws IllegalArgumentException {
 
@@ -978,8 +1349,11 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Loeschen eines Teams<--------
-
+	/**
+	 *Loeschen eines Teams
+	 *@param t Team
+	 * @throws IllegalArgumentException 
+	 */
 	public void deleteTeam(Team t) throws IllegalArgumentException {
 		try {
 			tMapper.loeschen(t);
@@ -994,7 +1368,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	 * **
 	 */
 
-	// ------->Einfuegen eines UN<--------
+	
+	/**
+	 *Einfuegen eines UN
+	 *@param u Unternehmen
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Unternehmen insertUnternehmen(Unternehmen u) throws IllegalArgumentException {
 
@@ -1006,7 +1386,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Bearbeiten eines UN<--------
+	
+	/**
+	 *Bearbeiten eines UN
+	 *@param u Unternehmen
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public Unternehmen updateUnternehmen(Unternehmen u) throws IllegalArgumentException {
 		try {
@@ -1017,8 +1403,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen eines UN<--------
 
+
+	/**
+	 *Lesen eines UN
+	 *@param u Unternehmen
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	public Unternehmen readByIdUnternehmen(Unternehmen u) throws IllegalArgumentException {
 		try {
 			uMapper.getById(u);
@@ -1028,7 +1420,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 
-	// ------->Lesen aller UN<--------
+
+	/**
+	 *Lesen aller UN
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 
 	public ArrayList<Unternehmen> readAllUnternehmen() throws IllegalArgumentException {
 
@@ -1041,6 +1438,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 	}
 
 	// ------->Loeschen eines UN<--------
+	
+	/**
+	 *Loeschen eines UN
+	 *@param u Unternehmen
+	 * @throws IllegalArgumentException 
+	 */
 
 	public void deleteUnternehmen(Unternehmen u) throws IllegalArgumentException {
 		try {
@@ -1049,6 +1452,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 *Liest ein Partnerprofil von Ausschreibungen
+	 *@param a Ausschreibung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	
 	@Override
 	public Partnerprofil getProfilbyAusschreibung(Ausschreibung a)  throws IllegalArgumentException {
@@ -1061,6 +1471,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		return null;
 	}
 	
+	/**
+	 *Liest das GesuchteProfil
+	 *@param p Partnerprofil
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	@Override
 	public Eigenschaft getGesuchtesProf(Partnerprofil p) throws IllegalArgumentException {
 		try {
@@ -1073,6 +1489,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
+	/**
+	 *Liest ein Beteiligung an einem Projekt
+	 *@param p Projekt
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	
 	@Override
 	public ArrayList<Beteiligung> getBeteiligungBy(Projekt p) throws IllegalArgumentException {
@@ -1084,7 +1506,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
-	
+	/**
+	 *Liest die Organisationseinheit von Beteiligungen
+	 *@param b Beteiligung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	@Override
 	public Organisationseinheit getOrgaByBeteiligung(Beteiligung b) throws IllegalArgumentException {
 		Organisationseinheit o = new Organisationseinheit();
@@ -1097,7 +1524,12 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
-
+	/**
+	 *Liest die Projekte eines Nutzers 
+	 *@param o Organisationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	@Override
 	public ArrayList<Projekt> getMeineProjekte(Organisationseinheit o) throws IllegalArgumentException {
 		Organisationseinheit org = this.getNutzerByEmail(o);
@@ -1109,6 +1541,14 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
+	/**
+	 *Liest andere Projekte einer Organisationseinheit auf dem Projektmarktplatz
+	 *@param pm Projektmarktplatz
+	 *@param o Organisationseinheit
+	 *@param a Ausschreibung
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	
 	@Override
 	public ArrayList<Projekt> getAndereProjekte(Organisationseinheit o, Projektmarktplatz pm) throws IllegalArgumentException {
@@ -1121,6 +1561,13 @@ public class ProjektmarktplatzAdminImpl extends RemoteServiceServlet implements 
 		}
 		return null;
 	}
+	
+	/**
+	 *Liest den Nutzer anhand der Email
+	 *@param o Organisationseinheit
+	 * @return null
+	 * @throws IllegalArgumentException 
+	 */
 	
 	public Organisationseinheit getNutzerByEmail(Organisationseinheit o){
 		try {
