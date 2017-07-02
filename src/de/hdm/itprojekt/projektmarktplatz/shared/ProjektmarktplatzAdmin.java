@@ -255,8 +255,24 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	public Person updatePerson (Person pers) throws IllegalArgumentException;
+	/**
+	 * auslesen von PersonID
+	 * @param pers Person
+	 * @return Person
+	 * @throws IllegalArgumentException
+	 */
 	public Person readByIdPerson (Person pers) throws IllegalArgumentException;
+	/**
+	 * alle Personen auslesen
+	 * @return Person
+	 * @throws IllegalArgumentException
+	 */
 	public ArrayList <Person> readAllPerson() throws IllegalArgumentException;
+	/**
+	 * löschen von Person
+	 * @param pers Person
+	 * @throws IllegalArgumentException
+	 */
 	public void deletePerson (Person pers) throws IllegalArgumentException;
 	/**
 	 * User auslesen
@@ -272,9 +288,31 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	public Beteiligung insertBeteiligung(Beteiligung projBet ) throws IllegalArgumentException;
+	/**
+	 * speichern von Beteiligung
+	 * @param projBet Beteiligung
+	 * @return Beteiligung
+	 * @throws IllegalArgumentException
+	 */
 	public Beteiligung updateBeteiligung (Beteiligung projBet) throws IllegalArgumentException;
+	/**
+	 * auslesen von BeteiligungID
+	 * @param projBet Beteiligung
+	 * @return Beteiligung
+	 * @throws IllegalArgumentException
+	 */
 	public Beteiligung readByIdBeteiligung(Beteiligung projBet) throws IllegalArgumentException;
+	/**
+	 * alle Beteiligungen auslesen
+	 * @return Beteiligung
+	 * @throws IllegalArgumentException
+	 */
 	public ArrayList<Beteiligung> readAllBeteiligung() throws IllegalArgumentException;
+	/**
+	 * löschen von Beteiligung
+	 * @param projBet Beteiligung
+	 * @throws IllegalArgumentException
+	 */
 	public void deleteBeteiligung (Beteiligung projBet) throws IllegalArgumentException;
 	
 	/**
@@ -284,9 +322,31 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	public Projekt insertProjekt(Projekt proj ) throws IllegalArgumentException;
+	/**
+	 * speichern von Projekt
+	 * @param proj Projekt
+	 * @return Projekt
+	 * @throws IllegalArgumentException
+	 */
 	public Projekt updateProjekt (Projekt proj) throws IllegalArgumentException;
+	/**
+	 * auslesen von ProjektID
+	 * @param proj Projekt
+	 * @return Projekt
+	 * @throws IllegalArgumentException
+	 */
 	public Projekt readByIdProjekt(Projekt proj) throws IllegalArgumentException;
+	/**
+	 * auslesen von allen Projekten
+	 * @return Projekt
+	 * @throws IllegalArgumentException
+	 */
 	public ArrayList<Projekt> readAllProjekt() throws IllegalArgumentException;
+	/**
+	 * löschen von Projekt
+	 * @param proj Projekt
+	 * @throws IllegalArgumentException
+	 */
 	public void deleteProjekt (Projekt proj) throws IllegalArgumentException;
 	
 	/**
@@ -296,11 +356,45 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	public Projektmarktplatz insertProjektmarktplatz(Projektmarktplatz projMark ) throws IllegalArgumentException;
+	/**
+	 * speichern von Projektmarktplatz
+	 * @param projMark Projektmarktplatz
+	 * @return Projektmarktplatz
+	 * @throws IllegalArgumentException
+	 */
 	public Projektmarktplatz updateProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
+	/**
+	 * auslesen von ProjektmarktplatzID
+	 * @param projMark Projektmarktplatz
+	 * @return Projektmarktplatz
+	 * @throws IllegalArgumentException
+	 */
 	public Projektmarktplatz readByIdProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
+	/**
+	 * alle Projektmarktplaetze auslesen
+	 * @return Projektmarktplatz
+	 * @throws IllegalArgumentException
+	 */
 	public ArrayList<Projektmarktplatz> readAllProjektmarktplatz() throws IllegalArgumentException;
+	/**
+	 * löschen von Projektmarktplatz
+	 * @param projMark Projektmarktplatz
+	 * @throws IllegalArgumentException
+	 */
 	public void deleteProjektmarktplatz(Projektmarktplatz projMark) throws IllegalArgumentException;
+	/**
+	 * alle Projektmarktplätze anhand der Organisationseinheit auslesen
+	 * @param o Organisationseinheit
+	 * @return Projektmarktplatz
+	 * @throws IllegalArgumentException
+	 */
 	public ArrayList<Projektmarktplatz> readAllProjektmarktplatzByOrg(Organisationseinheit o) throws IllegalArgumentException;
+	/**
+	 * auslesen von ProjektID Projektmarktplatz
+	 * @param proj Projektmarktplatz
+	 * @return Projektmarktplatz
+	 * @throws IllegalArgumentException
+	 */
 	public ArrayList<Projekt>  readByIdProjektProjektmarktplatz(Projektmarktplatz proj) throws IllegalArgumentException;	
 	/**
 	 * Team anlegen
@@ -309,9 +403,31 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	public Team insertTeam(Team t) throws IllegalArgumentException;
+	/**
+	 * speichern von team
+	 * @param t Team
+	 * @return Team
+	 * @throws IllegalArgumentException
+	 */
 	public Team updateTeam(Team t) throws IllegalArgumentException;
+	/**
+	 * auslesen von TeamID
+	 * @param t Team
+	 * @return Team
+	 * @throws IllegalArgumentException
+	 */
 	public Team readByIdTeam(Team t) throws IllegalArgumentException;
+	/**
+	 * alle Teams auslesen
+	 * @return Team
+	 * @throws IllegalArgumentException
+	 */
 	public ArrayList<Team> readAllTeam() throws IllegalArgumentException;
+	/**
+	 * Team löschen
+	 * @param t Team
+	 * @throws IllegalArgumentException
+	 */
 	public void deleteTeam(Team t) throws IllegalArgumentException;
 	/**
 	 * Unternehmen anlegen
@@ -320,9 +436,31 @@ public interface ProjektmarktplatzAdmin extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	public Unternehmen insertUnternehmen(Unternehmen u) throws IllegalArgumentException;
+	/**
+	 * speichern von Unternehmen
+	 * @param u Unternehmen
+	 * @return Unternehmen
+	 * @throws IllegalArgumentException
+	 */
 	public Unternehmen updateUnternehmen(Unternehmen u) throws IllegalArgumentException;
+	/**
+	 * auslesen von UnternehmenID
+	 * @param u Unternehmen
+	 * @return Unternehmen
+	 * @throws IllegalArgumentException
+	 */
 	public Unternehmen readByIdUnternehmen(Unternehmen u) throws IllegalArgumentException;
+	/**
+	 * alle Unternehmen auslesen
+	 * @return Unternehmen
+	 * @throws IllegalArgumentException
+	 */
 	public ArrayList<Unternehmen> readAllUnternehmen() throws IllegalArgumentException;
+	/**
+	 * löschen von Unternehmen
+	 * @param u Unternehmen
+	 * @throws IllegalArgumentException
+	 */
 	public void deleteUnternehmen(Unternehmen u) throws IllegalArgumentException;
 	/**
 	 * gesuchtes Partnerprofil wird zurückgegeben
